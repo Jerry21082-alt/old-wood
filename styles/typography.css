@@ -1,0 +1,94 @@
+@font-face {
+  font-family: CerebriBookSemi;
+  src: url("../public/Cerebri\ Sans\ SemiBold.ttf");
+}
+
+h1 {
+  font-size: 34px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 26px;
+}
+
+h4 {
+  font-size: 22px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+  font-family: CerebriBookSemi;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body,
+html,
+p,
+input,
+textarea,
+select,
+button,
+email,
+phone,
+h6,
+.h6,
+.rte h6,
+.rte .h6 {
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 1.5;
+}
+
+h5,
+.h5,
+.rte h5,
+.rte .h5,
+button,
+.heading--small,
+.heading--xsmall,
+heading--xxsmall,
+a.button,
+#klForm button {
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 1.3px !important;
+}
+p strong,
+p b,
+h6 b,
+.h6 b,
+h6 strong,
+.h6 strong {
+  font-weight: 500 !important;
+}
+
+h5,
+.h5,
+.rte h5,
+.rte .h5,
+.heading--small,
+.heading--xsmall,
+.heading--xxsmall,
+.text--small,
+.text--xxsmall {
+  line-height: 1.3;
+}
