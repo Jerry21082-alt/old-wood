@@ -1,33 +1,33 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 export default function AspectRatioContainer({
+  aspectRatio = 11 / 9,
   children,
-  aspectRatio = 1 / 1,
   className,
 }) {
   const containerRef = useRef(null);
-  const container = containerRef.current;
 
   useEffect(() => {
     function handleResize() {
+      const container = containerRef.current;
       if (container) {
-        const content = container.querySelector(".content");
-        if (containerRef) {
-          const containerWidth = container.clientWidth;
+        const content = container.querySelector(".aspect-ratio-content");
+        if (content) {
+          const containerWidth = container.offsetWidth;
           content.style.height = `${containerWidth * (1 / aspectRatio)}px`;
         }
       }
     }
-    if (containerRef.current) handleResize();
 
     window.addEventListener("resize", handleResize);
 
+    if (containerRef.current) handleResize();
+
     return () => window.removeEventListener("resize", handleResize);
   }, [aspectRatio]);
-
   return (
-    <div ref={containerRef} className={className}>
-      <div className="content">{children}</div>
+    <div className={`${className}`} ref={containerRef}>
+      <div className="aspect-ratio-content">{children}</div>
     </div>
   );
 }

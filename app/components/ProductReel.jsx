@@ -23,10 +23,13 @@ export default function ProductReel() {
                   </span>
                 )}
               </div>
-              <AspectRatioContainer aspectRatio={3 / 4}>
+              <AspectRatioContainer
+                aspectRatio={3 / 4}
+                className="block relative mb-4 "
+              >
                 <Link
                   href="/"
-                  className="block relative mb-4 w-full h-full"
+                  className="w-full h-full"
                   // style={{ aspectRatio: "3 / 4" }}
                 >
                   <Image
