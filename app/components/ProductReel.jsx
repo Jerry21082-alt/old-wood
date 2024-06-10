@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { productReelItems } from "../constants";
+import AspectRatioContainer from "./AspectRatioContainer";
 
 export default function ProductReel() {
   return (
@@ -22,10 +23,11 @@ export default function ProductReel() {
                   </span>
                 )}
               </div>
-              <Link
+              <AspectRatioContainer
+                aspectRatio={3 / 4}
                 href="/"
                 className="block relative mb-4"
-                style={{ aspectRatio: "3 / 4" }}
+                // style={{ aspectRatio: "3 / 4" }}
               >
                 <Image
                   src={item.primaryImage}
@@ -41,7 +43,7 @@ export default function ProductReel() {
                   height={500}
                   className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full secondary-img"
                 />
-              </Link>
+              </AspectRatioContainer>
 
               <div className="flex justify-between items-center">
                 <div className="flex flex-col">
