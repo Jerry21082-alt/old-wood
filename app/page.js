@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import ProductReel from "./components/ProductReel";
 
 export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
@@ -79,13 +80,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block mt-5 m-7">
+      <section className="block mt-5">
         <div
           className="py-7 px-0"
           style={{ display: "flow-root", bakground: "transparent" }}
         >
           <div className="w-full max-w-7xl">
-            <header className="max-w-full">
+            <header className="max-w-full m-7">
               <div>
                 <div className="flex items-center space-x-6">
                   <h4 className="h2 text-darkBrown">Made To Age</h4>
@@ -133,13 +134,7 @@ export default function Home() {
               </div>
             </header>
 
-            <div className="relative">
-              <div className="scroller">
-                <div className="product-list_inner--scroller product-list_inner">
-                  <div style={{opacity: '1'}} className="relative flex flex-col space-y-3"></div>
-                </div>
-              </div>
-            </div>
+            <ProductReel />
           </div>
         </div>
       </section>

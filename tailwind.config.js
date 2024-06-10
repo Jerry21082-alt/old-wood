@@ -9,6 +9,7 @@ module.exports = {
     colors: {
       lightBrown: "#5e3519",
       darkBrown: "#221f20",
+      snow: "rgb(243, 241, 234)",
     },
   },
   plugins: [],

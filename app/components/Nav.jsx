@@ -1,10 +1,34 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Nav() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleWindowScroll = () => {
+      const windowHight = window.scrollY;
+      if (windowHight > 56) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleWindowScroll);
+
+    return () => window.removeEventListener("scroll", handleWindowScroll);
+  }, [isScrolled]);
+
   return (
-    <section className="w-full fixed z-10 nav-container">
+    <section
+      className={`w-full fixed z-10 nav-container h-[62.5px] header header-transparent ${
+        isScrolled ? "scrolled" : ""
+      }`}
+    >
       <div className="flex items-center p-5">
-        <h1 className="text-2xl block relative text-white logo">
+        <h1 className="text-2xl block relative logo">
           <Link href={`/`}>OLDWOOD</Link>
         </h1>
         <div className="flex justify-end items-center w-full text-white">
