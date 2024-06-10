@@ -23,26 +23,27 @@ export default function ProductReel() {
                   </span>
                 )}
               </div>
-              <AspectRatioContainer
-                aspectRatio={3 / 4}
-                href="/"
-                className="block relative mb-4"
-                // style={{ aspectRatio: "3 / 4" }}
-              >
-                <Image
-                  src={item.primaryImage}
-                  alt="product image"
-                  width={500}
-                  height={500}
-                  className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full"
-                />
-                <Image
-                  src={item.secondaryImage}
-                  alt="product image"
-                  width={500}
-                  height={500}
-                  className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full secondary-img"
-                />
+              <AspectRatioContainer aspectRatio={3 / 4}>
+                <Link
+                  href="/"
+                  className="block relative mb-4 w-full h-full"
+                  // style={{ aspectRatio: "3 / 4" }}
+                >
+                  <Image
+                    src={item.primaryImage}
+                    alt="product image"
+                    width={500}
+                    height={500}
+                    className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full"
+                  />
+                  <Image
+                    src={item.secondaryImage}
+                    alt="product image"
+                    width={500}
+                    height={500}
+                    className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full secondary-img"
+                  />
+                </Link>
               </AspectRatioContainer>
 
               <div className="flex justify-between items-center">
