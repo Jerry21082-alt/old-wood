@@ -138,6 +138,32 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="min-h-[80vh] relative">
+        <div className="mt-4 overflow-hidden">
+          <div className="absolute bottom-6 w-full">
+            <div className="w-full max-h-[1600px] px-6">
+              <div className="max-w-[500px] text-[#f3f1ea]">
+                <div>Sabi Insitu</div>
+                <div className="mt-4 ">
+                  <p>
+                    A clean line of tailored upholstery, simple and
+                    elegant.&nbsp;Drawing inspiration from the seamless fusion
+                    of strength and feminisity
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Image
+            src="/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg"
+            alt="Sabi Insitu"
+            width={500}
+            height={500}
+            className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full -z-10"
+          />
+        </div>
+      </section>
     </>
   );
 }
