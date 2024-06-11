@@ -135,6 +135,19 @@ body {
   transition: transform 0.3s ease-in-out;
 }
 
+.shop-room-button::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  transform: scaleX(1);
+  transform-origin: left;
+  width: 100%;
+  background-color: #f3f1ea;
+  height: 1px;
+  transition: transform 0.3s ease-in-out;
+}
+
 .grid-item {
   display: grid;
   grid-auto-flow: unset;
@@ -160,4 +173,36 @@ body {
 .secondary-img {
   visibility: hidden;
   opacity: 0;
+}
+
+.tap-area::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  left: -6px;
+  right: -6px;
+}
+
+.tap-area::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 34px;
+  height: 34px;
+  border-color: #f3f1ea50;
+  animation: shopTheLookDotKeyframe 2s ease-in-out infinite;
+}
+
+@keyframes shopTheLookDotKeyframe {
+  0% {
+    opacity: 1;
+    transform: scale(0.4);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
 }

@@ -144,19 +144,43 @@ export default function Home() {
           <div className="absolute bottom-6 w-full">
             <div className="w-full max-h-[1600px] px-6">
               <div className="max-w-[500px] text-[#f3f1ea]">
-                <div>Sabi Insitu</div>
+                <div className="h2 text-2xl">Sabi In situ</div>
                 <div className="mt-4 ">
                   <p>
                     A clean line of tailored upholstery, simple and
                     elegant.&nbsp;Drawing inspiration from the seamless fusion
-                    of strength and feminisity
+                    of strength and femininity, the Sabi embodies a symphony of
+                    grace and allure
                   </p>
+
+                  <div className="mt-5">
+                    <Link
+                      href="/"
+                      className="text-milk uppercase shop-room-button relative"
+                    >
+                      Shop this romm
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <div className="absolute top-[23%] left-[38%] md:top-[20%] md:left-[41%] ml-[-12px] mt-[-12px]">
+            <button
+              type="button"
+              aria-expanded="false"
+              style={{ opacity: "1" }}
+              className="w-4 h-4 float-left rounded-full border-[1px] border-milk tap-area relative block"
+            >
+              <span className="absolute left-6  top-[-4px] text-milk text-xs w-full">
+                Table Lamps
+              </span>
+            </button>
+          </div>
+
           <Image
-            src="/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg"
+            src="/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg"
             alt="Sabi Insitu"
             width={500}
             height={500}
