@@ -7,6 +7,7 @@ import ProductReel from "./components/ProductReel";
 
 export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
+  const [activeRList, setActiveRList] = useState(false);
 
   return (
     <>
@@ -167,16 +168,28 @@ export default function Home() {
           </div>
 
           <div className="absolute top-[23%] left-[38%] md:top-[20%] md:left-[41%] ml-[-12px] mt-[-12px]">
-            <button
-              type="button"
-              aria-expanded="false"
-              style={{ opacity: "1" }}
-              className="w-4 h-4 float-left rounded-full border-[1px] border-milk tap-area relative block"
-            >
-              <span className="absolute left-6  top-[-4px] text-milk text-xs w-full">
+            <div className="flex items-center relative">
+              <div className="tap-area w-4 h-4 rounded-full border border-milk" />
+              <span className="text-sm md:text-md text-milk ml-2">
                 Table Lamps
               </span>
-            </button>
+            </div>
+          </div>
+
+          <div className="absolute top-[40%] left-[30%] md:top-[38%] md:left-[42%] ml-[-12px] mt-[-12px]">
+            <div className="flex items-center relative">
+              <div className="tap-area w-4 h-4 rounded-full border border-milk" />
+              <span className="text-sm md:text-md text-milk ml-2">
+                Havard Devinity Desk
+              </span>
+            </div>
+          </div>
+
+          <div className="absolute top-[50%] left-[74%] md:top-[50%] md:left-[71%] ml-[-12px] mt-[-12px]">
+            <div className="flex items-center relative">
+              <div className="tap-area w-4 h-4 rounded-full border border-milk" />
+              <span className="text-sm md:text-md text-milk ml-2">Seating</span>
+            </div>
           </div>
 
           <Image
@@ -186,6 +199,114 @@ export default function Home() {
             height={500}
             className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full -z-10"
           />
+        </div>
+      </section>
+
+      <section className="w-full py-16">
+        <div className=" max-w-[1600px] px-6 py-16 flex flex-col md:flex-row items-start md:items-center flex-wrap">
+          <div>
+            <h5 className="text-lightBrown text-sm">
+              <span className="uppercase">
+                Part new vintage, part true vintage
+              </span>
+            </h5>
+
+            <div className="mt-4">
+              <span className="text-darkBrown text-5xl h2 block">
+                The Roweam
+              </span>
+              <span className="text-darkBrown text-5xl h2 block">Method</span>
+            </div>
+
+            <div className="max-w-[80%] mt-6">
+              <p className="text-sm">
+                Part new vintage, part true vintage. Our design method takes a
+                gathered, authentic approach using well-constructed pieces
+                complete with endless character, no matter their age.
+              </p>
+            </div>
+
+            <div className="mt-8">
+              <Link
+                href="/"
+                className="shop-button relative uppercase text-lightBrown"
+              >
+                Learn More
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-wrap">
+          <div className="pl-[30%] pb-6 order-2">
+            <Image
+              src="/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg"
+              alt="product making"
+              width={500}
+              height={500}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="px-6 w-full">
+          <div className="overflow-hidden flex flex-wrap">
+            <div className="relative w-full overflow-hidden mb-8">
+              <Image
+                src="/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg"
+                width={500}
+                height={500}
+                alt="product image"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="p-6">
+          <div className="flex flex-wrap">
+            <div className="w-full order-2 shrink-0">
+              <div className="my-4 text-lightBrown">
+                <span className="uppercase">join the r list</span>
+              </div>
+
+              <div className="h2">
+                <span>Sign-up to recieve 10%off your first</span>
+                <span>purchase and you'll hear about our new</span>
+                <span>production collections, antiquities, and more</span>
+                <span>before anyone else!</span>
+              </div>
+
+              <div className="mt-11 relative" id="r-form">
+                <form>
+                  <div
+                    className="flex justify-start items-center py-3 relative"
+                    style={{ backgroundColor: activeRList ? "#f3f1ea" : "" }}
+                  >
+                    <input
+                      type="email"
+                      placeholder="Your Email"
+                      onFocus={() => setActiveRList(true)}
+                      onBlur={() => setActiveRList(false)}
+                      className="r-list outline-none w-full h-full"
+                    />
+
+                    <div className="absolute right-0 flex items-center justify-center w-4 h-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        id="right-arrow"
+                        width="20px"
+                        height="20px"
+                        fill="#221f20"
+                      >
+                        <path d="M22.707,12.707a1,1,0,0,0,0-1.414l-6-6a1,1,0,0,0-1.414,1.414L19.586,11H2a1,1,0,0,0,0,2H19.586l-4.293,4.293a1,1,0,0,0,1.414,1.414Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>

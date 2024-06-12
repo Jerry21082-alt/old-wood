@@ -11,6 +11,7 @@ module.exports = {
       darkBrown: "#221f20",
       snow: "rgb(243, 241, 234)",
       milk: "#f3f1ea",
+      transparent: "rgba(34, 31, 32, 0)",
     },
   },
   plugins: [],

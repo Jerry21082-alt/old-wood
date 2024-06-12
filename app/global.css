@@ -42,6 +42,19 @@ body {
   font-family: Chopin;
 }
 
+.r-list::placeholder {
+  color: #000000;
+}
+
+#r-form::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0.5px;
+  background-color: #221f20;
+  bottom: 0px;
+}
+
 .header-transparent {
   background: transparent;
   color: #fff;
@@ -91,6 +104,7 @@ body {
   border-radius: 5px;
   background-color: inherit;
 }
+
 .hamburger-menu::after {
   content: "";
   position: absolute;
@@ -175,23 +189,20 @@ body {
   opacity: 0;
 }
 
+.r-list {
+  background: transparent;
+}
+
 .tap-area::before {
   content: "";
   position: absolute;
-  top: -6px;
-  bottom: -6px;
-  left: -6px;
-  right: -6px;
-}
-
-.tap-area::after {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
+  top: -7px;
+  left: -9px;
   width: 34px;
   height: 34px;
+  border: 2px solid;
   border-color: #f3f1ea50;
+  border-radius: 50%;
   animation: shopTheLookDotKeyframe 2s ease-in-out infinite;
 }
 

@@ -23,7 +23,7 @@ export default function Nav() {
 
   return (
     <section
-      className={`w-full fixed z-10 nav-container h-[62.5px] header header-transparent ${
+      className={`w-full fixed z-20 nav-container h-[62.5px] header header-transparent ${
         isScrolled ? "scrolled" : ""
       }`}
     >
