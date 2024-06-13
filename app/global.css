@@ -221,12 +221,84 @@ body {
   padding: 0 24px;
 }
 
+.grid-list {
+  display: grid;
+  grid-template-columns: calc(50% - calc(24px / 2)) calc(50% - calc(24px / 2));
+  /* margin-bottom: 12px; */
+  gap: 0 24px;
+}
+
 .gradient {
   background-image: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.5),
     rgba(0, 0, 0, 0.05)
   );
+}
+
+.plus-icon::before {
+  content: "";
+  background-color: #5e3519;
+  width: 14px;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in;
+}
+
+.plus-icon::after {
+  content: "";
+  background-color: #5e3519;
+  width: 1px;
+  height: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in;
+}
+
+.plus-icon.animate-plus::before {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+.plus-icon.animate-plus::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+/* 
+.drawer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  width: 89vw;
+  max-width: 400px;
+  height: 100%;
+  max-height: 100vh;
+  background: rgb(243, 241, 234);
+  color: rgb(34, 31, 32);
+  z-index: 10;
+  transform: translateX(calc(1 * 100%));
+  visibility: hidden;
+  font-size: 1rem;
+  transition: transform 0.6s cubic-bezier(0.75, 0, 0.175, 1),
+    visibility 0.6s cubic-bezier(0.75, 0, 0.175, 1);
+} */
+
+.open-mobile-menu {
+  transform: translateX(calc(0 * 100%));
+  visibility: visible;
+  transition: transform 0.6s cubic-bezier(0.75, 0, 0.175, 1),
+    visibility 0.6s cubic-bezier(0.75, 0, 0.175, 1);
+}
+
+.close-mobile-menu {
+  transform: translateX(calc(1 * 100%));
+  visibility: hidden;
+  transition: transform 0.6s cubic-bezier(0.75, 0, 0.175, 1),
+    visibility 0.6s cubic-bezier(0.75, 0, 0.175, 1);
 }
 
 @keyframes shopTheLookDotKeyframe {

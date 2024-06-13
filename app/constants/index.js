@@ -86,3 +86,59 @@ export const productReelItems = [
     toOrder: true,
   },
 ];
+
+export const mobileMenuList = {
+  title: "shop",
+  innerMenu: [
+    {
+      title: "shop by category",
+      innerList: [
+        "shop all",
+        "furniture",
+        "decoration",
+        "dinning & entertainment",
+        "soft goods",
+        "lighting",
+        "art",
+      ],
+    },
+    {
+      title: "furniture",
+      innerList: ["tables", "seating", "casegoods"],
+    },
+    {
+      title: "decoration",
+      innerList: [
+        "vases & vessels",
+        "decorative objects",
+        "bowls & dishes",
+        "mirrors",
+        "utility",
+        "bath accessories ",
+      ],
+    },
+    {
+      title: "dinning & entertaining",
+      innerList: [
+        "kitchen accessories",
+        "serving dishes",
+        "barware",
+        "utensils",
+        "candlehoder",
+        "glassware",
+      ],
+    },
+    {
+      title: "soft goods",
+      innerList: ["pillows"],
+    },
+    {
+      title: "lighting",
+      innerList: ["table lamps"],
+    },
+    {
+      title: "art",
+      innerList: ["vintage", "artisan"],
+    },
+  ],
+};

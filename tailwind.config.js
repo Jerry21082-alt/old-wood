@@ -12,6 +12,8 @@ module.exports = {
       snow: "rgb(243, 241, 234)",
       milk: "#f3f1ea",
       transparent: "rgba(34, 31, 32, 0)",
+      listBorder: "rgba(34, 31, 32, .15)",
+      darkGray: "#a5a097",
     },
   },
   plugins: [],

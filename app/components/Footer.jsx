@@ -109,7 +109,7 @@ export default function Footer() {
                     fill="#f3f1ea"
                     id="instagram"
                   >
-                    <g fill="none" stroke="#f3f1ea" stroke-miterlimit="10">
+                    <g fill="none" stroke="#f3f1ea">
                       <path d="M11.5 15.5h-7a4 4 0 0 1-4-4v-7a4 4 0 0 1 4-4h7a4 4 0 0 1 4 4v7a4 4 0 0 1-4 4z"></path>
                       <circle cx="8" cy="8" r="3.5"></circle>
                       <circle cx="12.5" cy="3.5" r=".5"></circle>
@@ -122,7 +122,6 @@ export default function Footer() {
                 <Link href="/" className="flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    enable-background="new 0 0 1668.56 1221.19"
                     viewBox="0 0 1668.56 1221.19"
                     id="twitter-x"
                     fill="#f3f1ea"
