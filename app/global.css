@@ -206,6 +206,29 @@ body {
   animation: shopTheLookDotKeyframe 2s ease-in-out infinite;
 }
 
+.footer {
+  background-image: url("../public//bg-rust-50.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.grid-footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 100%;
+  gap: 40px;
+  padding: 0 24px;
+}
+
+.gradient {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.05)
+  );
+}
+
 @keyframes shopTheLookDotKeyframe {
   0% {
     opacity: 1;

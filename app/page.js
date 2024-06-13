@@ -11,7 +11,9 @@ export default function Home() {
 
   return (
     <>
-      <section className="block mt-0 mb-0">
+      <section className="block mt-0 mb-0 relative">
+        <div className="absolute z-10 h-full top-0 left-0 w-full gradient" />
+
         <div
           className="min-h-[80vh] relative flex image-overlay"
           style={{ opacity: "1" }}
@@ -21,7 +23,7 @@ export default function Home() {
             style={{ paddingBottom: "66.64%" }}
           >
             <Image
-              src="/20230809-In_Situ-Bromley_01_0858-MAIN2_ab51fab4-c8a5-4460-93ef-2efb27a1433f.jpg"
+              src="/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg"
               width={500}
               height={500}
               className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full"
@@ -253,7 +255,7 @@ export default function Home() {
           <div className="overflow-hidden flex flex-wrap">
             <div className="relative w-full overflow-hidden mb-8">
               <Image
-                src="/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg"
+                src="/Roweam_Method_4647_1600.jpg"
                 width={500}
                 height={500}
                 alt="product image"
