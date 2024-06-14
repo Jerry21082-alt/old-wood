@@ -4,15 +4,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import ProductReel from "./components/ProductReel";
+import { stateProvider } from "./components/stateContext/UseStateContext";
 
 export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
   const [activeRList, setActiveRList] = useState(false);
+  const { toggleMobileMenu } = stateProvider();
 
   return (
     <>
       <section className="block mt-0 mb-0 relative">
         <div className="absolute z-10 h-full top-0 left-0 w-full gradient" />
+        <div
+          className="fixed left-0 bottom-0 w-full h-14 z-50"
+          style={{
+            opacity: toggleMobileMenu ? "1" : "0",
+            transition: "5s opacity .4s ease-in-out",
+          }}
+        >
+          <div className="footer-gradient" />
+        </div>
 
         <div
           className="min-h-[80vh] relative flex image-overlay"
