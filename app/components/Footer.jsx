@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { stateProvider } from "./stateContext/UseStateContext";
 
 export default function Footer() {
+  const { toggleMobileMenu } = stateProvider();
+
   return (
     <footer className="mt-16 footer pt-16 pb-5 text-snow">
       <div className="grid-footer">

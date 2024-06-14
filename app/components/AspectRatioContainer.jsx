@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 export default function AspectRatioContainer({
-  aspectRatio = 11 / 9,
+  aspectRatio = 1 / 1,
   children,
   className,
 }) {
