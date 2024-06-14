@@ -79,7 +79,7 @@ export const productReelItems = [
     id: 8,
     primaryImage: "/product_images/101727D_Wolcott_Stool_1555.jpg",
     secondaryImage: "/product_images/101727D_Wolcott_Stool_1560.jpg",
-    name: "Mr. Wolcott Counter Stoll",
+    name: "Mr. Wolcott Counter Stool",
     type: "New Vintage",
     price: 2481,
     colors: ["B09C7C", "493D32", "392D23"],

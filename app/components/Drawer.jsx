@@ -24,7 +24,7 @@ export default function Drawer({ children, title, delay }) {
   };
 
   return (
-    <li className="flow-root border-b border-listBorder" onClick={toggleDrawer}>
+    <li className="flow-root border-b border-listBorder">
       <button
         aria-expanded="false"
         className="flex items-center justify-between py-[21px] px-6 w-full text-xs animate-link"
@@ -35,6 +35,7 @@ export default function Drawer({ children, title, delay }) {
           className={`w-[14px] h-[14px] plus-icon relative ${
             isOpen ? "animate-plus" : ""
           }`}
+          onClick={toggleDrawer}
         ></span>
       </button>
       <div

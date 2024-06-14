@@ -43,10 +43,12 @@ export default function Nav() {
             <span className="inline-block">0</span>
           </div>
           <div
-            className="w-5 h-5 ml-7 relative flex items-center"
+            className={`w-5 h-5 ml-7 relative flex items-center`}
             onClick={openMobileMenu}
           >
-            <div className="hamburger-menu" />
+            <div
+              className={`hamburger-menu ${!toggleMobileMenu ? "active" : ""}`}
+            />
           </div>
         </div>
       </div>

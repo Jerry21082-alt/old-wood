@@ -31,7 +31,7 @@ export default function MobileMenu() {
                     {list.title}
                   </Link>
 
-                  <ul className="grid-list mt-4">
+                  <ul className="grid-list mt-4 capitalize">
                     {list.innerList.map((list, index) => (
                       <li
                         className="mb-[14px] flow-root overflow-visible text-darkBrown"
@@ -202,9 +202,6 @@ export default function MobileMenu() {
             </Link>
           </li>
         </ul>
-      </div>
-      <div className="w-screen h-14">
-        <div className="py-5 footer-gradient relative z-50">div</div>
       </div>
     </section>
   );
