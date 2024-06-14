@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { productReelItems } from "../constants";
 import AspectRatioContainer from "./AspectRatioContainer";
+import { formatPrice } from "@/helpers/formatPrice";
 
 export default function ProductReel() {
   return (
@@ -25,7 +26,7 @@ export default function ProductReel() {
               </div>
               <AspectRatioContainer
                 aspectRatio={3 / 4}
-                className="block relative mb-4 "
+                className="block relative mb-4"
               >
                 <Link
                   href="/"
@@ -51,7 +52,7 @@ export default function ProductReel() {
 
               <div className="flex justify-between items-center">
                 <div className="flex flex-col">
-                  <Link className="mt-[1px] mr-[10px] mb-[8px]" href="/">
+                  <Link className="mt-[1px] mr-[10px] mb-[8px] h2" href="/">
                     {item.name}
                   </Link>
                   <div className="text-lightBrown h2">{item.type}</div>
@@ -60,7 +61,7 @@ export default function ProductReel() {
                 <div className="flex flex-col">
                   <div className="mt-[1px] mr-[10px] mb-[8px] flex flex-wrap justify-end">
                     <span>From&nbsp;</span>
-                    <span>${item.price}</span>
+                    <span>${formatPrice(item.price)}</span>
                   </div>
 
                   <div className="flex items-center justify-end">

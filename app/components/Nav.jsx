@@ -30,7 +30,7 @@ export default function Nav() {
   return (
     <section
       className={`w-full fixed z-20 nav-container h-[62.5px] header header-transparent ${
-        backgroundChanged ? "scrolled" : ""
+        backgroundChanged ? "scrolled shadow-sm" : ""
       }`}
     >
       <div className="flex items-center p-5">
