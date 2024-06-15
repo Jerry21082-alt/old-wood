@@ -14,19 +14,19 @@ export default function Home() {
   return (
     <>
       <section className="block mt-0 mb-0 relative">
-        <div className="absolute z-10 h-full top-0 left-0 w-full gradient" />
+        {/* <div className="gradient" /> */}
         <div
           className="fixed left-0 bottom-0 w-full h-14 z-50"
           style={{
             opacity: toggleMobileMenu ? "1" : "0",
-            transition: "5s opacity .4s ease-in-out",
+            transition: "opacity .4s ease-in-out",
           }}
         >
           <div className="footer-gradient" />
         </div>
 
         <div
-          className="min-h-[80vh] relative flex image-overlay"
+          className="min-h-[80vh] relative flex image-overlay gradient"
           style={{ opacity: "1" }}
         >
           <div
@@ -153,9 +153,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="min-h-[80vh] relative">
+      <section className="min-h-[80vh] relative gradient">
         <div className="mt-4 overflow-hidden">
-          <div className="absolute bottom-6 w-full">
+          <div className="absolute bottom-6 w-full ">
             <div className="w-full max-h-[1600px] px-6">
               <div className="max-w-[500px] text-[#f3f1ea]">
                 <div className="h2 text-2xl">Sabi In situ</div>
@@ -172,7 +172,7 @@ export default function Home() {
                       href="/"
                       className="text-milk uppercase shop-room-button relative"
                     >
-                      Shop this romm
+                      Shop this room
                     </Link>
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { mobileMenuList } from "../constants";
+import { mobileMenuList } from "../../constants";
 import { stateProvider } from "./stateContext/UseStateContext";
 import Image from "next/image";
 import Drawer from "./Drawer";
@@ -20,7 +20,13 @@ export default function MobileMenu() {
     >
       <div className="overflow-x-hidden overflow-y-auto flex-grow pb-4 border border-listBorder drawer-content">
         <ul role="list">
-          <Drawer title="Shop" delay="0.1s">
+          <Drawer
+            title="Shop"
+            delay="0.1s"
+            color="#221f20"
+            borderColor="rgba(34, 31, 32, .15)"
+            padding={6}
+          >
             {mobileMenuList.innerMenu.map((list, index) => (
               <ul className="mb-4" key={index}>
                 <li className="border-t border-listBorder py-[21px] px-6 mb-[15px] flow-root">
@@ -51,7 +57,13 @@ export default function MobileMenu() {
             ))}
           </Drawer>
 
-          <Drawer title="Collections" delay="0.15s">
+          <Drawer
+            title="Collections"
+            delay="0.15s"
+            color="#221f20"
+            borderColor="rgba(34, 31, 32, .15)"
+            padding={6}
+          >
             <ul className="mb-4">
               <li className="border-t border-listBorder py-[21px] px-6 mb-[15px] flow-root">
                 <Link

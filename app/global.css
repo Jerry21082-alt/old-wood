@@ -17,6 +17,11 @@
   src: url("../public/TT\ Drugs\ Trial\ Regular.otf");
 }
 
+@font-face {
+  font-family: DrugsItalic;
+  src: url("../public/TT\ Drugs\ Trial\ Italic.otf");
+}
+
 *,
 *::before,
 *::after {
@@ -40,6 +45,9 @@ body {
 
 .h2 {
   font-family: Drugs;
+}
+.h3 {
+  font-family: DrugsItalic;
 }
 
 .r-list::placeholder {
@@ -175,6 +183,19 @@ body {
   transition: transform 0.3s ease-in-out;
 }
 
+.detail-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  transform: scaleX(1);
+  transform-origin: left;
+  width: 100%;
+  background-color: #5e3519;
+  height: 1px;
+  transition: transform 0.3s ease-in-out;
+}
+
 .shop-room-button::after {
   content: "";
   position: absolute;
@@ -275,12 +296,29 @@ body {
   gap: 24px;
 }
 
-.gradient {
+.fabric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  margin: -12px;
+  justify-content: flex-start;
+}
+
+/* .gradient {
+  position: relative;
+} */
+
+.gradient::after {
   background-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.5),
     rgba(0, 0, 0, 0.05)
   );
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 
 .plus-icon::before {

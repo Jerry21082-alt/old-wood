@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { productReelItems } from "../constants";
+import { productReelItems } from "../../constants";
 import AspectRatioContainer from "./AspectRatioContainer";
 import { formatPrice } from "@/helpers/formatPrice";
 
@@ -29,7 +29,7 @@ export default function ProductReel() {
                 className="block relative mb-4"
               >
                 <Link
-                  href="/"
+                  href={`/product_page/${item.id}`}
                   className="w-full h-full"
                   // style={{ aspectRatio: "3 / 4" }}
                 >
