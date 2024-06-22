@@ -1,9 +1,9 @@
-import Nav from "./components/Nav";
+import Nav from "../components/Nav";
 import "./global.css";
 import "../styles/typography.css";
-import Footer from "./components/Footer";
-import MobileMenu from "./components/MobileMenu";
-import UseStateContext from "./components/stateContext/UseStateContext";
+import Footer from "../components/Footer";
+import MobileMenu from "../components/MobileMenu";
+import UseStateContext from "../components/stateContext/UseStateContext";
 
 export default function RootLayout({ children }) {
   return (

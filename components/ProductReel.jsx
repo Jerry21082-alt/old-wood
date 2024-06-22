@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { productReelItems } from "../../constants";
+import { productReelItems } from "../constants";
 import AspectRatioContainer from "./AspectRatioContainer";
 import { formatPrice } from "@/helpers/formatPrice";
 

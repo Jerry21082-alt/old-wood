@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { mobileMenuList } from "../../constants";
+import { mobileMenuList } from "../constants";
 import { stateProvider } from "./stateContext/UseStateContext";
 import Image from "next/image";
 import Drawer from "./Drawer";

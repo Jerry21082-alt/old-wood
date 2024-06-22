@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import ProductReel from "./components/ProductReel";
-import { stateProvider } from "./components/stateContext/UseStateContext";
+import ProductReel from "../components/ProductReel";
+import { stateProvider } from "../components/stateContext/UseStateContext";
 
 export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
