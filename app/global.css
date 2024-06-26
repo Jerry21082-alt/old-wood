@@ -401,6 +401,48 @@ body {
   transition: transform 0.59s ease-in-out;
 }
 
+.scroll-grid {
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  justify-content: start;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 5px;
+  padding: 10px 0;
+  position: relative;
+  align-items: start;
+}
+
+.scroll-item-grid {
+  display: grid;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  grid-template-columns: 100% 100% 100%;
+  align-items: start;
+  justify-content: safe start;
+  min-width: 0;
+  grid-auto-flow: column;
+  position: relative;
+}
+
+.timeline_content::before {
+  content: "";
+  position: absolute;
+  width: unset;
+  height: 100%;
+  top: 0;
+  pointer-events: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  right: 100%;
+}
+
+.timeline_image_wrapper {
+  left: calc((100vw - unset) / 2);
+  position: sticky;
+}
+
 @keyframes shopTheLookDotKeyframe {
   0% {
     opacity: 1;

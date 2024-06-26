@@ -5,12 +5,14 @@ import Drawer from "@/components/Drawer";
 import { productReelItems } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Product_Page({ params }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
+
+  const scrollRef = useRef(null);
 
   const { id } = params;
   const [productId] = id;
@@ -55,6 +57,16 @@ export default function Product_Page({ params }) {
 
   const handleSlideClick = (index) => {
     setCurrentIndex(index);
+  };
+
+  const handleScrollLeft = () => {
+    const current = scrollRef.current;
+    if (current) current.scrollLeft -= 50;
+  };
+
+  const handleScrollRight = () => {
+    const current = scrollRef.current;
+    if (current) current.scrollLeft += 50;
   };
 
   return (
@@ -274,16 +286,135 @@ export default function Product_Page({ params }) {
             More about this item
           </h3>
         </header>
+      </div>
 
-        <div className="h-10 w-full overflow-y-hidden overflow-x-auto whitespace-nowrap mt-8">
-          <div className="inline-block">
-            <span className="uppercase text-xs">story</span>
+      <div className="px-6 w-full">
+        <div className="mt-6 overflow-y-hidden overflow-x-auto" ref={scrollRef}>
+          <div className="min-w-full w-max">
+            <div className="scroll-grid border-y border-listBorder">
+              <button type="button" className="pr-7" onClick={handleScrollLeft}>
+                <span className="text-[12px] uppercase">store</span>
+              </button>
+              <button type="button" className="pr-7">
+                <span className="text-[12px] uppercase">product care</span>
+              </button>
+              <button type="button" onClick={handleScrollRight}>
+                <span className="text-[12px] uppercase">shipping & return</span>
+              </button>
+            </div>
           </div>
-          <div className="inline-block ml-12">
-            <span className="uppercase text-xs">product care</span>
-          </div>
-          <div className="inline-block ml-12">
-            <span className="uppercase text-xs">shipping & return</span>
+        </div>
+      </div>
+
+      <div className="relative w-full">
+        <div className="w-full px-6">
+          <div
+            className="pb-[30px] border-b border-listBorder w-full overflow-y-hidden overflow-x-auto block"
+            style={{ scrollSnapType: "x mandatory" }}
+          >
+            <div className="scroll-item-grid">
+              <div className="flex flex-wrap w-full gap-2">
+                <div className="max-w-full">
+                  <div className="flex flex-wrap content-between py-10 pr-6 pl-1 timeline_content relative">
+                    <div className="pb-7 w-full">
+                      <h5 className="text-darkBrown text-sm mb-7">
+                        New Vintage
+                      </h5>
+                      <p>
+                        Designs inspired by everyday life, our New Vintage items
+                        are made for the home. Antique elements are paired with
+                        luxurious interior upholstery and organic fabrics. Our
+                        New Vintage pieces are made by hand from master
+                        craftsmen and uphosterers with generations worth of
+                        knowledge.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="timeline_image_wrapper">
+                  <Image
+                    src="/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg"
+                    width={500}
+                    height={500}
+                    alt="product-img"
+                    className="max-w-full h-auto"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-wrap w-full gap-2">
+                <div className="max-w-full">
+                  <div className="flex flex-wrap content-between py-10 pr-6 pl-1 timeline_content relative">
+                    <div className="pb-7 w-full">
+                      <h5 className="text-sm mb-7 uppercase">
+                        caring for this item
+                      </h5>
+                      <p>
+                        All soft goods including sofa cushions and slipcovers
+                        are recommended dry clean only. Do not machine wash
+                      </p>
+
+                      <p className="mt-6">
+                        You may use a steamer on medium to remove wrinkles. Do
+                        not iron.
+                      </p>
+
+                      <p className="mt-6">
+                        Our fabrics are organic in nature which allows for
+                        movement. If you find your tight back sofa is wrinkling,
+                        a simple swipe of the hand and fabric tuck in the arm
+                        will remove those lines. Our cushion internals will
+                        settle and loosen over time. To keep them fresh, simply
+                        fluff and pat to organize the contents.
+                      </p>
+
+                      <p className="mt-6">
+                        Remove stains immediately. If you must, use a damp cloth
+                        to pat out the stain, do not rub. Never use harsh
+                        chemicals to remove stains. For persistent stains,
+                        contact a professional fabric cleaning company.
+                      </p>
+
+                      <p className="mt-6">
+                        It’s important to remember when purchasing items
+                        upholstered in fabric with higher piles, variations in
+                        texture will be highlighted. These fabrics are luxurious
+                        and pile inconsistencies are not a flaw but should be
+                        embraced. It is not uncommon for these fabrics to crush
+                        and distort over time with use. We use these fabrics
+                        often in our designs and cherish their unique qualities.
+                      </p>
+
+                      <p className="mt-6">
+                        To keep these fabrics looking young, it’s recommended to
+                        use a velvet brush or vacuum with an upholstery
+                        attachment to reorganize the pile as you desire.
+                      </p>
+
+                      <p className="mt-6">Do not steam or iron shearling.</p>
+
+                      <p className="mt-6">
+                        For small leather stains, use a leather cleaner and
+                        microfiber cloth.{" "}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="timeline_image_wrapper">
+                  <div className="timeline_image_wrapper">
+                    <Image
+                      src="/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg"
+                      width={500}
+                      height={500}
+                      alt="product-img"
+                      className="max-w-full h-auto"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
