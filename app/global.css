@@ -241,6 +241,17 @@ body {
   background: transparent;
 }
 
+.custom-scrollbar,
+.select {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar,
+.select::-webkit-scrollbar {
+  display: none;
+}
+
 .tap-area::before {
   content: "";
   position: absolute;

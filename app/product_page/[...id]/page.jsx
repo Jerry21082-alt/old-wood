@@ -2,6 +2,7 @@
 
 import AspectRatioContainer from "@/components/AspectRatioContainer";
 import Drawer from "@/components/Drawer";
+import ProductReel from "@/components/ProductReel";
 import { productReelItems } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,8 +12,30 @@ export default function Product_Page({ params }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
-
   const scrollRef = useRef(null);
+
+  const [swipeIndex, setSwipeIndex] = useState(0);
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  const handleSwipeStart = (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  };
+
+  const handleSwipeMove = (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchDifference = () => {
+    if (touchEndX < touchStartX) {
+      setSwipeIndex((prevIndex) => prevIndex - 1);
+    } else {
+      if (touchEndX > touchStartX) {
+        setSwipeIndex((prevIndex) => prevIndex + 1);
+      }
+    }
+  };
 
   const { id } = params;
   const [productId] = id;
@@ -67,6 +90,10 @@ export default function Product_Page({ params }) {
   const handleScrollRight = () => {
     const current = scrollRef.current;
     if (current) current.scrollLeft += 50;
+  };
+
+  const handleSelect = (index) => {
+    setCurrentIndex(index);
   };
 
   return (
@@ -289,31 +316,70 @@ export default function Product_Page({ params }) {
       </div>
 
       <div className="px-6 w-full">
-        <div className="mt-6 overflow-y-hidden overflow-x-auto" ref={scrollRef}>
+        <div
+          className="mt-6 overflow-y-hidden overflow-x-auto select"
+          ref={scrollRef}
+        >
           <div className="min-w-full w-max">
             <div className="scroll-grid border-y border-listBorder">
-              <button type="button" className="pr-7" onClick={handleScrollLeft}>
-                <span className="text-[12px] uppercase">store</span>
+              <button
+                type="button"
+                className="pr-7"
+                onClick={() => handleSelect(0)}
+              >
+                <span
+                  className="text-[12px] uppercase"
+                  style={{ color: swipeIndex === 0 ? "#5e35190" : null }}
+                >
+                  story
+                </span>
               </button>
-              <button type="button" className="pr-7">
-                <span className="text-[12px] uppercase">product care</span>
+
+              <button
+                type="button"
+                className="pr-7"
+                onClick={() => handleSelect(1)}
+              >
+                <span
+                  className="text-[12px] uppercase"
+                  style={{ color: swipeIndex === 1 ? "#5e35190" : null }}
+                >
+                  product care
+                </span>
               </button>
-              <button type="button" onClick={handleScrollRight}>
-                <span className="text-[12px] uppercase">shipping & return</span>
+
+              <button type="button" onClick={() => handleSelect(2)}>
+                <span
+                  className="text-[12px] uppercase"
+                  style={{ color: swipeIndex === 2 ? "#5e35190" : null }}
+                >
+                  shipping & return
+                </span>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="relative w-full">
+      <div
+        className="relative min-w-full"
+        onTouchStart={handleSwipeStart}
+        onTouchEnd={handleTouchDifference}
+        onTouchMove={handleSwipeMove}
+      >
         <div className="w-full px-6">
           <div
             className="pb-[30px] border-b border-listBorder w-full overflow-y-hidden overflow-x-auto block"
             style={{ scrollSnapType: "x mandatory" }}
           >
             <div className="scroll-item-grid">
-              <div className="flex flex-wrap w-full gap-2">
+              <div
+                className="flex flex-wrap w-full gap-2"
+                style={{
+                  transform: `translateX(${-currentIndex * 100}%)`,
+                  transition: "transform .4s ease",
+                }}
+              >
                 <div className="max-w-full">
                   <div className="flex flex-wrap content-between py-10 pr-6 pl-1 timeline_content relative">
                     <div className="pb-7 w-full">
@@ -343,7 +409,13 @@ export default function Product_Page({ params }) {
                 </div>
               </div>
 
-              <div className="flex flex-wrap w-full gap-2">
+              <div
+                className="flex flex-wrap w-full gap-2"
+                style={{
+                  transform: `translateX(${-currentIndex * 100}%)`,
+                  transition: "transform .4s ease",
+                }}
+              >
                 <div className="max-w-full">
                   <div className="flex flex-wrap content-between py-10 pr-6 pl-1 timeline_content relative">
                     <div className="pb-7 w-full">
@@ -415,7 +487,13 @@ export default function Product_Page({ params }) {
                 </div>
               </div>
 
-              <div className="flex flex-wrap w-full gap-2">
+              <div
+                className="flex flex-wrap w-full gap-2"
+                style={{
+                  transform: `translateX(${-currentIndex * 100}%)`,
+                  transition: "transform .4s ease",
+                }}
+              >
                 <div className="max-w-full">
                   <div className="flex flex-wrap content-between py-10 pr-6 pl-1 timeline_content relative">
                     <div className="pb-7 w-full">
@@ -487,7 +565,67 @@ export default function Product_Page({ params }) {
             </div>
           </div>
         </div>
+        <div className="my-7 px-6 w-full">
+          <div className="flow-root">
+            <header className="mb-7 max-w-full">
+              <div>
+                <h3 className="h2">Pairs with</h3>
+              </div>
+            </header>
+          </div>
+        </div>
+        <ProductReel products={productReelItems} />
       </div>
+
+      <section className="my-7">
+        <div className="px-6 w-full">
+          <div className="px-6 bg-milk">
+            <div className="flex flex-wrap py-6 relative overflow-hidden">
+              <div className="w-full relative overflow-hidden mb-8">
+                <Image
+                  src="/product_images/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg"
+                  width={500}
+                  height={500}
+                  alt="product image"
+                  className="z-10 block relative w-full h-auto max-w-full"
+                />
+              </div>
+            </div>
+
+            <div className="py-6">
+              <div className="flex flex-wrap">
+                <div className="shrink-0 w-full">
+                  <div className="h2 mb-7">
+                    <div>
+                      <span className="block text-4xl">The Old Wood</span>
+                      <span className="block text-4xl">Method</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p>
+                  We believe in the storytelling power of one-of-a-kind pieces
+                  that are made to age through generation. Our custom products
+                  do just that. All material options are tried and true
+                  favorites that patina perfectly. So we welcome the sun and
+                  play, sleep and stain--our furniture is meant for fully lived
+                  life.
+                </p>
+
+                <div className="mt-8">
+                  <Link
+                    href="/"
+                    className="relative text-lightBrown detail-link uppercase"
+                  >
+                    learn more
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   );
 }

@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { productReelItems } from "../constants";
 import AspectRatioContainer from "./AspectRatioContainer";
 import { formatPrice } from "@/helpers/formatPrice";
 
-export default function ProductReel() {
+export default function ProductReel({ products }) {
   return (
     <div
-      className="overflow-x-auto overflow-y-hidden"
+      className="overflow-x-auto overflow-y-hidden custom-scrollbar"
       style={{ scrollSnapType: "x mandatory" }}
     >
       <div className="scrollbar">
-        {productReelItems.map((item) => (
+        {products.map((item) => (
           <div className="w-full flex flex-col relative" key={item.id}>
             <div
               className="relative mb-4 overflow-hidden"

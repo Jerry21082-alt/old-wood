@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { productReelItems } from "../constants";
 import ProductReel from "../components/ProductReel";
 import { stateProvider } from "../components/stateContext/UseStateContext";
 
@@ -148,7 +149,7 @@ export default function Home() {
               </div>
             </header>
 
-            <ProductReel />
+            <ProductReel products={productReelItems} />
           </div>
         </div>
       </section>
