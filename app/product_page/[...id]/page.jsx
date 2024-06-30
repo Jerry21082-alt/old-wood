@@ -405,7 +405,77 @@ export default function Product_Page({ params }) {
                 <div className="timeline_image_wrapper">
                   <div className="timeline_image_wrapper">
                     <Image
-                      src="/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg"
+                      src="/product_images/Roweam_Method_4825_Resize_for_Product_Care.jpg"
+                      width={500}
+                      height={500}
+                      alt="product-img"
+                      className="max-w-full h-auto"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap w-full gap-2">
+                <div className="max-w-full">
+                  <div className="flex flex-wrap content-between py-10 pr-6 pl-1 timeline_content relative">
+                    <div className="pb-7 w-full">
+                      <h5 className="text-sm mb-7 uppercase">true Vintage</h5>
+                      <p className="mb-7">
+                        We offer domestic shipping to all 50 states using common
+                        carrier. All orders will be fulfilled within 5-7
+                        business days (excluding holidays). Please note that
+                        shipping rates are calculated based on the weight of the
+                        entire order.
+                      </p>
+
+                      <h5 className="text-sm mb-7 uppercase">New Vintage</h5>
+                      <p className="mb-7">
+                        We offer white-glove delivery within the contiguous 48
+                        states. Shipping totals are based on the weight of the
+                        entire order. Please allow 10 - 25 days upon completion
+                        of production for your order to be scheduled for
+                        delivery. You'll be contacted to schedule a delivery
+                        date once your order is delivered to its final
+                        inspection point. Measure furniture in the space and all
+                        entry points to ensure piece will fit upon arrival.
+                      </p>
+
+                      <h5 className="text-sm mb-7 uppercase">
+                        True Vintage - Oversized
+                      </h5>
+                      <p>
+                        Due to the scale of the piece, please inquire with us at{" "}
+                        <span className="relative detail-link">
+                          hello@roweam.com.
+                        </span>{" "}
+                        We'll estimate white-glove delivery based on the
+                        delivery location.
+                      </p>
+
+                      <h5 className="text-sm mb-7 uppercase">
+                        DAMAGED OR MISSING SHIPMENTS{" "}
+                      </h5>
+                      <p className="mb-7">
+                        In the event that your item arrives damaged or is lost
+                        in transit please contact us at{" "}
+                        <span className="relative detail-link">
+                          hello@roweam.com
+                        </span>
+                        . Please inspect all shipments within 48hrs of delivery.
+                      </p>
+
+                      <h5 className="text-sm text-[#000]">
+                        All Roweam™ New & True Vintage items are ineligible for
+                        returns or exchanges.
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="timeline_image_wrapper">
+                  <div className="timeline_image_wrapper">
+                    <Image
+                      src="/Roweam_Method_4647_1600.jpg"
                       width={500}
                       height={500}
                       alt="product-img"
