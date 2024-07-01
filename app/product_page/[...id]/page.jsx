@@ -8,13 +8,53 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increaseQty,
+  decreaseQty,
+  toggleAgree,
+} from "@/features/checkout/checkoutSlice";
+
+import { formatPrice } from "@/helpers/formatPrice";
+import { addToCart } from "@/features/cart/cartSlice";
+
 export default function Product_Page({ params }) {
+  const { id } = params;
+  const [productId] = id;
+
+  const product = productReelItems.find((item) => item.id == productId);
+  const slides = product.allImages;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [swipeIndex, setSwipeIndex] = useState(0);
+
   const scrollRef = useRef(null);
 
-  const [swipeIndex, setSwipeIndex] = useState(0);
+  const quantity = useSelector((state) => state.checkout.qty);
+  const agree = useSelector((state) => state.checkout.agree);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const dispatch = useDispatch();
+
+  const handleIncrement = () => {
+    dispatch(increaseQty());
+  };
+
+  const handleDecrement = () => {
+    dispatch(decreaseQty());
+  };
+
+  const addItemToCart = (product) => {
+    if (cartItems.some((item) => item.id === product.id)) {
+      alert("item in cart");
+    } else {
+      dispatch(addToCart(product));
+    }
+  };
+
+  const handleToggleAgree = () => dispatch(toggleAgree());
 
   let touchStartX = 0;
   let touchEndX = 0;
@@ -36,11 +76,6 @@ export default function Product_Page({ params }) {
       }
     }
   };
-
-  const { id } = params;
-  const [productId] = id;
-
-  const product = productReelItems.find((item) => item.id == productId);
 
   const showSlide = (idx) => {
     const totalSlides = slides.length;
@@ -246,11 +281,18 @@ export default function Product_Page({ params }) {
             </div>
 
             <div className="mt-6">
-              <span className="text-lightBrown">${product.price}</span>
+              <span className="text-lightBrown">
+                ${formatPrice(product.price)}
+              </span>
             </div>
 
-            <div className="flex mt-6">
-              <div className="w-4 h-4 rounded-full border-darkBrown border"></div>
+            <div className="flex mt-6" onClick={handleToggleAgree}>
+              <div className="w-4 h-4 rounded-full border-darkBrown border flex items-center justify-center">
+                <div
+                  className="w-3 h-3 rounded-full"
+                  style={{ backgroundColor: agree ? "#5e3519" : null }}
+                ></div>
+              </div>
               <span className="block text-sm ml-2 max-w-[70vw]">
                 I agree to the Old Wood terms and conditions
               </span>
@@ -259,7 +301,7 @@ export default function Product_Page({ params }) {
             <div className="flex items-center w-full mt-2">
               <div className="w-28 h-12 p-3 flex items-center border border-listBorder">
                 <div className="flex justify-between items-center w-full">
-                  <button type="button">
+                  <button type="button" onClick={handleDecrement}>
                     <svg
                       focusable="false"
                       width="10"
@@ -270,9 +312,9 @@ export default function Product_Page({ params }) {
                     </svg>
                   </button>
 
-                  <span>{1}</span>
+                  <span>{quantity}</span>
 
-                  <button type="button">
+                  <button type="button" onClick={handleIncrement}>
                     <svg
                       version="1.1"
                       xmlns="http://www.w3.org/2000/svg"
@@ -291,6 +333,7 @@ export default function Product_Page({ params }) {
                 <button
                   className="w-full uppercase py-3 px-3 bg-lightBrown text-milk"
                   type="button"
+                  onClick={() => addItemToCart(product)}
                 >
                   <span className="text-sm">Add to cart</span>
                 </button>

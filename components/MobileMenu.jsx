@@ -2,15 +2,14 @@
 
 import Link from "next/link";
 import { mobileMenuList } from "../constants";
-import { stateProvider } from "./stateContext/UseStateContext";
 import Image from "next/image";
 import Drawer from "./Drawer";
 import AspectRatioContainer from "./AspectRatioContainer";
+import { useSelector } from "react-redux";
 
 export default function MobileMenu() {
-  const { setOpenMenu, toggleMobileMenu } = stateProvider();
-
-  const handleToggleMenu = () => setOpenMenu((previousState) => !previousState);
+  // const { setOpenMenu, toggleMobileMenu } = stateProvider();
+  const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
 
   return (
     <section

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { stateProvider } from "./stateContext/UseStateContext";
+import { useSelector } from "react-redux";
 
 export default function Footer() {
-  const { toggleMobileMenu } = stateProvider();
+  // const { toggleMobileMenu } = stateProvider();
+  const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
 
   return (
     <footer className="mt-16 footer pt-16 pb-5 text-snow">

@@ -5,12 +5,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { productReelItems } from "../constants";
 import ProductReel from "../components/ProductReel";
-import { stateProvider } from "../components/stateContext/UseStateContext";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
   const [activeRList, setActiveRList] = useState(false);
-  const { toggleMobileMenu } = stateProvider();
+  const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
 
   return (
     <>

@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { stateProvider } from "./stateContext/UseStateContext";
 import { usePathname } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleMenu } from "@/features/navigation/navigationSlice";
 
 export default function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { toggleMobileMenu, setToggleMobileMenu } = stateProvider();
+  const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
+  const cartLength = useSelector((state) => state.cart.cartItems).length;
 
+  const dispatch = useDispatch();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -26,7 +29,7 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", handleWindowScroll);
   }, [isScrolled]);
 
-  const openMobileMenu = () => setToggleMobileMenu((prev) => !prev);
+  // const openMobileMenu = () => dispatch(toggleMenu());
 
   const backgroundChanged = isScrolled || toggleMobileMenu;
 
@@ -46,11 +49,11 @@ export default function Nav() {
         <div className="flex justify-end items-center w-full text-white">
           <div className="flex space-x-2">
             <span className="inline-block">Cart</span>
-            <span className="inline-block">0</span>
+            <span className="inline-block">{cartLength}</span>
           </div>
           <div
             className={`w-5 h-5 ml-7 relative flex items-center`}
-            onClick={openMobileMenu}
+            onClick={() => dispatch(toggleMenu())}
           >
             <div
               className={`hamburger-menu ${!toggleMobileMenu ? "active" : ""}`}
