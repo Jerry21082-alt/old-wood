@@ -4,15 +4,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleMenu } from "@/features/navigation/navigationSlice";
+import { toggleMenu, toggleCart } from "@/features/navigation/navigationSlice";
 
 export default function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
+  const openCart = useSelector((state) => state.navigation.isCartOpen);
   const cartLength = useSelector((state) => state.cart.cartItems).length;
 
   const dispatch = useDispatch();
   const pathname = usePathname();
+
+  useEffect(() => setIsMounted(true), []);
 
   useEffect(() => {
     const handleWindowScroll = () => {
@@ -29,9 +34,9 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", handleWindowScroll);
   }, [isScrolled]);
 
-  // const openMobileMenu = () => dispatch(toggleMenu());
+  const handleCartToggle = () => dispatch(toggleCart());
 
-  const backgroundChanged = isScrolled || toggleMobileMenu;
+  const backgroundChanged = isScrolled || toggleMobileMenu || openCart;
 
   return (
     <section
@@ -47,10 +52,14 @@ export default function Nav() {
           <Link href={`/`}>OLDWOOD</Link>
         </h1>
         <div className="flex justify-end items-center w-full text-white">
-          <div className="flex space-x-2">
+          <button
+            type="button"
+            className="flex space-x-2"
+            onClick={handleCartToggle}
+          >
             <span className="inline-block">Cart</span>
-            <span className="inline-block">{cartLength}</span>
-          </div>
+            <span className="inline-block">{isMounted && cartLength}</span>
+          </button>
           <div
             className={`w-5 h-5 ml-7 relative flex items-center`}
             onClick={() => dispatch(toggleMenu())}

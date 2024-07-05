@@ -1,6 +1,7 @@
 export const productReelItems = [
   {
     id: 1,
+    quantity: 1,
     primaryImage: "/product_images/101743_Sabi_Sectional_0031.jpg",
     secondaryImage: "/product_images/101743_Sabi_Sectional_0042_1.jpg",
     name: "Sabi Sectional",
@@ -29,6 +30,7 @@ export const productReelItems = [
   },
   {
     id: 2,
+    quantity: 1,
     primaryImage: "/product_images/101732B_Disc_Side_Table_3026.jpg",
     secondaryImage: "/product_images/101732B_Disc_Side_Table_3040.jpg",
     name: "Disc Slide Table",
@@ -61,6 +63,7 @@ export const productReelItems = [
   },
   {
     id: 3,
+    quantity: 1,
     primaryImage:
       "/product_images/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg",
     secondaryImage:
@@ -91,6 +94,7 @@ export const productReelItems = [
   },
   {
     id: 4,
+    quantity: 1,
     primaryImage:
       "/product_images/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg",
     secondaryImage: "/product_images/Thrown_Salad_Bowl_1386.jpg",
@@ -117,6 +121,7 @@ export const productReelItems = [
   },
   {
     id: 5,
+    quantity: 1,
     primaryImage: "/product_images/101019_Bromley_7_1953.jpg",
     secondaryImage:
       "/product_images/101019_Bromley_7_1969_1b2da4ff-e31b-4e49-9165-c78d722601ca.jpg",
@@ -148,6 +153,7 @@ export const productReelItems = [
   },
   {
     id: 6,
+    quantity: 1,
     primaryImage: "/product_images/101735_Disc_Coffee_Table_2436.jpg",
     secondaryImage: "/product_images/101741_Disc_Coffee_Table_3105_1.jpg",
     name: "NBL Coffee Table",
@@ -175,6 +181,7 @@ export const productReelItems = [
   },
   {
     id: 7,
+    quantity: 1,
     primaryImage:
       "/product_images/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg",
     secondaryImage:
@@ -208,6 +215,7 @@ export const productReelItems = [
   },
   {
     id: 8,
+    quantity: 1,
     primaryImage: "/product_images/101727D_Wolcott_Stool_1555.jpg",
     secondaryImage: "/product_images/101727D_Wolcott_Stool_1560.jpg",
     name: "Mr. Wolcott Counter Stool",
