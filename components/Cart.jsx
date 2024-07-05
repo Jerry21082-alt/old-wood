@@ -4,44 +4,49 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
 import { useEffect, useState } from "react";
+import { updateItem } from "@/features/cart/cartSlice";
+import { closeCart } from "@/features/navigation/navigationSlice";
+import { toggleMenu, toggleCart } from "@/features/navigation/navigationSlice";
 
 export default function Cart() {
-  const toggleCart = useSelector((state) => state.navigation.isCartOpen);
+  const cartState = useSelector((state) => state.navigation.isCartOpen);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isMounted, setIsMounted] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => setIsMounted(true), []);
 
   return (
     <section
-      className={`w-screen fixed top-[62.5px] inset-0 bg-milk z-20 cart ${
-        !toggleCart ? "close-cart" : "open-cart"
+      className={`w-screen fixed top-[62.5px] inset-0 bg-milk z-[1000] cart ${
+        !cartState ? "close-cart" : "open-cart"
       }`}
-      style={{ transform: !toggleCart ? "translateX(100%)" : "translateX(0%)" }}
+      style={{ transform: !cartState ? "translateX(100%)" : "translateX(0%)" }}
     >
       <div className="w-full h-full">
         <div className="px-6 overflow-y-auto overflow-x-hidden flex-grow-0 w-full">
           {isMounted && cartItems.length > 0 ? (
             <div
-              className="overflow-x-hidden overflow-y-auto flex-grow pb-14 scroller"
-              style={{ height: "89vh" }}
+              className="overflow-x-hidden overflow-y-auto flex-grow pb-36 custom-scrollbar w-full"
+              style={{ height: "100vh" }}
             >
               {cartItems.map((item) => (
                 <div className="pt-4 pb-14" key={item.id}>
-                  <div className="flow-root pb-6 border-b border-listBorder">
-                    <div className="flex relative mb-5">
+                  <div className="flow-root pb-6 border-b border-listBorder w-full">
+                    <div className="flex relative mt-5 w-full">
                       <Link
                         href="/"
                         tabIndex="-1"
                         aria-hidden="true"
-                        className="w-[120px] relative mr-5"
+                        className="relative mr-5"
                       >
                         <Image
                           src={item.primaryImage}
                           width={500}
                           height={500}
                           alt="product image"
-                          className="w-full h-auto"
+                          className="w-full h-full"
                         />
                       </Link>
 
@@ -63,6 +68,9 @@ export default function Cart() {
                             <button
                               type="button"
                               aria-label="Increase item quantity"
+                              onClick={() =>
+                                handleUpdateCart(item.id, item.quantity - 1)
+                              }
                             >
                               <svg
                                 focusable="false"
@@ -75,16 +83,15 @@ export default function Cart() {
                             </button>
 
                             <div className="w-10 flex items-center justify-center">
-                              <input
-                                type="Number"
-                                value={item.quantity}
-                                className="w-full text-center outline-none"
-                              />
+                              {item.quantity}
                             </div>
 
                             <button
                               type="button"
                               aria-label="Decrease item quantity"
+                              onClick={() =>
+                                handleUpdateCart(item.id, item.quantity + 1)
+                              }
                             >
                               <svg
                                 version="1.1"

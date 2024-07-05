@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isMenuOpen: false,
   isCartOpen: false,
+  closeCart: false,
 };
 
 const navigationSlice = createSlice({
@@ -17,8 +18,12 @@ const navigationSlice = createSlice({
       state.isCartOpen = !state.isCartOpen;
       state.isMenuOpen = false;
     },
+    closeCart: (state) => {
+      state.closeCart = true;
+    },
   },
 });
 
-export const { toggleMenu, toggleCart, isCartOpen } = navigationSlice.actions;
+export const { toggleMenu, toggleCart, isCartOpen, closeCart } =
+  navigationSlice.actions;
 export default navigationSlice.reducer;
