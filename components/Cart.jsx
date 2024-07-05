@@ -4,9 +4,7 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
 import { useEffect, useState } from "react";
-import { updateItem } from "@/features/cart/cartSlice";
-import { closeCart } from "@/features/navigation/navigationSlice";
-import { toggleMenu, toggleCart } from "@/features/navigation/navigationSlice";
+import { updateItem, removeFromCart } from "@/features/cart/cartSlice";
 
 export default function Cart() {
   const cartState = useSelector((state) => state.navigation.isCartOpen);
@@ -16,6 +14,13 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   useEffect(() => setIsMounted(true), []);
+
+  const handleUpdateCart = (id, quantity, price) => {
+    if (quantity < 1) {
+      dispatch(removeFromCart(id));
+    }
+    dispatch(updateItem({ id, quantity }));
+  };
 
   return (
     <section
@@ -114,7 +119,7 @@ export default function Cart() {
                   </div>
                 </div>
               ))}
-              <footer className="w-full fixed left-0 bottom-0 z-50 px-6 bg-milk">
+              <footer className="w-full fixed left-0 bottom-0 z-50 px-6">
                 <div className="w-full">
                   <span className="text-xs">
                     Shipping & taxes calculated at checkout
@@ -133,7 +138,7 @@ export default function Cart() {
               </footer>
             </div>
           ) : (
-            <div className="w-full h-full absolute top-1/3 left-0 px-6">
+            <div className="w-full h-full absolute top-1/3 left-0 px-6 z-50">
               <div className="pb-14">
                 <h3 className="h2 block mb-2">Your cart is empty</h3>
                 <p>Discover our products.</p>

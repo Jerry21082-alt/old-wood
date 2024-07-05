@@ -47,11 +47,7 @@ export default function Product_Page({ params }) {
   };
 
   const addItemToCart = (product) => {
-    if (cartItems.some((item) => item.id === product.id)) {
-      alert("item in cart");
-    } else {
-      dispatch(addToCart(product));
-    }
+    dispatch(addToCart(product));
   };
 
   const handleToggleAgree = () => dispatch(toggleAgree());
