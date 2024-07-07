@@ -28,11 +28,8 @@ const cartSlice = createSlice({
       } else state.cartItems.push(payload);
     },
     removeFromCart: (state, action) => {
-      const payload = action.payload;
-      state.cartItems = state.cartItems.slice(
-        1,
-        state.cartItems.indexOf(payload)
-      );
+      const { id } = action.payload;
+      state.cartItems = state.cartItems.filter((item) => item.id !== id);
     },
     updateItem: (state, action) => {
       const { id, quantity } = action.payload;

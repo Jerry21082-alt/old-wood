@@ -11,15 +11,18 @@ export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isMounted, setIsMounted] = useState(false);
 
+  const totalPrice = 134;
+
   const dispatch = useDispatch();
 
   useEffect(() => setIsMounted(true), []);
 
-  const handleUpdateCart = (id, quantity) => {
+  const handleUpdateCart = (id, quantity, item) => {
     if (quantity < 1) {
-      dispatch(removeFromCart(id));
+      dispatch(removeFromCart(item));
+    } else {
+      dispatch(updateItem({ id, quantity }));
     }
-    dispatch(updateItem({ id, quantity }));
   };
 
   return (
@@ -40,7 +43,7 @@ export default function Cart() {
                       href="/"
                       tabIndex="-1"
                       aria-hidden="true"
-                      className="w-32 relative mr-5"
+                      className="w-32 relative mr-5 block"
                     >
                       <Image
                         src={item.primaryImage}
@@ -70,16 +73,18 @@ export default function Cart() {
                             type="button"
                             aria-label="Increase item quantity"
                             onClick={() =>
-                              handleUpdateCart(item.id, item.quantity - 1)
+                              handleUpdateCart(item.id, item.quantity - 1, item)
                             }
                           >
                             <svg
-                              focusable="false"
-                              width="8"
-                              height="2"
-                              viewBox="0 0 8 2"
+                              version="1.1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="15"
+                              height="15"
+                              viewBox="0 0 24 24"
                             >
-                              <path fill="#000" d="M0 0h8v2H0z"></path>
+                              <title>minus</title>
+                              <path d="M18 11h-12c-1.104 0-2 0.896-2 2s0.896 2 2 2h12c1.104 0 2-0.896 2-2s-0.896-2-2-2z"></path>
                             </svg>
                           </button>
 
@@ -115,6 +120,23 @@ export default function Cart() {
                 </div>
               </div>
             ))}
+
+          <footer className="fixed bottom-0 left-0 w-full px-6 z-10 bg-milk">
+            <p className="pb-6 text-sm">
+              Shipping & taxes calculated at checkout
+            </p>
+
+            <div className="pb-6">
+              <button
+                type="button"
+                className="w-full py-3 px-5 bg-lightBrown flex items-center justify-center text-milk text-sm"
+              >
+                complete your order
+                <span className="px-3">|</span>
+                <span>${totalPrice}</span>
+              </button>
+            </div>
+          </footer>
         </div>
       ) : (
         <div className="flex items-center justify-center bg-milk h-full w-full">
