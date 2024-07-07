@@ -24,7 +24,7 @@ export default function Cart() {
 
   return (
     <section
-      className={`w-screen fixed top-[62.5px] inset-0 bg-milk z-[1000] px-6 ${
+      className={`w-screen fixed top-[62.5px] bottom-0 left-0 right-0 bg-milk z-[1000] px-6 ${
         !cartState ? "close-cart" : "open-cart"
       }`}
       style={{ transform: !cartState ? "translateX(100%)" : "translateX(0%)" }}
@@ -117,7 +117,7 @@ export default function Cart() {
             ))}
         </div>
       ) : (
-        <div className="flex items-center justify-center w-full h-full">
+        <div className="flex items-center justify-center bg-milk h-full w-full">
           <div className="w-full">
             <div className="pb-14">
               <h3 className="h2 block mb-2">Your cart is empty</h3>
