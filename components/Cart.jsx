@@ -11,7 +11,21 @@ export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isMounted, setIsMounted] = useState(false);
 
-  const totalPrice = 134;
+  const getTotalCartItemsPrice = () => {
+    let emptyArray = [];
+
+    for (let i = 0; i < cartItems.length; i++) {
+      const price = cartItems[i].price;
+      const qty = cartItems[i].quantity;
+      const totalPrice = price * qty;
+
+      emptyArray.push(totalPrice);
+    }
+
+    return emptyArray;
+  };
+
+  const totalPrice = reduce(getTotalCartItemsPrice(), (a, b) => a + b, 0);
 
   const dispatch = useDispatch();
 
@@ -24,6 +38,16 @@ export default function Cart() {
       dispatch(updateItem({ id, quantity }));
     }
   };
+
+  function reduce(array, combineFunction, start) {
+    let current = start;
+
+    for (let element of array) {
+      current = combineFunction(element, current);
+    }
+
+    return current;
+  }
 
   return (
     <section
@@ -133,7 +157,7 @@ export default function Cart() {
               >
                 complete your order
                 <span className="px-3">|</span>
-                <span>${totalPrice}</span>
+                <span>${formatPrice(totalPrice)}</span>
               </button>
             </div>
           </footer>

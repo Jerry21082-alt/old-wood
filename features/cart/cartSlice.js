@@ -21,7 +21,6 @@ const cartSlice = createSlice({
             ? {
                 ...item,
                 quantity: item.quantity + 1,
-                price: item.price + item.price,
               }
             : item
         );

@@ -7,6 +7,8 @@ import { productReelItems } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -22,15 +24,18 @@ export default function Product_Page({ params }) {
   const { id } = params;
   const [productId] = id;
 
-  const product = productReelItems.find((item) => item.id == productId);
-  const slides = product.allImages;
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [swipeIndex, setSwipeIndex] = useState(0);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [allProducts, setAllProducts] = useState(productReelItems);
+
+  const product = allProducts.find((item) => item.id == productId);
+  const slides = product.allImages;
 
   const scrollRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const quantity = useSelector((state) => state.checkout.qty);
   const agree = useSelector((state) => state.checkout.agree);
@@ -38,16 +43,35 @@ export default function Product_Page({ params }) {
 
   const dispatch = useDispatch();
 
-  const handleIncrement = () => {
-    dispatch(increaseQty());
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  const handleIncrement = (product) => {
+    setAllProducts((prevProduct) =>
+      prevProduct.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
   };
 
-  const handleDecrement = () => {
-    dispatch(decreaseQty());
+  const handleDecrement = (product) => {
+    setAllProducts((prevProduct) =>
+      prevProduct.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+      )
+    );
   };
 
-  const addItemToCart = (product) => {
-    dispatch(addToCart(product));
+  const addItemToCart = async (product) => {
+    if (!agree) {
+      console.log("please agree to terms");
+    } else {
+      setIsAddingToCart(true);
+      await delay(2000);
+      dispatch(addToCart(product));
+      setIsAddingToCart(false);
+    }
   };
 
   const handleToggleAgree = () => dispatch(toggleAgree());
@@ -126,6 +150,8 @@ export default function Product_Page({ params }) {
   const handleSelect = (index) => {
     setCurrentIndex(index);
   };
+
+  useGSAP(() => {}, { scope: buttonRef });
 
   return (
     <section className="mt-24">
@@ -282,11 +308,12 @@ export default function Product_Page({ params }) {
               </span>
             </div>
 
-            <div className="flex mt-6" onClick={handleToggleAgree}>
+            <div className="flex mt-6">
               <div className="w-4 h-4 rounded-full border-darkBrown border flex items-center justify-center">
                 <div
                   className="w-3 h-3 rounded-full"
                   style={{ backgroundColor: agree ? "#5e3519" : null }}
+                  onClick={handleToggleAgree}
                 ></div>
               </div>
               <span className="block text-sm ml-2 max-w-[70vw]">
@@ -297,7 +324,10 @@ export default function Product_Page({ params }) {
             <div className="flex items-center w-full mt-2">
               <div className="w-28 h-12 p-3 flex items-center border border-listBorder">
                 <div className="flex justify-between items-center w-full">
-                  <button type="button" onClick={handleDecrement}>
+                  <button
+                    type="button"
+                    onClick={() => handleDecrement(product)}
+                  >
                     <svg
                       focusable="false"
                       width="10"
@@ -308,9 +338,12 @@ export default function Product_Page({ params }) {
                     </svg>
                   </button>
 
-                  <span>{quantity}</span>
+                  <span>{product.quantity}</span>
 
-                  <button type="button" onClick={handleIncrement}>
+                  <button
+                    type="button"
+                    onClick={() => handleIncrement(product)}
+                  >
                     <svg
                       version="1.1"
                       xmlns="http://www.w3.org/2000/svg"
@@ -327,11 +360,37 @@ export default function Product_Page({ params }) {
 
               <div className="flex-1 ml-4">
                 <button
-                  className="w-full uppercase py-3 px-3 bg-lightBrown text-milk"
+                  className="w-full uppercase py-3 px-3 bg-lightBrown text-milk relative"
                   type="button"
                   onClick={() => addItemToCart(product)}
                 >
-                  <span className="text-sm">Add to cart</span>
+                  <span
+                    className="text-sm"
+                    style={{ opacity: isAddingToCart ? "0" : "1" }}
+                  >
+                    Add to cart
+                  </span>
+                  <span className="absolute w-full h-full top-0 left-0 flex justify-center items-center">
+                    <div
+                      className={isAddingToCart ? "spinner" : ""}
+                      style={{
+                        opacity: !isAddingToCart ? "0" : "1",
+                        width: "18px",
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        id="spinner"
+                      >
+                        <path
+                          fill="#f3f1ea"
+                          d="M12.9 3.1C14.2 4.3 15 6.1 15 8c0 3.9-3.1 7-7 7s-7-3.1-7-7c0-1.9.8-3.7 2.1-4.9l-.8-.8C.9 3.8 0 5.8 0 8c0 4.4 3.6 8 8 8s8-3.6 8-8c0-2.2-.9-4.2-2.3-5.7l-.8.8z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </span>
                 </button>
               </div>
             </div>
