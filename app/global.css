@@ -276,12 +276,57 @@ input {
   background-repeat: no-repeat;
 }
 
+.showme-grid {
+  display: grid;
+  grid-template-columns: 17px auto;
+  gap: 4px;
+  align-content: center;
+}
+
 .grid-footer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   max-width: 100%;
   gap: 40px;
   padding: 0 24px;
+}
+
+#termCheck {
+  /* position: absolute;
+  top: 50px; */
+  left: 0;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 17px auto;
+  grid-gap: 10px;
+  align-content: center;
+  cursor: pointer;
+  color: #221f20;
+  font-weight: 300 !important;
+}
+
+#theTerms {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: 1px solid #221f20;
+  border-radius: 50% !important;
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+#theTerms:checked:after {
+  content: "";
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: block;
+  background: #5e3519;
+  position: absolute;
+  top: 1px;
+  left: 1px;
 }
 
 .footer-gradient::before {
@@ -478,6 +523,14 @@ input {
 
 .spinner {
   animation: spin 1s linear infinite;
+}
+
+.overlay {
+  background-image: url("../public/bg-dark-grain.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transition: all 0.25s ease;
 }
 
 @keyframes shopTheLookDotKeyframe {

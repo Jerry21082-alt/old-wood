@@ -11,14 +11,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-  increaseQty,
-  decreaseQty,
-  toggleAgree,
-} from "@/features/checkout/checkoutSlice";
+import { toggleAgree } from "@/features/checkout/checkoutSlice";
 
 import { formatPrice } from "@/helpers/formatPrice";
 import { addToCart } from "@/features/cart/cartSlice";
+import { toggleShowMe } from "@/features/overlay/overlaySlice";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -30,6 +27,7 @@ export default function Product_Page({ params }) {
   const [swipeIndex, setSwipeIndex] = useState(0);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [allProducts, setAllProducts] = useState(productReelItems);
+  const [terms, setTerms] = useState(false);
 
   const product = allProducts.find((item) => item.id == productId);
   const slides = product.allImages;
@@ -37,9 +35,8 @@ export default function Product_Page({ params }) {
   const scrollRef = useRef(null);
   const buttonRef = useRef(null);
 
-  const quantity = useSelector((state) => state.checkout.qty);
   const agree = useSelector((state) => state.checkout.agree);
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const showMe = useSelector((state) => state.overlay.showMe);
 
   const dispatch = useDispatch();
 
@@ -58,7 +55,9 @@ export default function Product_Page({ params }) {
   const handleDecrement = (product) => {
     setAllProducts((prevProduct) =>
       prevProduct.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+        item.id === product.id
+          ? { ...item, quantity: item.quantity - 1 < 1 ? 1 : item.quantity - 1 }
+          : item
       )
     );
   };
@@ -74,7 +73,16 @@ export default function Product_Page({ params }) {
     }
   };
 
-  const handleToggleAgree = () => dispatch(toggleAgree());
+  const hideTerms = () => {
+    setTerms(false);
+    dispatch(toggleShowMe());
+  };
+
+  const handleToggleAgree = () => {
+    dispatch(toggleAgree());
+    dispatch(toggleShowMe());
+    setTerms((prev) => !prev);
+  };
 
   let touchStartX = 0;
   let touchEndX = 0;
@@ -137,21 +145,9 @@ export default function Product_Page({ params }) {
     setCurrentIndex(index);
   };
 
-  const handleScrollLeft = () => {
-    const current = scrollRef.current;
-    if (current) current.scrollLeft -= 50;
-  };
-
-  const handleScrollRight = () => {
-    const current = scrollRef.current;
-    if (current) current.scrollLeft += 50;
-  };
-
   const handleSelect = (index) => {
     setCurrentIndex(index);
   };
-
-  useGSAP(() => {}, { scope: buttonRef });
 
   return (
     <section className="mt-24">
@@ -308,18 +304,15 @@ export default function Product_Page({ params }) {
               </span>
             </div>
 
-            <div className="flex mt-6">
-              <div className="w-4 h-4 rounded-full border-darkBrown border flex items-center justify-center">
-                <div
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: agree ? "#5e3519" : null }}
-                  onClick={handleToggleAgree}
-                ></div>
-              </div>
-              <span className="block text-sm ml-2 max-w-[70vw]">
-                I agree to the Old Wood terms and conditions
-              </span>
-            </div>
+            <label id="termCheck" className="mt-4">
+              <input
+                id="theTerms"
+                type="checkbox"
+                required
+                onClick={handleToggleAgree}
+              />
+              <span className="text-sm">Agree to the Terms and Conditions</span>
+            </label>
 
             <div className="flex items-center w-full mt-2">
               <div className="w-28 h-12 p-3 flex items-center border border-listBorder">
@@ -375,19 +368,16 @@ export default function Product_Page({ params }) {
                       className={isAddingToCart ? "spinner" : ""}
                       style={{
                         opacity: !isAddingToCart ? "0" : "1",
-                        width: "18px",
                       }}
                     >
                       <svg
+                        fill="#f3f1ea"
+                        width="20px"
+                        height="20px"
+                        viewBox="0 0 1024 1024"
                         xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        id="spinner"
                       >
-                        <path
-                          fill="#f3f1ea"
-                          d="M12.9 3.1C14.2 4.3 15 6.1 15 8c0 3.9-3.1 7-7 7s-7-3.1-7-7c0-1.9.8-3.7 2.1-4.9l-.8-.8C.9 3.8 0 5.8 0 8c0 4.4 3.6 8 8 8s8-3.6 8-8c0-2.2-.9-4.2-2.3-5.7l-.8.8z"
-                        ></path>
+                        <path d="M512 1024c-69.1 0-136.2-13.5-199.3-40.2C251.7 958 197 921 150 874c-47-47-84-101.7-109.8-162.7C13.5 648.2 0 581.1 0 512c0-19.9 16.1-36 36-36s36 16.1 36 36c0 59.4 11.6 117 34.6 171.3 22.2 52.4 53.9 99.5 94.3 139.9 40.4 40.4 87.5 72.2 139.9 94.3C395 940.4 452.6 952 512 952c59.4 0 117-11.6 171.3-34.6 52.4-22.2 99.5-53.9 139.9-94.3 40.4-40.4 72.2-87.5 94.3-139.9C940.4 629 952 571.4 952 512c0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71 437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.2C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3s-13.5 136.2-40.2 199.3C958 772.3 921 827 874 874c-47 47-101.8 83.9-162.7 109.7-63.1 26.8-130.2 40.3-199.3 40.3z" />
                       </svg>
                     </div>
                   </span>
@@ -724,6 +714,46 @@ export default function Product_Page({ params }) {
           </div>
         </div>
       </section>
+      {terms ? <Terms hideTerms={hideTerms} /> : null}
     </section>
   );
 }
+
+const Terms = ({ hideTerms }) => {
+  return (
+    <div className="h-[76vh] py-[7.5%] px-[5%] overflow-y-auto max-w-[600px] m-6 bg-milk fixed top-0 left-0 z-40">
+      <h5 className="uppercase text-sm">New Vintage Terms and Conditions</h5>
+      <p className="mt-4">
+        All Oldwood™ New Vintage items are made to order and custom, therefore
+        they are ineligible for returns or exchanges. Please note that all lead
+        times are estimated and subject to change. If a multiple item custom
+        order is placed, items will ship when all custom pieces are complete.
+        Dye lots and color variations on fabric and finishes are subject to a
+        10% variation, as our stains are hand applied and fabrics vary per bolt.
+        If you are interested in seeing the finishes in person, please email
+        trade@oldwood.com for samples. Buyer is responsible for properly
+        measuring your point of entry and intended furniture location to ensure
+        a true fit. If an order must be canceled immediately after placement, we
+        allow for a 24 hour grace period to contact us at hello@roweam.com to
+        cancel your order. Our teams personally inspect all items as they
+        prepare to ship to ensure the finest quality. It is the responsibility
+        of the buyer to inspect their custom new vintage pieces upon receipt to
+        notice of any damage incurred during transit. Roweam™ is not responsible
+        for any damages incurred after items leave our manufacturer. Please
+        notate any signs of transit damage and contact us immediately at
+        hello@oldwood.com so that we may file claims with the responsible
+        carrier. Roweam™ will honor any damages determined to be a manufacturing
+        issue. If any manufacturing damages are found, please contact us
+        immediately.
+      </p>
+
+      <button
+        type="button"
+        onClick={hideTerms}
+        className="mt-6 text-sm bg-lightBrown py-2 px-8 text-milk"
+      >
+        ACCEPT
+      </button>
+    </div>
+  );
+};
