@@ -7,8 +7,6 @@ import { productReelItems } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 
 import { useSelector, useDispatch } from "react-redux";
 import { toggleAgree } from "@/features/checkout/checkoutSlice";
@@ -16,6 +14,8 @@ import { toggleAgree } from "@/features/checkout/checkoutSlice";
 import { formatPrice } from "@/helpers/formatPrice";
 import { addToCart } from "@/features/cart/cartSlice";
 import { toggleShowMe } from "@/features/overlay/overlaySlice";
+
+import { delay } from "@/helpers";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -39,10 +39,6 @@ export default function Product_Page({ params }) {
   const showMe = useSelector((state) => state.overlay.showMe);
 
   const dispatch = useDispatch();
-
-  function delay(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
 
   const handleIncrement = (product) => {
     setAllProducts((prevProduct) =>
@@ -326,12 +322,13 @@ export default function Product_Page({ params }) {
                       width="10"
                       height="2"
                       viewBox="0 0 10 2"
+                      fill="#5e3519"
                     >
                       <path filter="#5e3519" d="M0 0h10v2H0z"></path>
                     </svg>
                   </button>
 
-                  <span>{product.quantity}</span>
+                  <span className="text-lightBrown">{product.quantity}</span>
 
                   <button
                     type="button"
@@ -343,6 +340,7 @@ export default function Product_Page({ params }) {
                       width="18"
                       height="18"
                       viewBox="0 0 20 20"
+                      fill="#5e3519"
                     >
                       <title>plus</title>
                       <path d="M16 10c0 0.553-0.048 1-0.601 1h-4.399v4.399c0 0.552-0.447 0.601-1 0.601s-1-0.049-1-0.601v-4.399h-4.399c-0.552 0-0.601-0.447-0.601-1s0.049-1 0.601-1h4.399v-4.399c0-0.553 0.447-0.601 1-0.601s1 0.048 1 0.601v4.399h4.399c0.553 0 0.601 0.447 0.601 1z"></path>

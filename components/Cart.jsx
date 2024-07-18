@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
 import { useEffect, useState } from "react";
 import { updateItem, removeFromCart } from "@/features/cart/cartSlice";
+import { toggleCart } from "@/features/navigation/navigationSlice";
+import { useRouter } from "next/navigation";
 
 export default function Cart() {
   const cartState = useSelector((state) => state.navigation.isCartOpen);
@@ -28,6 +30,7 @@ export default function Cart() {
   const totalPrice = reduce(getTotalCartItemsPrice(), (a, b) => a + b, 0);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => setIsMounted(true), []);
 
@@ -48,6 +51,15 @@ export default function Cart() {
 
     return current;
   }
+
+  const navigateToCheckoutPage = () => {
+    dispatch(toggleCart());
+
+    const data = { totalPrice };
+    const queryString = new URLSearchParams(data).toString();
+
+    router.push(`/checkout_page?${queryString}`);
+  };
 
   return (
     <section
@@ -145,12 +157,12 @@ export default function Cart() {
               </div>
             ))}
 
-          <footer className="fixed bottom-0 left-0 w-full px-6 z-10 bg-milk">
+          <footer className="fixed bottom-0 left-0 w-full px-6 bg-milk cart_footer">
             <p className="pb-6 text-sm">
               Shipping & taxes calculated at checkout
             </p>
 
-            <div className="pb-6">
+            <div onClick={navigateToCheckoutPage} className="pb-6 block">
               <button
                 type="button"
                 className="w-full py-3 px-5 bg-lightBrown flex items-center justify-center text-milk text-sm"
@@ -171,7 +183,15 @@ export default function Cart() {
             </div>
             <div className="w-full">
               <button type="button" className="w-full bg-lightBrown px-8 py-3">
-                <Link href="/" className="w-full h-full text-milk text-sm">
+                <Link
+                  href={{
+                    pathname: "/checkout_page",
+                    query: {
+                      id: 1,
+                    },
+                  }}
+                  className="w-full h-full text-milk text-sm"
+                >
                   continue shopping
                 </Link>
               </button>
