@@ -49,6 +49,10 @@ input {
   outline: none;
 }
 
+select {
+  background: transparent;
+}
+
 .h2 {
   font-family: Drugs;
 }

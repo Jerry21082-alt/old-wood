@@ -13,10 +13,42 @@ function CheckoutContent() {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isFocus, setIsFocus] = useState(false);
+  const [isMailFocus, setIsMailFocus] = useState(false);
+  const [isFirstNameFocus, setIsFirstNameFocus] = useState(false);
+  const [isLastNameFocus, setIsLastNameFocus] = useState(false);
   const [hideSummary, setHideSummary] = useState(true);
+  const [newsLetter, setNewsLetter] = useState(false);
   const [height, setHeight] = useState("0px");
+  const [isMounted, setIsMounted] = useState(false);
+
   const collapseRef = useRef(null);
   const inputRef = useRef(null);
+  const emailRef = useRef(null);
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+
+  const handleLastNameFocus = () => {
+    lastNameRef.current.focus();
+    setIsLastNameFocus(true);
+  };
+
+  const handleLastNameBlur = () => setIsLastNameFocus(false);
+
+  const handleFirstNameFocus = () => {
+    firstNameRef.current.focus();
+    setIsFirstNameFocus(true);
+  };
+
+  const handleMailFocus = () => {
+    emailRef.current.focus();
+    setIsMailFocus(true);
+  };
+
+  const handleFirstNameBlur = () => {
+    setIsFirstNameFocus(false);
+  };
+
+  const handleMailBlur = () => setIsMailFocus(false);
 
   const handleFocus = () => {
     inputRef.current.focus();
@@ -31,15 +63,25 @@ function CheckoutContent() {
     setHideSummary(!hideSummary);
   };
 
+  useEffect(() => setIsMounted(true), []);
+
   useEffect(() => {
     if (collapseRef.current) {
       setHeight(hideSummary ? "0px" : `${collapseRef.current.scrollHeight}px`);
     }
   }, [hideSummary]);
 
+  const countries = [
+    { name: "Unites State", value: "US" },
+    { name: "Australia", value: "AUS" },
+    { name: "Canada", value: "CAD" },
+    { name: "Netherlands", value: "NAD" },
+    { name: "Nigeria", value: "NG" },
+  ];
+
   return (
     <section className="w-full">
-      <nav className="flex items-center justify-center w-full border-b border-listBorder relative">
+      <nav className="flex items-center justify-center w-full bg-milk border-b border-listBorder relative">
         <div className="p-4">
           <div>
             <Link href="/" className="logo text-4xl">
@@ -94,38 +136,41 @@ function CheckoutContent() {
           id="collapse"
         >
           <div className="bg-milk w-full p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="relative border-listBorder border-[2px] rounded-md px-2">
-                  <div className="w-12 h-auto">
-                    <Image
-                      src={cartItems[0].primaryImage}
-                      alt="product image"
-                      width={500}
-                      height={500}
-                    />
+            {isMounted &&
+              cartItems.map((item, idx) => (
+                <div
+                  className="flex items-center justify-between mb-4"
+                  key={idx}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="relative border-listBorder border-[2px] rounded-md px-2">
+                      <div className="w-12 h-auto">
+                        <Image
+                          src={item.primaryImage}
+                          alt="product image"
+                          width={500}
+                          height={500}
+                        />
+                      </div>
+                      <div className="absolute -top-2 -right-1 rounded-full w-6 h-6 flex items-center justify-center bg-transparentBlack">
+                        <span className="text-sm text-milk">
+                          {item.quantity}
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-sm text-balck mb-2">
+                        {item.name}
+                      </span>
+                      <p className="text-xs">Natural</p>
+                    </div>
                   </div>
-                  <div className="absolute -top-2 -right-1 rounded-full w-6 h-6 flex items-center justify-center bg-transparentBlack">
-                    <span className="text-sm text-milk">
-                      {cartItems[0].quantity}
-                    </span>
+
+                  <div>
+                    <span className="text-sm text-black">${item.price}</span>
                   </div>
                 </div>
-                <div>
-                  <span className="text-sm text-balck mb-2">
-                    {cartItems[0].name}
-                  </span>
-                  <p className="text-xs">Natural</p>
-                </div>
-              </div>
-
-              <div>
-                <span className="text-sm text-black">
-                  ${cartItems[0].price}
-                </span>
-              </div>
-            </div>
-
+              ))}
             <div className="mt-6 w-full space-x-2 grid-items">
               <div
                 className={`${
@@ -275,6 +320,116 @@ function CheckoutContent() {
           </p>
           <div className="w-full h-[1px] bg-listBorder" />
         </div>
+
+        <div className="flex items-center justify-between w-full mt-6 px-6">
+          <div>
+            <span className="text-black text-lg">Contact</span>
+          </div>
+          <div>
+            <Link href="/" className="underline text-sm text-balck">
+              Login
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-4 w-full px-6">
+          <div
+            className={`${
+              isMailFocus ? "border-black" : "border-listBorder"
+            } border-2 p-3 rounded-md promoCode`}
+            tabIndex={0}
+            style={{ transition: "border-color .25s ease" }}
+            onFocus={handleMailFocus}
+            onBlur={handleMailBlur}
+          >
+            <input
+              type="text"
+              placeholder="Email or mobile phone number"
+              ref={emailRef}
+            />
+          </div>
+        </div>
+
+        <div className="flex space-x-2 px-6 mt-6">
+          <div
+            className="relative"
+            onClick={() => setNewsLetter((prev) => !prev)}
+          >
+            <input
+              type="checkbox"
+              style={{ backgroundColor: newsLetter ? "#000" : "transparent" }}
+              className="appearance-none border border-listBorder w-5 h-5 rounded-sm relative"
+            />
+            <span
+              className="block absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{ display: newsLetter ? "block" : "none" }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="#FFFFFF"
+              >
+                <path d="M 20.292969 5.2929688 L 9 16.585938 L 4.7070312 12.292969 L 3.2929688 13.707031 L 9 19.414062 L 21.707031 6.7070312 L 20.292969 5.2929688 z"></path>
+              </svg>
+            </span>
+          </div>
+          <p className="text-black text-sm">Email me with news and offers</p>
+        </div>
+
+        <section className="px-6 mt-8">
+          <h4 className="text-black">Delivery</h4>
+          <div
+            className={`relative mt-4 border border-listBorder rounded-md p-3`}
+          >
+            <label className="absolute left-4 top-0 hidden">
+              <span className="text-xs text-black">Country/Region</span>
+            </label>
+
+            <select
+              name="countryCode"
+              id="select0"
+              required
+              autoComplete="shipping country"
+              className="w-full outline-none mt-1 text-sm text-black text-balance"
+            >
+              {countries.map((country) => (
+                <option value={country.name} key={country.name}>
+                  {country.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mt-4 w-full">
+            <div
+              className={`${
+                isFirstNameFocus ? "border-black" : "border-listBorder"
+              } border-2 p-3 rounded-md promoCode`}
+              tabIndex={0}
+              style={{ transition: "border-color .25s ease" }}
+              onFocus={handleFirstNameFocus}
+              onBlur={handleFirstNameBlur}
+            >
+              <input type="text" placeholder="First name" ref={firstNameRef} />
+            </div>
+          </div>
+          <div className="my-4 w-full">
+            <div
+              className={`${
+                isLastNameFocus ? "border-black" : "border-listBorder"
+              } border-2 p-3 rounded-md promoCode`}
+              tabIndex={0}
+              style={{ transition: "border-color .25s ease" }}
+              onFocus={handleLastNameFocus}
+              onBlur={handleLastNameBlur}
+            >
+              <input type="text" placeholder="Last name" ref={lastNameRef} />
+            </div>
+          </div>
+        </section>
       </main>
     </section>
   );

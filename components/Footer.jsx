@@ -1,14 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 
 export default function Footer() {
-  // const { toggleMobileMenu } = stateProvider();
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
+  const pathname = usePathname();
 
   return (
-    <footer className="mt-16 footer pt-16 pb-5 text-snow">
+    <footer
+      className="mt-16 footer pt-16 pb-5 text-snow"
+      style={{ display: pathname === "/checkout_page" ? "none" : "block" }}
+    >
       <div className="grid-footer">
         <div className="order-2 max-w-[325px] break-words">
           <p className="text-sm uppercase mb-5">shop</p>
