@@ -17,6 +17,7 @@ module.exports = {
       black: "#000000",
       transparentBlack: "rgba(0, 0, 0, 0.5)",
       ligthGrey: "rgb(236,236,236)",
+      primaryBtn: "#592ff4",
     },
   },
   plugins: [],

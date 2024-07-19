@@ -556,10 +556,6 @@ input::placeholder {
   grid-template-rows: minmax(auto, max-content);
 }
 
-.hide-summary {
-  height: 0px;
-}
-
 @keyframes shopTheLookDotKeyframe {
   0% {
     opacity: 1;
