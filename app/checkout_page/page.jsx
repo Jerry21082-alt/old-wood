@@ -4,10 +4,10 @@ import { formatPrice } from "@/helpers/formatPrice";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function Checkout_Page() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const totalPrice = parseFloat(searchParams.get("totalPrice"));
 
@@ -51,7 +51,7 @@ export default function Checkout_Page() {
       </nav>
 
       <main className="w-full">
-        <div className="w-full border-listBorder border-b flex items-center justify-between p-4">
+        <div className="w-full border-listBorder border-b flex items-center justify-between   p-4">
           <div
             className="flex items-center space-x-1"
             onClick={() => setHideSummary((prev) => !prev)}
@@ -183,5 +183,13 @@ export default function Checkout_Page() {
         </div>
       </main>
     </section>
+  );
+}
+
+export default function Checkout_Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CheckoutContent />
+    </Suspense>
   );
 }
