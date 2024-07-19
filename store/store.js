@@ -7,6 +7,14 @@ import { load, save } from "redux-localstorage-simple";
 
 const PERSISTED_KEYS = ["cart"];
 
+let preloadedState;
+try {
+  preloadedState = load({ states: PERSISTED_KEYS });
+} catch (error) {
+  console.warn("Invalid state in localStorage, resetting state.");
+  preloadedState = {};
+}
+
 export const store = configureStore({
   reducer: {
     navigation: navigationReducer,
@@ -16,5 +24,5 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(save({ states: PERSISTED_KEYS })),
-  preloadedState: load({ states: PERSISTED_KEYS }),
+  preloadedState,
 });
