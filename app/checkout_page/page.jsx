@@ -13,42 +13,55 @@ function CheckoutContent() {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isFocus, setIsFocus] = useState(false);
-  const [isMailFocus, setIsMailFocus] = useState(false);
-  const [isFirstNameFocus, setIsFirstNameFocus] = useState(false);
-  const [isLastNameFocus, setIsLastNameFocus] = useState(false);
   const [hideSummary, setHideSummary] = useState(true);
   const [newsLetter, setNewsLetter] = useState(false);
   const [height, setHeight] = useState("0px");
   const [isMounted, setIsMounted] = useState(false);
 
   const collapseRef = useRef(null);
-  const inputRef = useRef(null);
-  const emailRef = useRef(null);
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
 
-  const handleLastNameFocus = () => {
-    lastNameRef.current.focus();
-    setIsLastNameFocus(true);
-  };
+  useEffect(() => setIsMounted(true), []);
 
-  const handleLastNameBlur = () => setIsLastNameFocus(false);
+  useEffect(() => {
+    if (collapseRef.current) {
+      setHeight(hideSummary ? "0px" : `${collapseRef.current.scrollHeight}px`);
+    }
+  }, [hideSummary]);
 
-  const handleFirstNameFocus = () => {
-    firstNameRef.current.focus();
-    setIsFirstNameFocus(true);
-  };
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const inputContainer = document.querySelectorAll("#focus_input");
 
-  const handleMailFocus = () => {
-    emailRef.current.focus();
-    setIsMailFocus(true);
-  };
+      const handleFocus = (div) => {
+        const input = div.querySelector("input");
+        input.focus();
+        div.style.borderColor = "#000";
+      };
 
-  const handleFirstNameBlur = () => {
-    setIsFirstNameFocus(false);
-  };
+      const handleBlur = (div) => {
+        div.style.borderColor = "rgba(0,0,0,.045)";
+      };
 
-  const handleMailBlur = () => setIsMailFocus(false);
+      inputContainer.forEach((el) => {
+        const input = el.querySelector("input");
+        if (input) {
+          el.addEventListener("click", () => handleFocus(el));
+          input.addEventListener("blur", () => handleBlur(el));
+        }
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+
+  const countries = [
+    { name: "Unites State", value: "US" },
+    { name: "Australia", value: "AUS" },
+    { name: "Canada", value: "CAD" },
+    { name: "Netherlands", value: "NAD" },
+    { name: "Nigeria", value: "NG" },
+  ];
 
   const handleFocus = () => {
     inputRef.current.focus();
@@ -62,22 +75,6 @@ function CheckoutContent() {
   const toggleSummary = () => {
     setHideSummary(!hideSummary);
   };
-
-  useEffect(() => setIsMounted(true), []);
-
-  useEffect(() => {
-    if (collapseRef.current) {
-      setHeight(hideSummary ? "0px" : `${collapseRef.current.scrollHeight}px`);
-    }
-  }, [hideSummary]);
-
-  const countries = [
-    { name: "Unites State", value: "US" },
-    { name: "Australia", value: "AUS" },
-    { name: "Canada", value: "CAD" },
-    { name: "Netherlands", value: "NAD" },
-    { name: "Nigeria", value: "NG" },
-  ];
 
   return (
     <section className="w-full">
@@ -127,7 +124,6 @@ function CheckoutContent() {
         </div>
 
         <div
-          ref={collapseRef}
           style={{
             maxHeight: height,
             overflow: "hidden",
@@ -173,19 +169,13 @@ function CheckoutContent() {
               ))}
             <div className="mt-6 w-full space-x-2 grid-items">
               <div
-                className={`${
-                  isFocus ? "border-black" : "border-listBorder"
-                } border-2 p-3 rounded-md promoCode`}
+                className={`p-3 rounded-md promoCode`}
                 tabIndex={0}
                 onClick={handleFocus}
-                onBlur={handleBlur}
                 style={{ transition: "border-color .25s ease" }}
+                id="focus_input"
               >
-                <input
-                  type="text"
-                  placeholder="Discount code or giftcard"
-                  ref={inputRef}
-                />
+                <input type="text" placeholder="Discount code or giftcard" />
               </div>
 
               <div>
@@ -254,8 +244,6 @@ function CheckoutContent() {
               >
                 <title id="shop-pay-logo">Shop Pay</title>
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
                   d="M204.916 30.0997C208.894 25.1796 215.067 21.1016 222.436 21.1016C238.98 21.1016 252.012 34.7983 252.001 51.6974C252.001 69.3058 238.903 82.3375 223.189 82.3375C214.834 82.3375 208.44 78.06 206.102 74.4918H205.88V100.356C205.88 100.512 205.818 100.661 205.708 100.771C205.598 100.881 205.449 100.943 205.293 100.943H190.566C190.409 100.943 190.258 100.882 190.146 100.772C190.035 100.662 189.97 100.513 189.967 100.356V21.6779C189.967 21.5192 190.03 21.3669 190.143 21.2547C190.255 21.1425 190.407 21.0795 190.566 21.0795H204.329C204.486 21.0824 204.635 21.1467 204.745 21.2586C204.855 21.3705 204.916 21.5211 204.916 21.6779V30.0997ZM221.179 67.3428C219.958 67.3814 218.73 67.2768 217.521 67.0265C214.479 66.397 211.694 64.8745 209.522 62.6536C207.35 60.4328 205.89 57.6146 205.329 54.5595C205.167 53.6817 205.082 52.7958 205.072 51.9114C205.061 50.9204 205.144 49.926 205.323 48.9415C205.879 45.8886 207.331 43.0704 209.495 40.8465C211.659 38.6226 214.436 37.094 217.473 36.4557C218.689 36.2001 219.924 36.0919 221.153 36.1288C223.15 36.1534 225.123 36.5679 226.962 37.3492C228.825 38.141 230.513 39.2939 231.929 40.7413C233.344 42.1887 234.459 43.902 235.209 45.7824C235.959 47.6628 236.329 49.6731 236.299 51.6974C236.299 51.6977 236.299 51.698 236.299 51.6983C236.331 53.7263 235.962 55.7408 235.214 57.626C234.465 59.5114 233.351 61.2304 231.937 62.6843C230.522 64.1382 228.834 65.2983 226.97 66.098C225.138 66.8837 223.171 67.3063 221.179 67.3428Z"
                   fill="#5A31F4"
                 ></path>
@@ -272,8 +260,6 @@ function CheckoutContent() {
                   fill="#5A31F4"
                 ></path>
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
                   d="M282.375 1.04428H408.027C416.699 1.04428 423.73 8.07446 423.73 16.7466V85.54C423.73 94.2121 416.699 101.242 408.027 101.242H282.375C273.703 101.242 266.673 94.2121 266.673 85.54V16.7466C266.673 8.07446 273.703 1.04428 282.375 1.04428ZM310.566 55.5316C321.049 55.5316 328.551 47.8854 328.551 37.1697C328.551 26.5093 321.049 18.8188 310.566 18.8188H292.06C291.84 18.8188 291.628 18.9064 291.473 19.0623C291.317 19.2181 291.229 19.4295 291.229 19.65V70.4361C291.232 70.6556 291.32 70.8653 291.476 71.0206C291.631 71.1758 291.841 71.2643 292.06 71.2672H299.019C299.24 71.2672 299.451 71.1796 299.607 71.0237C299.763 70.8679 299.85 70.6565 299.85 70.4361V56.3627C299.85 56.1423 299.938 55.9309 300.094 55.775C300.25 55.6191 300.461 55.5316 300.682 55.5316H310.566ZM310.034 26.5315C315.73 26.5315 319.93 31.0306 319.93 37.1697C319.93 43.3198 315.73 47.8078 310.034 47.8078H300.682C300.463 47.8078 300.253 47.7218 300.098 47.5683C299.942 47.4149 299.853 47.2063 299.85 46.9878V27.3626C299.853 27.1431 299.942 26.9334 300.097 26.7781C300.252 26.6229 300.462 26.5344 300.682 26.5315H310.034ZM330.601 61.5266C330.529 59.8838 330.868 58.2489 331.588 56.7704C332.308 55.2919 333.386 54.0167 334.724 53.0604C337.428 51.0325 341.616 49.9798 347.833 49.736L354.426 49.5144V47.564C354.426 43.6745 351.811 42.0233 347.611 42.0233C343.412 42.0233 340.763 43.5082 340.143 45.9351C340.093 46.1065 339.988 46.2564 339.843 46.3609C339.698 46.4653 339.523 46.5183 339.345 46.5113H332.84C332.72 46.5143 332.601 46.491 332.492 46.4431C332.382 46.3952 332.284 46.3238 332.205 46.2341C332.126 46.1443 332.067 46.0383 332.033 45.9235C331.999 45.8086 331.991 45.6878 332.009 45.5694C332.984 39.807 337.749 35.4299 347.911 35.4299C358.704 35.4299 362.593 40.4498 362.593 50.0352V70.4028C362.595 70.5129 362.575 70.6221 362.533 70.7243C362.492 70.8264 362.431 70.9193 362.354 70.9977C362.277 71.076 362.185 71.1382 362.083 71.1807C361.981 71.2232 361.872 71.245 361.762 71.245H355.191C355.081 71.245 354.972 71.2232 354.87 71.1807C354.769 71.1382 354.677 71.076 354.599 70.9977C354.522 70.9193 354.461 70.8264 354.42 70.7243C354.379 70.6221 354.358 70.5129 354.36 70.4028V68.8846C354.371 68.7514 354.339 68.6183 354.268 68.5049C354.197 68.3915 354.092 68.3041 353.967 68.2555C353.842 68.207 353.706 68.1999 353.577 68.2354C353.448 68.2709 353.334 68.347 353.252 68.4525C351.29 70.5912 348.099 72.1426 343.013 72.1426C335.555 72.1647 330.601 68.2641 330.601 61.5266ZM354.426 57.094V55.5205L345.894 55.9637C341.395 56.1964 338.768 58.0692 338.768 61.2163C338.768 64.0643 341.173 65.6489 345.362 65.6489C351.058 65.6489 354.426 62.5682 354.426 57.1051V57.094ZM369.198 80.7196V86.6481C369.188 86.8397 369.242 87.0293 369.353 87.1861C369.463 87.3429 369.623 87.4579 369.807 87.5124C370.966 87.8283 372.164 87.9739 373.365 87.9446C379.736 87.9446 385.554 85.6175 388.879 76.553L403.506 37.5353C403.548 37.4097 403.559 37.276 403.54 37.1451C403.52 37.0142 403.47 36.8897 403.394 36.7817C403.317 36.6738 403.216 36.5854 403.099 36.5238C402.982 36.4622 402.852 36.4291 402.719 36.4272H395.904C395.727 36.4257 395.554 36.4809 395.411 36.5845C395.267 36.6882 395.161 36.8349 395.106 37.0034L387.05 61.7149C386.989 61.8769 386.879 62.0163 386.737 62.1147C386.594 62.2131 386.425 62.2658 386.252 62.2658C386.079 62.2658 385.91 62.2131 385.767 62.1147C385.625 62.0163 385.516 61.8769 385.454 61.7149L376.168 36.9369C376.106 36.7782 375.998 36.6417 375.858 36.5449C375.718 36.4481 375.552 36.3956 375.381 36.394H368.732C368.6 36.3959 368.47 36.429 368.353 36.4906C368.236 36.5522 368.135 36.6406 368.058 36.7485C367.981 36.8564 367.931 36.9809 367.912 37.1119C367.892 37.2428 367.904 37.3765 367.946 37.5021L381.62 72.6301C381.687 72.8126 381.687 73.0129 381.62 73.1953L381.188 74.5583C380.684 76.2492 379.627 77.722 378.186 78.7407C376.746 79.7593 375.005 80.265 373.243 80.1766C372.22 80.1755 371.2 80.079 370.195 79.8885C370.073 79.8656 369.948 79.87 369.828 79.9012C369.708 79.9325 369.596 79.9898 369.501 80.0692C369.406 80.1486 369.329 80.2481 369.277 80.3605C369.224 80.4729 369.197 80.5956 369.198 80.7196Z"
                   fill="#5A31F4"
                 ></path>
@@ -334,19 +320,12 @@ function CheckoutContent() {
 
         <div className="mt-4 w-full px-6">
           <div
-            className={`${
-              isMailFocus ? "border-black" : "border-listBorder"
-            } border-2 p-3 rounded-md promoCode`}
+            className={`border-2 border-inputBorder p-3 rounded-md promoCode`}
             tabIndex={0}
             style={{ transition: "border-color .25s ease" }}
-            onFocus={handleMailFocus}
-            onBlur={handleMailBlur}
+            id="focus_input"
           >
-            <input
-              type="text"
-              placeholder="Email or mobile phone number"
-              ref={emailRef}
-            />
+            <input type="text" placeholder="Email or mobile phone number" />
           </div>
         </div>
 
@@ -380,10 +359,11 @@ function CheckoutContent() {
           <p className="text-black text-sm">Email me with news and offers</p>
         </div>
 
-        <section className="px-6 mt-8">
+        <section className="px-6 mt-8 delivery">
           <h4 className="text-black">Delivery</h4>
           <div
-            className={`relative mt-4 border border-listBorder rounded-md p-3`}
+            className={`relative mt-4 border-2 border-inputBorder rounded-md p-3`}
+            id="focus_input"
           >
             <label className="absolute left-4 top-0 hidden">
               <span className="text-xs text-black">Country/Region</span>
@@ -405,28 +385,80 @@ function CheckoutContent() {
           </div>
           <div className="mt-4 w-full">
             <div
-              className={`${
-                isFirstNameFocus ? "border-black" : "border-listBorder"
-              } border-2 p-3 rounded-md promoCode`}
+              className={`border-2 border-inputBorder p-3 rounded-md promoCode`}
               tabIndex={0}
-              style={{ transition: "border-color .25s ease" }}
-              onFocus={handleFirstNameFocus}
-              onBlur={handleFirstNameBlur}
+              style={{
+                transition: "border-color .25s ease",
+              }}
+              id="focus_input"
             >
-              <input type="text" placeholder="First name" ref={firstNameRef} />
+              <input type="text" placeholder="First name" />
             </div>
           </div>
           <div className="my-4 w-full">
             <div
-              className={`${
-                isLastNameFocus ? "border-black" : "border-listBorder"
-              } border-2 p-3 rounded-md promoCode`}
+              className={`border-2 border-inputBorder p-3 rounded-md promoCode`}
               tabIndex={0}
-              style={{ transition: "border-color .25s ease" }}
-              onFocus={handleLastNameFocus}
-              onBlur={handleLastNameBlur}
+              style={{
+                transition: "border-color .25s ease",
+              }}
+              id="focus_input"
             >
-              <input type="text" placeholder="Last name" ref={lastNameRef} />
+              <input type="text" placeholder="Last name" />
+            </div>
+          </div>
+          <div className="my-4 w-full">
+            <div
+              className={`border-2 border-inputBorder p-3 rounded-md promoCode`}
+              tabIndex={0}
+              style={{
+                transition: "border-color .25s ease",
+              }}
+              id="focus_input"
+            >
+              <input type="text" placeholder="Company (optional)" />
+            </div>
+          </div>
+          <div className="my-4 w-full">
+            <div
+              className={`border-2 border-inputBorder p-3 rounded-md flex items-center justify-between space-x-2 promoCode`}
+              tabIndex={0}
+              style={{
+                transition: "border-color .25s ease",
+              }}
+              id="focus_input"
+            >
+              <input type="text" placeholder="Address" className="w-full" />
+
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 30 30"
+                  fill="rgb(25, 25, 25)"
+                >
+                  <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div className="my-4 w-full">
+            <div
+              className={`border-2 border-inputBorder p-3 rounded-md promoCode`}
+              tabIndex={0}
+              style={{
+                transition: "border-color .25s ease",
+              }}
+              id="focus_input"
+            >
+              <input
+                type="text"
+                placeholder="Appartment, suite, etc. (optional)"
+                className="w-full"
+              />
             </div>
           </div>
         </section>

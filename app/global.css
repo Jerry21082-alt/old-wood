@@ -47,6 +47,9 @@ body {
 input {
   background: transparent;
   outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 select {
@@ -60,8 +63,9 @@ select {
   font-family: DrugsItalic;
 }
 
-input::placeholder {
-  color: #000000;
+input::placeholder,
+select {
+  color: rgba(0, 0, 0, 0.56);
   font-size: 14px;
 }
 
