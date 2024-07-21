@@ -15,6 +15,7 @@ module.exports = {
       listBorder: "rgba(34, 31, 32, .15)",
       darkGray: "#a5a097",
       black: "#000000",
+      white: "#FFFFFF",
       transparentBlack: "rgba(0, 0, 0, 0.5)",
       ligthGrey: "rgb(236,236,236)",
       primaryBtn: "#592ff4",
