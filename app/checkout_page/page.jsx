@@ -81,6 +81,33 @@ function CheckoutContent() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const inputContainer = document.querySelectorAll("#focus_input_payment");
+
+      const handleFocus = (div) => {
+        const input = div.querySelector("input");
+        input.focus();
+        div.style.borderColor = "#000";
+      };
+
+      const handleBlur = (div) => {
+        div.style.borderColor = "rgb(211,209,202)";
+      };
+
+      inputContainer.forEach((el) => {
+        const input = el.querySelector("input");
+        if (input) {
+          el.addEventListener("click", () => handleFocus(el));
+          input.addEventListener("blur", () => handleBlur(el));
+        }
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+
   const handleFocus = () => {
     inputRef.current.focus();
     setIsFocus(true);
@@ -188,7 +215,7 @@ function CheckoutContent() {
               ))}
             <div className="mt-6 w-full space-x-2 grid-items">
               <div
-                className={`p-3 rounded-md promoCode`}
+                className={`p-3 rounded-md promoCode border border-inputBorder`}
                 tabIndex={0}
                 onClick={handleFocus}
                 style={{ transition: "border-color .25s ease" }}
@@ -355,10 +382,10 @@ function CheckoutContent() {
             <input
               type="checkbox"
               style={{ backgroundColor: newsLetter ? "#000" : "transparent" }}
-              className="appearance-none border border-listBorder w-5 h-5 rounded-sm relative"
+              className="appearance-none border border-listBorder w-4 h-4 rounded-sm relative"
             />
             <span
-              className="block absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+              className="block absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2"
               style={{ display: newsLetter ? "block" : "none" }}
             >
               <svg
@@ -633,7 +660,7 @@ function CheckoutContent() {
                     transition: "border-color .25s ease",
                     borderColor: "rgb(211,209,202)",
                   }}
-                  id="focus_input"
+                  id="focus_input_payment"
                 >
                   <input
                     type="text"
@@ -663,7 +690,7 @@ function CheckoutContent() {
                     transition: "border-color .25s ease",
                     borderColor: "rgb(211,209,202)",
                   }}
-                  id="focus_input"
+                  id="focus_input_payment"
                 >
                   <input
                     type="text"
@@ -680,7 +707,7 @@ function CheckoutContent() {
                     transition: "border-color .25s ease",
                     borderColor: "rgb(211,209,202)",
                   }}
-                  id="focus_input"
+                  id="focus_input_payment"
                 >
                   <input
                     type="text"
@@ -711,7 +738,7 @@ function CheckoutContent() {
                       transition: "border-color .25s ease",
                       borderColor: "rgb(211,209,202)",
                     }}
-                    id="focus_input"
+                    id="focus_input_payment"
                   >
                     <input
                       type="text"
@@ -746,7 +773,7 @@ function CheckoutContent() {
                         height={500}
                       />
                     </div>
-                    <span className="mx-2">|</span>
+                    <span className="mx-1">|</span>
                     <p className="text-sm text-black">
                       Pay in full or installments
                     </p>
@@ -758,7 +785,152 @@ function CheckoutContent() {
         </section>
         <section>
           <div className="p-6">
-            <span className="text-black text-lg">Remember me</span>
+            <span className="text-black text-lg mb-4 block">Remember me</span>
+            <div className="w-full border border-inputBorder rounded-md p-5 flex space-x-2">
+              <div
+                className="relative"
+                onClick={() => setNewsLetter((prev) => !prev)}
+              >
+                <input
+                  type="checkbox"
+                  style={{
+                    backgroundColor: newsLetter ? "#000" : "transparent",
+                  }}
+                  className="appearance-none border border-inputBorder w-4 h-4 rounded-sm relative"
+                />
+                <span
+                  className="block absolute top-[23%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  style={{ display: newsLetter ? "block" : "none" }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="#FFFFFF"
+                  >
+                    <path d="M 20.292969 5.2929688 L 9 16.585938 L 4.7070312 12.292969 L 3.2929688 13.707031 L 9 19.414062 L 21.707031 6.7070312 L 20.292969 5.2929688 z"></path>
+                  </svg>
+                </span>
+              </div>
+
+              <div>
+                <span className="text-sm text-black">
+                  Save info for 1-step checkout
+                </span>
+                <p className="text-xs">
+                  Your info is encrypted and stored securely
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="w-full p-4">
+            {isMounted &&
+              cartItems.map((item, idx) => (
+                <div
+                  className="flex items-center justify-between mb-4"
+                  key={idx}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="relative border-listBorder border-[2px] rounded-md px-2">
+                      <div className="w-12 h-auto">
+                        <Image
+                          src={item.primaryImage}
+                          alt="product image"
+                          width={500}
+                          height={500}
+                        />
+                      </div>
+                      <div className="absolute -top-2 -right-1 rounded-full w-6 h-6 flex items-center justify-center bg-transparentBlack">
+                        <span className="text-sm text-milk">
+                          {item.quantity}
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-sm text-balck mb-2">
+                        {item.name}
+                      </span>
+                      <p className="text-xs">Natural</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-sm text-black">${item.price}</span>
+                  </div>
+                </div>
+              ))}
+            <div className="mt-6 w-full space-x-2 grid-items">
+              <div
+                className={`p-3 rounded-md promoCode border-inputBorder border`}
+                tabIndex={0}
+                onClick={handleFocus}
+                style={{ transition: "border-color .25s ease" }}
+                id="focus_input"
+              >
+                <input type="text" placeholder="Discount code or giftcard" />
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  className="p-3 h-full border-listBorder border-2 rounded-md text-xs bg-white"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-col mt-6 w-full">
+              <div className="flex items-center justify-between mb-2">
+                <div>
+                  <span className="text-black text-sm">Subtotal</span>
+                </div>
+                <div>
+                  <span className="text-black text-sm">
+                    ${formatPrice(totalPrice)}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex justify-start  items-center content-center space-x-1">
+                  <span className="text-sm text-black block">Shipping</span>
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      id="question"
+                    >
+                      <path d="M12 24C5.4 24 0 18.6 0 12S5.4 0 12 0s12 5.4 12 12-5.4 12-12 12zm0-22C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"></path>
+                      <path d="M12 16c-.6 0-1-.4-1-1v-.7c0-1.5.8-2.8 2-3.5.8-.4 1.2-1.3 1-2.1-.1-.8-.8-1.5-1.6-1.6-.6-.1-1.2 0-1.7.4-.4.3-.7.9-.7 1.5s-.4 1-1 1-1-.4-1-1c0-1.2.5-2.3 1.4-3.1.9-.8 2.1-1.1 3.3-.9 1.6.3 2.9 1.6 3.2 3.2.3 1.7-.5 3.4-2 4.2-.6.3-.9 1-.9 1.8v.8c0 .6-.4 1-1 1z"></path>
+                      <circle cx="12" cy="18" r="1"></circle>
+                      <path d="M12 19.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zm0-2c-.3 0-.5.2-.5.5s.2.5.5.5.5-.2.5-.5-.2-.5-.5-.5z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-sm">Enter shipping address</p>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-black text-lg">Total</span>
+                <span className="text-black text-lg">
+                  ${formatPrice(totalPrice)}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                className="w-full py-5 flex items-center justify-center mt-4 rounded-md text-white"
+                style={{ background: "rgb(46,46,46)" }}
+              >
+                Pay Now
+              </button>
+            </div>
           </div>
         </section>
       </main>

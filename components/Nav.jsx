@@ -54,7 +54,7 @@ export default function Nav() {
             OLDWOOD
           </Link>
         </h1>
-        <div className="flex justify-end items-center w-full text-white">
+        <div className="flex justify-end items-center w-full">
           <button
             type="button"
             className="flex space-x-2"
