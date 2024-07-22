@@ -33,6 +33,13 @@ const provinces = [
   "Massachusetts",
 ];
 
+const footerList = [
+  "Refund policy",
+  "Shipping policy",
+  "Terms of service",
+  "Contact imformation",
+];
+
 function CheckoutContent() {
   const searchParams = useSearchParams();
   const totalPrice = parseFloat(searchParams.get("totalPrice"));
@@ -934,6 +941,22 @@ function CheckoutContent() {
           </div>
         </section>
       </main>
+
+      <footer className="w-full border-t border-inputBorder p-6">
+        <div className="footer-grid">
+          <div className="flex relative">
+            <div className="flex flex-wrap justify-start items-start gap-x-4">
+              {footerList.map((list, idx) => (
+                <div key={idx}>
+                  <Link href="/" className="underline text-sm text-black">
+                    {list}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
     </section>
   );
 }

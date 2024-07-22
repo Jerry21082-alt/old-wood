@@ -13,7 +13,7 @@ export default function MobileMenu() {
 
   return (
     <section
-      className={`fixed top-[62.5px] h-screen w-screen flex flex-col z-30 bg-snow right-0 ${
+      className={`fixed top-[62.5px] h-screen w-screen flex flex-col z-50 bg-snow right-0 ${
         toggleMobileMenu ? "open-mobile-menu" : "close-mobile-menu"
       }`}
     >
