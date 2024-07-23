@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { productReelItems } from "../constants";
 import ProductReel from "../components/ProductReel";
 import { useSelector } from "react-redux";
@@ -12,12 +12,16 @@ export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
   const [activeRList, setActiveRList] = useState(false);
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
+  const [reveal, setReveal] = useState(false);
+
+  useEffect(() => {
+    setReveal(true);
+  }, []);
 
   return (
     <>
       <NewsLetter />
       <section className="block mt-0 mb-0 relative">
-        {/* <div className="gradient" /> */}
         <div
           className="fixed left-0 bottom-0 w-full h-14 z-50"
           style={{
@@ -30,7 +34,10 @@ export default function Home() {
 
         <div
           className="min-h-[80vh] relative flex image-overlay gradient"
-          style={{ opacity: "1" }}
+          style={{
+            opacity: reveal ? "1" : "0",
+            transition: "opacity .4s ease",
+          }}
         >
           <div
             className="absolute left-0 top-0 w-full h-full overflow-hidden"
@@ -42,6 +49,10 @@ export default function Home() {
               height={500}
               className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full"
               alt="hero image"
+              style={{
+                scale: reveal ? "1" : "1.2",
+                transition: "scale .4s ease",
+              }}
             />
           </div>
 

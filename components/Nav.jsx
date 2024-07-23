@@ -86,10 +86,12 @@ export default function Nav() {
             className="flex space-x-2"
             onClick={handleCartToggle}
           >
-            <span className="inline-block">Cart</span>
-            <span className="inline-block">{isMounted && cartLength}</span>
+            <span className="inline-block text-sm capitalize">Cart</span>
+            <span className="inline-block text-sm">
+              {isMounted && cartLength}
+            </span>
           </button>
-          <div className={`w-5 h-5 ml-7 relative flex items-center`}>
+          <div className={`w-4 h-4 ml-7 relative flex items-center`}>
             <div
               className={`hamburger-menu absolute w-full ${
                 revealX ? "hide-hamburger-menu" : ""

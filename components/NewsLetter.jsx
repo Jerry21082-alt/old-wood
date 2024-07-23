@@ -7,7 +7,12 @@ export default function NewsLetter() {
   const newsLetterRef = useRef(null);
 
   useEffect(() => {
-    setShowNewsLetter(true);
+    async function handleDelay() {
+      await delay(2000);
+      setShowNewsLetter(true);
+    }
+
+    handleDelay();
   }, []);
 
   useEffect(() => {
@@ -80,7 +85,7 @@ export default function NewsLetter() {
                       className="outline-none bg-milk h-full w-full"
                     />
 
-                    <div className="h-full">
+                    <div className="h-[14px] w-[14px]">
                       <Image
                         src="/arrow-right-form.png"
                         width={500}
