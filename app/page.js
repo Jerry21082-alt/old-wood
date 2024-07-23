@@ -6,6 +6,7 @@ import { useState } from "react";
 import { productReelItems } from "../constants";
 import ProductReel from "../components/ProductReel";
 import { useSelector } from "react-redux";
+import NewsLetter from "@/components/NewsLetter";
 
 export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
@@ -14,6 +15,7 @@ export default function Home() {
 
   return (
     <>
+      <NewsLetter />
       <section className="block mt-0 mb-0 relative">
         {/* <div className="gradient" /> */}
         <div
