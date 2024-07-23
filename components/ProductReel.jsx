@@ -2,8 +2,35 @@ import Image from "next/image";
 import Link from "next/link";
 import AspectRatioContainer from "./AspectRatioContainer";
 import { formatPrice } from "@/helpers/formatPrice";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useEffect } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ProductReel({ products }) {
+  useEffect(() => {
+    const items = gsap.utils.toArray("#product_item");
+
+    gsap.fromTo(
+      items,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 1.2,
+        scrollTrigger: {
+          trigger: items[0].parentNode,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: true,
+          once: true,
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
+
   return (
     <div
       className="overflow-x-auto overflow-y-hidden custom-scrollbar"
@@ -14,7 +41,11 @@ export default function ProductReel({ products }) {
           <div className="w-full flex flex-col relative" key={item.id}>
             <div
               className="relative mb-4 overflow-hidden"
-              style={{ opacity: "1" }}
+              style={{
+                opacity: "1",
+                transition: "opacity .4s ease, transform .4s ease",
+              }}
+              id="product_item"
             >
               <div className="absolute right-2 top-2 z-10 flex flex-col items-end">
                 {item.toOrder && (
@@ -30,7 +61,6 @@ export default function ProductReel({ products }) {
                 <Link
                   href={`/product_page/${item.id}`}
                   className="w-full h-full"
-                  // style={{ aspectRatio: "3 / 4" }}
                 >
                   <Image
                     src={item.primaryImage}
