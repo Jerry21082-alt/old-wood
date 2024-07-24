@@ -5,16 +5,44 @@ import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
 import { useEffect, useState } from "react";
 import { updateItem, removeFromCart } from "@/features/cart/cartSlice";
-import { toggleCart } from "@/features/navigation/navigationSlice";
+import { closeAll, toggleCart } from "@/features/navigation/navigationSlice";
 import { useRouter } from "next/navigation";
 import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
+import { gsap } from "gsap";
 
 export default function Cart() {
   const cartState = useSelector((state) => state.navigation.isCartOpen);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isMounted, setIsMounted] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  useEffect(() => {
+    if (cartState) {
+      gsap.fromTo(
+        "#cart-item",
+        {
+          opacity: 0,
+          x: 200,
+        },
+        {
+          opacity: 1,
+          x: 0,
+        }
+      );
+      gsap.fromTo(
+        "#continue-btn",
+        {
+          opacity: 0,
+          y: 100,
+        },
+        {
+          opacity: 1,
+          y: 0,
+        }
+      );
+    }
+  }, [cartState]);
 
   const getTotalCartItemsPrice = () => {
     let emptyArray = [];
@@ -60,8 +88,7 @@ export default function Cart() {
     await delay(2000);
     setIsAddingToCart(false);
 
-    dispatch(toggleCart());
-    dispatch(toggleOverlay());
+    dispatch(closeAll());
 
     const data = { totalPrice };
     const queryString = new URLSearchParams(data).toString();
@@ -80,7 +107,14 @@ export default function Cart() {
         <div className="w-full h-full overflow-x-hidden overflow-y-auto flex-grow pb-36 custom-scrollbar">
           {isMounted &&
             cartItems.map((item) => (
-              <div className="pt-4 pb-14" key={item.id}>
+              <div
+                className="pt-4 pb-14"
+                key={item.id}
+                id="cart-item"
+                style={{
+                  transition: "transform .15s ease-out, opacity .25s ease-out",
+                }}
+              >
                 <div className="flow-root pb-6 border-b border-listBorder w-full">
                   <div className="flex relative mt-5 w-full">
                     <Link
@@ -165,7 +199,13 @@ export default function Cart() {
               </div>
             ))}
 
-          <footer className="fixed bottom-0 left-0 w-full px-6 bg-milk cart_footer">
+          <footer
+            className="fixed bottom-0 left-0 w-full px-6 bg-milk cart_footer"
+            id="continue-btn"
+            style={{
+              transition: "transform .15s ease-out, opacity .25s ease-out",
+            }}
+          >
             <p className="pb-6 text-sm">
               Shipping & taxes calculated at checkout
             </p>

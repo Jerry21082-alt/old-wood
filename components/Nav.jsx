@@ -41,23 +41,16 @@ export default function Nav() {
   }, [isScrolled]);
 
   const handleCartToggle = () => {
-    dispatch(toggleOverlay());
     dispatch(toggleCart());
   };
 
   const handleMenuOpen = () => {
-    dispatch(toggleShowMe());
+    dispatch(toggleOverlay());
     dispatch(toggleMenu());
   };
 
   const handleMenuClose = () => {
     dispatch(closeAll());
-    // dispatch(toggleShowMe());
-    // if (openCart) {
-    //   dispatch(toggleCart());
-    // } else if (toggleMobileMenu) {
-    //   dispatch(toggleMenu());
-    // }
   };
 
   const backgroundChanged = isScrolled || toggleMobileMenu || openCart;

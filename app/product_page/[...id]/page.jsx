@@ -13,7 +13,7 @@ import { toggleAgree } from "@/features/checkout/checkoutSlice";
 
 import { formatPrice } from "@/helpers/formatPrice";
 import { addToCart } from "@/features/cart/cartSlice";
-import { toggleOverlay } from "@/features/navigation/navigationSlice";
+import { closeAll, toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
 import { toggleCart } from "@/features/navigation/navigationSlice";
 
@@ -728,7 +728,7 @@ export default function Product_Page({ params }) {
 
 const Terms = ({ hideTerms }) => {
   return (
-    <div className="h-[76vh] py-[7.5%] px-[5%] overflow-y-auto max-w-[600px] m-6 bg-milk fixed top-0 left-0 z-40">
+    <div className="h-[90vh] py-[7.5%] px-[5%] overflow-y-auto max-w-[600px] m-6 bg-milk fixed top-0 left-0 z-40">
       <h5 className="uppercase text-sm">New Vintage Terms and Conditions</h5>
       <p className="mt-4">
         All Oldwood™ New Vintage items are made to order and custom, therefore
@@ -757,7 +757,7 @@ const Terms = ({ hideTerms }) => {
       <button
         type="button"
         onClick={hideTerms}
-        className="mt-6 text-sm bg-lightBrown py-2 px-8 text-milk"
+        className="mt-6 text-sm bg-lightBrown py-3 px-8 text-milk"
       >
         ACCEPT
       </button>

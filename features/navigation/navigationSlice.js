@@ -22,7 +22,7 @@ const navigationSlice = createSlice({
       state.isMenuOpen = false;
     },
     closeAll: (state) => {
-      state.revealOverlay = !state.revealOverlay;
+      state.revealOverlay = false;
 
       if (state.isCartOpen || state.isMenuOpen) {
         state.isCartOpen = false;

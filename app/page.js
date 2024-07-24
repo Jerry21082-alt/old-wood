@@ -42,7 +42,7 @@ export default function Home() {
         {
           y: 0,
           opacity: 1,
-          duration: 0.3,
+          duration: 0.25,
           stagger: 1,
           scrollTrigger: {
             trigger: element,
@@ -91,7 +91,7 @@ export default function Home() {
               className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full"
               alt="hero image"
               style={{
-                transform: reveal ? "scale(1)" : "scale(1.2)",
+                transform: reveal ? "scale(1)" : "scale(1.1)",
                 transition: "transform .4s ease",
               }}
             />
