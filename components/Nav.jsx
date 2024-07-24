@@ -4,8 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleMenu, toggleCart } from "@/features/navigation/navigationSlice";
-import { toggleShowMe } from "@/features/overlay/overlaySlice";
+import {
+  toggleMenu,
+  toggleCart,
+  closeAll,
+  toggleOverlay,
+} from "@/features/navigation/navigationSlice";
 import { debounce } from "@/helpers/debounce";
 
 export default function Nav() {
@@ -37,7 +41,7 @@ export default function Nav() {
   }, [isScrolled]);
 
   const handleCartToggle = () => {
-    dispatch(toggleShowMe());
+    dispatch(toggleOverlay());
     dispatch(toggleCart());
   };
 
@@ -47,15 +51,13 @@ export default function Nav() {
   };
 
   const handleMenuClose = () => {
-    if (openCart) {
-      dispatch(toggleCart());
-      dispatch(toggleShowMe());
-    }
-
-    if (toggleMobileMenu) {
-      dispatch(toggleMenu());
-      dispatch(toggleShowMe());
-    }
+    dispatch(closeAll());
+    // dispatch(toggleShowMe());
+    // if (openCart) {
+    //   dispatch(toggleCart());
+    // } else if (toggleMobileMenu) {
+    //   dispatch(toggleMenu());
+    // }
   };
 
   const backgroundChanged = isScrolled || toggleMobileMenu || openCart;

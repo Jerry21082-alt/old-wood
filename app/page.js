@@ -28,12 +28,31 @@ export default function Home() {
         duration: 1,
         scrollTrigger: {
           trigger: "#shop-the-look",
-          start: "top 80%",
+          start: "top 110%",
           once: true,
           toggleActions: "play none none none",
         },
       }
     );
+
+    gsap.utils.toArray("#slide-up").forEach((element) => {
+      gsap.fromTo(
+        element,
+        { y: 100, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.3,
+          stagger: 1,
+          scrollTrigger: {
+            trigger: element,
+            start: "top 100%",
+            once: true,
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
   }, []);
 
   useEffect(() => {
@@ -258,20 +277,22 @@ export default function Home() {
       <section className="w-full py-16">
         <div className=" max-w-[1600px] px-6 py-16 flex flex-col md:flex-row items-start md:items-center flex-wrap">
           <div>
-            <h5 className="text-lightBrown text-sm">
+            <h5 className="text-lightBrown text-sm" id="slide-up">
               <span className="uppercase">
                 Part new vintage, part true vintage
               </span>
             </h5>
 
             <div className="mt-4">
-              <span className="text-darkBrown text-5xl h2 block">
+              <span className="text-darkBrown text-5xl h2 block" id="slide-up">
                 The Roweam
               </span>
-              <span className="text-darkBrown text-5xl h2 block">Method</span>
+              <span className="text-darkBrown text-5xl h2 block" id="slide-up">
+                Method
+              </span>
             </div>
 
-            <div className="max-w-[80%] mt-6">
+            <div className="max-w-[80%] mt-6" id="slide-up">
               <p className="text-sm">
                 Part new vintage, part true vintage. Our design method takes a
                 gathered, authentic approach using well-constructed pieces

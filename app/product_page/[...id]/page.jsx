@@ -6,16 +6,16 @@ import ProductReel from "@/components/ProductReel";
 import { productReelItems } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { toggleAgree } from "@/features/checkout/checkoutSlice";
 
 import { formatPrice } from "@/helpers/formatPrice";
 import { addToCart } from "@/features/cart/cartSlice";
-import { toggleShowMe } from "@/features/overlay/overlaySlice";
-
+import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
+import { toggleCart } from "@/features/navigation/navigationSlice";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -28,17 +28,20 @@ export default function Product_Page({ params }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [allProducts, setAllProducts] = useState(productReelItems);
   const [terms, setTerms] = useState(false);
+  const [reveal, setReveal] = useState(false);
 
   const product = allProducts.find((item) => item.id == productId);
   const slides = product.allImages;
 
   const scrollRef = useRef(null);
-  const buttonRef = useRef(null);
 
   const agree = useSelector((state) => state.checkout.agree);
-  const showMe = useSelector((state) => state.overlay.showMe);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setReveal(true);
+  }, []);
 
   const handleIncrement = (product) => {
     setAllProducts((prevProduct) =>
@@ -65,18 +68,19 @@ export default function Product_Page({ params }) {
       setIsAddingToCart(true);
       await delay(2000);
       dispatch(addToCart(product));
+      dispatch(toggleCart());
       setIsAddingToCart(false);
     }
   };
 
   const hideTerms = () => {
     setTerms(false);
-    dispatch(toggleShowMe());
+    dispatch(toggleOverlay());
   };
 
   const handleToggleAgree = () => {
     dispatch(toggleAgree());
-    dispatch(toggleShowMe());
+    dispatch(toggleOverlay());
     setTerms((prev) => !prev);
   };
 
@@ -174,6 +178,11 @@ export default function Product_Page({ params }) {
                     height={500}
                     className="object-cover object-center"
                     alt="product-image"
+                    style={{
+                      transform: reveal ? "scale(1)" : "scale(1.2)",
+                      opacity: reveal ? "1" : "0",
+                      transition: "transform .4s ease, opacity .4s ease",
+                    }}
                   />
                 </div>
               ))}

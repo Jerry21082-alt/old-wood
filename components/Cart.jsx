@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { updateItem, removeFromCart } from "@/features/cart/cartSlice";
 import { toggleCart } from "@/features/navigation/navigationSlice";
 import { useRouter } from "next/navigation";
-import { toggleShowMe } from "@/features/overlay/overlaySlice";
+import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
 
 export default function Cart() {
@@ -61,7 +61,7 @@ export default function Cart() {
     setIsAddingToCart(false);
 
     dispatch(toggleCart());
-    dispatch(toggleShowMe());
+    dispatch(toggleOverlay());
 
     const data = { totalPrice };
     const queryString = new URLSearchParams(data).toString();
