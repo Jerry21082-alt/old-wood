@@ -7,12 +7,34 @@ import { productReelItems } from "../constants";
 import ProductReel from "../components/ProductReel";
 import { useSelector } from "react-redux";
 import NewsLetter from "@/components/NewsLetter";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
   const [activeRList, setActiveRList] = useState(false);
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
   const [reveal, setReveal] = useState(false);
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  useEffect(() => {
+    gsap.fromTo(
+      "#shop-the-look",
+      { clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)", opacity: 0 },
+      {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: "#shop-the-look",
+          start: "top 80%",
+          once: true,
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
 
   useEffect(() => {
     setReveal(true);
@@ -50,8 +72,8 @@ export default function Home() {
               className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full"
               alt="hero image"
               style={{
-                scale: reveal ? "1" : "1.2",
-                transition: "scale .4s ease",
+                transform: reveal ? "scale(1)" : "scale(1.2)",
+                transition: "transform .4s ease",
               }}
             />
           </div>
@@ -167,7 +189,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="min-h-[80vh] relative gradient">
+      <section
+        className="min-h-[80vh] relative gradient"
+        id="shop-the-look"
+        style={{ transition: "opacity .25s ease-out, clip-path .25s ease-out" }}
+      >
         <div className="mt-4 overflow-hidden">
           <div className="absolute bottom-6 w-full ">
             <div className="w-full max-h-[1600px] px-6">
