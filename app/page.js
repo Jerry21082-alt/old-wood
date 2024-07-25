@@ -84,10 +84,9 @@ export default function Home() {
             className="absolute left-0 top-0 w-full h-full overflow-hidden"
             style={{ paddingBottom: "66.64%" }}
           >
-            <Image
-              src="/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg"
-              width={500}
-              height={500}
+            <img
+              src="https://roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=2500"
+              srcset="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1400 1400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1600 1600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1800 1800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=2000 2000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=2200 2200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=2400 2400w"
               className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full"
               alt="hero image"
               style={{
@@ -119,7 +118,7 @@ export default function Home() {
             />
           </div>
           <div className="mb-9 w-full">
-            <div className="aspect-square w-full">
+            <div className="aspect-square w-full flex justify-center items-center flex-col">
               <div className="my-4 mx-0 text-[#5e3519]">
                 <span className="block text-center">OLDWOOD NEW VINTAGE</span>
               </div>
@@ -149,12 +148,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block mt-5">
+      <section className="block mt-5 w-full">
         <div
           className="py-7 px-0"
           style={{ display: "flow-root", bakground: "transparent" }}
         >
-          <div className="w-full max-w-7xl">
+          <div className="w-full max-w-[1600px]">
             <header className="max-w-full m-7">
               <div>
                 <div className="flex items-center space-x-6">
@@ -170,7 +169,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="grid-item gap-2 mt-4">
+                <div className="grid-item mt-4">
                   {["new vintage", "true vintage", "new & true vintage"].map(
                     (li, idx) => (
                       <div className="flex items-center space-x-2" key={li}>
@@ -208,69 +207,69 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        className="min-h-[80vh] relative gradient"
-        id="shop-the-look"
-        style={{ transition: "opacity .25s ease-out, clip-path .25s ease-out" }}
-      >
-        <div className="mt-4 overflow-hidden">
-          <div className="absolute bottom-6 w-full ">
-            <div className="w-full max-h-[1600px] px-6">
-              <div className="max-w-[500px] text-[#f3f1ea]">
-                <div className="h2 text-2xl">Sabi In situ</div>
-                <div className="mt-4 ">
-                  <p>
-                    A clean line of tailored upholstery, simple and
-                    elegant.&nbsp;Drawing inspiration from the seamless fusion
-                    of strength and femininity, the Sabi embodies a symphony of
-                    grace and allure
-                  </p>
+      <section>
+        <div className="mt-10">
+          <div className="relative block overflow-hidden">
+            <div className="absolute bottom-6 w-full ">
+              <div className="w-full max-h-[1600px] px-6">
+                <div className="max-w-[500px] text-[#f3f1ea]">
+                  <div className="h2 text-2xl">Sabi In situ</div>
+                  <div className="mt-4 ">
+                    <p>
+                      A clean line of tailored upholstery, simple and
+                      elegant.&nbsp;Drawing inspiration from the seamless fusion
+                      of strength and femininity, the Sabi embodies a symphony
+                      of grace and allure
+                    </p>
 
-                  <div className="mt-5">
-                    <Link
-                      href="/"
-                      className="text-milk uppercase shop-room-button relative"
-                    >
-                      Shop this room
-                    </Link>
+                    <div className="mt-5">
+                      <Link
+                        href="/"
+                        className="text-milk uppercase shop-room-button relative"
+                      >
+                        Shop this room
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="absolute top-[23%] left-[38%] md:top-[20%] md:left-[41%] ml-[-12px] mt-[-12px]">
-            <div className="flex items-center relative">
-              <div className="tap-area w-4 h-4 rounded-full border border-milk" />
-              <span className="text-sm md:text-md text-milk ml-2">
-                Table Lamps
-              </span>
+            <div className="absolute top-[23%] left-[38%] md:top-[20%] md:left-[41%] ml-[-12px] mt-[-12px]">
+              <div className="flex items-center relative">
+                <div className="tap-area w-4 h-4 rounded-full border border-milk" />
+                <span className="text-sm md:text-md text-milk ml-2">
+                  Table Lamps
+                </span>
+              </div>
+            </div>
+
+            <div className="absolute top-[40%] left-[30%] md:top-[38%] md:left-[42%] ml-[-12px] mt-[-12px]">
+              <div className="flex items-center relative">
+                <div className="tap-area w-4 h-4 rounded-full border border-milk" />
+                <span className="text-sm md:text-md text-milk ml-2">
+                  Havard Devinity Desk
+                </span>
+              </div>
+            </div>
+
+            <div className="absolute top-[50%] left-[74%] md:top-[50%] md:left-[71%] ml-[-12px] mt-[-12px]">
+              <div className="flex items-center relative">
+                <div className="tap-area w-4 h-4 rounded-full border border-milk" />
+                <span className="text-sm md:text-md text-milk ml-2">
+                  Seating
+                </span>
+              </div>
+            </div>
+
+            <div className="h-[80vh] md:h-[110vh]">
+              <img
+                src="/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg"
+                alt="product imgage"
+                className="w-full max-w-full h-full object-cover object-center align-top"
+              />
             </div>
           </div>
-
-          <div className="absolute top-[40%] left-[30%] md:top-[38%] md:left-[42%] ml-[-12px] mt-[-12px]">
-            <div className="flex items-center relative">
-              <div className="tap-area w-4 h-4 rounded-full border border-milk" />
-              <span className="text-sm md:text-md text-milk ml-2">
-                Havard Devinity Desk
-              </span>
-            </div>
-          </div>
-
-          <div className="absolute top-[50%] left-[74%] md:top-[50%] md:left-[71%] ml-[-12px] mt-[-12px]">
-            <div className="flex items-center relative">
-              <div className="tap-area w-4 h-4 rounded-full border border-milk" />
-              <span className="text-sm md:text-md text-milk ml-2">Seating</span>
-            </div>
-          </div>
-
-          <Image
-            src="/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg"
-            alt="Sabi Insitu"
-            width={500}
-            height={500}
-            className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full -z-10"
-          />
         </div>
       </section>
 

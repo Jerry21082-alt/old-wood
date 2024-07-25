@@ -33,14 +33,14 @@ export default function ProductReel({ products }) {
 
   return (
     <div
-      className="overflow-x-auto overflow-y-hidden custom-scrollbar"
+      className="overflow-x-auto overflow-y-hidden custom-scrollbar w-full"
       style={{ scrollSnapType: "x mandatory" }}
     >
       <div className="scrollbar">
         {products.map((item) => (
-          <div className="w-full flex flex-col relative" key={item.id}>
+          <div className="flex flex-col relative" key={item.id}>
             <div
-              className="relative mb-4 overflow-hidden"
+              className="relative mb-4"
               style={{
                 opacity: "1",
                 transition: "opacity .4s ease, transform .4s ease",
@@ -60,6 +60,7 @@ export default function ProductReel({ products }) {
               >
                 <Link
                   href={`/product_page/${item.id}`}
+                  id="custom-aspect-ratio"
                   className="w-full h-full"
                 >
                   <Image

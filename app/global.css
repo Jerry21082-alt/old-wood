@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --section-products-per-row: 4;
+  --grid-gap: 24px;
+  --product-list-block-spacing: 28px;
+  --product-list-column-gap: 24px;
+}
+
 @font-face {
   font-family: CerebriBook;
   src: url("../public/Cerebri\ Sans\ Book.ttf");
@@ -41,6 +48,11 @@ body {
 
 .logo {
   font-family: NOVABOLD;
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
 }
 
 input {
@@ -235,25 +247,29 @@ select {
 }
 
 .grid-item {
-  display: grid;
-  grid-auto-flow: unset;
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: flex-start;
-  white-space: nowrap;
+  display: inline-grid;
+  grid-auto-flow: column;
   grid-auto-columns: max-content;
+  justify-content: flex-start;
+  gap: 30px;
   vertical-align: top;
 }
 
 .scrollbar {
   display: grid;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 0px 24px;
-  grid-auto-flow: column;
-  grid-auto-columns: 53vw;
   grid-template-columns: none;
-  min-width: min-content;
-  scrollbar-width: none;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(
+    100% / var(--section-products-per-row, 4) -
+      (
+        var(--grid-gap) / var(--section-products-per-row, 4) *
+          (var(--section-products-per-row, 4) - 1)
+      )
+  );
+  margin-left: 28px;
+  margin-right: 28px;
+  justify-content: safe center;
+  gap: var(--grid-gap);
 }
 
 .secondary-img {
@@ -599,5 +615,30 @@ select {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .grid-item {
+    display: grid;
+    grid-auto-flow: unset;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: flex-start;
+    white-space: nowrap;
+    grid-auto-columns: max-content;
+    vertical-align: top;
+    gap: 0px !important;
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .scrollbar {
+    display: grid;
+    gap: 16px;
+    grid-auto-flow: column;
+    grid-auto-columns: 52vw;
+    grid-template-columns: none;
+    min-width: min-content;
+    scrollbar-width: none;
   }
 }

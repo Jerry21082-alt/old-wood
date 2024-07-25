@@ -3,7 +3,8 @@ import React, { useEffect, useRef } from "react";
 export default function AspectRatioContainer({
   aspectRatio = 1 / 1,
   children,
-  className,
+  maxWidth = "100%",
+  ...props
 }) {
   const containerRef = useRef(null);
 
@@ -26,7 +27,7 @@ export default function AspectRatioContainer({
     return () => window.removeEventListener("resize", handleResize);
   }, [aspectRatio]);
   return (
-    <div className={`${className}`} ref={containerRef}>
+    <div ref={containerRef} style={{ maxWidth: maxWidth }} {...props}>
       <div className="aspect-ratio-content">{children}</div>
     </div>
   );
