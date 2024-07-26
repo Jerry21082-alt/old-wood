@@ -2,8 +2,14 @@ export const productReelItems = [
   {
     id: 1,
     quantity: 1,
-    primaryImage: "/product_images/101743_Sabi_Sectional_0031.jpg",
-    secondaryImage: "/product_images/101743_Sabi_Sectional_0042_1.jpg",
+    primaryImage: {
+      img: "//roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1500",
+      srcSet: `//roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=200 200w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=300 300w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=400 400w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=500 500w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=600 600w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=700 700w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=800 800w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=900 900w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1000 1000w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1100 1100w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1200 1200w`,
+    },
+    secondaryImage: {
+      img: "//roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=1500",
+      srcSet: `//roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=200 200w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=300 300w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=400 400w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=500 500w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=600 600w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=700 700w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=800 800w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=900 900w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=1000 1000w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=1100 1100w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0042_1.jpg?v=1716312829&width=1200 1200w`,
+    },
     name: "Sabi Sectional",
     type: "New Vintage",
     price: 26550,
@@ -31,8 +37,15 @@ export const productReelItems = [
   {
     id: 2,
     quantity: 1,
-    primaryImage: "/product_images/101732B_Disc_Side_Table_3026.jpg",
-    secondaryImage: "/product_images/101732B_Disc_Side_Table_3040.jpg",
+    primaryImage: {
+      img: "//roweam.com/cdn/shop/files/101732W_Disc_Side_Table_30742.jpg?v=1701886334&width=662",
+      srcSet: `//roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=200 200w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=300 300w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=400 400w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=500 500w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=600 600w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=700 700w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=800 800w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=900 900w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=1000 1000w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=1100 1100w, //roweam.com/cdn/shop/files/101732B_Disc_Side_Table_3026.jpg?v=1694707471&width=1200 1200w`,
+    },
+    secondaryImage: {
+      img: "//roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=1334",
+      srcSet:
+        "//roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=200 200w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=300 300w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=400 400w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=500 500w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=600 600w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=700 700w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=800 800w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=900 900w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=1000 1000w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=1100 1100w, //roweam.com/cdn/shop/files/101732L_Disc_Side_Table_3137.jpg?v=1701886334&width=1200 1200w",
+    },
     name: "Disc Slide Table",
     type: "New Vintage",
     price: 4821,
@@ -64,10 +77,14 @@ export const productReelItems = [
   {
     id: 3,
     quantity: 1,
-    primaryImage:
-      "/product_images/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg",
-    secondaryImage:
-      "/product_images/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg",
+    primaryImage: {
+      img: "//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=1500",
+      srcSet: `//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=200 200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=300 300w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=400 400w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=500 500w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=900 900w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=1100 1100w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_8714ec86-65eb-46c4-8d57-aec39863d230.jpg?v=1717156809&width=1200 1200w`,
+    },
+    secondaryImage: {
+      img: "//roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=1500",
+      srcSet: `//roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=200 200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=300 300w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=400 400w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=500 500w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=900 900w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=1100 1100w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0633_6c62687c-1fcb-44fc-b979-411aee025606.jpg?v=1717156808&width=1200 1200w`,
+    },
     name: "The Bromley Chair",
     type: "New Vintage",
     price: 7406,
@@ -95,9 +112,15 @@ export const productReelItems = [
   {
     id: 4,
     quantity: 1,
-    primaryImage:
-      "/product_images/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg",
-    secondaryImage: "/product_images/Thrown_Salad_Bowl_1386.jpg",
+    primaryImage: {
+      img: "//roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=1500",
+      srcSet:
+        "//roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=200 200w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=300 300w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=400 400w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=500 500w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=600 600w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=700 700w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=800 800w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=900 900w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=1000 1000w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=1100 1100w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1381_7c231f9e-0301-4d25-b655-137f41a14d54.jpg?v=1694547324&width=1200 1200w",
+    },
+    secondaryImage: {
+      img: "//roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=1500",
+      srcSet: `//roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=200 200w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=300 300w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=400 400w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=500 500w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=600 600w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=700 700w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=800 800w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=900 900w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=1000 1000w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=1100 1100w, //roweam.com/cdn/shop/files/Thrown_Salad_Bowl_1386.jpg?v=1694547324&width=1200 1200w`,
+    },
     name: "Thrown Salad Bowl",
     type: "New Vintage",
     price: 399,
@@ -122,9 +145,16 @@ export const productReelItems = [
   {
     id: 5,
     quantity: 1,
-    primaryImage: "/product_images/101019_Bromley_7_1953.jpg",
-    secondaryImage:
-      "/product_images/101019_Bromley_7_1969_1b2da4ff-e31b-4e49-9165-c78d722601ca.jpg",
+    primaryImage: {
+      img: "//roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=1125",
+      srcSet:
+        "//roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=200 200w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=300 300w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=400 400w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=500 500w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=600 600w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=700 700w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=800 800w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=900 900w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=1000 1000w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=1100 1100w",
+    },
+    secondaryImage: {
+      img: "//roweam.com/cdn/shop/files/101019_Bromley_7_1969_1b2da4ff-e31b-4e49-9165-c78d722601ca.jpg?v=1699744752&width=1125",
+      srcSet:
+        "//roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=200 200w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=300 300w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=400 400w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=500 500w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=600 600w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=700 700w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=800 800w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=900 900w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=1000 1000w, //roweam.com/cdn/shop/files/101019_Bromley_7_1966.jpg?v=1699745040&width=1100 1100w",
+    },
     name: "The Bromley Sofa",
     type: "New Vintage",
     price: 12227,
@@ -154,8 +184,16 @@ export const productReelItems = [
   {
     id: 6,
     quantity: 1,
-    primaryImage: "/product_images/101735_Disc_Coffee_Table_2436.jpg",
-    secondaryImage: "/product_images/101741_Disc_Coffee_Table_3105_1.jpg",
+    primaryImage: {
+      img: "//roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=1500",
+      srcSet: `//roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=200 200w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=300 300w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=400 400w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=500 500w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=600 600w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=700 700w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=800 800w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=900 900w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=1000 1000w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=1100 1100w, //roweam.com/cdn/shop/files/101735_Disc_Coffee_Table_2436.jpg?v=1694696600&width=1200 1200w`,
+    },
+    secondaryImage: {
+      img: "//roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=1500",
+      srcSet:
+        "//roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=200 200w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=300 300w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=400 400w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=500 500w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=600 600w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=700 700w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=800 800w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=900 900w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=1000 1000w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=1100 1100w, //roweam.com/cdn/shop/files/101741_Disc_Coffee_Table_3105_1.jpg?v=1695054228&width=1200 1200w",
+    },
+
     name: "NBL Coffee Table",
     type: "New Vintage",
     price: 6428,
@@ -182,10 +220,16 @@ export const productReelItems = [
   {
     id: 7,
     quantity: 1,
-    primaryImage:
-      "/product_images/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg",
-    secondaryImage:
-      "/product_images/101725_Pavillion_Chair_2586_a5b14b54-de7f-4c3f-8ccf-33ae64f7b15f.jpg",
+    primaryImage: {
+      img: "//roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=1500",
+      srcSet:
+        "//roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=200 200w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=300 300w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=400 400w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=500 500w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=600 600w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=700 700w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=800 800w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=900 900w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=1000 1000w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=1100 1100w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2585_01ad3450-aa26-49c8-a820-779dcde8af7b.jpg?v=1694647910&width=1200 1200w",
+    },
+    secondaryImage: {
+      img: "//roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=1500",
+      srcSet:
+        "//roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=200 200w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=300 300w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=400 400w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=500 500w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=600 600w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=700 700w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=800 800w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=900 900w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=1000 1000w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=1100 1100w, //roweam.com/cdn/shop/files/101725_Pavillion_Chair_2597.jpg?v=1694647910&width=1200 1200w",
+    },
     name: "Pavillion Chair",
     type: "New Vintage",
     price: 8384,
@@ -216,8 +260,16 @@ export const productReelItems = [
   {
     id: 8,
     quantity: 1,
-    primaryImage: "/product_images/101727D_Wolcott_Stool_1555.jpg",
-    secondaryImage: "/product_images/101727D_Wolcott_Stool_1560.jpg",
+    primaryImage: {
+      img: "//roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=1500",
+      srcSet:
+        "//roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=200 200w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=300 300w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=400 400w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=500 500w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=600 600w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=700 700w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=800 800w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=900 900w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=1000 1000w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=1100 1100w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1560.jpg?v=1694700564&width=1200 1200w",
+    },
+    secondaryImage: {
+      img: "//roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=1500",
+      srcSet:
+        "//roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=200 200w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=300 300w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=400 400w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=500 500w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=600 600w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=700 700w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=800 800w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=900 900w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=1000 1000w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=1100 1100w, //roweam.com/cdn/shop/files/101727D_Wolcott_Stool_1555.jpg?v=1694700564&width=1200 1200w",
+    },
     name: "Mr. Wolcott Counter Stool",
     type: "New Vintage",
     price: 2481,

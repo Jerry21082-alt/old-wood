@@ -29,6 +29,22 @@ export default function ProductReel({ products }) {
         },
       }
     );
+
+    items.forEach((item) => {
+      const primaryImage = item.querySelector("#primary-img");
+      const secondaryImage = item.querySelector("#secondary-img");
+
+      gsap.set(secondaryImage, { autoAlpha: 0 });
+      item.addEventListener("mouseenter", () => {
+        gsap.to(primaryImage, { autoAlpha: 0, duration: 0.4 });
+        gsap.to(secondaryImage, { autoAlpha: 1, duration: 0.4 });
+      });
+
+      item.addEventListener("mouseleave", () => {
+        gsap.to(primaryImage, { autoAlpha: 1, duration: 0.4 });
+        gsap.to(secondaryImage, { autoAlpha: 0, duration: 0.4 });
+      });
+    });
   }, []);
 
   return (
@@ -63,18 +79,17 @@ export default function ProductReel({ products }) {
                   id="custom-aspect-ratio"
                   className="w-full h-full"
                 >
-                  <Image
-                    src={item.primaryImage}
+                  <img
+                    src={item.primaryImage.img}
+                    srcSet={item.primaryImage.srcSet}
                     alt="product image"
-                    width={500}
-                    height={500}
+                    id="primary-img"
                     className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full"
                   />
-                  <Image
-                    src={item.secondaryImage}
+                  <img
+                    src={item.secondaryImage.img}
                     alt="product image"
-                    width={500}
-                    height={500}
+                    id="secondary-img"
                     className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full secondary-img"
                   />
                 </Link>

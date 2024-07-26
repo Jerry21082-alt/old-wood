@@ -207,7 +207,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
+      <section
+        id="shop-the-look"
+        style={{ transition: "clip-path .25s ease-out, opacity .25s ease-out" }}
+      >
         <div className="mt-10">
           <div className="relative block overflow-hidden">
             <div className="absolute bottom-6 w-full ">
@@ -264,7 +267,8 @@ export default function Home() {
 
             <div className="h-[80vh] md:h-[110vh]">
               <img
-                src="/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg"
+                src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2500"
+                srcset="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1400 1400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1600 1600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1800 1800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2000 2000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2200 2200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2400 2400w"
                 alt="product imgage"
                 className="w-full max-w-full h-full object-cover object-center align-top"
               />
@@ -273,110 +277,123 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full py-16">
-        <div className=" max-w-[1600px] px-6 py-16 flex flex-col md:flex-row items-start md:items-center flex-wrap">
-          <div>
-            <h5 className="text-lightBrown text-sm" id="slide-up">
-              <span className="uppercase">
-                Part new vintage, part true vintage
-              </span>
-            </h5>
+      <section className="block my-20">
+        <div className="w-full max-w-[1600px] px-0 md:px-10">
+          <div className="image-with-text">
+            <div className="w-full px-6 md:p-16">
+              <div>
+                <h5 className="text-lightBrown text-sm" id="slide-up">
+                  <span className="uppercase">
+                    Part new vintage, part true vintage
+                  </span>
+                </h5>
 
-            <div className="mt-4">
-              <span className="text-darkBrown text-5xl h2 block" id="slide-up">
-                The Roweam
-              </span>
-              <span className="text-darkBrown text-5xl h2 block" id="slide-up">
-                Method
-              </span>
+                <div className="mt-4">
+                  <span
+                    className="text-darkBrown text-5xl h2 block"
+                    id="slide-up"
+                  >
+                    The Oldwood
+                  </span>
+                  <span
+                    className="text-darkBrown text-5xl h2 block"
+                    id="slide-up"
+                  >
+                    Method
+                  </span>
+                </div>
+
+                <div className="max-w-[80%] mt-6" id="slide-up">
+                  <p className="text-sm">
+                    Part new vintage, part true vintage. Our design method takes
+                    a gathered, authentic approach using well-constructed pieces
+                    complete with endless character, no matter their age.
+                  </p>
+                </div>
+
+                <div className="mt-8">
+                  <Link
+                    href="/"
+                    className="shop-button relative uppercase text-lightBrown"
+                  >
+                    Learn More
+                  </Link>
+                </div>
+              </div>
             </div>
 
-            <div className="max-w-[80%] mt-6" id="slide-up">
-              <p className="text-sm">
-                Part new vintage, part true vintage. Our design method takes a
-                gathered, authentic approach using well-constructed pieces
-                complete with endless character, no matter their age.
-              </p>
+            <div className="flex flex-wrap h-full w-full">
+              <div className="pb-6 overflow-hidden pl-[30%] order-2 h-full w-full">
+                <img
+                  src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
+                  srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000 2000w"
+                  alt="product image"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
             </div>
-
-            <div className="mt-8">
-              <Link
-                href="/"
-                className="shop-button relative uppercase text-lightBrown"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-wrap">
-          <div className="pl-[30%] pb-6 order-2">
-            <Image
-              src="/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg"
-              alt="product making"
-              width={500}
-              height={500}
-            />
           </div>
         </div>
       </section>
 
       <section>
-        <div className="px-6 w-full">
-          <div className="overflow-hidden flex flex-wrap">
-            <div className="relative w-full overflow-hidden mb-8">
-              <Image
-                src="/Roweam_Method_4647_1600.jpg"
-                width={500}
-                height={500}
-                alt="product image"
-              />
+        <div className="image-with-text-r-list">
+          <div className="px-6 w-full">
+            <div className="overflow-hidden flex flex-wrap">
+              <div className="relative w-full overflow-hidden mb-8">
+                <img
+                  src="//roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=2000"
+                  srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1400 1400w"
+                  alt="product image"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="p-6">
-          <div className="flex flex-wrap">
-            <div className="w-full order-2 shrink-0">
-              <div className="my-4 text-lightBrown">
-                <span className="uppercase">join the r list</span>
-              </div>
+          <div className="p-6 md:p-16">
+            <div className="flex flex-wrap">
+              <div className="w-full order-2 shrink-0">
+                <div className="my-4 text-lightBrown">
+                  <span className="uppercase">join the r list</span>
+                </div>
 
-              <div className="h2">
-                <span>Sign-up to recieve 10%off your first</span>
-                <span>purchase and you'll hear about our new</span>
-                <span>production collections, antiquities, and more</span>
-                <span>before anyone else!</span>
-              </div>
+                <div className="h2">
+                  <span>Sign-up to recieve 10%off your first</span>
+                  <span>purchase and you'll hear about our new</span>
+                  <span>production collections, antiquities, and more</span>
+                  <span>before anyone else!</span>
+                </div>
 
-              <div className="mt-11 relative" id="r-form">
-                <form>
-                  <div
-                    className="flex justify-start items-center py-3 relative"
-                    style={{ backgroundColor: activeRList ? "#f3f1ea" : "" }}
-                  >
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      onFocus={() => setActiveRList(true)}
-                      onBlur={() => setActiveRList(false)}
-                      className="r-list outline-none w-full h-full"
-                    />
+                <div className="mt-11 relative" id="r-form">
+                  <form>
+                    <div
+                      className="flex justify-start items-center py-3 relative"
+                      style={{ backgroundColor: activeRList ? "#f3f1ea" : "" }}
+                    >
+                      <input
+                        type="email"
+                        placeholder="Your Email"
+                        onFocus={() => setActiveRList(true)}
+                        onBlur={() => setActiveRList(false)}
+                        className="r-list outline-none w-full h-full"
+                      />
 
-                    <div className="absolute right-0 flex items-center justify-center w-4 h-4">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        id="right-arrow"
-                        width="20px"
-                        height="20px"
-                        fill="#221f20"
-                      >
-                        <path d="M22.707,12.707a1,1,0,0,0,0-1.414l-6-6a1,1,0,0,0-1.414,1.414L19.586,11H2a1,1,0,0,0,0,2H19.586l-4.293,4.293a1,1,0,0,0,1.414,1.414Z"></path>
-                      </svg>
+                      <div className="absolute right-0 flex items-center justify-center w-4 h-4">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          id="right-arrow"
+                          width="20px"
+                          height="20px"
+                          fill="#221f20"
+                        >
+                          <path d="M22.707,12.707a1,1,0,0,0,0-1.414l-6-6a1,1,0,0,0-1.414,1.414L19.586,11H2a1,1,0,0,0,0,2H19.586l-4.293,4.293a1,1,0,0,0,1.414,1.414Z"></path>
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

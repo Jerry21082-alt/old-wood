@@ -309,7 +309,8 @@ select {
   background-image: url("../public//bg-rust-50.jpg");
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
+  background-attachment: fixed;
 }
 
 .showme-grid {
@@ -321,10 +322,12 @@ select {
 
 .grid-footer {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: column;
+  grid-template-columns: none;
+  padding: 0 calc(2 * 40px);
+  justify-content: space-between;
   max-width: 100%;
-  gap: 40px;
-  padding: 0 24px;
+  margin: 0 auto;
 }
 
 #termCheck {
@@ -590,12 +593,23 @@ select {
   grid-template-rows: minmax(auto, max-content);
 }
 
-.footer-grid {
+.image-with-text {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  column-gap: 1.7rem;
-  row-gap: 1.7rem;
+  grid-template-columns: 40% 60%;
+  min-height: 700px;
+  position: relative;
+  align-items: center;
 }
+
+.image-with-text-r-list {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  min-height: 700px;
+  position: relative;
+  align-items: center;
+}
+
+/* La */
 
 @keyframes shopTheLookDotKeyframe {
   0% {
@@ -640,5 +654,20 @@ select {
     grid-template-columns: none;
     min-width: min-content;
     scrollbar-width: none;
+  }
+  .image-with-text,
+  .image-with-text-r-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .grid-footer {
+    display: grid;
+    gap: 40px;
+    justify-content: space-between;
+    max-width: 100%;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 24px;
+    grid-auto-flow: row;
   }
 }
