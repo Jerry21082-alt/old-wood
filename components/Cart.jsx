@@ -123,10 +123,8 @@ export default function Cart() {
                       aria-hidden="true"
                       className="w-32 relative mr-5 block"
                     >
-                      <Image
+                      <img
                         src={item.primaryImage}
-                        width={500}
-                        height={500}
                         alt="product image"
                         className="w-full h-full"
                       />
