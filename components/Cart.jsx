@@ -124,7 +124,7 @@ export default function Cart() {
                       className="w-32 relative mr-5 block"
                     >
                       <img
-                        src={item.primaryImage}
+                        src={item.primaryImage.img}
                         alt="product image"
                         className="w-full h-full"
                       />
