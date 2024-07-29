@@ -13,7 +13,7 @@ import { toggleAgree } from "@/features/checkout/checkoutSlice";
 
 import { formatPrice } from "@/helpers/formatPrice";
 import { addToCart } from "@/features/cart/cartSlice";
-import { closeAll, toggleOverlay } from "@/features/navigation/navigationSlice";
+import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
 import { toggleCart } from "@/features/navigation/navigationSlice";
 
@@ -23,6 +23,7 @@ export default function Product_Page({ params }) {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [startX, setStartX] = useState(0);
   const [swipeIndex, setSwipeIndex] = useState(0);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -64,6 +65,7 @@ export default function Product_Page({ params }) {
   const addItemToCart = async (product) => {
     if (!agree) {
       console.log("please agree to terms");
+      setIsChecked(true);
     } else {
       setIsAddingToCart(true);
       await delay(2000);
@@ -79,6 +81,7 @@ export default function Product_Page({ params }) {
   };
 
   const handleToggleAgree = () => {
+    setIsChecked(false);
     dispatch(toggleAgree());
     dispatch(toggleOverlay());
     setTerms((prev) => !prev);
@@ -319,7 +322,27 @@ export default function Product_Page({ params }) {
               <span className="text-sm">Agree to the Terms and Conditions</span>
             </label>
 
-            <div className="flex items-center w-full mt-2">
+            <div className="flex items-center w-full mt-2 relative">
+              <div
+                className="absolute top-0 w-full"
+                style={{ visibility: !isChecked ? "hidden" : "visible" }}
+              >
+                <div className="absolute -top-2 left-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 22h-24l12-20z" />
+                  </svg>
+                </div>
+                <div className="absolute w-auto z-[1000]">
+                  <div className="bg-black text-snow text-sm p-2">
+                    check this box
+                  </div>
+                </div>
+              </div>
               <div className="w-28 h-12 p-3 flex items-center border border-listBorder">
                 <div className="flex justify-between items-center w-full">
                   <button
