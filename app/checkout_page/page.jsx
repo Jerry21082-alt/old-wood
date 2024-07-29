@@ -845,11 +845,10 @@ function CheckoutContent() {
                   <div className="flex items-center space-x-3">
                     <div className="relative border-listBorder border-[2px] rounded-md px-2">
                       <div className="w-12 h-auto">
-                        <Image
-                          src={item.primaryImage}
+                        <img
+                          src={item.primaryImage.img}
+                          srcSet={item.primaryImage.srcSet}
                           alt="product image"
-                          width={500}
-                          height={500}
                         />
                       </div>
                       <div className="absolute -top-2 -right-1 rounded-full w-6 h-6 flex items-center justify-center bg-transparentBlack">

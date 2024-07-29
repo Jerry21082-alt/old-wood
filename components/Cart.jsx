@@ -3,11 +3,10 @@ import Link from "next/link";
 
 import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { updateItem, removeFromCart } from "@/features/cart/cartSlice";
 import { closeAll, toggleCart } from "@/features/navigation/navigationSlice";
 import { useRouter } from "next/navigation";
-import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
 import { gsap } from "gsap";
 
@@ -16,6 +15,27 @@ export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isMounted, setIsMounted] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  const cartRef = useRef(null);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => setIsMounted(true), []);
+
+  useEffect(() => {
+    const handleClickOutside = (ev) => {
+      if (cartRef.current && !cartRef.current.contains(ev.target)) {
+        dispatch(toggleCart());
+      }
+    };
+
+    if (cartState) {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [cartState]);
 
   useEffect(() => {
     if (cartState) {
@@ -60,11 +80,6 @@ export default function Cart() {
 
   const totalPrice = reduce(getTotalCartItemsPrice(), (a, b) => a + b, 0);
 
-  const dispatch = useDispatch();
-  const router = useRouter();
-
-  useEffect(() => setIsMounted(true), []);
-
   const handleUpdateCart = (id, quantity, item) => {
     if (quantity < 1) {
       dispatch(removeFromCart(item));
@@ -98,10 +113,11 @@ export default function Cart() {
 
   return (
     <section
-      className={`w-screen fixed top-[62.5px] bottom-0 left-0 right-0 bg-milk z-[1000] px-6 ${
+      ref={cartRef}
+      className={`w-screen md:w-1/3 fixed top-[62.5px] border-t border-listBorder bottom-0 right-0 bg-milk z-[1000] px-6 ${
         !cartState ? "close-cart" : "open-cart"
       }`}
-      style={{ transform: !cartState ? "translateX(100%)" : "translateX(0%)" }}
+      // style={{ transform: !cartState ? "translateX(100%)" : "translateX(0%)" }}
     >
       {isMounted && cartItems.length > 0 ? (
         <div className="w-full h-full overflow-x-hidden overflow-y-auto flex-grow pb-36 custom-scrollbar">
@@ -204,7 +220,7 @@ export default function Cart() {
               transition: "transform .15s ease-out, opacity .25s ease-out",
             }}
           >
-            <p className="pb-6 text-sm">
+            <p className="pb-6 text-sm text-start md:text-center">
               Shipping & taxes calculated at checkout
             </p>
 

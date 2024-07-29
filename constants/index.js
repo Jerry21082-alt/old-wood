@@ -353,3 +353,32 @@ export const mobileMenuList = {
     },
   ],
 };
+
+// export const desktopMenuList = [
+//   {
+//     title: "furniture",
+//     innerList: ["tables", "seating", "casegoods"],
+//   },
+//   {
+//     title: "decor",
+//     innerList: [
+//       "vases & vesels",
+//       "decorative objects",
+//       "bowls & dishes",
+//       "Mirrors",
+//       "utility",
+//       "bath accessories",
+//     ],
+//   },
+//   {
+//     title: "dinning & entertaining",
+//     innerList: [
+//       "kitchen accessories",
+//       "serving dishes",
+//       "barware",
+//       "utensils",
+//       "candleholders",
+//       "glassware",
+//     ],
+//   },
+// ];
