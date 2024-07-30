@@ -47,7 +47,7 @@ export default function Nav() {
   useEffect(() => {
     const shop = document.getElementById("shop");
     const shopReveal = document.getElementById("shop-nav_reveal");
-    const container = document.querySelectorAll("#menu-container");
+    const container = shopReveal.querySelectorAll("#menu-container");
 
     const handleMouseEnter = () => {
       shopReveal.style.visibility = "visible";
@@ -87,6 +87,52 @@ export default function Nav() {
       shop.removeEventListener("mouseleave", handleMouseLeave);
       shopReveal.removeEventListener("mouseenter", handleMouseEnter);
       shopReveal.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  useEffect(() => {
+    const collection = document.getElementById("collection");
+    const collectionReveal = document.getElementById("collection_reveal");
+    const container = collectionReveal.querySelectorAll("#menu-container");
+
+    const handleMouseEnter = () => {
+      collectionReveal.style.visibility = "visible";
+      collectionReveal.style.opacity = "1";
+    };
+
+    const handleMouseLeave = () => {
+      collectionReveal.style.visibility = "hidden";
+      collectionReveal.style.opacity = "0";
+    };
+
+    collection.addEventListener("mouseenter", function () {
+      handleMouseEnter();
+      const items = gsap.utils.toArray(container);
+
+      gsap.fromTo(
+        items,
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+      );
+    });
+    collection.addEventListener("mouseleave", handleMouseLeave);
+    collectionReveal.addEventListener("mouseenter", handleMouseEnter);
+    collectionReveal.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      collection.removeEventListener("mouseenter", function () {
+        handleMouseEnter();
+        const items = gsap.utils.toArray(container);
+
+        gsap.fromTo(
+          items,
+          { opacity: 0, y: 100 },
+          { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+        );
+      });
+      collection.removeEventListener("mouseleave", handleMouseLeave);
+      collectionReveal.removeEventListener("mouseenter", handleMouseEnter);
+      collectionReveal.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
@@ -177,17 +223,16 @@ export default function Nav() {
           </div>
         </div>
       </div>
-      <div className="px-10 h-full hidden md:block relative">
+      <div
+        className="px-10 h-full hidden md:block relative desktop-nav_links"
+        style={{ color: pathname !== "/" ? "#221f20" : "" }}
+      >
         <div className="flex items-center">
           <nav className="flex items-center justify-end flex-1">
             <div className="flex">
               <ul className="flex flex-wrap">
-                <li className="uppercase text-[13px] flex items-center flex-shrink-0 mr-[55px]">
-                  <Link
-                    href="/"
-                    className="relative block w-max desktop-link"
-                    id="shop"
-                  >
+                <li className="uppercase text-[13px] flex items-center flex-shrink-0 mr-[55px] ">
+                  <Link href="/" className="relative block" id="shop">
                     Shop
                   </Link>
 
@@ -204,11 +249,7 @@ export default function Nav() {
                     <div className="w-full relative z-[2px] px-10">
                       <div className="w-full flex flex-wrap pt-[45px] pb-[60px] overflow-visible z-[1px]">
                         <div className="flex justify-between w-full flex-wrap">
-                          <div
-                            className="mr-16"
-                            id="menu-container"
-                            // ref={(el) => (menuContainerRef.current[idx] = el)}
-                          >
+                          <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
                               className="text-darkGray text-[16px] mb-4 block w-max relative"
@@ -425,12 +466,127 @@ export default function Nav() {
                             </ul>
                           </div>
                         </div>
+                        <div className="mt-[45px] mb-[-30px]">
+                          <div className="pb-[10px] text-lightBrown text-[14px]">
+                            <Link href="/" className="uppercase">
+                              shop all
+                            </Link>
+                          </div>
+
+                          <div>
+                            <p className="normal-case text-[15px] underline decoration-lightBrown">
+                              Just browsing?{" "}
+                              <a href="/">Here is a great place to start.</a>
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </li>
+
                 <li className="uppercase text-[13px] flex items-center flex-shrink-0 mr-[55px]">
-                  <Link href="/">Collections</Link>
+                  <Link href="/" id="collection">
+                    Collections
+                  </Link>
+
+                  <div
+                    className="absolute bg-milk left-0 top-full w-full mt-[1px] z-10"
+                    style={{
+                      visibility: "hidden",
+                      opacity: "0",
+                      transition:
+                        "visibility .25s ease-in-out, opacity .25s ease-in-out",
+                    }}
+                    id="collection_reveal"
+                  >
+                    <div className="relative z-[2] w-full px-10">
+                      <div className="flex pt-[45px] pb-[60px] overflow-visible relative z-[1]">
+                        <div className="flex justify-between flex-wrap w-full">
+                          <div className="mr-16" id="menu-container">
+                            <Link
+                              href="/"
+                              className="text-lightBrown mb-4 text-[14px] block"
+                            >
+                              Collection
+                            </Link>
+                            <ul>
+                              <li>
+                                <Link
+                                  href=""
+                                  className="text-[16px] py-[5px] break-words relative w-max"
+                                >
+                                  Sabi Collection
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  href=""
+                                  className="text-[16px] py-[5px] break-words relative w-max"
+                                >
+                                  Pavillion Collection
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  href=""
+                                  className="text-[16px] py-[5px] break-words relative w-max"
+                                >
+                                  Disc Collection
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  href=""
+                                  className="text-[16px] py-[5px] break-words relative w-max"
+                                >
+                                  View All
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-flow-col items-start gap-5">
+                          <Link href="/" id="menu-container">
+                            <div className="h-[220px] w-auto mb-[18px] overflow-hidden">
+                              <img
+                                src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=2082"
+                                srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=352 352w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=832 832w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=1920 1920w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=2082 2082w"
+                                alt="sabi collection"
+                              />
+                            </div>
+                            <span className="relative w-max block text-[14px] collection-title">
+                              Sabi Collection
+                            </span>
+                          </Link>
+                          <Link href="/" id="menu-container">
+                            <div className="h-[220px] w-auto mb-[18px] overflow-hidden">
+                              <img
+                                src="//roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=2500"
+                                srcSet="//roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=352 352w, //roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=832 832w, //roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=1920 1920w, //roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=2500 2500w"
+                                alt="sabi collection"
+                              />
+                            </div>
+                            <span className="relative w-max block text-[14px] collection-title">
+                              Pavillion Collection
+                            </span>
+                          </Link>
+                          <Link href="/" id="menu-container">
+                            <div className="h-[220px] w-auto mb-[18px] overflow-hidden">
+                              <img
+                                src="//roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=2500"
+                                srcSet="//roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=352 352w, //roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=832 832w, //roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=1920 1920w, //roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=2500 2500w"
+                              />
+                            </div>
+                            <span className="relative w-max block text-[14px] collection-title">
+                              Disc Collection
+                            </span>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </li>
                 <li className="uppercase text-[13px] flex items-center flex-shrink-0 mr-[55px]">
                   <Link href="/">About</Link>
@@ -449,6 +605,7 @@ export default function Nav() {
                     height="15"
                     viewBox="0 0 30 30"
                     fill={backgroundChanged ? "" : "#f3f1ea"}
+                    style={{ fill: pathname !== "/" ? "#221f20" : "" }}
                     className="mr-3"
                   >
                     <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
@@ -463,6 +620,7 @@ export default function Nav() {
                     height="16"
                     id="user"
                     fill={backgroundChanged ? "" : "#f3f1ea"}
+                    style={{ fill: pathname !== "/" ? "#221f20" : "" }}
                     className="mr-3"
                   >
                     <path d="M50.4 54.5c10.1 0 18.2-8.2 18.2-18.2S60.5 18 50.4 18s-18.2 8.2-18.2 18.2 8.1 18.3 18.2 18.3zm0-31.7c7.4 0 13.4 6 13.4 13.4s-6 13.4-13.4 13.4S37 43.7 37 36.3s6-13.5 13.4-13.5zM18.8 83h63.4c1.3 0 2.4-1.1 2.4-2.4 0-12.6-10.3-22.9-22.9-22.9H39.3c-12.6 0-22.9 10.3-22.9 22.9 0 1.3 1.1 2.4 2.4 2.4zm20.5-20.5h22.4c9.2 0 16.7 6.8 17.9 15.7H21.4c1.2-8.9 8.7-15.7 17.9-15.7z"></path>
@@ -480,6 +638,7 @@ export default function Nav() {
                     viewBox="0 0 24 24"
                     id="shopping-bag"
                     fill={backgroundChanged ? "" : "#f3f1ea"}
+                    style={{ fill: pathname !== "/" ? "#221f20" : "" }}
                     className="mr-3"
                   >
                     <path fill="none" d="M0 0h24v24H0V0z"></path>
@@ -494,7 +653,7 @@ export default function Nav() {
           </nav>
 
           <h1 className="mr-10 -order-1 block relative">
-            <Link href="" className="block w-max">
+            <Link href="/" className="block w-max">
               <span className="uppercase">Oldwood</span>
             </Link>
           </h1>

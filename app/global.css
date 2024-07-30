@@ -190,6 +190,25 @@ select {
   background: #000000;
 }
 
+.desktop-nav_links a {
+  position: relative;
+}
+
+.desktop-nav_links a:hover::after {
+  width: 100%;
+}
+
+.desktop-nav_links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: #000;
+  transition: width 0.25s ease-in-out;
+}
+
 .image-overlay::before {
   content: "";
   display: block;
@@ -516,14 +535,22 @@ select {
 
 .scroll-grid {
   display: grid;
-  grid-template-columns: max-content max-content max-content;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-content: start;
   margin-left: 0;
   margin-right: 0;
-  margin-bottom: 5px;
+  margin-bottom: 30px;
   padding: 10px 0;
   position: relative;
   align-items: start;
+  text-align: center;
+}
+
+.scroll-new-grid {
+  display: flex;
+  justify-content: safe start;
+  /* min-width: 0; */
+  position: relative;
 }
 
 .scroll-item-grid {
@@ -622,7 +649,9 @@ select {
   transition: transform 0.3s;
 }
 
-/* La */
+.product-thombnail {
+  grid-template-columns: 50% 50%;
+}
 
 @keyframes shopTheLookDotKeyframe {
   0% {
@@ -682,5 +711,16 @@ select {
     grid-template-columns: 1fr 1fr;
     padding: 0 24px;
     grid-auto-flow: row;
+  }
+  .scroll-new-grid {
+    display: grid;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    grid-template-columns: 100% 100% 100%;
+    align-items: start;
+    justify-content: safe start;
+    min-width: 0;
+    position: relative;
   }
 }

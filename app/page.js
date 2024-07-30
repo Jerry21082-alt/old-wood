@@ -28,7 +28,7 @@ export default function Home() {
         duration: 1,
         scrollTrigger: {
           trigger: "#shop-the-look",
-          start: "top 110%",
+          start: "top 130%",
           once: true,
           toggleActions: "play none none none",
         },
