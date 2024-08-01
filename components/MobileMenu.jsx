@@ -177,7 +177,7 @@ export default function MobileMenu() {
 
           <li className="flow-root border-b border-listBorder ">
             <Link
-              href="/"
+              href="/about_page"
               className="text-darkBrown uppercase flex items-center justify-between py-[21px] px-6 m text-xs animate-link"
               style={{ transitionDelay: "0.20s" }}
             >

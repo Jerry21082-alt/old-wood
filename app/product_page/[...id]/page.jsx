@@ -111,9 +111,9 @@ export default function Product_Page({ params }) {
   const showSlide = (idx) => {
     const totalSlides = slides.length;
     if (idx >= totalSlides) {
-      setCurrentIndex(0);
+      return;
     } else if (idx < 0) {
-      setCurrentIndex(slides.length - 1);
+      return;
     } else {
       setCurrentIndex(idx);
     }
@@ -144,10 +144,6 @@ export default function Product_Page({ params }) {
     }
   };
 
-  const handleSlideClick = (index) => {
-    setCurrentIndex(index);
-  };
-
   const handleSelect = (index) => {
     setCurrentIndex(index);
   };
@@ -158,11 +154,11 @@ export default function Product_Page({ params }) {
         <div className="mt-6 mb-9 pt-6 block justify-between items-center md:grid product-thombnail">
           <div className="w-full">
             <AspectRatioContainer
-              className="w-full overflow-hidden"
+              className="w-full overflow-hidden relative"
               aspectRatio={3 / 4}
             >
               <div
-                className="flex w-full h-full"
+                className="flex w-full h-full relative"
                 style={{
                   transform: `translateX(${-currentIndex * 100}%)`,
                   transition: "transform .5s ease-in-out",
@@ -190,6 +186,61 @@ export default function Product_Page({ params }) {
                     />
                   </div>
                 ))}
+              </div>
+              <div
+                className="absolute top-1/2 left-10 hidden md:block"
+                onClick={handlePrev}
+                style={{
+                  visibility: currentIndex === 0 ? "hidden" : "visible",
+                  opacity: currentIndex === 0 ? "0" : "1",
+                  transition:
+                    "visibility .25s ease-in-out, opacity .25s ease-in-out",
+                }}
+              >
+                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-transparentBlack cursor-pointer">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    id="chevron-left"
+                    fill="#f3f1ea"
+                  >
+                    <g>
+                      <path d="M13.36 17a1 1 0 0 1-.72-.31l-3.86-4a1 1 0 0 1 0-1.4l4-4a1 1 0 1 1 1.42 1.42L10.9 12l3.18 3.3a1 1 0 0 1 0 1.41 1 1 0 0 1-.72.29z"></path>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div
+                className="absolute top-1/2 right-10 hidden md:block"
+                onClick={handleNext}
+                style={{
+                  visibility:
+                    currentIndex === slides.length - 1 ? "hidden" : "visible",
+                  opacity: currentIndex === slides.length - 1 ? "0" : "1",
+                  transition:
+                    "visibility .25s ease-in-out, opacity .25s ease-in-out",
+                }}
+              >
+                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-transparentBlack cursor-pointer">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    id="chevron-right"
+                    fill="#f3f1ea"
+                  >
+                    <g>
+                      <g>
+                        <rect
+                          width="24"
+                          height="24"
+                          opacity="0"
+                          transform="rotate(-90 12 12)"
+                        ></rect>
+                        <path d="M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z"></path>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
               </div>
             </AspectRatioContainer>
             <div className="w-full flex md:hidden items-center justify-center mt-4">
@@ -693,48 +744,47 @@ export default function Product_Page({ params }) {
       </div>
 
       <section className="my-7">
-        <div className="px-6 w-full">
-          <div className="px-6 bg-milk">
-            <div className="flex flex-wrap py-6 relative overflow-hidden">
-              <div className="w-full relative overflow-hidden mb-8">
-                <Image
-                  src="/product_images/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg"
-                  width={500}
-                  height={500}
+        <div className="px-6 md: md:px-10 w-full">
+          <div className="px-6 md:px-10 bg-milk">
+            <div className="method-grid">
+              <div className="w-full relative overflow-hidden">
+                <img
+                  src="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400"
+                  srcSet="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=600 600w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=700 700w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=800 800w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1000 1000w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1200 1200w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400 1400w"
                   alt="product image"
                   className="z-10 block relative w-full h-auto max-w-full"
                 />
               </div>
-            </div>
 
-            <div className="py-6">
-              <div className="flex flex-wrap">
-                <div className="shrink-0 w-full">
-                  <div className="h2 mb-7">
-                    <div>
-                      <span className="block text-4xl">The Old Wood</span>
-                      <span className="block text-4xl">Method</span>
+              <div className="py-6">
+                <div className="flex flex-wrap">
+                  <div className="shrink-0 w-full">
+                    <div className="h2 mb-7">
+                      <div>
+                        <span className="block text-4xl">The Old Wood</span>
+                        <span className="block text-4xl">Method</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                <p>
-                  We believe in the storytelling power of one-of-a-kind pieces
-                  that are made to age through generation. Our custom products
-                  do just that. All material options are tried and true
-                  favorites that patina perfectly. So we welcome the sun and
-                  play, sleep and stain--our furniture is meant for fully lived
-                  life.
-                </p>
+                <div>
+                  <p>
+                    We believe in the storytelling power of one-of-a-kind pieces
+                    that are made to age through generation. Our custom products
+                    do just that. All material options are tried and true
+                    favorites that patina perfectly. So we welcome the sun and
+                    play, sleep and stain--our furniture is meant for fully
+                    lived life.
+                  </p>
 
-                <div className="mt-8">
-                  <Link
-                    href="/"
-                    className="relative text-lightBrown detail-link uppercase"
-                  >
-                    learn more
-                  </Link>
+                  <div className="mt-8">
+                    <Link
+                      href="/"
+                      className="relative text-lightBrown detail-link uppercase"
+                    >
+                      learn more
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

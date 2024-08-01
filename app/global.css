@@ -46,6 +46,13 @@ body {
   color: #221f20;
 }
 
+.checkout-page {
+  background-image: url("../public/bg-sand-50\ \(2\).jpg");
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+
 .logo {
   font-family: NOVABOLD;
 }
@@ -190,21 +197,21 @@ select {
   background: #000000;
 }
 
-.desktop-nav_links a {
+.desktop-nav_links li a {
   position: relative;
 }
 
-.desktop-nav_links a:hover::after {
+.desktop-nav_links li a:hover::after {
   width: 100%;
 }
 
-.desktop-nav_links a::after {
+.desktop-nav_links li a::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0%;
-  height: 1px;
+  height: 2px !important;
   background: #000;
   transition: width 0.25s ease-in-out;
 }
@@ -422,22 +429,14 @@ select {
   justify-content: flex-start;
 }
 
-/* .gradient {
+.method-grid {
+  display: grid;
+  grid-template-columns: calc(60% - calc(40px / 2)) calc(40% - calc(40px / 2));
+  gap: 40px;
   position: relative;
-} */
-
-.gradient::after {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.4),
-    rgba(0, 0, 0, 0.01)
-  );
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
 }
 
 .plus-icon::before {
@@ -722,5 +721,12 @@ select {
     justify-content: safe start;
     min-width: 0;
     position: relative;
+  }
+  .method-grid {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 24px 0;
+    overflow: hidden;
   }
 }

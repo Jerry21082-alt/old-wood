@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -14,7 +12,7 @@ import { debounce } from "@/helpers/debounce";
 import { gsap } from "gsap";
 import AspectRatioContainer from "./AspectRatioContainer";
 
-export default function Nav() {
+export default function DesktopNav() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -169,62 +167,20 @@ export default function Nav() {
   const backgroundChanged =
     isScrolled || toggleMobileMenu || openCart || isHovered;
   const revealX = toggleMobileMenu || openCart;
-
   return (
-    <section
-      className={`w-full fixed top-0 nav-container h-[62.5px] header header-transparent flex justify-center items-center ${
+    <div
+      className={`w-full fixed md:hidden top-0 nav-container h-[62.5px] header header-transparent flex justify-center items-center ${
         backgroundChanged ? "scrolled shadow-sm" : ""
       }`}
       style={{
         display: pathname === "/checkout_page" ? "none" : "block",
         zIndex: openCart || toggleMobileMenu ? "50" : "30",
       }}
+      id="navigation"
     >
-      <div
-        className="flex md:hidden items-center p-5"
-        style={{ color: pathname !== "/" ? "#221f20" : "" }}
-      >
-        <h1 className="text-2xl relative logo">
-          <Link href={`/`} className="block">
-            OLDWOOD
-          </Link>
-        </h1>
-        <div className="flex justify-end items-center w-full">
-          <button
-            type="button"
-            className="flex space-x-2"
-            onClick={handleCartToggle}
-          >
-            <span className="inline-block text-sm capitalize">Cart</span>
-            <span className="inline-block text-sm">
-              {isMounted && cartLength}
-            </span>
-          </button>
-          <div className={`w-4 h-4 ml-7 relative flex items-center`}>
-            <div
-              className={`hamburger-menu absolute w-full ${
-                revealX ? "hide-hamburger-menu" : ""
-              }`}
-              style={{
-                background: pathname !== "/" ? "#221f20" : null,
-              }}
-              onClick={handleMenuOpen}
-            />
-            <div
-              className="x-icon"
-              style={{
-                visibility: revealX ? "visible" : "hidden",
-              }}
-              onClick={handleMenuClose}
-            />
-          </div>
-        </div>
-      </div>
-
       <div
         className="px-10 h-full hidden md:block relative desktop-nav_links"
         style={{ color: pathname !== "/" ? "#221f20" : "" }}
-        id="navigation"
       >
         <div className="flex items-center">
           <nav className="flex items-center justify-end flex-1">
@@ -680,6 +636,6 @@ export default function Nav() {
           </h1>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

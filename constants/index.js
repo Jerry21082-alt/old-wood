@@ -31,7 +31,7 @@ export const productReelItems = [
       height: 30.5,
       seatHeight: 18,
       seatDepth: 25.75,
-      ArmHeight: 26,
+      armHeight: 26,
     },
   },
   {
