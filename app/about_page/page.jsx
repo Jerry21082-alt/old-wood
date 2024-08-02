@@ -16,7 +16,7 @@ export default function page() {
           </div>
 
           <div className="px-6 py-16 relative z-[1]">
-            <div className="h2 mt-12 mr-6">
+            <div className="h2 mt-14 mr-6">
               <div className="text-[54px] block">
                 <span className="block line leading-8">An Ode to</span>
                 <span className="block">the Home</span>
@@ -174,7 +174,7 @@ export default function page() {
           </div>
         </div>
       </div>
-      <div className="my-7 px-6">
+      <div className="my-7 px-6 w-full">
         <div className="w-full">
           <div className="flex flex-wrap w-full space-x-7">
             <div className="pb-[30px] pt-[60px] pr-[60px] z-[1]">
@@ -204,7 +204,227 @@ export default function page() {
                 </div>
               </div>
             </div>
-            <div></div>
+          </div>
+          <div
+            className="grid items-center gap-[5%] py-[30px] w-full"
+            style={{ gridTemplateColumns: "35% 60%" }}
+          >
+            <div className="w-full">
+              <img
+                src="//roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=2000"
+                srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316.jpg?v=1694800301&width=2000 2000w"
+                alt="product image"
+                className="max-w-full object-center object-contain"
+              />
+            </div>
+            <div className="w-full">
+              <div className="text-lightBrown text-sm uppercase">
+                1. the designer
+              </div>
+              <div className="w-full">
+                <p className="text-sm">
+                  Our process begins in the hands of the designer, where
+                  generations of experience are developed from a hand sketch and
+                  transformed by our engineering team. The intricacies are
+                  determined with the highest quality internals in mind, to
+                  ensure the longevity of every piece.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            className="grid items-center gap-[5%] py-[30px] w-full"
+            style={{ gridTemplateColumns: "35% 60%" }}
+          >
+            <div className="w-full">
+              <img
+                src="//roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=2000"
+                srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4451_resized.jpg?v=1694800374&width=2000 2000w"
+                alt="product image"
+                className="max-w-full object-center object-contain"
+              />
+            </div>
+            <div className="w-full">
+              <div className="text-lightBrown text-sm uppercase">
+                2. the craftsman
+              </div>
+              <div className="w-full">
+                <p className="text-sm">
+                  It is then passed onto the craftsman to bring the art to life
+                  in form and frame. Hours are spent carving, sanding,
+                  assembling, and stitching with the touch of the human hand,
+                  then it's meticulously inspected for quality control on each
+                  and every detail.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            className="grid items-center gap-[5%] py-[30px] w-full"
+            style={{ gridTemplateColumns: "35% 60%" }}
+          >
+            <div className="w-full">
+              <img
+                src="//roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=2000"
+                srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4523_resized.jpg?v=1694800438&width=2000 2000w"
+                alt="product image"
+                className="max-w-full object-center object-contain"
+              />
+            </div>
+            <div className="w-full">
+              <div className="text-lightBrown text-sm uppercase">
+                3. the maker
+              </div>
+              <div className="w-full">
+                <p className="text-sm">
+                  A final prototype is then passed to the makers hands to be
+                  produced, down to each minute detail. Hems, cords, stains, and
+                  stamps applied, and signed at every step.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            className="grid items-center gap-[5%] py-[30px] w-full"
+            style={{ gridTemplateColumns: "35% 60%" }}
+          >
+            <div className="w-full">
+              <img
+                src="//roweam.com/cdn/shop/files/101019_Bromley_7_1954.jpg?v=1694800544&width=1500"
+                srcSet="//roweam.com/cdn/shop/files/101019_Bromley_7_1954.jpg?v=1694800544&width=600 600w, //roweam.com/cdn/shop/files/101019_Bromley_7_1954.jpg?v=1694800544&width=700 700w, //roweam.com/cdn/shop/files/101019_Bromley_7_1954.jpg?v=1694800544&width=800 800w, //roweam.com/cdn/shop/files/101019_Bromley_7_1954.jpg?v=1694800544&width=1000 1000w, //roweam.com/cdn/shop/files/101019_Bromley_7_1954.jpg?v=1694800544&width=1200 1200w, //roweam.com/cdn/shop/files/101019_Bromley_7_1954.jpg?v=1694800544&width=1400 1400w"
+                alt="product image"
+                className="max-w-full object-center object-contain"
+              />
+            </div>
+            <div className="w-full">
+              <div className="text-lightBrown text-sm uppercase">
+                4. the steward
+              </div>
+              <div className="w-full">
+                <p className="text-sm">
+                  After each finishing touch is perfected and the finest quality
+                  assured, it's wrapped and packaged with thoughtful
+                  preparation.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            className="grid items-center gap-[5%] py-[30px] w-full"
+            style={{ gridTemplateColumns: "35% 60%" }}
+          >
+            <div className="w-full">
+              <img
+                src="//roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=2000"
+                srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4705.jpg?v=1694800572&width=2000 2000w"
+                className="max-w-full object-center object-contain"
+              />
+            </div>
+            <div className="w-full">
+              <div className="text-lightBrown text-sm uppercase">
+                4. the steward
+              </div>
+              <div className="w-full">
+                <p className="text-sm">
+                  After each finishing touch is perfected and the finest quality
+                  assured, it's wrapped and packaged with thoughtful
+                  preparation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="my-7">
+          <div className="-mb-7 pt-7 pb-7">
+            <div className="w-full px-6">
+              <div className="flex flex-wrap relative">
+                <div className="w-full relative mb-8 overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/contact_us_-about.jpg?v=1694800608&width=2500"
+                    srcSet="//roweam.com/cdn/shop/files/contact_us_-about.jpg?v=1694800608&width=600 600w, //roweam.com/cdn/shop/files/contact_us_-about.jpg?v=1694800608&width=700 700w, //roweam.com/cdn/shop/files/contact_us_-about.jpg?v=1694800608&width=800 800w, //roweam.com/cdn/shop/files/contact_us_-about.jpg?v=1694800608&width=1000 1000w, //roweam.com/cdn/shop/files/contact_us_-about.jpg?v=1694800608&width=1200 1200w, //roweam.com/cdn/shop/files/contact_us_-about.jpg?v=1694800608&width=1400 1400w"
+                    alt=""
+                    className="z-[1] relative block w-full"
+                  />
+                </div>
+                <div className="mb-6 w-full z-[1]">
+                  <div className="flex flex-wrap">
+                    <div className="block w-full shrink-0">
+                      <div className="my-[40px] mr-4">
+                        <div className="mb-6">
+                          <span className="block h2 text-2xl">
+                            Get in touch
+                          </span>
+                        </div>
+                        <div>
+                          <p className="text-sm">
+                            Curious about a product or have a question about our
+                            process? We're always here and our inbox is always
+                            open.{" "}
+                          </p>
+                          <p className="text-sm mt-6">
+                            General Inquiry:{" "}
+                            <a href="/" className="relative shop-button">
+                              hello@Oldood.com
+                            </a>
+                          </p>
+                          <p className="text-sm">
+                            Designer trade program:
+                            <a href="/" className="relative shop-button">
+                              trade@Oldood.com
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="my-7">
+          <div className="-mb-7 pt-7 pb-7">
+            <div className="w-full px-6">
+              <div className="flex flex-wrap relative">
+                <div className="w-full relative mb-8 overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_05_1066-MAIN2.jpg?v=1702495920&width=2500"
+                    srcSet="//roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_05_1066-MAIN2.jpg?v=1702495920&width=600 600w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_05_1066-MAIN2.jpg?v=1702495920&width=700 700w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_05_1066-MAIN2.jpg?v=1702495920&width=800 800w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_05_1066-MAIN2.jpg?v=1702495920&width=1000 1000w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_05_1066-MAIN2.jpg?v=1702495920&width=1200 1200w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_05_1066-MAIN2.jpg?v=1702495920&width=1400 1400w"
+                    alt="product image"
+                    className="z-[1] relative block w-full"
+                  />
+                </div>
+                <div className="mb-6 w-full z-[1]">
+                  <div className="flex flex-wrap">
+                    <div className="block w-full shrink-0">
+                      <div className="my-[40px] mr-4">
+                        <div className="mb-6">
+                          <span className="block h2 text-2xl">
+                            Interior Design Services
+                          </span>
+                        </div>
+                        <div>
+                          <p className="text-sm">
+                            Full service interior design services for whole home
+                            transformations.
+                          </p>
+                          <p className="text-sm mt-6">
+                            General Inquiry:{" "}
+                            <a href="/" className="relative shop-button">
+                              hello@Oldood.com
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
