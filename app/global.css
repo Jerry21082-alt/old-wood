@@ -25,6 +25,11 @@
 }
 
 @font-face {
+  font-family: Tobias-Thin;
+  src: url("../public/Tobias-Light.ttf");
+}
+
+@font-face {
   font-family: DrugsItalic;
   src: url("../public/TT\ Drugs\ Trial\ Italic.otf");
 }
@@ -77,6 +82,13 @@ select {
 .h2 {
   font-family: Tobias-Medium;
 }
+
+.h4 {
+  font-family: Tobias-Thin;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
 .h3 {
   font-family: DrugsItalic;
 }
