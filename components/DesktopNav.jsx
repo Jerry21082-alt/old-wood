@@ -554,7 +554,7 @@ export default function DesktopNav() {
                   </div>
                 </li>
                 <li className="uppercase text-xs flex items-center flex-shrink-0 mr-[45px]">
-                  <Link href="/">About</Link>
+                  <Link href="/about_page">About</Link>
                 </li>
                 <li className="uppercase text-xs flex items-center flex-shrink-0 mr-[45px]">
                   <Link href="/">In Situ</Link>

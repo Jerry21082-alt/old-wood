@@ -85,7 +85,7 @@ select {
 
 .h4 {
   font-family: Tobias-Thin;
-  font-size: 22px;
+  font-size: 34px;
   line-height: 1.2;
 }
 
@@ -740,5 +740,11 @@ select {
     flex-wrap: wrap;
     padding: 24px 0;
     overflow: hidden;
+  }
+
+  .h4 {
+    font-family: Tobias-Thin;
+    font-size: 22px;
+    line-height: 1.2;
   }
 }
