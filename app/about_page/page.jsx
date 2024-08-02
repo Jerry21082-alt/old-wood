@@ -4,9 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function page() {
-  const mobileScreens = window.innerWidth > 999;
-
-  const [isMobile, setIsMobile] = useState(mobileScreens);
+  const [isMobile, setIsMobile] = useState(false);
 
   const styles = {
     mobileImgFull: isMobile
@@ -40,7 +38,7 @@ export default function page() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const handleResize = () => setIsMobile(mobileScreens);
+      const handleResize = () => setIsMobile(window.innerWidth >= 999);
 
       handleResize();
       window.addEventListener("resize", handleResize);
