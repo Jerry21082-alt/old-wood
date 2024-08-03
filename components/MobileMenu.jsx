@@ -5,11 +5,12 @@ import { mobileMenuList } from "../constants";
 import Image from "next/image";
 import Drawer from "./Drawer";
 import AspectRatioContainer from "./AspectRatioContainer";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { closeAll, toggleMenu } from "@/features/navigation/navigationSlice";
 
 export default function MobileMenu() {
-  // const { setOpenMenu, toggleMobileMenu } = stateProvider();
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
+  const dispatch = useDispatch();
 
   return (
     <section
@@ -175,7 +176,10 @@ export default function MobileMenu() {
             </div>
           </Drawer>
 
-          <li className="flow-root border-b border-listBorder ">
+          <li
+            className="flow-root border-b border-listBorder "
+            onClick={() => dispatch(closeAll())}
+          >
             <Link
               href="/about_page"
               className="text-darkBrown uppercase flex items-center justify-between py-[21px] px-6 m text-xs animate-link"

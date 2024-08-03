@@ -73,14 +73,17 @@ export default function page() {
                 <span className="block">the Home</span>
               </div>
             </div>
-            <div className="max-w-[80%] md:max-w-[65%] mt-6">
-              <p className="text-sm md:text-md">
+            <div className="max-w-[80%] md:max-w-[55%] mt-6">
+              <p className="text-sm md:text-lg">
                 Our intentional approach is designed to offer new and vintage
                 furniture that inspires curiosity within your home.
               </p>
             </div>
-            <div className="order-3 w-full px-6 md:px-0">
-              <ul className="flex md:block border-b md:border-0 mt-[60px] my-0 md:my-[60px] border-listBorder overflow-visible w-[200%]">
+            <div className="order-3 w-full md:px-0">
+              <ul
+                className="flex md:block border-b md:border-0 mt-[60px] my-0 md:my-[60px] border-listBorder overflow-visible overflow-x-auto w-auto md:w-[200%]"
+                style={{ scrollbarWidth: "none" }}
+              >
                 <li className="pr-[30px] whitespace-nowrap">
                   <h5>
                     <a
@@ -121,7 +124,7 @@ export default function page() {
                     </a>
                   </h5>
                 </li>
-                <li className="pr-[30px] whitespace-nowrap">
+                <li className="whitespace-nowrap">
                   <h5>
                     <a
                       href="#"
@@ -256,7 +259,7 @@ export default function page() {
                   Part new vintage, part true vintage, our design method takes a
                   gathered, authentic approach using well-constructed pieces
                   complete with endless character, no matter their age. At
-                  Roweam, we believe character is a cornerstone of timeless
+                  Oldwood, we believe character is a cornerstone of timeless
                   interiors. We create pieces that are made to age and live
                   through generations.{" "}
                 </p>
