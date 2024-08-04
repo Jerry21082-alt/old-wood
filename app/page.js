@@ -211,67 +211,179 @@ export default function Home() {
         id="shop-the-look"
         style={{ transition: "clip-path .25s ease-out, opacity .25s ease-out" }}
       >
-        <div className="mt-10">
-          <div className="relative block overflow-hidden">
-            <div className="absolute bottom-6 w-full ">
-              <div className="w-full max-h-[1600px] px-6">
-                <div className="max-w-[500px] text-[#f3f1ea]">
-                  <div className="h2 text-2xl">Sabi In situ</div>
-                  <div className="mt-4 ">
+        <div className="w-full relative mt-10">
+          <div className="relative overflow-hidden text-milk">
+            <div className="absolute bottom-6 md:bottom-10 left-0 w-full">
+              <div className="w-full max-w-[1600px] px-6 md:px-10">
+                <div className="max-w-[500px]">
+                  <div className="h2 text-2xl text-[34px]">Sabi In Situ</div>
+                  <div className="mt-[15px]">
                     <p>
-                      A clean line of tailored upholstery, simple and
-                      elegant.&nbsp;Drawing inspiration from the seamless fusion
-                      of strength and femininity, the Sabi embodies a symphony
-                      of grace and allure
+                      A clean line of tailored upholstery, simple and elegant.
+                      Drawing inspiration from the seamless fusion of strength
+                      and femininity, the Sabi embodies a symphony of grace and
+                      allure.
                     </p>
-
                     <div className="mt-5">
                       <Link
                         href="/"
-                        className="text-milk uppercase shop-room-button relative"
+                        className="inline-block uppercase relative shop-room-button"
                       >
-                        Shop this room
+                        shop this room
                       </Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="absolute top-[23%] left-[38%] md:top-[20%] md:left-[41%] ml-[-12px] mt-[-12px]">
-              <div className="flex items-center relative">
-                <div className="tap-area w-4 h-4 rounded-full border border-milk" />
-                <span className="text-sm md:text-md text-milk ml-2">
-                  Table Lamps
-                </span>
-              </div>
-            </div>
-
-            <div className="absolute top-[40%] left-[30%] md:top-[38%] md:left-[42%] ml-[-12px] mt-[-12px]">
-              <div className="flex items-center relative">
-                <div className="tap-area w-4 h-4 rounded-full border border-milk" />
-                <span className="text-sm md:text-md text-milk ml-2">
-                  Havard Devinity Desk
-                </span>
-              </div>
-            </div>
-
-            <div className="absolute top-[50%] left-[74%] md:top-[50%] md:left-[71%] ml-[-12px] mt-[-12px]">
-              <div className="flex items-center relative">
-                <div className="tap-area w-4 h-4 rounded-full border border-milk" />
-                <span className="text-sm md:text-md text-milk ml-2">
-                  Seating
-                </span>
-              </div>
-            </div>
-
-            <div className="h-[80vh] md:h-[140vh]">
+            <div>
               <img
                 src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2500"
                 srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1400 1400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1600 1600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1800 1800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2000 2000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2200 2200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2400 2400w"
-                alt="product imgage"
-                className="w-full max-w-full h-full object-cover object-center align-top"
+                alt="product image"
+                className="w-full object-cover object-center hidden md:inline-block"
               />
+              <img
+                src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=1178"
+                srcset="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=1000 1000w"
+                alt="product image"
+                className="object-cover object-center inline-block md:hidden"
+              />
+            </div>
+            <div className="absolute top-[26%] md:top-[22%] left-[36%] md:left-[45%] ml-[-12px] mt-[-12px]">
+              <button
+                type="button"
+                className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+              >
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+                  Table Lamps
+                </span>
+              </button>
+              <div
+                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                style={{
+                  opacity: "1",
+                  visibility: "visible",
+                  transform: "scale(1) translateY(-50%)",
+                  left: "calc(100% + 7px)",
+                  gridTemplateColumns: "100px 100px",
+                }}
+              >
+                <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                    srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                    alt="product image"
+                    className="h-full w-full object-cover object-center bg-[#a5a097]"
+                  />
+                </div>
+                <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                  <Link
+                    href="/"
+                    className="pointer-events-none block mb-[2px] text-xs"
+                  >
+                    Table Lamps
+                  </Link>
+                  <div className="w-full">
+                    <Link
+                      href="/"
+                      className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                    >
+                      see more
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute top-[55%] md:top-[54%] left-[78%] md:left-[70%] ml-[-12px] mt-[-12px]">
+              <button
+                type="button"
+                className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+              >
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+                  Seating
+                </span>
+              </button>
+              <div
+                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                style={{
+                  opacity: "1",
+                  visibility: "hidden",
+                  transform: "scale(1) translateY(-50%)",
+                  left: "calc(100% + 7px)",
+                  gridTemplateColumns: "100px 100px",
+                }}
+              >
+                <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                    srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                    alt="product image"
+                    className="h-full w-full object-cover object-center bg-[#a5a097]"
+                  />
+                </div>
+                <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                  <Link
+                    href="/"
+                    className="pointer-events-none block mb-[2px] text-xs"
+                  >
+                    Table Lamps
+                  </Link>
+                  <div className="w-full">
+                    <Link
+                      href="/"
+                      className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                    >
+                      see more
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute top-[57%] md:top-[38%] left-[24%] md:left-[42%] ml-[-12px] mt-[-12px]">
+              <button
+                type="button"
+                className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+              >
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+                  Harvard Divinity Desk
+                </span>
+              </button>
+              <div
+                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                style={{
+                  opacity: "1",
+                  visibility: "hidden",
+                  transform: "scale(1) translateY(-50%)",
+                  left: "calc(100% + 7px)",
+                  gridTemplateColumns: "100px 100px",
+                }}
+              >
+                <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                    srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                    alt="product image"
+                    className="h-full w-full object-cover object-center bg-[#a5a097]"
+                  />
+                </div>
+                <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                  <Link
+                    href="/"
+                    className="pointer-events-none block mb-[2px] text-xs"
+                  >
+                    Table Lamps
+                  </Link>
+                  <div className="w-full">
+                    <Link
+                      href="/"
+                      className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                    >
+                      see more
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

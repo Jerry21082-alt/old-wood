@@ -230,7 +230,7 @@ export default function Nav() {
           <nav className="flex items-center justify-end flex-1">
             <div className="flex">
               <ul className="flex flex-wrap">
-                <li className="uppercase text-[13px] flex items-center flex-shrink-0 mr-[45px] ">
+                <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px] ">
                   <Link href="/" className="relative block" id="shop">
                     Shop
                   </Link>
@@ -484,7 +484,7 @@ export default function Nav() {
                   </div>
                 </li>
 
-                <li className="uppercase text-[13px] flex items-center flex-shrink-0 mr-[45px]">
+                <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px]">
                   <Link href="/" id="collection">
                     Collections
                   </Link>
@@ -597,15 +597,15 @@ export default function Nav() {
                     </div>
                   </div>
                 </li>
-                <li className="uppercase text-xs flex items-center flex-shrink-0 mr-[45px]">
+                <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px]">
                   <Link href="/about_page">About</Link>
                 </li>
-                <li className="uppercase text-xs flex items-center flex-shrink-0 mr-[45px]">
-                  <Link href="/">In Situ</Link>
+                <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px]">
+                  <Link href="/insitu">In Situ</Link>
                 </li>
               </ul>
               <ul className="flex flex-nowrap">
-                <li className="flex items-center uppercase text-xs mr-[45px] cursor-pointer">
+                <li className="flex items-center uppercase text-sm mr-[45px] cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     x="0px"
@@ -624,7 +624,7 @@ export default function Nav() {
                   </svg>
                   <a href="/cart">search</a>
                 </li>
-                <li className="flex items-center uppercase text-xs mr-[45px] cursor-pointer">
+                <li className="flex items-center uppercase text-sm mr-[45px] cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 101 101"
@@ -643,7 +643,7 @@ export default function Nav() {
                   <a href="/cart">login</a>
                 </li>
                 <li
-                  className="flex items-center uppercase text-xs cursor-pointer"
+                  className="flex items-center uppercase text-sm cursor-pointer"
                   onClick={handleCartToggle}
                 >
                   <svg

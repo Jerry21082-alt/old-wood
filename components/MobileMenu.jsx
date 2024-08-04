@@ -189,9 +189,12 @@ export default function MobileMenu() {
             </Link>
           </li>
 
-          <li className="flow-root border-b border-listBorder text-xs">
+          <li
+            className="flow-root border-b border-listBorder text-xs"
+            onClick={() => dispatch(closeAll())}
+          >
             <Link
-              href="/"
+              href="/insitu"
               className="text-darkBrown uppercase px-6 py-[21px] flex justify-between items-center animate-link"
               style={{ transitionDelay: "0.25s" }}
             >

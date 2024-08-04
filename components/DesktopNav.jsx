@@ -557,7 +557,7 @@ export default function DesktopNav() {
                   <Link href="/about_page">About</Link>
                 </li>
                 <li className="uppercase text-xs flex items-center flex-shrink-0 mr-[45px]">
-                  <Link href="/">In Situ</Link>
+                  <Link href="/insitu">In Situ</Link>
                 </li>
               </ul>
               <ul className="flex flex-nowrap">

@@ -333,7 +333,7 @@ select {
 .tap-area::before {
   content: "";
   position: absolute;
-  top: -7px;
+  top: -9px;
   left: -9px;
   width: 34px;
   height: 34px;
