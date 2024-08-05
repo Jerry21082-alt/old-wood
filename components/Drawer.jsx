@@ -38,9 +38,13 @@ export default function Drawer({
         style={{ transitionDelay: delay }}
         onClick={toggleDrawer}
       >
-        <Link href="/" style={{ color: color }}>
+        <span
+          href="/"
+          style={{ color: color }}
+          className="text-[14px] md:text-[16px] lg:text-xl"
+        >
           {title}
-        </Link>
+        </span>
         <span
           className={`w-[14px] h-[14px] plus-icon relative ${
             isOpen ? "animate-plus" : ""

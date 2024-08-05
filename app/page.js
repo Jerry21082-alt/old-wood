@@ -105,7 +105,7 @@ export default function Home() {
       </section>
 
       <section className="block p-6 w-full">
-        <div className="mb-11 text-[#5e3519] text-center">
+        <div className="mb-11 text-[#5e3519] text-center text-sm md:text-md lg:text-lg">
           THIS IS THE NEW NOSTALGIA
         </div>
 
@@ -120,15 +120,21 @@ export default function Home() {
           <div className="mb-9 w-full">
             <div className="aspect-square w-full flex justify-center items-center flex-col">
               <div className="my-4 mx-0 text-[#5e3519]">
-                <span className="block text-center">OLDWOOD NEW VINTAGE</span>
+                <span className="block text-center text-sm md:text-md lg:text-lg">
+                  OLDWOOD NEW VINTAGE
+                </span>
               </div>
               <div className="mt-10 mb-8 text-4xl text-center mx-0 h2">
-                <span className="block">The Bromley</span>
-                <span className="block text-center">Collection</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl">
+                  The Bromley
+                </span>
+                <span className="block text-center text-4xl md:text-5xl lg:text-6xl">
+                  Collection
+                </span>
               </div>
 
               <div className="mb-0 w-full">
-                <p className="mt-0 text-center w-full block">
+                <p className="mt-0 text-center w-full block text-sm md:text-md lg:text-lg">
                   Our cornerstone collection, designed with families and comfort
                   in mind. Exquisite designs that foster a life well lived for
                   generations to come.
@@ -157,12 +163,14 @@ export default function Home() {
             <header className="max-w-full m-7">
               <div>
                 <div className="flex items-center space-x-6">
-                  <h4 className="h2 text-darkBrown">Made To Age</h4>
+                  <h4 className="h2 text-darkBrown text-2xl md:text-3xl lg:text-4xl">
+                    Made To Age
+                  </h4>
                   <div className="mt-0">
                     <a
                       href="/"
                       style={{ backgroundPosition: "99% -97%, 99% 99%" }}
-                      className="text-lightBrown relative text-sm shop-button"
+                      className="text-lightBrown relative text-sm md:text-md lg:text-lg shop-button"
                     >
                       SHOP ALL
                     </a>
@@ -193,7 +201,9 @@ export default function Home() {
                         </div>
 
                         <div>
-                          <h6 className="text-darkBrown capitalize">{li}</h6>
+                          <h6 className="text-darkBrown capitalize text-sm md:text-md lg:text-lg">
+                            {li}
+                          </h6>
                         </div>
                       </div>
                     )
@@ -216,9 +226,11 @@ export default function Home() {
             <div className="absolute bottom-6 md:bottom-10 left-0 w-full">
               <div className="w-full max-w-[1600px] px-6 md:px-10">
                 <div className="max-w-[500px]">
-                  <div className="h2 text-2xl text-[34px]">Sabi In Situ</div>
+                  <div className="h2 text-2xl text-[34px] md:text-4xl lg:text-5xl">
+                    Sabi In Situ
+                  </div>
                   <div className="mt-[15px]">
-                    <p>
+                    <p className="text-sm md:text-md lg:text-lg">
                       A clean line of tailored upholstery, simple and elegant.
                       Drawing inspiration from the seamless fusion of strength
                       and femininity, the Sabi embodies a symphony of grace and
@@ -227,7 +239,7 @@ export default function Home() {
                     <div className="mt-5">
                       <Link
                         href="/"
-                        className="inline-block uppercase relative shop-room-button"
+                        className="inline-block uppercase relative shop-room-button text-sm md:text-md lg:text-lg"
                       >
                         shop this room
                       </Link>
@@ -255,7 +267,7 @@ export default function Home() {
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
               >
-                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                   Table Lamps
                 </span>
               </button>
@@ -300,7 +312,7 @@ export default function Home() {
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
               >
-                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                   Seating
                 </span>
               </button>
@@ -345,7 +357,7 @@ export default function Home() {
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
               >
-                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                   Harvard Divinity Desk
                 </span>
               </button>
@@ -395,20 +407,20 @@ export default function Home() {
             <div className="w-full px-6 md:p-16">
               <div>
                 <h5 className="text-lightBrown text-sm" id="slide-up">
-                  <span className="uppercase">
+                  <span className="uppercase text-sm md:text-md lg:text-lg">
                     Part new vintage, part true vintage
                   </span>
                 </h5>
 
                 <div className="mt-4">
                   <span
-                    className="text-darkBrown text-5xl h2 block"
+                    className="text-darkBrown text-5xl md:text-6xl lg:text-7xl h2 block"
                     id="slide-up"
                   >
                     The Oldwood
                   </span>
                   <span
-                    className="text-darkBrown text-5xl h2 block"
+                    className="text-darkBrown text-5xl md:text-6xl lg:text-7xl h2 block"
                     id="slide-up"
                   >
                     Method
@@ -416,7 +428,7 @@ export default function Home() {
                 </div>
 
                 <div className="max-w-[80%] mt-6" id="slide-up">
-                  <p className="text-sm">
+                  <p className="text-sm md:text-md lg:text-lg">
                     Part new vintage, part true vintage. Our design method takes
                     a gathered, authentic approach using well-constructed pieces
                     complete with endless character, no matter their age.
@@ -471,10 +483,18 @@ export default function Home() {
                 </div>
 
                 <div className="h2">
-                  <span>Sign-up to recieve 10%off your first</span>
-                  <span>purchase and you'll hear about our new</span>
-                  <span>production collections, antiquities, and more</span>
-                  <span>before anyone else!</span>
+                  <span className="text-lg md:text-xl lg:text-2xl">
+                    Sign-up to recieve 10%off your first
+                  </span>
+                  <span className="text-lg md:text-xl lg:text-2xl">
+                    purchase and you'll hear about our new
+                  </span>
+                  <span className="text-lg md:text-xl lg:text-2xl">
+                    production collections, antiquities, and more
+                  </span>
+                  <span className="text-lg md:text-xl lg:text-2xl">
+                    before anyone else!
+                  </span>
                 </div>
 
                 <div className="mt-11 relative" id="r-form">

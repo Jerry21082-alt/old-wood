@@ -97,10 +97,15 @@ export default function ProductReel({ products }) {
 
               <div className="flex justify-between items-center">
                 <div className="flex flex-col">
-                  <Link className="mt-[1px] mr-[10px] mb-[8px] h2" href="/">
+                  <Link
+                    className="mt-[1px] mr-[10px] mb-[8px] h2 text-sm md:text-md lg:text-lg"
+                    href="/"
+                  >
                     {item.name}
                   </Link>
-                  <div className="text-lightBrown h2">{item.type}</div>
+                  <div className="text-lightBrown h2 text-sm md:text-md lg:text-lg">
+                    {item.type}
+                  </div>
                 </div>
 
                 <div className="flex flex-col">

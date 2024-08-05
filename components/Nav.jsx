@@ -251,11 +251,11 @@ export default function Nav() {
                           <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
-                              className="text-darkGray text-xs mb-4 block w-max relative"
+                              className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Furniture
                             </Link>
-                            <ul className="h2 text-xs">
+                            <ul className="h2">
                               <li>
                                 <Link
                                   href="/"
@@ -286,7 +286,7 @@ export default function Nav() {
                           <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
-                              className="text-darkGray text-xs mb-4 block w-max relative"
+                              className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Decor
                             </Link>
@@ -345,7 +345,7 @@ export default function Nav() {
                           <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
-                              className="text-darkGray text-xs mb-4 block w-max relative"
+                              className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Dinnging & Entertainment
                             </Link>
@@ -404,7 +404,7 @@ export default function Nav() {
                           <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
-                              className="text-darkGray text-xs mb-4 block w-max relative"
+                              className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Soft Goods
                             </Link>
@@ -423,7 +423,7 @@ export default function Nav() {
                           <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
-                              className="text-darkGray text-xs mb-4 block w-max relative"
+                              className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Lighting
                             </Link>
@@ -441,7 +441,7 @@ export default function Nav() {
                           <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
-                              className="text-darkGray text-xs mb-4 block w-max relative"
+                              className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Art
                             </Link>
@@ -505,15 +505,15 @@ export default function Nav() {
                           <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
-                              className="text-darkGray mb-4 text-xs block"
+                              className="text-darkGray mb-4 text-[14px] block"
                             >
                               Collection
                             </Link>
-                            <ul>
+                            <ul className="h2">
                               <li>
                                 <Link
                                   href=""
-                                  className="text-xs py-[5px] break-words relative w-max"
+                                  className="text-sm py-[5px] break-words relative w-max"
                                 >
                                   Sabi Collection
                                 </Link>
@@ -521,7 +521,7 @@ export default function Nav() {
                               <li>
                                 <Link
                                   href=""
-                                  className="text-xs py-[5px] break-words relative w-max"
+                                  className="text-sm py-[5px] break-words relative w-max"
                                 >
                                   Pavillion Collection
                                 </Link>
@@ -529,7 +529,7 @@ export default function Nav() {
                               <li>
                                 <Link
                                   href=""
-                                  className="text-xs py-[5px] break-words relative w-max"
+                                  className="text-sm py-[5px] break-words relative w-max"
                                 >
                                   Disc Collection
                                 </Link>
@@ -537,7 +537,7 @@ export default function Nav() {
                               <li>
                                 <Link
                                   href=""
-                                  className="text-xs py-[5px] break-words relative w-max"
+                                  className="text-sm py-[5px] break-words relative w-max"
                                 >
                                   View All
                                 </Link>
@@ -558,7 +558,7 @@ export default function Nav() {
                                 />
                               </AspectRatioContainer>
                             </div>
-                            <span className="relative w-max block text-xs collection-title">
+                            <span className="relative w-max block text-sm normal-case collection-title">
                               Sabi Collection
                             </span>
                           </Link>
@@ -573,7 +573,7 @@ export default function Nav() {
                                 />
                               </AspectRatioContainer>
                             </div>
-                            <span className="relative w-max block text-xs collection-title">
+                            <span className="relative w-max block text-sm normal-case collection-title">
                               Pavillion Collection
                             </span>
                           </Link>
@@ -588,7 +588,7 @@ export default function Nav() {
                                 />
                               </AspectRatioContainer>
                             </div>
-                            <span className="relative w-max block text-xs collection-title">
+                            <span className="relative w-max block text-sm normal-case collection-title">
                               Disc Collection
                             </span>
                           </Link>

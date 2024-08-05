@@ -15,6 +15,9 @@ export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isMounted, setIsMounted] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
 
   const cartRef = useRef(null);
 
@@ -23,10 +26,12 @@ export default function Cart() {
 
   useEffect(() => setIsMounted(true), []);
 
+  const onClose = () => dispatch(toggleCart());
+
   useEffect(() => {
     const handleClickOutside = (ev) => {
       if (cartRef.current && !cartRef.current.contains(ev.target)) {
-        dispatch(toggleCart());
+        onClose();
       }
     };
 
@@ -35,7 +40,7 @@ export default function Cart() {
     }
 
     return () => document.removeEventListener("click", handleClickOutside);
-  }, [cartState]);
+  }, [cartState, onClose]);
 
   useEffect(() => {
     if (cartState) {
@@ -80,10 +85,23 @@ export default function Cart() {
 
   const totalPrice = reduce(getTotalCartItemsPrice(), (a, b) => a + b, 0);
 
-  const handleUpdateCart = (id, quantity, item) => {
+  const handleUpdateCart = async (id, quantity, item) => {
+    setIsLoading(true);
+    setIsComplete(false);
+
+    setTimeout(() => {
+      setIsComplete(true);
+    }, 2000);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
     if (quantity < 1) {
+      await delay(2000);
       dispatch(removeFromCart(item));
     } else {
+      await delay(3000);
       dispatch(updateItem({ id, quantity }));
     }
   };
@@ -114,10 +132,9 @@ export default function Cart() {
   return (
     <section
       ref={cartRef}
-      className={`w-screen md:w-1/3 fixed top-[62.5px] border-t border-listBorder bottom-0 right-0 bg-milk z-[1000] px-6 ${
+      className={`w-screen md:w-[45%] fixed top-[62.5px] border-t border-listBorder bottom-0 right-0 bg-milk z-[1000] px-6 md:px-10 ${
         !cartState ? "close-cart" : "open-cart"
       }`}
-      // style={{ transform: !cartState ? "translateX(100%)" : "translateX(0%)" }}
     >
       {isMounted && cartItems.length > 0 ? (
         <div className="w-full h-full overflow-x-hidden overflow-y-auto flex-grow pb-36 custom-scrollbar">
@@ -139,6 +156,55 @@ export default function Cart() {
                       aria-hidden="true"
                       className="w-32 relative mr-5 block"
                     >
+                      <div
+                        id="loading-container"
+                        className="absolute flex items-center justify-center bg-milk w-8 h-8 rounded-[32px]"
+                        style={{
+                          top: "calc(50% - 15px)",
+                          left: "calc(50% - 15px)",
+                          transition:
+                            "opacity .2s ease-in-out, transform .2s ease-in-out, visibility .2s ease-in-out",
+                          visibility: isLoading ? "visible" : "hidden",
+                          transform: isLoading ? "scale(1)" : "scale(.4)",
+                          opacity: isLoading ? "1" : "0",
+                        }}
+                      >
+                        <span
+                          id="loading-icon"
+                          style={{
+                            display: isComplete ? "block" : "none",
+                          }}
+                        >
+                          <svg
+                            focusable="false"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 32 32"
+                          >
+                            <path
+                              d="M24.59 8L12.9885 20.6731L7.31806 15.1819L6 16.6956L12.3755 22.8792L13.0805 23.5556L13.7395 22.8309L26 9.43318L24.59 8Z"
+                              stroke="currentColor"
+                            ></path>
+                          </svg>
+                        </span>
+
+                        <span
+                          style={{ display: !isComplete ? "block" : "none" }}
+                          className="overflow-visible block"
+                        >
+                          <svg
+                            fill="#000000"
+                            width="20px"
+                            height="20px"
+                            viewBox="0 0 1024 1024"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="spinner"
+                          >
+                            <path d="M512 1024c-69.1 0-136.2-13.5-199.3-40.2C251.7 958 197 921 150 874c-47-47-84-101.7-109.8-162.7C13.5 648.2 0 581.1 0 512c0-19.9 16.1-36 36-36s36 16.1 36 36c0 59.4 11.6 117 34.6 171.3 22.2 52.4 53.9 99.5 94.3 139.9 40.4 40.4 87.5 72.2 139.9 94.3C395 940.4 452.6 952 512 952c59.4 0 117-11.6 171.3-34.6 52.4-22.2 99.5-53.9 139.9-94.3 40.4-40.4 72.2-87.5 94.3-139.9C940.4 629 952 571.4 952 512c0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71 437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.2C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3s-13.5 136.2-40.2 199.3C958 772.3 921 827 874 874c-47 47-101.8 83.9-162.7 109.7-63.1 26.8-130.2 40.3-199.3 40.3z" />
+                          </svg>
+                        </span>
+                      </div>
+
                       <img
                         src={item.primaryImage.img}
                         alt="product image"
@@ -148,13 +214,16 @@ export default function Cart() {
 
                     <div className="flex content-between flex-wrap">
                       <div className="w-full">
-                        <Link href="/" className="mt-[1px] mr-[10px] mb-2">
+                        <Link
+                          href="/"
+                          className="mt-[1px] mr-[10px] mb-2 text-sm md:text-md lg:text-lg"
+                        >
                           {item.name}
                         </Link>
-                        <div className="h3 text-lightBrown text-sm">
+                        <div className="h3 text-lightBrown text-sm md:text-md lg:text-lg">
                           {item.type}
                         </div>
-                        <div className="mt-[6px] mb-2">
+                        <div className="mt-[6px] mb-2 text-sm md:text-md lg:text-lg">
                           <span className="text-xs">Sand / LARC</span>
                         </div>
                       </div>
@@ -167,6 +236,7 @@ export default function Cart() {
                             onClick={() =>
                               handleUpdateCart(item.id, item.quantity - 1, item)
                             }
+                            className="w-max ring-o active:ring-1 ring-lightBrown transition-all"
                           >
                             <svg
                               version="1.1"
@@ -190,6 +260,7 @@ export default function Cart() {
                             onClick={() =>
                               handleUpdateCart(item.id, item.quantity + 1)
                             }
+                            className="w-max ring-o active:ring-1 ring-lightBrown transition-all"
                           >
                             <svg
                               version="1.1"
@@ -206,7 +277,9 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className="inline-grid items-baseline">
-                      <span>${formatPrice(item.price * item.quantity)}</span>
+                      <span className="text-sm md:text-md lg:text-lg">
+                        ${formatPrice(item.price * item.quantity)}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -214,20 +287,20 @@ export default function Cart() {
             ))}
 
           <footer
-            className="fixed bottom-0 left-0 w-full px-6 bg-milk cart_footer"
+            className="fixed bottom-0 left-0 w-full px-6 md:px-10 bg-milk cart_footer"
             id="continue-btn"
             style={{
               transition: "transform .15s ease-out, opacity .25s ease-out",
             }}
           >
-            <p className="pb-6 text-sm text-start md:text-center">
+            <p className="py-6 text-sm md:text-lg text-start md:text-center">
               Shipping & taxes calculated at checkout
             </p>
 
             <div onClick={navigateToCheckoutPage} className="pb-6 block">
               <button
                 type="button"
-                className="w-full py-3 px-5 bg-lightBrown text-milk text-sm relative"
+                className="w-full px-4 md:px-8 py-3 text-sm md:text-[16px] lg:text-lg bg-lightBrown text-milk relative"
               >
                 <div
                   className="w-full h-full flex items-center justify-center"
@@ -270,8 +343,12 @@ export default function Cart() {
         <div className="flex items-center justify-center bg-milk h-full w-full">
           <div className="w-full">
             <div className="pb-14">
-              <h3 className="h2 block mb-2">Your cart is empty</h3>
-              <p>Discover our products.</p>
+              <h3 className="h2 block mb-2 text-2xl md:text-3xl lg:text-4xl">
+                Your cart is empty
+              </h3>
+              <p className="text-sm md:text-[16px] lg:text-lg">
+                Discover our products.
+              </p>
             </div>
             <div className="w-full">
               <button type="button" className="w-full bg-lightBrown px-8 py-3">
@@ -282,7 +359,7 @@ export default function Cart() {
                       id: 1,
                     },
                   }}
-                  className="w-full h-full text-milk text-sm"
+                  className="w-full h-full text-milk text-sm md:text-[16px] lg:text-lg"
                 >
                   continue shopping
                 </Link>

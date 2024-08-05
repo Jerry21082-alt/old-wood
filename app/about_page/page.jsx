@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function page() {
   const [isMobile, setIsMobile] = useState(false);
@@ -11,6 +15,7 @@ export default function page() {
       ? {
           width:
             "calc(calc((100vw - max(calc((100vw - calc( 1600px - ( 40px ) * 2) ) / 2), 40px ) * 2 - 24px * ( 20 - 1)) / 20 )* 14 + 24px* 13",
+          transition: "opacity .25s ease-out, clip-path .25s ease-out",
         }
       : {},
     mobileTextFull: isMobile
@@ -47,6 +52,20 @@ export default function page() {
     }
   }, []);
 
+  useEffect(() => {
+    gsap.fromTo(
+      "#about-intro_img",
+      {
+        opacity: 0,
+        clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
+      },
+      {
+        opacity: 1,
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+      }
+    );
+  }, []);
+
   return (
     <section className="mt-7 md:my-20">
       <div className="w-full">
@@ -54,6 +73,7 @@ export default function page() {
           <div
             className="order-2 overflow-hidden bg-milk relative md:absolute top-0 md:overflow-hidden bg-none md:bg-milk left-auto right-0"
             style={styles.mobileImgFull}
+            id="about-intro_img"
           >
             <img
               src="//roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=2500"
@@ -124,7 +144,7 @@ export default function page() {
                     </a>
                   </h5>
                 </li>
-                <li className="whitespace-nowrap">
+                <li className="pr-[30px] whitespace-nowrap">
                   <h5>
                     <a
                       href="#"
@@ -162,12 +182,14 @@ export default function page() {
                     <div className="shrink-0 w-full">
                       <div className="my-4 text-lightBrown">
                         <div>
-                          <span className="block uppercase">About</span>
+                          <span className="block uppercase text-sm md:text-lg">
+                            About
+                          </span>
                         </div>
                       </div>
                       <div>
-                        <p>
-                          Roweam is a luxury furniture brand whose heirloom
+                        <p className="text-sm md:text-md lg:text-lg">
+                          Oldwood is a luxury furniture brand whose heirloom
                           custom furniture pieces evoke a sense of simple
                           nostalgia. Inspired by the minds of designers, crafted
                           by the hands of artisans, and sourced with leading
@@ -190,21 +212,25 @@ export default function page() {
           <div className="-mb-7 md:pb-[5%] pt-7 md:pt-[5%] pb-7">
             <div className="w-full max-w-[600px] md:max-w-full px-6 md:px-20">
               <div
-                className="flex md:grid gap-10 flex-wrap relative overflow-hidden"
+                className="flex md:grid gap-10 pt-[5%] pb-[5%] flex-wrap items-center relative overflow-hidden"
                 style={{
                   gridTemplateColumns:
-                    "calc(60% - calc(40px / 2)) calc(40% - calc(40px / 2));",
+                    "calc(60% - calc(40px / 2)) calc(40% - calc(40px / 2))",
                 }}
               >
                 <div
-                  className="mt-[-50%] pl-[30%] order-2 w-full relative"
+                  className="mt-[-50%] pl-[30%] md:pl-0 order-2 w-full relative z-0"
                   style={styles.imageWithTextWrapper}
                 >
                   <img
                     src="//roweam.com/cdn/shop/files/101032_Art_Deco_Danish_Armchair_1930s_0536_Resized.jpg?v=1694800087&width=1400"
                     srcSet="//roweam.com/cdn/shop/files/101032_Art_Deco_Danish_Armchair_1930s_0536_Resized.jpg?v=1694800087&width=600 600w, //roweam.com/cdn/shop/files/101032_Art_Deco_Danish_Armchair_1930s_0536_Resized.jpg?v=1694800087&width=700 700w, //roweam.com/cdn/shop/files/101032_Art_Deco_Danish_Armchair_1930s_0536_Resized.jpg?v=1694800087&width=800 800w, //roweam.com/cdn/shop/files/101032_Art_Deco_Danish_Armchair_1930s_0536_Resized.jpg?v=1694800087&width=1000 1000w, //roweam.com/cdn/shop/files/101032_Art_Deco_Danish_Armchair_1930s_0536_Resized.jpg?v=1694800087&width=1200 1200w, //roweam.com/cdn/shop/files/101032_Art_Deco_Danish_Armchair_1930s_0536_Resized.jpg?v=1694800087&width=1400 1400w"
                     alt="product image"
-                    className="w-full max-w-full"
+                    className="max-w-full block h-auto"
+                    width="1400"
+                    height="1400"
+                    loading="lazy"
+                    sizes="(max-width: 740px) calc(100vw - 96px), (max-width: 999px) calc(100vw - 160px), 600px"
                   />
 
                   <div className="py-[15px]">
@@ -213,24 +239,26 @@ export default function page() {
                     </h5>
                   </div>
                 </div>
-                <div className="w-full z-[1] order-none md:order-1">
+                <div className="w-full z-[1] order-1">
                   <div className="flex flex-nowrap">
-                    <div className="shrink-0 w-full">
-                      <div className="my-[40px] mr-4">
+                    <div className="shrink-0 w-full order-none">
+                      <div className="my-[40px] md:my-12 mr-4">
                         <div style={{ opacity: 1 }} className="h4">
-                          <span className="block">
+                          <span className="block text-sm md:text-4xl lg:text-5xl">
                             Furniture is a gathering place
                           </span>
-                          <span className="block">
+                          <span className="block text-sm md:text-4xl lg:text-5xl">
                             And our curated collection is
                           </span>
-                          <span className="block">the conversation piece.</span>
+                          <span className="block text-sm md:text-4xl lg:text-5xl">
+                            the conversation piece.
+                          </span>
                         </div>
                       </div>
                       <div style={{ opacity: "1" }}>
                         <Link
                           href="/"
-                          className="text-lightBrown whitespace-nowrap w-max uppercase inline-block relative text-sm shop-button"
+                          className="text-lightBrown whitespace-nowrap w-max uppercase inline-block relative text-sm md:text-lg shop-button"
                         >
                           Shop now
                         </Link>
@@ -247,15 +275,17 @@ export default function page() {
         <div className="w-full">
           <div className="flex md:grid gap-10 pl-0 md:pl-[5%] md:pr-[90px] grid-cols-2 flex-wrap w-full">
             <div className="pb-[30px] pt-[60px] pr-[60px] z-[1]">
-              <h5 className="my-[15px] text-lightBrown text-[14px]">Process</h5>
+              <h5 className="my-[15px] text-lightBrown text-[14px] md:text-lg lg:text-xl">
+                Process
+              </h5>
               <div
-                className="mt-4 mr-4 h2 text-[46px]"
+                className="mt-4 mr-4 h2 text-[46px] md:text-5xl lg:text-6xl"
                 style={{ lineHeight: 1 }}
               >
                 The Oldood Method
               </div>
               <div className="max-w-[90%] mt-6">
-                <p>
+                <p className="text-sm md:text-md lg:text-lg">
                   Part new vintage, part true vintage, our design method takes a
                   gathered, authentic approach using well-constructed pieces
                   complete with endless character, no matter their age. At
@@ -266,7 +296,7 @@ export default function page() {
                 <div className="mt-8">
                   <Link
                     href="/"
-                    className="shop-button relative uppercase text-sm text-lightBrown"
+                    className="shop-button relative uppercase text-sm md:text-md lg:text-lg text-lightBrown"
                   >
                     Shop now
                   </Link>
@@ -286,11 +316,11 @@ export default function page() {
                 />
               </div>
               <div className="w-full">
-                <div className="text-lightBrown text-sm uppercase">
+                <div className="text-lightBrown text-sm md:text-md lg:text-lg uppercase">
                   1. the designer
                 </div>
                 <div className="w-full">
-                  <p className="text-sm">
+                  <p className="text-sm md:text-md lg:text-lg">
                     Our process begins in the hands of the designer, where
                     generations of experience are developed from a hand sketch
                     and transformed by our engineering team. The intricacies are
@@ -313,11 +343,11 @@ export default function page() {
                 />
               </div>
               <div className="w-full">
-                <div className="text-lightBrown text-sm uppercase">
+                <div className="text-lightBrown text-sm md:text-md lg:text-lg uppercase">
                   2. the craftsman
                 </div>
                 <div className="w-full">
-                  <p className="text-sm">
+                  <p className="text-sm md:text-md lg:text-lg">
                     It is then passed onto the craftsman to bring the art to
                     life in form and frame. Hours are spent carving, sanding,
                     assembling, and stitching with the touch of the human hand,
@@ -340,11 +370,11 @@ export default function page() {
                 />
               </div>
               <div className="w-full">
-                <div className="text-lightBrown text-sm uppercase">
+                <div className="text-lightBrown text-sm md:text-md lg:text-lg uppercase">
                   3. the maker
                 </div>
                 <div className="w-full">
-                  <p className="text-sm">
+                  <p className="text-sm md:text-md lg:text-lg">
                     A final prototype is then passed to the makers hands to be
                     produced, down to each minute detail. Hems, cords, stains,
                     and stamps applied, and signed at every step.
@@ -365,11 +395,11 @@ export default function page() {
                 />
               </div>
               <div className="w-full">
-                <div className="text-lightBrown text-sm uppercase">
+                <div className="text-lightBrown text-sm md:text-md lg:text-lg uppercase">
                   4. the steward
                 </div>
                 <div className="w-full">
-                  <p className="text-sm">
+                  <p className="text-sm md:text-md lg:text-lg">
                     After each finishing touch is perfected and the finest
                     quality assured, it's wrapped and packaged with thoughtful
                     preparation.
@@ -389,11 +419,11 @@ export default function page() {
                 />
               </div>
               <div className="w-full">
-                <div className="text-lightBrown text-sm uppercase">
+                <div className="text-lightBrown text-sm md:text-md lg:text-lg uppercase">
                   5. the patron
                 </div>
                 <div className="w-full">
-                  <p className="text-sm">
+                  <p className="text-sm md:text-md lg:text-lg">
                     Once carefully placed inside your home, you become its
                     custodians. Created with love
                     <strong>and aged by a life well lived.</strong>
@@ -428,23 +458,23 @@ export default function page() {
                     <div className="block w-full shrink-0">
                       <div className="my-[40px] mr-4">
                         <div className="mb-6">
-                          <span className="block h2 text-2xl">
+                          <span className="block h2 text-2xl md:text-3xl lg:text-4xl">
                             Get in touch
                           </span>
                         </div>
                         <div>
-                          <p className="text-sm">
+                          <p className="text-sm md:text-md lg:text-lg">
                             Curious about a product or have a question about our
                             process? We're always here and our inbox is always
                             open.{" "}
                           </p>
-                          <p className="text-sm mt-6">
+                          <p className="text-sm md:text-md lg:text-lg mt-6">
                             General Inquiry:{" "}
                             <a href="/" className="relative shop-button">
                               hello@Oldood.com
                             </a>
                           </p>
-                          <p className="text-sm">
+                          <p className="text-sm md:text-md lg:text-lg">
                             Designer trade program:
                             <a href="/" className="relative shop-button">
                               trade@Oldood.com
@@ -484,16 +514,16 @@ export default function page() {
                     <div className="block w-full shrink-0">
                       <div className="my-[40px] mr-4">
                         <div className="mb-6">
-                          <span className="block h2 text-2xl">
+                          <span className="block h2 text-2xl md:text-3xl lg:text-4xl">
                             Interior Design Services
                           </span>
                         </div>
                         <div>
-                          <p className="text-sm">
+                          <p className="text-sm md:text-md lg:text-lg">
                             Full service interior design services for whole home
                             transformations.
                           </p>
-                          <p className="text-sm mt-6">
+                          <p className="text-sm md:text-md lg:text-lg mt-6">
                             General Inquiry:{" "}
                             <a href="/" className="relative shop-button">
                               hello@Oldood.com

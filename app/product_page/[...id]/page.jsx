@@ -71,6 +71,7 @@ export default function Product_Page({ params }) {
       await delay(2000);
       dispatch(addToCart(product));
       dispatch(toggleCart());
+      dispatch(toggleAgree());
       setIsAddingToCart(false);
     }
   };
@@ -262,8 +263,12 @@ export default function Product_Page({ params }) {
 
           <div className="mt-7 md:mt-0 p-0 md:p-20 w-full">
             <div className="my-7">
-              <h1 className="h2 text-2xl my-2">Sabi Sectional</h1>
-              <div className="text-lightBrown text-sm h3">{product.type}</div>
+              <h1 className="h4 text-2xl md:text-4xl lg:text-5xl my-2">
+                Sabi Sectional
+              </h1>
+              <div className="text-lightBrown text-sm md:text-lg lg:text-xl h3">
+                {product.type}
+              </div>
             </div>
 
             <div className="w-full">
@@ -278,7 +283,7 @@ export default function Product_Page({ params }) {
                     style={{ transitionDuration: ".25s ease" }}
                   >
                     <div>
-                      <p className="text-sm">
+                      <p className="text-sm md:text-md lg:text-lg">
                         The sabi sectional was designed to fill the room. She
                         features a pared-down, rounded silhouette reminiscent of
                         a woman’s exposed shoulder. With a seat depth of 25.75",
@@ -286,8 +291,10 @@ export default function Product_Page({ params }) {
                         people. She’s the perfect piece for a large-scale
                         entertaining space.
                       </p>
-                      <p>Shown upholstered in our olive fabric.</p>
-                      <p className="mt-4 text-sm">
+                      <p className="text-sm md:text-md lg:text-lg">
+                        Shown upholstered in our olive fabric.
+                      </p>
+                      <p className="mt-4 text-sm md:text-md lg:text-lg">
                         <span>Shown upholstered in our olive fabric.</span>
                       </p>
                     </div>
@@ -302,7 +309,7 @@ export default function Product_Page({ params }) {
                     style={{ transitionDuration: ".25s ease" }}
                   >
                     <div>
-                      <p>
+                      <p className="text-sm md:text-md lg:text-lg">
                         <Link
                           href="/"
                           className="text-xs uppercase text-darkBrown shop-button relative"
@@ -311,7 +318,7 @@ export default function Product_Page({ params }) {
                         </Link>
                       </p>
                       <p className="my-6 text-darkGray text-sm">Overall</p>
-                      <ul className="flex flex-col space-y-1">
+                      <ul className="flex flex-col space-y-1 text-sm md:text-md lg:text-lg">
                         <li className="px-1 text-darkGray">
                           {`width: ${product.dimensions.width} in`}
                         </li>
@@ -368,7 +375,7 @@ export default function Product_Page({ params }) {
               </div>
 
               <div className="mt-6">
-                <span className="text-lightBrown">
+                <span className="text-lightBrown text-[14px] md:text-lg lg:text-xl">
                   ${formatPrice(product.price)}
                 </span>
               </div>
@@ -379,9 +386,10 @@ export default function Product_Page({ params }) {
                   type="checkbox"
                   required
                   onClick={handleToggleAgree}
+                  isChecked={agree ? true : false}
                 />
-                <span className="text-sm">
-                  Agree to the Terms and Conditions
+                <span className="text-sm md:text-[16px] lg:text-lg max-w-full md:max-w-[300px]">
+                  I agree to the New Vintage terms and conditions
                 </span>
               </label>
 
@@ -406,7 +414,7 @@ export default function Product_Page({ params }) {
                     </div>
                   </div>
                 </div>
-                <div className="w-28 h-12 p-3 flex items-center border border-listBorder">
+                <div className="w-28 md:w-[30%] h-12 p-3 md:p-5 flex items-center border border-listBorder">
                   <div className="flex justify-between items-center w-full">
                     <button
                       type="button"
@@ -423,7 +431,9 @@ export default function Product_Page({ params }) {
                       </svg>
                     </button>
 
-                    <span className="text-lightBrown">{product.quantity}</span>
+                    <span className="text-lightBrown text-sm md:text-lg lg:text-xl">
+                      {product.quantity}
+                    </span>
 
                     <button
                       type="button"
@@ -444,14 +454,14 @@ export default function Product_Page({ params }) {
                   </div>
                 </div>
 
-                <div className="flex-1 ml-4">
+                <div className="flex-1 ml-4 h-12">
                   <button
                     className="w-full uppercase py-3 px-3 bg-lightBrown text-milk relative"
                     type="button"
                     onClick={() => addItemToCart(product)}
                   >
                     <span
-                      className="text-sm"
+                      className="text-sm md:text-[14px] lg:text-[16px]"
                       style={{ opacity: isAddingToCart ? "0" : "1" }}
                     >
                       Add to cart
@@ -478,7 +488,7 @@ export default function Product_Page({ params }) {
                 </div>
               </div>
 
-              <div className="bg-milk p-5 text-sm mt-4">
+              <div className="bg-milk p-5 text-sm mt-4 text-sm md:text-md lg:text-lg">
                 <span>
                   Kindly allow 10-12 weeks lead time for production and
                   additional 2 weeks for shipping. Thank you.
@@ -491,7 +501,7 @@ export default function Product_Page({ params }) {
 
       <div className="flow-root mt-11 px-6">
         <header>
-          <h3 className="capitalize h2 text-xl border-t border-listBorder pt-7">
+          <h3 className="capitalize h2 text-xl md:text-3xl lg:text-4xl border-t border-listBorder pt-7">
             More about this item
           </h3>
         </header>
@@ -510,7 +520,7 @@ export default function Product_Page({ params }) {
                 onClick={() => handleSelect(0)}
               >
                 <span
-                  className="text-[12px] uppercase"
+                  className="text-[12px] md:text-[14px] lg:text-[18px] uppercase"
                   style={{ color: swipeIndex === 0 ? "#5e35190" : null }}
                 >
                   story
@@ -523,7 +533,7 @@ export default function Product_Page({ params }) {
                 onClick={() => handleSelect(1)}
               >
                 <span
-                  className="text-[12px] uppercase"
+                  className="text-[12px] md:text-[14px] lg:text-[18px] uppercase"
                   style={{ color: swipeIndex === 1 ? "#5e35190" : null }}
                 >
                   product care
@@ -532,7 +542,7 @@ export default function Product_Page({ params }) {
 
               <button type="button" onClick={() => handleSelect(2)}>
                 <span
-                  className="text-[12px] uppercase"
+                  className="text-[12px] md:text-[14px] lg:text-[18px] uppercase"
                   style={{ color: swipeIndex === 2 ? "#5e35190" : null }}
                 >
                   shipping & return
@@ -569,10 +579,10 @@ export default function Product_Page({ params }) {
                     style={{ alignContent: "space-between" }}
                   >
                     <div>
-                      <h5 className="uppercase text-[14px] pb-6">
+                      <h5 className="uppercase text-sm md:text-md lg:text-lg pb-6">
                         new vintage
                       </h5>
-                      <p>
+                      <p className="text-sm md:text-md lg:text-lg">
                         Designs inspired by everyday life, our New Vintage items
                         are made for the home. Antique elements are paired with
                         luxurious interior upholstery and organic fabrics. Our
@@ -602,14 +612,14 @@ export default function Product_Page({ params }) {
                     style={{ alignContent: "space-between" }}
                   >
                     <div>
-                      <h5 className="uppercase text-[14px] pb-6">
+                      <h5 className="uppercase text-sm md:text-md lg:text-lg pb-6">
                         Caring for this item
                       </h5>
-                      <p>
+                      <p className="text-sm md:text-md lg:text-lg">
                         You may use a steamer on medium to remove wrinkles. Do
                         not iron.
                       </p>
-                      <p className="mt-6">
+                      <p className="mt-6 text-sm md:text-md lg:text-lg">
                         Our fabrics are organic in nature which allows for
                         movement. If you find your tight back sofa is wrinkling,
                         a simple swipe of the hand and fabric tuck in the arm
@@ -617,13 +627,13 @@ export default function Product_Page({ params }) {
                         settle and loosen over time. To keep them fresh, simply
                         fluff and pat to organize the contents.
                       </p>
-                      <p className="mt-6">
+                      <p className="mt-6 text-sm md:text-md lg:text-lg">
                         Remove stains immediately. If you must, use a damp cloth
                         to pat out the stain, do not rub. Never use harsh
                         chemicals to remove stains. For persistent stains,
                         contact a professional fabric cleaning company.
                       </p>
-                      <p className="mt-6">
+                      <p className="mt-6 text-sm md:text-md lg:text-lg">
                         It’s important to remember when purchasing items
                         upholstered in fabric with higher piles, variations in
                         texture will be highlighted. These fabrics are luxurious
@@ -632,13 +642,15 @@ export default function Product_Page({ params }) {
                         and distort over time with use. We use these fabrics
                         often in our designs and cherish their unique qualities.
                       </p>
-                      <p className="mt-6">
+                      <p className="mt-6 text-sm md:text-md lg:text-lg">
                         To keep these fabrics looking young, it’s recommended to
                         use a velvet brush or vacuum with an upholstery
                         attachment to reorganize the pile as you desire.
                       </p>
-                      <p className="mt-6">Do not steam or iron shearling.</p>
-                      <p className="mt-6">
+                      <p className="mt-6 text-sm md:text-md lg:text-lg">
+                        Do not steam or iron shearling.
+                      </p>
+                      <p className="mt-6 text-sm md:text-md lg:text-lg">
                         For small leather stains, use a leather cleaner and
                         microfiber cloth.
                       </p>
@@ -664,20 +676,20 @@ export default function Product_Page({ params }) {
                     style={{ alignContent: "space-between" }}
                   >
                     <div>
-                      <h5 className="uppercase text-[14px] pb-6">
+                      <h5 className="uppercase text-sm md:text-md lg:text-lg pb-6">
                         True vintage
                       </h5>
-                      <p>
+                      <p className="text-sm md:text-md lg:text-lg">
                         We offer domestic shipping to all 50 states using common
                         carrier. All orders will be fulfilled within 5-7
                         business days (excluding holidays). Please note that
                         shipping rates are calculated based on the weight of the
                         entire order.
                       </p>
-                      <h5 className="text-[14px] uppercase my-6 block">
+                      <h5 className="text-sm md:text-md lg:text-lg uppercase my-6 block">
                         New Vintage
                       </h5>
-                      <p>
+                      <p className="text-sm md:text-md lg:text-lg">
                         We offer white-glove delivery within the contiguous 48
                         states. Shipping totals are based on the weight of the
                         entire order. Please allow 10 - 25 days upon completion
@@ -687,10 +699,10 @@ export default function Product_Page({ params }) {
                         inspection point. Measure furniture in the space and all
                         entry points to ensure piece will fit upon arrival.
                       </p>
-                      <h5 className="text-[14px] my-6 block">
+                      <h5 className="text-sm md:text-md lg:text-lg my-6 block">
                         True Vintage - Oversized
                       </h5>
-                      <p>
+                      <p className="text-sm md:text-md lg:text-lg">
                         Due to the scale of the piece, please inquire with us at{" "}
                         <a href="/" target="_blank">
                           hello@oldwood.com
@@ -698,10 +710,10 @@ export default function Product_Page({ params }) {
                         . We'll estimate white-glove delivery based on the
                         delivery location.
                       </p>
-                      <h5 className="text-[14px] uppercase my-6">
+                      <h5 className="text-sm md:text-md lg:text-lg uppercase my-6">
                         Damaged or Missing Shipments
                       </h5>
-                      <p>
+                      <p className="text-sm md:text-md lg:text-lg">
                         In the event that your item arrives damaged or is lost
                         in transit please contact us at{" "}
                         <a href="/" target="_blank">
@@ -709,9 +721,9 @@ export default function Product_Page({ params }) {
                         </a>{" "}
                         . Please inspect all shipments within 48hrs of delivery.
                       </p>
-                      <p className="pt-6">
+                      <p className="pt-6 text-sm md:text-md lg:text-lg">
                         <strong>
-                          All Roweam™ New & True Vintage items are ineligible
+                          All Oldwood™ New & True Vintage items are ineligible
                           for returns or exchanges.
                         </strong>
                       </p>
@@ -735,7 +747,9 @@ export default function Product_Page({ params }) {
           <div className="flow-root">
             <header className="mb-7 max-w-full">
               <div>
-                <h3 className="h2">Pairs with</h3>
+                <h3 className="h2 text-xl md:text-3xl lg:text-4xl">
+                  Pairs with
+                </h3>
               </div>
             </header>
           </div>
@@ -761,14 +775,18 @@ export default function Product_Page({ params }) {
                   <div className="shrink-0 w-full">
                     <div className="h2 mb-7">
                       <div>
-                        <span className="block text-4xl">The Old Wood</span>
-                        <span className="block text-4xl">Method</span>
+                        <span className="block text-4xl md:text-5xl lg:text-6xl">
+                          The Old Wood
+                        </span>
+                        <span className="block text-4xl md:text-5xl lg:text-6xl">
+                          Method
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <p>
+                  <p className="text-sm md:text-md lg:text-lg">
                     We believe in the storytelling power of one-of-a-kind pieces
                     that are made to age through generation. Our custom products
                     do just that. All material options are tried and true

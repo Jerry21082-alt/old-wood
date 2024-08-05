@@ -46,7 +46,7 @@ function CheckoutContent() {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isFocus, setIsFocus] = useState(false);
-  const [hideSummary, setHideSummary] = useState(false);
+  const [hideSummary, setHideSummary] = useState(true);
   const [newsLetter, setNewsLetter] = useState(false);
   const [height, setHeight] = useState("0px");
   const [isMounted, setIsMounted] = useState(false);
@@ -152,9 +152,9 @@ function CheckoutContent() {
         </div>
       </nav>
 
-      <main className="w-full block md:flex flex-row-reverse">
-        <section className="w-full md:w-1/2 bg-milk">
-          <div className="w-full border-listBorder border-b flex items-center justify-between p-4 md:hidden">
+      <main className="w-full">
+        <section className="w-full">
+          <div className="w-full border-listBorder border-b flex items-center justify-between p-4">
             <div
               className="flex items-center space-x-1"
               onClick={toggleSummary}
@@ -188,7 +188,7 @@ function CheckoutContent() {
             id="collapse"
             ref={collapseRef}
           >
-            <div className="w-full p-4">
+            <div className="w-full p-4 bg-milk">
               {isMounted &&
                 cartItems.map((item, idx) => (
                   <div
@@ -284,9 +284,7 @@ function CheckoutContent() {
               </div>
             </div>
           </div>
-        </section>
 
-        <section className="w-full md:w-1/2">
           <div className="px-6 w-full mt-6">
             <p className="text-sm text-black text-center">Express checkout</p>
             <div className="flex items-center justify-between space-x-3 mt-4">
@@ -949,22 +947,23 @@ function CheckoutContent() {
               </div>
             </div>
           </section>
-          <footer className="w-full border-t border-inputBorder p-6">
-            <div className="footer-grid">
-              <div className="flex relative">
-                <div className="flex flex-wrap justify-start items-start gap-x-4">
-                  {footerList.map((list, idx) => (
-                    <div key={idx}>
-                      <Link href="/" className="underline text-sm text-black">
-                        {list}
-                      </Link>
-                    </div>
-                  ))}
-                </div>
+        </section>
+
+        <footer className="w-full border-t border-inputBorder p-6">
+          <div className="footer-grid">
+            <div className="flex relative">
+              <div className="flex flex-wrap justify-start items-start gap-x-4">
+                {footerList.map((list, idx) => (
+                  <div key={idx}>
+                    <Link href="/" className="underline text-sm text-black">
+                      {list}
+                    </Link>
+                  </div>
+                ))}
               </div>
             </div>
-          </footer>
-        </section>
+          </div>
+        </footer>
       </main>
     </section>
   );

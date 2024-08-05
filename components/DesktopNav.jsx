@@ -514,7 +514,7 @@ export default function DesktopNav() {
                                 />
                               </AspectRatioContainer>
                             </div>
-                            <span className="relative w-max block text-xs collection-title">
+                            <span className="relative w-max block text-sm normal-case collection-title">
                               Sabi Collection
                             </span>
                           </Link>
@@ -529,7 +529,7 @@ export default function DesktopNav() {
                                 />
                               </AspectRatioContainer>
                             </div>
-                            <span className="relative w-max block text-xs collection-title">
+                            <span className="relative w-max block text-sm normal-case collection-title">
                               Pavillion Collection
                             </span>
                           </Link>
@@ -544,7 +544,7 @@ export default function DesktopNav() {
                                 />
                               </AspectRatioContainer>
                             </div>
-                            <span className="relative w-max block text-xs collection-title">
+                            <span className="relative w-max block text-sm normal-case collection-title">
                               Disc Collection
                             </span>
                           </Link>

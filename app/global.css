@@ -254,7 +254,7 @@ select {
   transform-origin: left;
   width: 100%;
   background-color: #5e3519;
-  height: 1px;
+  height: 2px;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -267,7 +267,7 @@ select {
   transform-origin: left;
   width: 100%;
   background-color: #5e3519;
-  height: 1px;
+  height: 2px;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -680,6 +680,12 @@ select {
   0% {
     transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinRotate {
   100% {
     transform: rotate(360deg);
   }

@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="order-2 max-w-[325px] break-words">
           <p className="text-sm uppercase mb-5">shop</p>
           <div className="break-words">
-            <ul className="text-[13px] flex flex-col space-y-1">
+            <ul className="text-sm md:text-[16px] flex flex-col space-y-1 md:space-y-3">
               <li className="break-words inline-block">
                 <Link href="/">Furniture</Link>
               </li>
@@ -43,7 +43,7 @@ export default function Footer() {
         <div className="order-2 max-w-[325px] break-words">
           <p className="text-sm uppercase mb-5">customer</p>
           <div className="break-words">
-            <ul className="text-[13px] flex flex-col space-y-1">
+            <ul className="flex flex-col space-y-1 md:space-y-3 text-sm md:text-[16px]">
               <li className="break-words inline-block">
                 <Link href="/">Contact Us</Link>
               </li>
@@ -68,7 +68,7 @@ export default function Footer() {
         <div className="order-2 max-w-[325px] break-words">
           <p className="text-sm uppercase mb-5">company</p>
           <div className="break-words">
-            <ul className="text-[13px] flex flex-col space-y-1">
+            <ul className="text-sm md:text-[16px] flex flex-col space-y-1 md:space-y-3">
               <li className="break-words inline-block">
                 <Link href="/">Our Story</Link>
               </li>
@@ -88,7 +88,7 @@ export default function Footer() {
         <div className="order-2 max-w-[325px] break-words">
           <p className="text-sm uppercase mb-5">connect</p>
           <div className="break-words">
-            <ul className="text-[13px] flex flex-col space-y-1">
+            <ul className="text-sm md:text-[16px] flex flex-col space-y-1 md:space-y-3">
               <li className="break-words inline-block">
                 <Link href="/">hello@oldwood.com</Link>
               </li>
@@ -154,7 +154,7 @@ export default function Footer() {
       <div className="mt-11 border-t border-milk py-5">
         <div className="grid-footer">
           <div className="flex items-center">
-            <div>ENGLISH</div>
+            <div className="text-sm md:text-[16px]">ENGLISH</div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -171,11 +171,15 @@ export default function Footer() {
           </div>
 
           <div className="text-xs">
-            <span className="text-milk uppercase">oldwood&#8482;</span>
+            <span className="text-milk uppercase text-sm md:text-2xl lg:text-3xl">
+              oldwood&#8482;
+            </span>
           </div>
 
           <div>
-            <span className="text-milk uppercase text-xs">made by amber</span>
+            <span className="text-milk uppercase text-sm md:text-[16px]">
+              made by amber
+            </span>
           </div>
         </div>
       </div>
