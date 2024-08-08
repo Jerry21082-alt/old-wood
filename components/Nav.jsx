@@ -9,6 +9,7 @@ import {
   toggleCart,
   closeAll,
   toggleOverlay,
+  toggleSearch,
 } from "@/features/navigation/navigationSlice";
 import { debounce } from "@/helpers/debounce";
 import { gsap } from "gsap";
@@ -21,9 +22,14 @@ export default function Nav() {
 
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
   const openCart = useSelector((state) => state.navigation.isCartOpen);
-  const cartLength = useSelector((state) => state.cart.cartItems).length;
+  const openSearch = useSelector((state) => state.navigation.isSearchOpen);
+  const cartLength = useSelector((state) => state.cart.cartLength);
 
   const cartLinkRef = useRef(null);
+
+  const backgroundChanged =
+    isScrolled || toggleMobileMenu || openCart || openSearch || isHovered;
+  const revealX = toggleMobileMenu || openCart;
 
   const dispatch = useDispatch();
   const pathname = usePathname();
@@ -153,6 +159,10 @@ export default function Nav() {
     dispatch(toggleCart());
   };
 
+  const handleSearchToggle = () => {
+    dispatch(toggleSearch());
+  };
+
   const changeDefaultLink = (ev) => {
     ev.preventDefault();
   };
@@ -166,18 +176,20 @@ export default function Nav() {
     dispatch(closeAll());
   };
 
-  const backgroundChanged =
-    isScrolled || toggleMobileMenu || openCart || isHovered;
-  const revealX = toggleMobileMenu || openCart;
-
   return (
     <section
-      className={`w-full fixed top-0 nav-container h-[62.5px] header header-transparent flex justify-center items-center ${
+      className={`w-full fixed top-0 nav-container h-[62.5px] md:h-[66.5px] header header-transparent flex justify-center items-center ${
         backgroundChanged ? "scrolled shadow-sm" : ""
       }`}
       style={{
         display: pathname === "/checkout_page" ? "none" : "block",
-        zIndex: openCart || toggleMobileMenu ? "50" : "30",
+        zIndex: openCart || toggleMobileMenu || openSearch ? "50" : "30",
+        background:
+          pathname === "/accounts/login" ||
+          pathname === "/accounts/register" ||
+          pathname === "/collections/furniture"
+            ? "#f3f1ea"
+            : "",
       }}
     >
       <div
@@ -250,7 +262,7 @@ export default function Nav() {
                         <div className="flex justify-between w-full flex-wrap">
                           <div className="mr-16" id="menu-container">
                             <Link
-                              href="/"
+                              href="/collections/furniture"
                               className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Furniture
@@ -605,7 +617,10 @@ export default function Nav() {
                 </li>
               </ul>
               <ul className="flex flex-nowrap">
-                <li className="flex items-center uppercase text-sm mr-[45px] cursor-pointer">
+                <li
+                  className="flex items-center uppercase text-sm mr-[45px] cursor-pointer"
+                  onClick={handleSearchToggle}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     x="0px"
@@ -622,7 +637,9 @@ export default function Nav() {
                   >
                     <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
                   </svg>
-                  <a href="/cart">search</a>
+                  <a href="/search" onClick={changeDefaultLink}>
+                    search
+                  </a>
                 </li>
                 <li className="flex items-center uppercase text-sm mr-[45px] cursor-pointer">
                   <svg
@@ -640,7 +657,7 @@ export default function Nav() {
                   >
                     <path d="M50.4 54.5c10.1 0 18.2-8.2 18.2-18.2S60.5 18 50.4 18s-18.2 8.2-18.2 18.2 8.1 18.3 18.2 18.3zm0-31.7c7.4 0 13.4 6 13.4 13.4s-6 13.4-13.4 13.4S37 43.7 37 36.3s6-13.5 13.4-13.5zM18.8 83h63.4c1.3 0 2.4-1.1 2.4-2.4 0-12.6-10.3-22.9-22.9-22.9H39.3c-12.6 0-22.9 10.3-22.9 22.9 0 1.3 1.1 2.4 2.4 2.4zm20.5-20.5h22.4c9.2 0 16.7 6.8 17.9 15.7H21.4c1.2-8.9 8.7-15.7 17.9-15.7z"></path>
                   </svg>
-                  <a href="/cart">login</a>
+                  <a href="/accounts/login">login</a>
                 </li>
                 <li
                   className="flex items-center uppercase text-sm cursor-pointer"

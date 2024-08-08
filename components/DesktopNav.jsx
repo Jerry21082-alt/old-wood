@@ -169,7 +169,7 @@ export default function DesktopNav() {
   const revealX = toggleMobileMenu || openCart;
   return (
     <div
-      className={`w-full fixed md:hidden top-0 nav-container h-[62.5px] header header-transparent flex justify-center items-center ${
+      className={`w-full fixed md:hidden top-0 nav-container h-[62.5px] header header-transparent flex justify-center items-center py-10 ${
         backgroundChanged ? "scrolled shadow-sm" : ""
       }`}
       style={{

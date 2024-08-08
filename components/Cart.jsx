@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
 import { useEffect, useRef, useState } from "react";
 import { updateItem, removeFromCart } from "@/features/cart/cartSlice";
-import { closeAll, toggleCart } from "@/features/navigation/navigationSlice";
+import {
+  closeAll,
+  isCartOpen,
+  toggleCart,
+} from "@/features/navigation/navigationSlice";
 import { useRouter } from "next/navigation";
 import { delay } from "@/helpers";
 import { gsap } from "gsap";
@@ -15,9 +19,7 @@ export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isMounted, setIsMounted] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSpinning, setIsSpinning] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
+  const [isLoadingStatus, setIsLoadingStatus] = useState({});
 
   const cartRef = useRef(null);
 
@@ -27,6 +29,22 @@ export default function Cart() {
   useEffect(() => setIsMounted(true), []);
 
   const onClose = () => dispatch(toggleCart());
+
+  useEffect(() => {
+    const handleCartEscape = (event) => {
+      if (cartRef.current && event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (cartState) {
+      document.addEventListener("keydown", handleCartEscape);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleCartEscape);
+    };
+  }, [cartState, onClose]);
 
   useEffect(() => {
     const handleClickOutside = (ev) => {
@@ -86,16 +104,21 @@ export default function Cart() {
   const totalPrice = reduce(getTotalCartItemsPrice(), (a, b) => a + b, 0);
 
   const handleUpdateCart = async (id, quantity, item) => {
-    setIsLoading(true);
-    setIsComplete(false);
+    setIsLoadingStatus((prevState) => {
+      return { ...prevState, [id]: { isLoading: true, isComplete: false } };
+    });
 
     setTimeout(() => {
-      setIsComplete(true);
+      setIsLoadingStatus((prevState) => {
+        return { ...prevState, [id]: { ...prevState[id], isComplete: true } };
+      });
+    }, 1000);
+
+    setTimeout(() => {
+      setIsLoadingStatus((prevState) => {
+        return { ...prevState, [id]: { isLoading: false, isComplete: false } };
+      });
     }, 2000);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
 
     if (quantity < 1) {
       await delay(2000);
@@ -132,17 +155,21 @@ export default function Cart() {
   return (
     <section
       ref={cartRef}
-      className={`w-screen md:w-[45%] fixed top-[62.5px] border-t border-listBorder bottom-0 right-0 bg-milk z-[1000] px-6 md:px-10 ${
+      className={`w-screen md:w-[45%] fixed top-[62.5px] md:top-[66.5px] border-t border-listBorder bottom-0 right-0 bg-milk z-[1000] px-6 md:px-10 ${
         !cartState ? "close-cart" : "open-cart"
       }`}
     >
       {isMounted && cartItems.length > 0 ? (
         <div className="w-full h-full overflow-x-hidden overflow-y-auto flex-grow pb-36 custom-scrollbar">
-          {isMounted &&
-            cartItems.map((item) => (
+          {cartItems.map((item) => {
+            const { id } = item;
+            const isLoading = isLoadingStatus[id]?.isLoading;
+            const isComplete = isLoadingStatus[id]?.isComplete;
+
+            return (
               <div
                 className="pt-4 pb-14"
-                key={item.id}
+                key={id}
                 id="cart-item"
                 style={{
                   transition: "transform .15s ease-out, opacity .25s ease-out",
@@ -284,7 +311,8 @@ export default function Cart() {
                   </div>
                 </div>
               </div>
-            ))}
+            );
+          })}
 
           <footer
             className="fixed bottom-0 left-0 w-full px-6 md:px-10 bg-milk cart_footer"

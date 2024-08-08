@@ -106,7 +106,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area bg-milk"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Table Lamps
               </span>
             </button>
@@ -152,7 +152,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Seating
               </span>
             </button>
@@ -197,7 +197,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Harvard Divinity Desk
               </span>
             </button>
@@ -288,7 +288,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Art
               </span>
             </button>
@@ -333,7 +333,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Tables
               </span>
             </button>
@@ -378,7 +378,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Vases & Vessels
               </span>
             </button>
@@ -423,7 +423,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area bg-milk"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Dinning Chairs
               </span>
             </button>
@@ -467,7 +467,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Dinning Chairs
               </span>
             </button>
@@ -557,7 +557,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Bowls & Dishes
               </span>
             </button>
@@ -603,7 +603,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Art
               </span>
             </button>
@@ -648,7 +648,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area bg-milk"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Vases & Vessels
               </span>
             </button>
@@ -738,7 +738,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area bg-milk"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 The Bromley Sofa
               </span>
             </button>
@@ -828,7 +828,7 @@ export default function page() {
               type="button"
               className="w-4 h-4 float-left rounded-full border border-milk tap-area"
             >
-              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+              <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                 Decorative Objects
               </span>
             </button>

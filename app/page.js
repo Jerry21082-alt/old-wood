@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { productReelItems } from "../constants";
@@ -104,7 +103,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block p-6 w-full">
+      <section className="block p-6 md:p-10 w-full">
         <div className="mb-11 text-[#5e3519] text-center text-sm md:text-md lg:text-lg">
           THIS IS THE NEW NOSTALGIA
         </div>
@@ -154,19 +153,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block mt-5 w-full">
+      <section className="block mt-5 w-full p-6 md:p-10">
         <div
-          className="py-7 px-0"
+          className="py-7"
           style={{ display: "flow-root", bakground: "transparent" }}
         >
           <div className="w-full max-w-[1600px]">
-            <header className="max-w-full m-7">
+            <header className="max-w-full my-7 md:my-7 md:m-0 block">
               <div>
                 <div className="flex items-center space-x-6">
                   <h4 className="h2 text-darkBrown text-2xl md:text-3xl lg:text-4xl">
                     Made To Age
                   </h4>
-                  <div className="mt-0">
+                  <div className="mt-0 block">
                     <a
                       href="/"
                       style={{ backgroundPosition: "99% -97%, 99% 99%" }}
@@ -462,7 +461,7 @@ export default function Home() {
 
       <section>
         <div className="image-with-text-r-list">
-          <div className="px-6 w-full">
+          <div className="px-6 md:px-10 w-full">
             <div className="overflow-hidden flex flex-wrap">
               <div className="relative w-full overflow-hidden mb-8">
                 <img

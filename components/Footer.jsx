@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="mt-7 footer pt-12 text-snow"
+      className="footer pt-12 text-snow"
       style={{ display: pathname === "/checkout_page" ? "none" : "block" }}
     >
       <div className="grid-footer">

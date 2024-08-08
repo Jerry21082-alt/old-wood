@@ -198,16 +198,24 @@ export default function Product_Page({ params }) {
                     "visibility .25s ease-in-out, opacity .25s ease-in-out",
                 }}
               >
-                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-transparentBlack cursor-pointer">
+                <div
+                  className="rounded-full flex items-center justify-center cursor-pointer active:scale-100 hover:scale-110 hover:fill-lightBrown"
+                  style={{
+                    transition:
+                      "transform .25s ease-in-out, fill .25s ease-in-out",
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    id="chevron-left"
-                    fill="#f3f1ea"
+                    version="1.1"
+                    viewBox="0 0 41 51.25"
+                    x="0px"
+                    y="0px"
+                    width="74"
+                    height="74"
                   >
-                    <g>
-                      <path d="M13.36 17a1 1 0 0 1-.72-.31l-3.86-4a1 1 0 0 1 0-1.4l4-4a1 1 0 1 1 1.42 1.42L10.9 12l3.18 3.3a1 1 0 0 1 0 1.41 1 1 0 0 1-.72.29z"></path>
-                    </g>
+                    <title>left-arrow</title>
+                    <path d="M20.5 2.293c-10.045 0-18.207 8.163-18.207 18.207 0 10.044 8.163 18.207 18.207 18.207 10.044 0 18.207-8.163 18.207-18.207s-8.163-18.207-18.207-18.207zM20.5 2.999c9.645 0 17.501 7.856 17.501 17.501s-7.856 17.501-17.501 17.501c-9.645 0-17.501-7.856-17.501-17.501s7.856-17.501 17.501-17.501zM17.622 14.862c-0.088 0-0.176 0.032-0.249 0.105l-5.281 5.281c-0.147 0.147-0.147 0.35 0 0.496l5.274 5.287c0.076 0.076 0.155 0.105 0.252 0.105s0.18-0.031 0.254-0.105c0.147-0.147 0.147-0.35 0-0.496l-4.679-4.679h15.471c0.206 0 0.357-0.151 0.357-0.357s-0.151-0.357-0.357-0.357h-15.471l4.679-4.679c0.147-0.147 0.147-0.35 0-0.496-0.073-0.073-0.161-0.105-0.249-0.105z" />
                   </svg>
                 </div>
               </div>
@@ -222,24 +230,24 @@ export default function Product_Page({ params }) {
                     "visibility .25s ease-in-out, opacity .25s ease-in-out",
                 }}
               >
-                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-transparentBlack cursor-pointer">
+                <div
+                  className="rounded-full flex items-center justify-center cursor-pointer active:scale-100 hover:scale-110 hover:fill-lightBrown"
+                  style={{
+                    transition:
+                      "transform .25s ease-in-out, fill .25s ease-in-out",
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    id="chevron-right"
-                    fill="#f3f1ea"
+                    version="1.1"
+                    viewBox="0 0 41 51.25"
+                    x="0px"
+                    y="0px"
+                    width="74"
+                    height="74"
                   >
-                    <g>
-                      <g>
-                        <rect
-                          width="24"
-                          height="24"
-                          opacity="0"
-                          transform="rotate(-90 12 12)"
-                        ></rect>
-                        <path d="M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z"></path>
-                      </g>
-                    </g>
+                    <title>right-arrow</title>
+                    <path d="M20.5 2.293c-10.045 0-18.207 8.163-18.207 18.207s8.163 18.207 18.207 18.207c10.044 0 18.207-8.163 18.207-18.207s-8.163-18.207-18.207-18.207zM20.5 2.999c9.645 0 17.501 7.856 17.501 17.501s-7.856 17.501-17.501 17.501c-9.645 0-17.501-7.856-17.501-17.501s7.856-17.501 17.501-17.501zM23.385 14.869c-0.088 0-0.176 0.032-0.249 0.105-0.147 0.147-0.147 0.35 0 0.496l4.679 4.679h-15.478c-0.206 0-0.357 0.151-0.357 0.357s0.146 0.35 0.357 0.35h15.471l-4.679 4.679c-0.147 0.147-0.147 0.35 0 0.496 0.074 0.074 0.157 0.105 0.254 0.105s0.176-0.030 0.252-0.105l5.281-5.281c0.147-0.147 0.147-0.35 0-0.496l-5.281-5.281c-0.073-0.073-0.161-0.105-0.249-0.105z" />
                   </svg>
                 </div>
               </div>
@@ -554,7 +562,7 @@ export default function Product_Page({ params }) {
       </div>
 
       <div
-        className="relative"
+        className="relative p-6 md:p-10"
         onTouchStart={handleSwipeStart}
         onTouchEnd={handleTouchDifference}
         onTouchMove={handleSwipeMove}

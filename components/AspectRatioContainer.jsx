@@ -27,7 +27,11 @@ export default function AspectRatioContainer({
     return () => window.removeEventListener("resize", handleResize);
   }, [aspectRatio]);
   return (
-    <div ref={containerRef} style={{ maxWidth: maxWidth }} {...props}>
+    <div
+      ref={containerRef}
+      style={{ maxWidth: maxWidth, aspectRatio: "3 / 4" }}
+      {...props}
+    >
       <div className="aspect-ratio-content">{children}</div>
     </div>
   );

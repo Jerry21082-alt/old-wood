@@ -99,6 +99,10 @@ select {
   font-size: 14px;
 }
 
+.search-input::placeholder {
+  font-size: 24px;
+}
+
 #r-form::before {
   content: "";
   position: absolute;
@@ -293,10 +297,7 @@ select {
   vertical-align: top;
 }
 
-.scrollbar {
-  display: grid;
-  grid-template-columns: none;
-  grid-auto-flow: column;
+.reel {
   grid-auto-columns: calc(
     100% / var(--section-products-per-row, 4) -
       (
@@ -304,10 +305,6 @@ select {
           (var(--section-products-per-row, 4) - 1)
       )
   );
-  margin-left: 28px;
-  margin-right: 28px;
-  justify-content: safe center;
-  gap: var(--grid-gap);
 }
 
 .secondary-img {
@@ -341,6 +338,10 @@ select {
   border-color: #f3f1ea50;
   border-radius: 50%;
   animation: shopTheLookDotKeyframe 2s ease-in-out infinite;
+}
+
+.direction {
+  animation: direction 0.5s ease-in-out normal;
 }
 
 .footer {
@@ -664,6 +665,41 @@ select {
   grid-template-columns: 50% 50%;
 }
 
+.collection {
+  grid-template-columns: repeat(
+    auto-fit,
+    calc(
+      100% / var(--section-products-per-row) - var(--product-list-column-gap) *
+        (var(--section-products-per-row) - 1) / var(--section-products-per-row)
+    )
+  );
+}
+
+.page[aria-current]::before {
+  content: "";
+  position: absolute;
+  max-width: calc(100% - 3px);
+  max-height: calc(100% - 3px);
+  top: 2px;
+  left: 2px;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+@keyframes direction {
+  from {
+    opacity: 0;
+    transform: scale(0.4) translate3d(-100px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
 @keyframes shopTheLookDotKeyframe {
   0% {
     opacity: 1;
@@ -705,15 +741,21 @@ select {
 }
 
 @media screen and (max-width: 999px) {
-  .scrollbar {
-    display: grid;
-    gap: 16px;
-    grid-auto-flow: column;
+  .reel {
+    gap: 24px;
+    grid-auto-columns: calc(
+      100% / var(--section-products-per-row, 4) -
+        (
+          var(--grid-gap) / var(--section-products-per-row, 4) *
+            (var(--section-products-per-row, 4) - 1)
+        )
+    );
     grid-auto-columns: 52vw;
     grid-template-columns: none;
     min-width: min-content;
-    scrollbar-width: none;
+    grid-auto-flow: column;
   }
+
   .image-with-text,
   .image-with-text-r-list {
     display: flex;
@@ -752,5 +794,8 @@ select {
     font-family: Tobias-Thin;
     font-size: 22px;
     line-height: 1.2;
+  }
+  .search-input::placeholder {
+    font-size: 16px;
   }
 }

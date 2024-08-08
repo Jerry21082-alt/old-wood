@@ -4,7 +4,32 @@ import React, { useEffect, useRef, useState } from "react";
 
 export default function NewsLetter() {
   const [showNewsLetter, setShowNewsLetter] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const newsLetterRef = useRef(null);
+
+  const styles = {
+    general: {
+      transform: isMobile
+        ? `${showNewsLetter ? "translateY(0%)" : "translateY(100%)"}`
+        : `${showNewsLetter ? "scale(1)" : "scale(0.8)"}`,
+      opacity: showNewsLetter ? "1" : "0",
+      transition: "transform .4s ease-in-out, opacity .4s ease-in-out",
+      maxHeight: "calc(100vh - 160px)",
+    },
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => setIsMobile(window.innerWidth <= 999);
+      handleResize();
+
+      window.addEventListener("resize", handleResize);
+
+      return function () {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, []);
 
   useEffect(() => {
     async function handleDelay() {
@@ -36,11 +61,8 @@ export default function NewsLetter() {
   return (
     <div
       ref={newsLetterRef}
-      className="max-h-[90vh] flow-root  bottom-0 overflow-hidden bg-milk z-50 fixed"
-      style={{
-        transform: showNewsLetter ? "translateY(0%)" : "translateY(100%)",
-        transition: "transform .4s ease-in-out",
-      }}
+      className="flow-root bottom-0 overflow-hidden md:overflow-auto will-change-transform m-6 md:m-10 bg-milk z-50 fixed right-0"
+      style={styles.general}
     >
       <button
         onClick={onClose}
@@ -60,13 +82,13 @@ export default function NewsLetter() {
       <div className="flex flex-col items-center">
         <div className="max-w-[700px] w-[90%] overflow-auto py-14 px-7">
           <div className="text-lightBrown uppercase">Join the r list</div>
-          <div className="h2 mt-4 text-xl">
+          <div className="h2 mt-4 text-xl md:text-4xl">
             Sign-up to receive 10% off your first purchase and you'll hear about
             our new product collections, antiquities, and more before anyone
             else!
           </div>
 
-          <div className="mt-11">
+          <div className="mt-[45px]">
             <div className="w-full">
               <div style={{ transform: "translate(0px, 0px)" }}>
                 <form
