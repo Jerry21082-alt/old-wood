@@ -1,3 +1,5 @@
+import { furnitureCollection } from "./furniture";
+
 export const productReelItems = [
   {
     id: 1,
@@ -316,9 +318,10 @@ export const mobileMenuList = {
     {
       title: "furniture",
       innerList: ["tables", "seating", "casegoods"],
+      href: "collections/furniture",
     },
     {
-      title: "decoration",
+      title: "decor",
       innerList: [
         "vases & vessels",
         "decorative objects",
@@ -327,6 +330,7 @@ export const mobileMenuList = {
         "utility",
         "bath accessories ",
       ],
+      href: "/collections/decor",
     },
     {
       title: "dinning & entertaining",
@@ -338,47 +342,22 @@ export const mobileMenuList = {
         "candlehoder",
         "glassware",
       ],
+      href: "collections/dinning&entertainment",
     },
     {
       title: "soft goods",
       innerList: ["pillows"],
+      href: "collections/soft-goods",
     },
     {
       title: "lighting",
       innerList: ["table lamps"],
+      href: "collections/lighting",
     },
     {
       title: "art",
       innerList: ["vintage", "artisan"],
+      href: "collections/art",
     },
   ],
 };
-
-// export const desktopMenuList = [
-//   {
-//     title: "furniture",
-//     innerList: ["tables", "seating", "casegoods"],
-//   },
-//   {
-//     title: "decor",
-//     innerList: [
-//       "vases & vesels",
-//       "decorative objects",
-//       "bowls & dishes",
-//       "Mirrors",
-//       "utility",
-//       "bath accessories",
-//     ],
-//   },
-//   {
-//     title: "dinning & entertaining",
-//     innerList: [
-//       "kitchen accessories",
-//       "serving dishes",
-//       "barware",
-//       "utensils",
-//       "candleholders",
-//       "glassware",
-//     ],
-//   },
-// ];

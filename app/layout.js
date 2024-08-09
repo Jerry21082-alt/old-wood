@@ -4,8 +4,8 @@ import Layout from "@/components/Layout";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full">
-      <body className="relative h-full">
+    <html lang="en">
+      <body>
         <Layout>{children}</Layout>
       </body>
     </html>

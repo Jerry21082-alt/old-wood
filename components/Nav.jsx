@@ -50,6 +50,7 @@ export default function Nav() {
 
   useEffect(() => {
     const shop = document.getElementById("shop");
+    const shopList = document.querySelectorAll("#shop-nav_reveal a");
     const shopReveal = document.getElementById("shop-nav_reveal");
     const container = shopReveal.querySelectorAll("#menu-container");
 
@@ -62,6 +63,10 @@ export default function Nav() {
       shopReveal.style.visibility = "hidden";
       shopReveal.style.opacity = "0";
     };
+
+    shopList.forEach((list) => {
+      list.addEventListener("click", handleMouseLeave);
+    });
 
     shop.addEventListener("mouseenter", function () {
       handleMouseEnter();
@@ -78,6 +83,10 @@ export default function Nav() {
     shopReveal.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
+      shopList.forEach((list) => {
+        list.removeEventListener("click", handleMouseLeave);
+      });
+
       shop.removeEventListener("mouseenter", function () {
         handleMouseEnter();
         const items = gsap.utils.toArray(container);
@@ -243,7 +252,11 @@ export default function Nav() {
             <div className="flex">
               <ul className="flex flex-wrap">
                 <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px] ">
-                  <Link href="/" className="relative block" id="shop">
+                  <Link
+                    href="/collections/all"
+                    className="relative block"
+                    id="shop"
+                  >
                     Shop
                   </Link>
 
@@ -690,7 +703,7 @@ export default function Nav() {
             </div>
           </nav>
 
-          <h1 className="mr-10 -order-1 block relative">
+          <h1 className="mr-10 -order-1 block relative logo">
             <Link href="/" className="block w-max">
               <span className="uppercase">Oldwood</span>
             </Link>

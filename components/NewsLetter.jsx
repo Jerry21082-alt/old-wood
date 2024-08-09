@@ -13,7 +13,9 @@ export default function NewsLetter() {
         ? `${showNewsLetter ? "translateY(0%)" : "translateY(100%)"}`
         : `${showNewsLetter ? "scale(1)" : "scale(0.8)"}`,
       opacity: showNewsLetter ? "1" : "0",
-      transition: "transform .4s ease-in-out, opacity .4s ease-in-out",
+      visibility: showNewsLetter ? "visible" : "hidden",
+      transition:
+        "transform .4s ease-in-out, opacity .4s ease-in-out, visibility .4s ease-in-out",
       maxHeight: "calc(100vh - 160px)",
     },
   };

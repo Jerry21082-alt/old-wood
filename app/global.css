@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --section-products-per-row: 4;
+  --section-products-per-row-m: 4;
   --grid-gap: 24px;
   --product-list-block-spacing: 28px;
-  --product-list-column-gap: 24px;
+  --product-list-column-gap-m: 24px;
+  --container-gutter: 24px;
+  --section-products-per-row: 2;
+  --product-list-column-gap: 12px;
 }
 
 @font-face {
@@ -15,8 +18,8 @@
 }
 
 @font-face {
-  font-family: NOVABOLD;
-  src: url("../public/Porter\ Bold.ttf");
+  font-family: Akira;
+  src: url("../public/Akira\ Expanded\ Demo.otf");
 }
 
 @font-face {
@@ -59,7 +62,7 @@ body {
 }
 
 .logo {
-  font-family: NOVABOLD;
+  font-family: Akira;
 }
 
 img {
@@ -85,8 +88,8 @@ select {
 
 .h4 {
   font-family: Tobias-Thin;
-  font-size: 34px;
-  line-height: 1.2;
+  /* font-size: 34px;
+  line-height: 1.2; */
 }
 
 .h3 {
@@ -669,10 +672,13 @@ select {
   grid-template-columns: repeat(
     auto-fit,
     calc(
-      100% / var(--section-products-per-row) - var(--product-list-column-gap) *
-        (var(--section-products-per-row) - 1) / var(--section-products-per-row)
+      100% / var(--section-products-per-row-m) -
+        var(--product-list-column-gap-m) *
+        (var(--section-products-per-row-m) - 1) /
+        var(--section-products-per-row-m)
     )
   );
+  gap: 48px 24px;
 }
 
 .page[aria-current]::before {
@@ -789,13 +795,26 @@ select {
     padding: 24px 0;
     overflow: hidden;
   }
-
+  /* 
   .h4 {
     font-family: Tobias-Thin;
     font-size: 22px;
     line-height: 1.2;
-  }
+  } */
   .search-input::placeholder {
     font-size: 16px;
+  }
+  .collection {
+    margin-left: calc(-1 * var(--container-gutter) / 2);
+    margin-right: calc(-1 * var(--container-gutter) / 2);
+    grid-template-columns: repeat(
+      auto-fit,
+      calc(
+        100% / var(--section-products-per-row) - var(--product-list-column-gap) *
+          (var(--section-products-per-row) - 1) /
+          var(--section-products-per-row)
+      )
+    );
+    gap: 32px 12px;
   }
 }

@@ -19,7 +19,7 @@ export default function Layout({ children }) {
         <SearchBar />
         <MobileMenu />
         <Overlay />
-        <main className="min-h-screen">{children}</main>
+        <main>{children}</main>
         <Footer />
       </section>
     </Provider>

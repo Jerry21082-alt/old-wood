@@ -206,7 +206,7 @@ export default function ProductReel({ products }) {
         id="scroller"
       >
         <div
-          className="grid grid-cols-none grid-flow-col reel"
+          className="grid grid-cols-none grid-flow-col px-6 md:px-0 reel"
           style={{
             justifyContent: "safe start",
             gap: "48px 24px",
@@ -224,7 +224,7 @@ export default function ProductReel({ products }) {
               >
                 <div className="absolute right-2 top-2 z-10 flex flex-col items-end">
                   {item.toOrder && (
-                    <span className="text-darkBrown py-1 px-2 bg-snow">
+                    <span className="text-darkBrown py-1 px-2 bg-snow text-xs md:text-sm">
                       Made to Order
                     </span>
                   )}

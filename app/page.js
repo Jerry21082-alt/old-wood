@@ -153,13 +153,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block mt-5 w-full p-6 md:p-10">
+      <section className="block mt-5 w-full">
         <div
           className="py-7"
           style={{ display: "flow-root", bakground: "transparent" }}
         >
-          <div className="w-full max-w-[1600px]">
-            <header className="max-w-full my-7 md:my-7 md:m-0 block">
+          <div className="w-full max-w-[1600px] p-0 md:p-10">
+            <header className="max-w-full my-7 md:my-7 md:m-0 block px-6 md:px-0">
               <div>
                 <div className="flex items-center space-x-6">
                   <h4 className="h2 text-darkBrown text-2xl md:text-3xl lg:text-4xl">
@@ -210,7 +210,6 @@ export default function Home() {
                 </div>
               </div>
             </header>
-
             <ProductReel products={productReelItems} />
           </div>
         </div>

@@ -35,7 +35,7 @@ export default function MobileMenu() {
               <ul className="mb-4" key={index}>
                 <li className="border-t border-listBorder py-[21px] px-6 mb-[15px] flow-root">
                   <Link
-                    href="/"
+                    href={`/${list.href}`}
                     className="flex items-center justify-between w-full uppercase text-darkGray text-xs animate-link"
                   >
                     {list.title}
@@ -205,7 +205,10 @@ export default function MobileMenu() {
               In Situ
             </Link>
           </li>
-          <li className="flow-root border-b border-listBorder text-xs">
+          <li
+            className="flow-root border-b border-listBorder text-xs"
+            onClick={() => dispatch(closeAll())}
+          >
             <Link
               href="/mobile-search"
               className="text-darkBrown uppercase px-6 py-[21px] flex justify-between items-center animate-link"
