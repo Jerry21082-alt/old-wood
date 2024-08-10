@@ -1,6 +1,9 @@
+import { generateProductId } from "@/helpers/customUUID";
+
 export const furnitureCollection = [
   {
-    id: 2,
+    id: generateProductId(),
+    category: "furniture",
     quantity: 1,
     description:
       "Full of character and curves, our momma bear chairs came all the way from Denmark. Reupholstered in a soft shearling aimed to wrap you in comfort. Internals have been completely reworked. ",
@@ -57,7 +60,8 @@ export const furnitureCollection = [
     },
   },
   {
-    id: 2,
+    id: generateProductId(),
+    category: "furniture",
     quantity: 1,
     description:
       "Swedish table with a burled wood tilt top makes for a fitting end table or game table between two chairs. Hand-turned pedestal base with curved tripod feet and rich patina. Wear consistent with age and past use.",
@@ -93,9 +97,15 @@ export const furnitureCollection = [
           "//roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=400 400w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=500 500w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=600 600w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=700 700w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=800 800w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=900 900w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=1000 1000w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=1100 1100w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=1200 1200w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=1300 1300w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=1400 1400w, //roweam.com/cdn/shop/files/100385_Swedish_Burl_Tilt_Table_3459.jpg?v=1694655386&width=1500 1500w",
       },
     ],
+    dimensions: {
+      width: 108.5,
+      length: 104.0,
+      height: 33.1,
+    },
   },
   {
-    id: 2,
+    id: generateProductId(),
+    category: "furniture",
     quantity: 1,
     description:
       "Pair of TeVe chairs by Alf Svensson. Classic Scandinavian design with symmetric lines and visible joints. Subtle brass screw and ring detail on back. Circa 1950s. Reupholstered in plush sheepskin. Exquisite patina.",
@@ -152,7 +162,8 @@ export const furnitureCollection = [
     },
   },
   {
-    id: 2,
+    id: generateProductId(),
+    category: "furniture",
     quantity: 1,
     description:
       "Pair of TeVe chairs by Alf Svensson. Classic Scandinavian design with symmetric lines and visible joints. Subtle brass screw and ring detail on back. Circa 1950s. Reupholstered in plush sheepskin. Exquisite patina.",
@@ -209,7 +220,8 @@ export const furnitureCollection = [
     },
   },
   {
-    id: 2,
+    id: generateProductId(),
+    category: "furniture",
     quantity: 1,
     description:
       "Showstopper piece. Made in Tuscany in the 19th century, this patterned armoire is hand painted and contains its original hardware. Exquisite patina. Wear consistent with age.",
@@ -266,7 +278,8 @@ export const furnitureCollection = [
     },
   },
   {
-    id: 2,
+    id: generateProductId(),
+    category: "furniture",
     quantity: 1,
     description:
       "Petite wooden bench with radiused ends. Delicate and aged, its patina patina is unmatched.",
@@ -318,7 +331,8 @@ export const furnitureCollection = [
     },
   },
   {
-    id: 2,
+    id: generateProductId(),
+    category: "furniture",
     quantity: 1,
     description:
       "These petite dining chairs are upholstered in a soft cream boucle fabric. They offer subtle curved back support and fine leg joinery. ",
@@ -375,7 +389,8 @@ export const furnitureCollection = [
     },
   },
   {
-    id: 2,
+    id: generateProductId(),
+    category: "furniture",
     quantity: 1,
     description:
       "Originating from the era of Napoleon III, this attention demanding armchair has ornate legs on casters. It's been reupholstered in 100% cotton velvet and internals reworked for comfort. Wear consistent with age.",

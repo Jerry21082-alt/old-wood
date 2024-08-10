@@ -1,7 +1,7 @@
 import { furnitureCollection } from "./furniture";
 import { productReelItems } from ".";
 
-const allProducts = [...productReelItems, ...furnitureCollection];
+export const allItems = [...productReelItems, ...furnitureCollection];
 
 const shuffleAllProducts = (array) => {
   const emptyArray = [];
@@ -18,4 +18,4 @@ const shuffleAllProducts = (array) => {
   return emptyArray;
 };
 
-export const shuffledProducts = shuffleAllProducts(allProducts);
+export const shuffledProducts = shuffleAllProducts(allItems);

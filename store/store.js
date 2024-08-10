@@ -2,9 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import navigationReducer from "../features/navigation/navigationSlice";
 import changeQty from "../features/checkout/checkoutSlice";
 import cartItems from "../features/cart/cartSlice";
+import allProduct from "../features/allProducts/productSlice";
 import { load, save } from "redux-localstorage-simple";
 
-const PERSISTED_KEYS = ["cart"];
+const PERSISTED_KEYS = ["cart", "products"];
 
 let preloadedState;
 try {
@@ -19,6 +20,7 @@ export const store = configureStore({
     navigation: navigationReducer,
     checkout: changeQty,
     cart: cartItems,
+    products: allProduct,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(save({ states: PERSISTED_KEYS })),

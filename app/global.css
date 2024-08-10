@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --section-products-per-row-m: 4;
+  --section-products-per-row: 4;
   --grid-gap: 24px;
   --product-list-block-spacing: 28px;
-  --product-list-column-gap-m: 24px;
+  --product-list-column-gap: 24px;
   --container-gutter: 24px;
-  --section-products-per-row: 2;
-  --product-list-column-gap: 12px;
+  --section-products-per-row-sm: 2;
+  --product-list-column-gap-sm: 12px;
 }
 
 @font-face {
@@ -672,10 +672,8 @@ select {
   grid-template-columns: repeat(
     auto-fit,
     calc(
-      100% / var(--section-products-per-row-m) -
-        var(--product-list-column-gap-m) *
-        (var(--section-products-per-row-m) - 1) /
-        var(--section-products-per-row-m)
+      100% / var(--section-products-per-row) - var(--product-list-column-gap) *
+        (var(--section-products-per-row) - 1) / var(--section-products-per-row)
     )
   );
   gap: 48px 24px;
@@ -810,9 +808,10 @@ select {
     grid-template-columns: repeat(
       auto-fit,
       calc(
-        100% / var(--section-products-per-row) - var(--product-list-column-gap) *
-          (var(--section-products-per-row) - 1) /
-          var(--section-products-per-row)
+        100% / var(--section-products-per-row-sm) -
+          var(--product-list-column-gap-sm) *
+          (var(--section-products-per-row-sm) - 1) /
+          var(--section-products-per-row-sm)
       )
     );
     gap: 32px 12px;

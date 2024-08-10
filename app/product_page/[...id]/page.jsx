@@ -3,8 +3,6 @@
 import AspectRatioContainer from "@/components/AspectRatioContainer";
 import Drawer from "@/components/Drawer";
 import ProductReel from "@/components/ProductReel";
-import { productReelItems } from "@/constants";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -16,6 +14,8 @@ import { addToCart } from "@/features/cart/cartSlice";
 import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
 import { toggleCart } from "@/features/navigation/navigationSlice";
+import { allItems } from "@/constants/shuffleAllProducts";
+import { furnitureCollection } from "@/constants/furniture";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -27,11 +27,15 @@ export default function Product_Page({ params }) {
   const [startX, setStartX] = useState(0);
   const [swipeIndex, setSwipeIndex] = useState(0);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [allProducts, setAllProducts] = useState(productReelItems);
   const [terms, setTerms] = useState(false);
   const [reveal, setReveal] = useState(false);
 
+  const items = useSelector((state) => state.products.allProducts);
+
+  const [allProducts, setAllProducts] = useState(items);
+
   const product = allProducts.find((item) => item.id == productId);
+
   const slides = product.allImages;
 
   const scrollRef = useRef(null);
@@ -173,10 +177,9 @@ export default function Product_Page({ params }) {
                     className="min-w-full box-border flex items-center h-full"
                     key={idx}
                   >
-                    <Image
-                      src={img}
-                      width={500}
-                      height={500}
+                    <img
+                      src={img.src}
+                      srcSet={img.srcSet}
                       className="object-cover object-center w-full"
                       alt="product-image"
                       style={{
@@ -263,7 +266,7 @@ export default function Product_Page({ params }) {
                       currentIndex === idx ? "#221f20" : "#a5a097",
                     transition: "background-color .4s ease-in-out",
                   }}
-                  onClick={() => handleSlideClick(idx)}
+                  // onClick={() => handleSlideClick(idx)}
                 ></button>
               ))}
             </div>
@@ -328,25 +331,49 @@ export default function Product_Page({ params }) {
                       <p className="my-6 text-darkGray text-sm">Overall</p>
                       <ul className="flex flex-col space-y-1 text-sm md:text-md lg:text-lg">
                         <li className="px-1 text-darkGray">
-                          {`width: ${product.dimensions.width} in`}
+                          {`width: ${
+                            product?.dimensions?.width
+                              ? product.dimensions.width
+                              : null
+                          } in`}
                         </li>
                         <li className="px-1 text-darkGray">
-                          {`Length: ${product.dimensions.length} in`}
+                          {`Length: ${
+                            product?.dimensions?.length
+                              ? product.dimensions.length
+                              : null
+                          } in`}
                         </li>
                         <li className="px-1 text-darkGray">
-                          {`Depth: ${product.dimensions.depth} in`}
+                          {`Depth: ${
+                            product.dimensions.depth
+                              ? product.dimensions.depth
+                              : null
+                          } in`}
                         </li>
                         <li className="px-1 text-darkGray">
                           {`Height: ${product.dimensions.height} in`}
                         </li>
                         <li className="px-1 text-darkGray">
-                          {`Seat Height: ${product.dimensions.seatHeight} in`}
+                          {`Seat Height: ${
+                            product.dimensions.seatHeight
+                              ? product.dimensions.seatHeight
+                              : null
+                          } in`}
                         </li>
                         <li className="px-1 text-darkGray">
-                          {`Seat Depth: ${product.dimensions.seatDepth} in`}
+                          {`Seat Depth: ${
+                            product.dimensions.seatDepth
+                              ? product.dimensions.seatDepth
+                              : null
+                          } in`}
                         </li>
                         <li className="px-1 text-darkGray">
-                          {`Arm Height: ${product.dimensions.ArmHeight} in`}
+                          {`Arm Height: ${
+                            product.dimensions.armHeight
+                              ? product.dimensions.armHeight
+                              : null
+                          } in`}
                         </li>
                       </ul>
                     </div>
@@ -525,19 +552,6 @@ export default function Product_Page({ params }) {
               <button
                 type="button"
                 className="pr-7"
-                onClick={() => handleSelect(0)}
-              >
-                <span
-                  className="text-[12px] md:text-[14px] lg:text-[18px] uppercase"
-                  style={{ color: swipeIndex === 0 ? "#5e35190" : null }}
-                >
-                  story
-                </span>
-              </button>
-
-              <button
-                type="button"
-                className="pr-7"
                 onClick={() => handleSelect(1)}
               >
                 <span
@@ -545,6 +559,19 @@ export default function Product_Page({ params }) {
                   style={{ color: swipeIndex === 1 ? "#5e35190" : null }}
                 >
                   product care
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className="pr-7"
+                onClick={() => handleSelect(0)}
+              >
+                <span
+                  className="text-[12px] md:text-[14px] lg:text-[18px] uppercase"
+                  style={{ color: swipeIndex === 0 ? "#5e35190" : null }}
+                >
+                  story
                 </span>
               </button>
 
@@ -562,7 +589,7 @@ export default function Product_Page({ params }) {
       </div>
 
       <div
-        className="relative p-6 md:p-10"
+        className="relative p-0 md:p-10"
         onTouchStart={handleSwipeStart}
         onTouchEnd={handleTouchDifference}
         onTouchMove={handleSwipeMove}
@@ -577,39 +604,6 @@ export default function Product_Page({ params }) {
               // className="flex min-w-0 relative"
               style={{ alignItems: "start", justifyContent: "safe start" }}
             >
-              <div
-                className="w-full gap-6 md:gap-10 flex flex-wrap md:flex-nowrap items-center md:items-start flex-none overflow-hidden mr-0"
-                style={{ scrollSnapAlign: "start" }}
-              >
-                <div className="flex-none w-full md:w-[50%] self-center">
-                  <div
-                    className="flex flex-wrap py-10 pr-10 pl-[3px]"
-                    style={{ alignContent: "space-between" }}
-                  >
-                    <div>
-                      <h5 className="uppercase text-sm md:text-md lg:text-lg pb-6">
-                        new vintage
-                      </h5>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        Designs inspired by everyday life, our New Vintage items
-                        are made for the home. Antique elements are paired with
-                        luxurious interior upholstery and organic fabrics. Our
-                        New Vintage pieces are made by hand from master
-                        craftsmen and upholsterers with generations worth of
-                        knowledge.{" "}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="min-h-full flex-none w-full md:w-[50%]">
-                  <img
-                    src="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400"
-                    srcset="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=400 400w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=500 500w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=600 600w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=700 700w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=800 800w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=900 900w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1000 1000w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1100 1100w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1200 1200w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1300 1300w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400 1400w"
-                    alt="product image"
-                    className="object-cover object-center w-full h-full"
-                  />
-                </div>
-              </div>
               <div
                 className="w-full gap-6 md:gap-10 flex flex-wrap md:flex-nowrap items-center md:items-start flex-none overflow-hidden mr-0"
                 style={{ scrollSnapAlign: "start" }}
@@ -747,6 +741,39 @@ export default function Product_Page({ params }) {
                   />
                 </div>
               </div>
+              <div
+                className="w-full gap-6 md:gap-10 flex flex-wrap md:flex-nowrap items-center md:items-start flex-none overflow-hidden mr-0"
+                style={{ scrollSnapAlign: "start" }}
+              >
+                <div className="flex-none w-full md:w-[50%] self-center">
+                  <div
+                    className="flex flex-wrap py-10 pr-10 pl-[3px]"
+                    style={{ alignContent: "space-between" }}
+                  >
+                    <div>
+                      <h5 className="uppercase text-sm md:text-md lg:text-lg pb-6">
+                        new vintage
+                      </h5>
+                      <p className="text-sm md:text-md lg:text-lg">
+                        Designs inspired by everyday life, our New Vintage items
+                        are made for the home. Antique elements are paired with
+                        luxurious interior upholstery and organic fabrics. Our
+                        New Vintage pieces are made by hand from master
+                        craftsmen and upholsterers with generations worth of
+                        knowledge.{" "}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="min-h-full flex-none w-full md:w-[50%]">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400"
+                    srcset="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=400 400w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=500 500w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=600 600w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=700 700w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=800 800w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=900 900w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1000 1000w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1100 1100w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1200 1200w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1300 1300w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400 1400w"
+                    alt="product image"
+                    className="object-cover object-center w-full h-full"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -762,7 +789,7 @@ export default function Product_Page({ params }) {
             </header>
           </div>
         </div>
-        <ProductReel products={productReelItems} />
+        <ProductReel products={allProducts} />
       </div>
 
       <section className="my-7">

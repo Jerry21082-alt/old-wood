@@ -6,11 +6,7 @@ import Image from "next/image";
 import Drawer from "./Drawer";
 import AspectRatioContainer from "./AspectRatioContainer";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  closeAll,
-  toggleMenu,
-  toggleSearch,
-} from "@/features/navigation/navigationSlice";
+import { closeAll } from "@/features/navigation/navigationSlice";
 
 export default function MobileMenu() {
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
@@ -18,7 +14,7 @@ export default function MobileMenu() {
 
   return (
     <section
-      className={`fixed top-[62.5px] h-screen w-screen flex flex-col z-50 bg-snow right-0 ${
+      className={`fixed top-[62.5px] h-screen w-screen flex md:hidden flex-col z-50 bg-snow right-0 ${
         toggleMobileMenu ? "open-mobile-menu" : "close-mobile-menu"
       }`}
     >
@@ -35,6 +31,7 @@ export default function MobileMenu() {
               <ul className="mb-4" key={index}>
                 <li className="border-t border-listBorder py-[21px] px-6 mb-[15px] flow-root">
                   <Link
+                    onClick={() => dispatch(closeAll())}
                     href={`/${list.href}`}
                     className="flex items-center justify-between w-full uppercase text-darkGray text-xs animate-link"
                   >
