@@ -35,9 +35,21 @@ export default function Product_Page({ params }) {
 
   const [allProducts, setAllProducts] = useState(items);
   const product = allProducts.find((item) => item.id === productId);
-  const productPairs = allProducts.filter(
-    (item) => item.category === product.category
-  );
+
+  const productCategory = allProducts.filter((item) => {
+    return item.category === product.category;
+  });
+
+  const pairs = () => {
+    let list = [];
+
+    for (let i = 0; i <= 8; i++) {
+      list.push(productCategory[i]);
+    }
+
+    return list.filter((item) => item.id !== product.id);
+  };
+
   const slides = product.allImages;
 
   useEffect(() => {
@@ -785,7 +797,7 @@ export default function Product_Page({ params }) {
             </header>
           </div>
         </div>
-        <ProductReel products={productPairs} />
+        <ProductReel products={pairs()} />
       </div>
 
       <section className="my-7">
