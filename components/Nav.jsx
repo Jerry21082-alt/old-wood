@@ -310,7 +310,7 @@ export default function Nav() {
 
                           <div className="mr-16" id="menu-container">
                             <Link
-                              href="/"
+                              href="/collections/decor"
                               className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Decor

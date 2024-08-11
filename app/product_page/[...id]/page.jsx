@@ -14,8 +14,6 @@ import { addToCart } from "@/features/cart/cartSlice";
 import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
 import { toggleCart } from "@/features/navigation/navigationSlice";
-import { allItems } from "@/constants/shuffleAllProducts";
-import { furnitureCollection } from "@/constants/furniture";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -31,18 +29,16 @@ export default function Product_Page({ params }) {
   const [reveal, setReveal] = useState(false);
 
   const items = useSelector((state) => state.products.allProducts);
-
-  const [allProducts, setAllProducts] = useState(items);
-
-  const product = allProducts.find((item) => item.id == productId);
-
-  const slides = product.allImages;
-
+  const agree = useSelector((state) => state.checkout.agree);
+  const dispatch = useDispatch();
   const scrollRef = useRef(null);
 
-  const agree = useSelector((state) => state.checkout.agree);
-
-  const dispatch = useDispatch();
+  const [allProducts, setAllProducts] = useState(items);
+  const product = allProducts.find((item) => item.id === productId);
+  const productPairs = allProducts.filter(
+    (item) => item.category === product.category
+  );
+  const slides = product.allImages;
 
   useEffect(() => {
     setReveal(true);
@@ -192,7 +188,7 @@ export default function Product_Page({ params }) {
                 ))}
               </div>
               <div
-                className="absolute top-1/2 left-10 hidden md:block"
+                className="absolute bottom-[10%] left-10 hidden md:block"
                 onClick={handlePrev}
                 style={{
                   visibility: currentIndex === 0 ? "hidden" : "visible",
@@ -223,7 +219,7 @@ export default function Product_Page({ params }) {
                 </div>
               </div>
               <div
-                className="absolute top-1/2 right-10 hidden md:block"
+                className="absolute bottom-[10%] right-10 hidden md:block"
                 onClick={handleNext}
                 style={{
                   visibility:
@@ -789,7 +785,7 @@ export default function Product_Page({ params }) {
             </header>
           </div>
         </div>
-        <ProductReel products={allProducts} />
+        <ProductReel products={productPairs} />
       </div>
 
       <section className="my-7">

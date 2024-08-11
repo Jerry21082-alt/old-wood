@@ -1,21 +1,34 @@
 "use client";
 
+import ProductReel from "../components/ProductReel";
+import NewsLetter from "@/components/NewsLetter";
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { productReelItems } from "../constants";
-import ProductReel from "../components/ProductReel";
 import { useSelector } from "react-redux";
-import NewsLetter from "@/components/NewsLetter";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Home() {
+  gsap.registerPlugin(ScrollTrigger);
+
   const [vintageSelect, setVintageSelect] = useState(0);
   const [activeRList, setActiveRList] = useState(false);
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
   const [reveal, setReveal] = useState(false);
 
-  gsap.registerPlugin(ScrollTrigger);
+  const allProducts = useSelector((state) => state.products.allProducts);
+
+  const getReelItems = (length) => {
+    const reelItems = [];
+
+    for (let i = 1; i <= length; i++) {
+      reelItems.push(allProducts[i]);
+    }
+
+    return reelItems;
+  };
 
   useEffect(() => {
     gsap.fromTo(
@@ -210,7 +223,7 @@ export default function Home() {
                 </div>
               </div>
             </header>
-            <ProductReel products={productReelItems} />
+            <ProductReel products={getReelItems(7)} />
           </div>
         </div>
       </section>

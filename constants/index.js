@@ -511,7 +511,7 @@ export const mobileMenuList = {
         "utility",
         "bath accessories ",
       ],
-      href: "/collections/decor",
+      href: "collections/decor",
     },
     {
       title: "dinning & entertaining",
