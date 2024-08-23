@@ -234,7 +234,7 @@ export default function ProductReel({ products }) {
                   className="block relative mb-4"
                 >
                   <Link
-                    href={`/product_page/${item.id}`}
+                    href={`/product_page/${item._id}`}
                     id="custom-aspect-ratio"
                     className="w-full h-full"
                   >

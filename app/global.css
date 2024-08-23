@@ -73,9 +73,9 @@ img {
 input {
   background: transparent;
   outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  /* -webkit-appearance: none; */
+  /* -moz-appearance: none; */
+  /* appearance: none; */
 }
 
 select {

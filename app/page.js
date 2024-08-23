@@ -5,26 +5,44 @@ import NewsLetter from "@/components/NewsLetter";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { productReelItems } from "../constants";
 import { useSelector } from "react-redux";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { getProducts } from "@/utils/fetchData";
 
 export default function Home() {
   gsap.registerPlugin(ScrollTrigger);
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [vintageSelect, setVintageSelect] = useState(0);
   const [activeRList, setActiveRList] = useState(false);
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
   const [reveal, setReveal] = useState(false);
+  const [products, setProducts] = useState([]);
 
-  const allProducts = useSelector((state) => state.products.allProducts);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await getProducts("/api/products");
+        if (result) setProducts(result);
+      } catch (error) {
+        console.log("error fetching data", error);
+        setError(true);
+      } finally {
+        setIsLoading(false);
+        setReveal(true);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const getReelItems = (length) => {
     const reelItems = [];
 
     for (let i = 1; i <= length; i++) {
-      reelItems.push(allProducts[i]);
+      reelItems.push(products[i]);
     }
 
     return reelItems;
@@ -67,13 +85,9 @@ export default function Home() {
     });
   }, []);
 
-  useEffect(() => {
-    setReveal(true);
-  }, []);
-
   return (
     <>
-      <NewsLetter />
+      {!isLoading && <NewsLetter />}
       <section className="block mt-0 mb-0 relative">
         <div
           className="fixed left-0 bottom-0 w-full h-14 z-50"
@@ -223,7 +237,11 @@ export default function Home() {
                 </div>
               </div>
             </header>
-            <ProductReel products={getReelItems(7)} />
+            {products.length < 0 || isLoading ? (
+              <div>Loading....</div>
+            ) : (
+              <ProductReel products={getReelItems(7)} />
+            )}
           </div>
         </div>
       </section>

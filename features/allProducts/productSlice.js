@@ -1,8 +1,9 @@
-import { allItems } from "@/constants/shuffleAllProducts";
+// import { allItems } from "@/constants/shuffleAllProducts";
+import { shuffledProducts } from "@/constants/shuffleAllProducts";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  allProducts: [...allItems],
+  allProducts: shuffledProducts,
 };
 
 const productSlice = createSlice({

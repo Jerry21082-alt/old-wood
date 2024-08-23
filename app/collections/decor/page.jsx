@@ -2,10 +2,15 @@
 
 import AspectRatioContainer from "@/components/AspectRatioContainer";
 import { formatPrice } from "@/helpers/formatPrice";
+import { getProducts } from "@/utils/fetchData";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
   {
@@ -43,11 +48,31 @@ export default function page() {
 
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const products = useSelector((state) => state.products.allProducts);
-
-  const decorProducts = products.filter((item) => item.category === "decor");
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => setIsMounted(true), []);
+
+  useEffect(() => {
+    async function fetchDecor() {
+      try {
+        const data = await getProducts("/api/products");
+
+        if (data) {
+          const filteredProduct = data.filter(
+            (item) => item.category === "decor"
+          );
+          setProducts(filteredProduct);
+        }
+      } catch (error) {
+        console.log("An error occured", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchDecor();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -62,6 +87,38 @@ export default function page() {
       };
     }
   }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const items = gsap.utils.toArray("#product_item");
+      gsap.fromTo(
+        items,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 0.1,
+        }
+      );
+
+      items.forEach((item) => {
+        const primaryImage = item.querySelector("#primary-img");
+        const secondaryImage = item.querySelector("#secondary-img");
+
+        gsap.set(secondaryImage, { autoAlpha: 0 });
+        item.addEventListener("mouseenter", () => {
+          gsap.to(primaryImage, { autoAlpha: 0, duration: 0.4 });
+          gsap.to(secondaryImage, { autoAlpha: 1, duration: 0.4 });
+        });
+
+        item.addEventListener("mouseleave", () => {
+          gsap.to(primaryImage, { autoAlpha: 1, duration: 0.4 });
+          gsap.to(secondaryImage, { autoAlpha: 0, duration: 0.4 });
+        });
+      });
+    }
+  }, [isLoading]);
 
   const styles = {
     productShow: isMobile
@@ -169,13 +226,20 @@ export default function page() {
                     scrollSnapType: "x proximity",
                   }}
                 >
-                  <ul className="flex min-w-0 flex-wrap space-x-5 pointer-events-auto px-6 md:px-0">
-                    {["tables", "seating", "casegoods"].map((li) => {
+                  <ul className="flex min-w-0 flex-nowrap whitespace-nowrap md:whitespace-normal md:flex-wrap space-x-5 pointer-events-auto px-6 md:px-0">
+                    {[
+                      "Vases & Vesels",
+                      "Decorative Objects",
+                      "Bowls & Dishes",
+                      "Mirrors",
+                      "Utility",
+                      "Bath Accessories",
+                    ].map((li) => {
                       let isActive;
                       if (pathname === li) isActive = true;
 
                       return (
-                        <li>
+                        <li key={li}>
                           <a
                             style={{ color: isActive ? "#221f20" : "#959697" }}
                             href="/collections/tables"
@@ -263,78 +327,86 @@ export default function page() {
               </div>
               <div className="relative block">
                 <div className="grid overflow-hidden collection">
-                  {isMounted &&
-                    decorProducts.map((item, idx) => (
-                      <div className="flex flex-col relative" key={idx}>
+                  {isLoading
+                    ? Array.from({ length: 6 }).map((_, index) => (
+                        <LoadingSkeleton key={index}></LoadingSkeleton>
+                      ))
+                    : products.map((item, idx) => (
                         <div
-                          className="relative mb-4"
-                          style={{
-                            opacity: "1",
-                            transition: "opacity .4s ease, transform .4s ease",
-                          }}
+                          className="flex flex-col relative"
+                          key={idx}
                           id="product_item"
                         >
-                          <div className="absolute right-2 top-2 z-10 flex flex-col items-end">
+                          <div
+                            className="relative mb-4"
+                            style={{
+                              opacity: "1",
+                              transition:
+                                "opacity .4s ease, transform .4s ease",
+                            }}
+                            id="product_item"
+                          >
+                            {/* <div className="absolute right-2 top-2 z-10 flex flex-col items-end">
                             {item.toOrder && (
                               <span className="text-darkBrown py-1 px-2 bg-snow text-xs">
                                 Made to Order
                               </span>
                             )}
-                          </div>
-                          <AspectRatioContainer
-                            aspectRatio={3 / 4}
-                            className="block relative mb-4"
-                          >
-                            <Link
-                              href={`/product_page/${item.id}`}
-                              id="custom-aspect-ratio"
-                              className="w-full h-full"
+                          </div> */}
+                            <AspectRatioContainer
+                              aspectRatio={3 / 4}
+                              className="block relative mb-4"
                             >
-                              <img
-                                src={item.primaryImage.img}
-                                srcSet={item.primaryImage.srcSet}
-                                alt="product image"
-                                id="primary-img"
-                                className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full"
-                              />
-                              <img
-                                src={item.secondaryImage.img}
-                                alt="product image"
-                                id="secondary-img"
-                                className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full secondary-img"
-                              />
-                            </Link>
-                          </AspectRatioContainer>
+                              <Link
+                                href={`/product_page/${item._id}`}
+                                id="custom-aspect-ratio"
+                                className="w-full h-full"
+                              >
+                                <img
+                                  src={item.primaryImage.img}
+                                  srcSet={item.primaryImage.srcSet}
+                                  alt="product image"
+                                  id="primary-img"
+                                  className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full"
+                                />
+                                <img
+                                  src={item.secondaryImage.img}
+                                  alt="product image"
+                                  id="secondary-img"
+                                  className="object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full secondary-img"
+                                />
+                              </Link>
+                            </AspectRatioContainer>
 
-                          <div
-                            className="grid"
-                            style={{ gridTemplateColumns: "auto auto" }}
-                          >
-                            <a
-                              href="/"
-                              className="mt-[1px] mr-[10px] mb-2 ml-0 h4 leading-[1.2]"
-                            >
-                              {item.name}
-                            </a>
-                            <div>
-                              <div className="flex justify-end items-baseline flex-wrap">
-                                <span className="text-sm md:text-[16px]">
-                                  ${formatPrice(item.price)}
-                                </span>
-                              </div>
-                            </div>
                             <div
-                              className="flex items-center"
-                              style={{ gridColumn: "span 2" }}
+                              className="grid"
+                              style={{ gridTemplateColumns: "auto auto" }}
                             >
-                              <div className="h3 text-sm mr-[15px] text-lightBrown block mb-[6px]">
-                                {item.type}
+                              <a
+                                href="/"
+                                className="mt-[1px] mr-[10px] mb-2 ml-0 h4 leading-[1.2]"
+                              >
+                                {item.name}
+                              </a>
+                              <div>
+                                <div className="flex justify-end items-baseline flex-wrap">
+                                  <span className="text-sm md:text-[16px]">
+                                    ${formatPrice(item.price)}
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                className="flex items-center"
+                                style={{ gridColumn: "span 2" }}
+                              >
+                                <div className="h3 text-sm mr-[15px] text-lightBrown block mb-[6px]">
+                                  {item.type}
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                 </div>
               </div>
             </div>

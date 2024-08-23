@@ -14,6 +14,7 @@ import { addToCart } from "@/features/cart/cartSlice";
 import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
 import { toggleCart } from "@/features/navigation/navigationSlice";
+import { getProducts } from "@/utils/fetchData";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -27,37 +28,56 @@ export default function Product_Page({ params }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [terms, setTerms] = useState(false);
   const [reveal, setReveal] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const items = useSelector((state) => state.products.allProducts);
   const agree = useSelector((state) => state.checkout.agree);
   const dispatch = useDispatch();
   const scrollRef = useRef(null);
 
-  const [allProducts, setAllProducts] = useState(items);
-  const product = allProducts.find((item) => item.id === productId);
-
-  const productCategory = allProducts.filter((item) => {
-    return item.category === product.category;
-  });
-
-  const pairs = () => {
-    let list = [];
-
-    for (let i = 0; i <= 8; i++) {
-      list.push(productCategory[i]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getProducts("/api/products");
+        setProducts(data);
+      } catch (error) {
+        console.log("An error occurred, please try again!", error);
+      } finally {
+        setIsLoading(false); // Ensure loading state is turned off
+      }
     }
 
-    return list.filter((item) => item.id !== product.id);
-  };
+    fetchData();
+  }, []);
 
-  const slides = product.allImages;
+  const product = products.find((item) => item._id === productId);
+
+  let slides = [];
+
+  if (product) {
+    slides = product.allImages;
+  }
+
+  const pairs = () => {
+    const emptyArray = [];
+
+    for (let i = 0; i < 8; i++) {
+      const sameCategory = products
+        .filter((item) => item.category === product.category)
+        .filter((item) => item.id !== product._id);
+
+      emptyArray.push(sameCategory[i]);
+    }
+
+    return emptyArray;
+  };
 
   useEffect(() => {
     setReveal(true);
   }, []);
 
   const handleIncrement = (product) => {
-    setAllProducts((prevProduct) =>
+    setProducts((prevProduct) =>
       prevProduct.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       )
@@ -65,7 +85,7 @@ export default function Product_Page({ params }) {
   };
 
   const handleDecrement = (product) => {
-    setAllProducts((prevProduct) =>
+    setProducts((prevProduct) =>
       prevProduct.map((item) =>
         item.id === product.id
           ? { ...item, quantity: item.quantity - 1 < 1 ? 1 : item.quantity - 1 }
@@ -81,7 +101,7 @@ export default function Product_Page({ params }) {
     } else {
       setIsAddingToCart(true);
       await delay(2000);
-      dispatch(addToCart(product));
+      dispatch(addToCart(product.id, product));
       dispatch(toggleCart());
       dispatch(toggleAgree());
       setIsAddingToCart(false);
@@ -160,6 +180,14 @@ export default function Product_Page({ params }) {
   const handleSelect = (index) => {
     setCurrentIndex(index);
   };
+
+  if (isLoading) {
+    return <div>Loadiing...</div>;
+  }
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
 
   return (
     <section className="mt-24">
@@ -429,7 +457,7 @@ export default function Product_Page({ params }) {
                   type="checkbox"
                   required
                   onClick={handleToggleAgree}
-                  isChecked={agree ? true : false}
+                  ischecked={agree ? "true" : "false"}
                 />
                 <span className="text-sm md:text-[16px] lg:text-lg max-w-full md:max-w-[300px]">
                   I agree to the New Vintage terms and conditions
@@ -670,7 +698,7 @@ export default function Product_Page({ params }) {
                 <div className="min-h-full flex-none w-full md:w-[50%]">
                   <img
                     src="//roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=1000"
-                    srcset="//roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=400 400w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=500 500w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=900 900w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=1000 1000w"
+                    srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=400 400w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=500 500w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=900 900w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=1000 1000w"
                     alt="product image"
                     className="object-cover object-center w-full h-full"
                   />
@@ -743,7 +771,7 @@ export default function Product_Page({ params }) {
                 <div className="min-h-full flex-none w-full md:w-[50%]">
                   <img
                     src="//roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=1000"
-                    srcset="//roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=400 400w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=500 500w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=900 900w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=1000 1000w"
+                    srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=400 400w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=500 500w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=900 900w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=1000 1000w"
                     alt="product image"
                     className="object-cover object-center w-full h-full"
                   />
@@ -776,7 +804,7 @@ export default function Product_Page({ params }) {
                 <div className="min-h-full flex-none w-full md:w-[50%]">
                   <img
                     src="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400"
-                    srcset="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=400 400w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=500 500w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=600 600w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=700 700w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=800 800w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=900 900w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1000 1000w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1100 1100w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1200 1200w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1300 1300w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400 1400w"
+                    srcSet="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=400 400w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=500 500w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=600 600w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=700 700w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=800 800w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=900 900w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1000 1000w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1100 1100w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1200 1200w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1300 1300w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400 1400w"
                     alt="product image"
                     className="object-cover object-center w-full h-full"
                   />

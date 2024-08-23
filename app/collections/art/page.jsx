@@ -1,15 +1,12 @@
 "use client";
 
 import AspectRatioContainer from "@/components/AspectRatioContainer";
-import { shuffledProducts } from "@/constants/shuffleAllProducts";
 import { formatPrice } from "@/helpers/formatPrice";
 import { getProducts } from "@/utils/fetchData";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
 import { gsap } from "gsap";
-
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
 
@@ -51,14 +48,22 @@ export default function page() {
 
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => setIsMounted(true), []);
 
   useEffect(() => {
-    async function getAllProducts() {
+    async function fetchDecor() {
       try {
         const data = await getProducts("/api/products");
-        setAllProducts(data);
+
+        if (data) {
+          const filteredProduct = data.filter(
+            (item) => item.category === "art"
+          );
+          setProducts(filteredProduct);
+        }
       } catch (error) {
         console.log("An error occured", error);
       } finally {
@@ -66,10 +71,8 @@ export default function page() {
       }
     }
 
-    getAllProducts();
+    fetchDecor();
   }, []);
-
-  useEffect(() => setIsMounted(true), []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -158,21 +161,19 @@ export default function page() {
           >
             <div className="relative">
               <div className="max-w-[450px] w-full">
-                <h1 className="h2 text-[46px] md:text-6xl mt-12 mb-6">
-                  Shop All
-                </h1>
+                <h1 className="h2 text-[46px] md:text-6xl mt-12 mb-6">Art</h1>
               </div>
             </div>
           </div>
           <div className="max-w-[1600px] px-6 md:px-10">
             <div>
               <div className="max-w-[450px] w-full">
-                <div className="text-sm md:text-[16px]">
+                {/* <div className="text-sm md:text-[16px]">
                   A custom designed and curated selection of New and True
                   Vintage products aimed to celebrate the beauty of patina and
                   moments of nostalgia. Each piece represents a sense of
                   heritage and history, comfort and customs, and the art of old.
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -212,44 +213,40 @@ export default function page() {
                 </div>
               </div>
             </div>
-            {/* <div className="w-full max-w-full border-t border-listBorder mt-5 pt-5 relative">
-              <div className="relative inline-flex items-center max-w-full">
+
+            <div className="flex md:block w-full max-w-full border-t border-listBorder mt-5 pt-5 relative">
+              <div
+                className="relative inline-flex items-center max-w-full overflow-x-hidden"
+                style={{ width: "calc(100% + (2* 24px))" }}
+              >
                 <div
-                  className="overflow-y-hidden overflow-x-auto"
+                  className="overflow-y-hidden overflow-x-auto w-auto pr-6"
                   style={{
                     scrollbarWidth: "none",
                     scrollSnapType: "x proximity",
                   }}
                 >
-                  <ul className="flex min-w-0 flex-wrap space-x-5 pointer-events-auto">
-                    <li>
-                      <a
-                        href="/collections/tables"
-                        className="h4 text-sm lg:text-[16px]"
-                      >
-                        Tables
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/collections/tables"
-                        className="h4 text-sm lg:text-[16px]"
-                      >
-                        Seating
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/collections/tables"
-                        className="h4 text-sm lg:text-[16px]"
-                      >
-                        Casegoods
-                      </a>
-                    </li>
+                  <ul className="flex min-w-0 flex-nowrap whitespace-nowrap md:whitespace-normal md:flex-wrap space-x-5 pointer-events-auto px-6 md:px-0">
+                    {["Vintage", "Artisan"].map((li) => {
+                      let isActive;
+                      if (pathname === li) isActive = true;
+
+                      return (
+                        <li key={li}>
+                          <a
+                            style={{ color: isActive ? "#221f20" : "#959697" }}
+                            href={`/collections/${li}`}
+                            className="h2 text-sm lg:text-[16px] capitalize"
+                          >
+                            {li}
+                          </a>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </section>
 
@@ -327,7 +324,7 @@ export default function page() {
                     ? Array.from({ length: 6 }).map((_, index) => (
                         <LoadingSkeleton key={index}></LoadingSkeleton>
                       ))
-                    : allProducts.map((item, idx) => (
+                    : products.map((item, idx) => (
                         <div
                           className="flex flex-col relative"
                           key={idx}
@@ -342,13 +339,13 @@ export default function page() {
                             }}
                             id="product_item"
                           >
-                            <div className="absolute right-2 top-2 z-10 flex flex-col items-end">
-                              {item.toOrder && (
-                                <span className="text-darkBrown py-1 px-2 bg-snow text-xs">
-                                  Made to Order
-                                </span>
-                              )}
-                            </div>
+                            {/* <div className="absolute right-2 top-2 z-10 flex flex-col items-end">
+                            {item.toOrder && (
+                              <span className="text-darkBrown py-1 px-2 bg-snow text-xs">
+                                Made to Order
+                              </span>
+                            )}
+                          </div> */}
                             <AspectRatioContainer
                               aspectRatio={3 / 4}
                               className="block relative mb-4"

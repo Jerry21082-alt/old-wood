@@ -416,7 +416,6 @@ export const productReelItems = [
       seatDepth: 25.25,
       armHeight: 25.75,
     },
-    similarItems: [],
   },
   {
     id: generateProductId(),

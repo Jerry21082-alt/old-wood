@@ -1,15 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
 import { useEffect, useRef, useState } from "react";
 import { updateItem, removeFromCart } from "@/features/cart/cartSlice";
-import {
-  closeAll,
-  isCartOpen,
-  toggleCart,
-} from "@/features/navigation/navigationSlice";
+import { closeAll, toggleCart } from "@/features/navigation/navigationSlice";
 import { useRouter } from "next/navigation";
 import { delay } from "@/helpers";
 import { gsap } from "gsap";
@@ -125,7 +120,7 @@ export default function Cart() {
       dispatch(removeFromCart(item));
     } else {
       await delay(3000);
-      dispatch(updateItem({ id, quantity }));
+      dispatch(updateItem({ quantity, item }));
     }
   };
 
@@ -285,7 +280,7 @@ export default function Cart() {
                             type="button"
                             aria-label="Decrease item quantity"
                             onClick={() =>
-                              handleUpdateCart(item.id, item.quantity + 1)
+                              handleUpdateCart(item.id, item.quantity + 1, item)
                             }
                             className="w-max ring-o active:ring-1 ring-lightBrown transition-all"
                           >
