@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProductReel({ products }) {
+export default function ProductReel({ products, isLoading }) {
   useEffect(() => {
     const items = gsap.utils.toArray("#product_item");
 

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { getProducts } from "@/utils/fetchData";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
 
 export default function Home() {
   gsap.registerPlugin(ScrollTrigger);
@@ -22,10 +23,11 @@ export default function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData(page = 1, limit = 12) {
       try {
-        const result = await getProducts("/api/products");
-        if (result) setProducts(result);
+        const res = await fetch(`/api/products?page=${page}&limit=${limit}`);
+        const data = await res.json();
+        setProducts(data.products);
       } catch (error) {
         console.log("error fetching data", error);
         setError(true);
@@ -238,7 +240,7 @@ export default function Home() {
               </div>
             </header>
             {products.length < 0 || isLoading ? (
-              <div>Loading....</div>
+              <LoadingSkeleton></LoadingSkeleton>
             ) : (
               <ProductReel products={getReelItems(7)} />
             )}

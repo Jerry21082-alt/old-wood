@@ -243,7 +243,7 @@ export default function Nav() {
       </div>
 
       <div
-        className="px-10 h-full hidden md:block relative desktop-nav_links"
+        className="px-10 h-full hidden md:block relative"
         style={{ color: pathname !== "/" ? "#221f20" : "" }}
         id="navigation"
       >
@@ -254,7 +254,7 @@ export default function Nav() {
                 <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px] ">
                   <Link
                     href="/collections/all"
-                    className="relative block"
+                    className="relative block nav-link"
                     id="shop"
                   >
                     Shop
@@ -270,7 +270,7 @@ export default function Nav() {
                     }}
                     id="shop-nav_reveal"
                   >
-                    <div className="w-full relative z-[2px] px-10">
+                    <div className="w-full relative z-[2px] px-10 desktop-sub_links">
                       <div className="w-full flex flex-wrap pt-[45px] pb-[60px] overflow-visible z-[1px]">
                         <div className="flex justify-between w-full flex-wrap">
                           <div className="mr-16" id="menu-container">
@@ -369,7 +369,7 @@ export default function Nav() {
 
                           <div className="mr-16" id="menu-container">
                             <Link
-                              href="/"
+                              href="/collections/dinning&entertainment"
                               className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Dinnging & Entertainment
@@ -428,7 +428,7 @@ export default function Nav() {
 
                           <div className="mr-16" id="menu-container">
                             <Link
-                              href="/"
+                              href="/collections/soft-goods"
                               className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Soft Goods
@@ -447,7 +447,7 @@ export default function Nav() {
 
                           <div className="mr-16" id="menu-container">
                             <Link
-                              href="/"
+                              href="/collections/lighting"
                               className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Lighting
@@ -465,7 +465,7 @@ export default function Nav() {
                           </div>
                           <div className="mr-16" id="menu-container">
                             <Link
-                              href="/"
+                              href="/collections/art"
                               className="text-darkGray text-[14px] mb-4 block w-max relative"
                             >
                               Art
@@ -510,7 +510,7 @@ export default function Nav() {
                 </li>
 
                 <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px]">
-                  <Link href="/" id="collection">
+                  <Link href="/" id="collection" className="nav-link">
                     Collections
                   </Link>
 
@@ -530,15 +530,15 @@ export default function Nav() {
                           <div className="mr-16" id="menu-container">
                             <Link
                               href="/"
-                              className="text-darkGray mb-4 text-[14px] block"
+                              className="text-darkGray mb-4 text-[14px] block nav-link"
                             >
                               Collection
                             </Link>
-                            <ul className="h2">
+                            <ul className="h2 capitalize text-darkBrown">
                               <li>
                                 <Link
                                   href=""
-                                  className="text-sm py-[5px] break-words relative w-max"
+                                  className="text-sm py-[5px] break-words relative w-max nav-link"
                                 >
                                   Sabi Collection
                                 </Link>
@@ -546,7 +546,7 @@ export default function Nav() {
                               <li>
                                 <Link
                                   href=""
-                                  className="text-sm py-[5px] break-words relative w-max"
+                                  className="text-sm py-[5px] break-words relative w-max nav-link"
                                 >
                                   Pavillion Collection
                                 </Link>
@@ -554,7 +554,7 @@ export default function Nav() {
                               <li>
                                 <Link
                                   href=""
-                                  className="text-sm py-[5px] break-words relative w-max"
+                                  className="text-sm py-[5px] break-words relative w-max nav-link"
                                 >
                                   Disc Collection
                                 </Link>
@@ -562,7 +562,7 @@ export default function Nav() {
                               <li>
                                 <Link
                                   href=""
-                                  className="text-sm py-[5px] break-words relative w-max"
+                                  className="text-sm py-[5px] break-words relative w-max nav-link"
                                 >
                                   View All
                                 </Link>
@@ -572,7 +572,11 @@ export default function Nav() {
                         </div>
 
                         <div className="grid grid-flow-col items-start gap-5">
-                          <Link href="/" id="menu-container">
+                          <Link
+                            href="/"
+                            id="menu-container"
+                            className="collections"
+                          >
                             <div className="w-[220px] mb-[18px] overflow-hidden">
                               <AspectRatioContainer aspectRatio={1 / 1}>
                                 <img
@@ -587,7 +591,11 @@ export default function Nav() {
                               Sabi Collection
                             </span>
                           </Link>
-                          <Link href="/" id="menu-container">
+                          <Link
+                            href="/"
+                            id="menu-container"
+                            className="collections"
+                          >
                             <div className="w-[220px] mb-[18px] overflow-hidden">
                               <AspectRatioContainer>
                                 <img
@@ -602,7 +610,11 @@ export default function Nav() {
                               Pavillion Collection
                             </span>
                           </Link>
-                          <Link href="/" id="menu-container">
+                          <Link
+                            href="/"
+                            id="menu-container"
+                            className="collections"
+                          >
                             <div className="w-[220px] mb-[18px] overflow-hidden">
                               <AspectRatioContainer>
                                 <img
@@ -623,10 +635,14 @@ export default function Nav() {
                   </div>
                 </li>
                 <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px]">
-                  <Link href="/about_page">About</Link>
+                  <Link href="/about_page" className="nav-link">
+                    About
+                  </Link>
                 </li>
                 <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px]">
-                  <Link href="/insitu">In Situ</Link>
+                  <Link href="/insitu" className="nav-link">
+                    In Situ
+                  </Link>
                 </li>
               </ul>
               <ul className="flex flex-nowrap">
@@ -650,7 +666,11 @@ export default function Nav() {
                   >
                     <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
                   </svg>
-                  <a href="/search" onClick={changeDefaultLink}>
+                  <a
+                    href="/search"
+                    className="nav-link"
+                    onClick={changeDefaultLink}
+                  >
                     search
                   </a>
                 </li>
@@ -670,7 +690,9 @@ export default function Nav() {
                   >
                     <path d="M50.4 54.5c10.1 0 18.2-8.2 18.2-18.2S60.5 18 50.4 18s-18.2 8.2-18.2 18.2 8.1 18.3 18.2 18.3zm0-31.7c7.4 0 13.4 6 13.4 13.4s-6 13.4-13.4 13.4S37 43.7 37 36.3s6-13.5 13.4-13.5zM18.8 83h63.4c1.3 0 2.4-1.1 2.4-2.4 0-12.6-10.3-22.9-22.9-22.9H39.3c-12.6 0-22.9 10.3-22.9 22.9 0 1.3 1.1 2.4 2.4 2.4zm20.5-20.5h22.4c9.2 0 16.7 6.8 17.9 15.7H21.4c1.2-8.9 8.7-15.7 17.9-15.7z"></path>
                   </svg>
-                  <a href="/accounts/login">login</a>
+                  <a href="/accounts/login" className="nav-link">
+                    login
+                  </a>
                 </li>
                 <li
                   className="flex items-center uppercase text-sm cursor-pointer"
@@ -692,7 +714,12 @@ export default function Nav() {
                     <path fill="none" d="M0 0h24v24H0V0z"></path>
                     <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"></path>
                   </svg>
-                  <a href="/cart" ref={cartLinkRef} onClick={changeDefaultLink}>
+                  <a
+                    href="/cart"
+                    className="nav-link"
+                    ref={cartLinkRef}
+                    onClick={changeDefaultLink}
+                  >
                     cart
                   </a>
                   <div>

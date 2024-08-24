@@ -5,13 +5,14 @@ import { shuffledProducts } from "@/constants/shuffleAllProducts";
 import { formatPrice } from "@/helpers/formatPrice";
 import { getProducts } from "@/utils/fetchData";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import { gsap } from "gsap";
 
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
+import { delay } from "@/helpers";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,28 +49,32 @@ const navLinks = [
 
 export default function page() {
   const pathname = usePathname();
+  const router = useRouter();
 
-  const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   const [allProducts, setAllProducts] = useState([]);
 
-  useEffect(() => {
-    async function getAllProducts() {
-      try {
-        const data = await getProducts("/api/products");
-        setAllProducts(data);
-      } catch (error) {
-        console.log("An error occured", error);
-      } finally {
-        setIsLoading(false);
-      }
+  async function getAllProducts(page = 1, limit = 12) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`/api/products?page=${page}&limit=${limit}`);
+      const data = await res.json();
+      setAllProducts(data.products);
+      setCurrentPage(data.currentPage);
+      setTotalPage(data.totalPages);
+    } catch (error) {
+      console.log("An error occured", error);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    getAllProducts();
-  }, []);
-
-  useEffect(() => setIsMounted(true), []);
+  useEffect(() => {
+    getAllProducts(currentPage);
+  }, [currentPage]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -116,6 +121,34 @@ export default function page() {
       });
     }
   }, [isLoading]);
+
+  const handleNextPage = (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    if (currentPage < totalPage) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = (e) => {
+    e.preventDefault();
+    router.refresh();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const preventDefaultLink = (e) => e.preventDefault();
 
   const styles = {
     productShow: isMobile
@@ -410,35 +443,69 @@ export default function page() {
         </div>
         <div className="mt-10 mb-[150px] flex justify-center">
           <nav className="table border-separate table-fixed">
-            <span
-              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
-              style={{
-                boxShadow:
-                  "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
-              }}
-              aria-current="page"
-            >
-              1
-            </span>
             <a
-              href="/collections/furniture?page=1"
-              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
+              href={`/collections/furniture?page=${currentPage + 1}`}
+              onClick={handlePreviousPage}
+              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm page"
               style={{
                 boxShadow:
                   "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                visibility: currentPage === 1 ? "hidden" : "visible",
               }}
-              //   aria-current="page"
+              // aria-current="page"
             >
-              2
+              <svg
+                focusable="false"
+                width="15"
+                height="15"
+                viewBox="0 0 17 14"
+                className="my-0 mx-auto"
+              >
+                <path
+                  d="M17 7H2M8 1L2 7l6 6"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  fill="none"
+                ></path>
+              </svg>
             </a>
+            {Array.from({ length: totalPage }).map((_, index) =>
+              currentPage === index + 1 ? (
+                <span
+                  className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
+                  style={{
+                    boxShadow:
+                      "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                  }}
+                  aria-current="page"
+                >
+                  {currentPage}
+                </span>
+              ) : (
+                <a
+                  href={`/collections/all?page=${index + 1}`}
+                  onClick={handleNextPage}
+                  className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
+                  style={{
+                    boxShadow:
+                      "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                  }}
+                  //   aria-current="page"
+                >
+                  {index + 1}
+                </a>
+              )
+            )}
+
             <a
-              href="/collections/furniture?page=1"
+              href={`/collections/furniture?page=${currentPage + 1}`}
+              onClick={handleNextPage}
               className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm page"
               style={{
                 boxShadow:
                   "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
               }}
-              //   aria-current="page"
+              // aria-current="page"
             >
               <svg
                 focusable="false"

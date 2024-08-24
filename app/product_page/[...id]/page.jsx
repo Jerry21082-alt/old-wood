@@ -14,7 +14,7 @@ import { addToCart } from "@/features/cart/cartSlice";
 import { toggleOverlay } from "@/features/navigation/navigationSlice";
 import { delay } from "@/helpers";
 import { toggleCart } from "@/features/navigation/navigationSlice";
-import { getProducts } from "@/utils/fetchData";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -28,22 +28,34 @@ export default function Product_Page({ params }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [terms, setTerms] = useState(false);
   const [reveal, setReveal] = useState(false);
-  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [pairs, setPairs] = useState([]);
 
   const agree = useSelector((state) => state.checkout.agree);
   const dispatch = useDispatch();
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData(page = 1, limit = 12, pairLimit = 8) {
       try {
-        const data = await getProducts("/api/products");
-        setProducts(data);
+        const itemCategoryRes = await fetch(
+          `/api/itemCategory?id=${productId}&pairLimit=${pairLimit}`
+        );
+
+        const itemCategoryData = await itemCategoryRes.json();
+        setPairs(itemCategoryData.itemCategory);
+
+        const productsRes = await fetch(
+          `/api/products?page=${page}&limit=${limit}`
+        );
+
+        const productsData = await productsRes.json();
+        setProducts(productsData.products);
       } catch (error) {
         console.log("An error occurred, please try again!", error);
       } finally {
-        setIsLoading(false); // Ensure loading state is turned off
+        setIsLoading(false);
       }
     }
 
@@ -57,20 +69,6 @@ export default function Product_Page({ params }) {
   if (product) {
     slides = product.allImages;
   }
-
-  const pairs = () => {
-    const emptyArray = [];
-
-    for (let i = 0; i < 8; i++) {
-      const sameCategory = products
-        .filter((item) => item.category === product.category)
-        .filter((item) => item.id !== product._id);
-
-      emptyArray.push(sameCategory[i]);
-    }
-
-    return emptyArray;
-  };
 
   useEffect(() => {
     setReveal(true);
@@ -182,11 +180,11 @@ export default function Product_Page({ params }) {
   };
 
   if (isLoading) {
-    return <div>Loadiing...</div>;
-  }
-
-  if (!product) {
-    return <div>Product not found</div>;
+    return (
+      <div>
+        <LoadingSkeleton></LoadingSkeleton>
+      </div>
+    );
   }
 
   return (
@@ -208,24 +206,29 @@ export default function Product_Page({ params }) {
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
               >
-                {product.allImages.map((img, idx) => (
-                  <div
-                    className="min-w-full box-border flex items-center h-full"
-                    key={idx}
-                  >
-                    <img
-                      src={img.src}
-                      srcSet={img.srcSet}
-                      className="object-cover object-center w-full"
-                      alt="product-image"
-                      style={{
-                        transform: reveal ? "scale(1)" : "scale(1.2)",
-                        opacity: reveal ? "1" : "0",
-                        transition: "transform .4s ease, opacity .4s ease",
-                      }}
-                    />
-                  </div>
-                ))}
+                {isLoading ? (
+                  <LoadingSkeleton></LoadingSkeleton>
+                ) : (
+                  slides &&
+                  slides.map((img, idx) => (
+                    <div
+                      className="min-w-full box-border flex items-center h-full"
+                      key={idx}
+                    >
+                      <img
+                        src={img.src}
+                        srcSet={img.srcSet}
+                        className="object-cover object-center w-full"
+                        alt="product-image"
+                        style={{
+                          transform: reveal ? "scale(1)" : "scale(1.2)",
+                          opacity: reveal ? "1" : "0",
+                          transition: "transform .4s ease, opacity .4s ease",
+                        }}
+                      />
+                    </div>
+                  ))
+                )}
               </div>
               <div
                 className="absolute bottom-[10%] left-10 hidden md:block"
@@ -292,7 +295,7 @@ export default function Product_Page({ params }) {
               </div>
             </AspectRatioContainer>
             <div className="w-full flex md:hidden items-center justify-center mt-4">
-              {product.allImages.map((_, idx) => (
+              {slides.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -825,7 +828,7 @@ export default function Product_Page({ params }) {
             </header>
           </div>
         </div>
-        <ProductReel products={pairs()} />
+        <ProductReel products={pairs} />
       </div>
 
       <section className="my-7">
