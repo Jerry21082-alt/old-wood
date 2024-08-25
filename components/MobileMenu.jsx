@@ -66,9 +66,12 @@ export default function MobileMenu() {
             padding={6}
           >
             <ul className="mb-4">
-              <li className="border-t border-listBorder py-[21px] px-6 mb-[15px] flow-root">
+              <li
+                className="border-t border-listBorder py-[21px] px-6 mb-[15px] flow-root"
+                onClick={() => dispatch(closeAll())}
+              >
                 <Link
-                  href="/"
+                  href="/blogs/collections"
                   className="flex items-center justify-between w-full uppercase text-darkGray text-xs animate-link"
                 >
                   Collections

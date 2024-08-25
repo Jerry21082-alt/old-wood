@@ -255,6 +255,14 @@ select {
   pointer-events: none;
 }
 
+/* .custom-gap div {
+  margin-right: 12px;
+}
+
+.custom-gap > div:last-child {
+  margin-right: 0;
+} */
+
 .shop-button::after {
   content: "";
   position: absolute;

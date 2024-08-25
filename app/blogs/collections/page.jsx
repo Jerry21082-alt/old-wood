@@ -5,7 +5,7 @@ export default function page() {
     <section className="mt-[75.5px]">
       <div className="my-7">
         <div className="w-full max-w-[1600px] px-6 md:px-10">
-          <div className="flex flex-wrap justify-start gap-6">
+          <div className="flex flex-wrap justify-start">
             <div className="w-full">
               <a
                 href="/"
@@ -56,7 +56,7 @@ export default function page() {
                 </div>
               </div>
             </div>
-            <div style={{ width: "calc(50% - 12px)" }}>
+            <div style={{ width: "calc(50% - 12px)" }} className="ml-6">
               <a
                 href="/"
                 className="h-[300px] relative block mb-5 overflow-hidden"
@@ -87,7 +87,7 @@ export default function page() {
                 </div>
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-full mt-6">
               <a
                 href="/"
                 className="h-[300px] relative block mb-5 overflow-hidden "
@@ -111,7 +111,7 @@ export default function page() {
                 </div>
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-full mt-6">
               <a
                 href="/"
                 className="h-[300px] relative block mb-5 overflow-hidden "
@@ -139,7 +139,7 @@ export default function page() {
           </div>
         </div>
         <section>
-          <div className="px-6 md:px-10 max-w-[1600px]">
+          <div className="px-6 md:px-10 max-w-[1600px] mt-6">
             <div className="bg-milk px-6">
               <div>
                 <div className="py-6 flex flex-wrap relative overflow-hidden">
