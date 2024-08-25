@@ -18,6 +18,7 @@ export default function Cart() {
   const cartState = useSelector((state) => state.navigation.isCartOpen);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isMounted, setIsMounted] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isLoadingStatus, setIsLoadingStatus] = useState({});
 
@@ -103,29 +104,34 @@ export default function Cart() {
 
   const totalPrice = reduce(getTotalCartItemsPrice(), (a, b) => a + b, 0);
 
-  const handleUpdateCart = async (id, quantity, item) => {
+  const handleUpdateCart = async (_id, quantity, item) => {
     setIsLoadingStatus((prevState) => {
-      return { ...prevState, [id]: { isLoading: true, isComplete: false } };
+      return { ...prevState, [_id]: { isLoading: true, isComplete: false } };
     });
 
     setTimeout(() => {
       setIsLoadingStatus((prevState) => {
-        return { ...prevState, [id]: { ...prevState[id], isComplete: true } };
+        return { ...prevState, [_id]: { ...prevState[_id], isComplete: true } };
       });
     }, 1000);
 
     setTimeout(() => {
       setIsLoadingStatus((prevState) => {
-        return { ...prevState, [id]: { isLoading: false, isComplete: false } };
+        return { ...prevState, [_id]: { isLoading: false, isComplete: false } };
       });
     }, 2000);
 
     if (quantity < 1) {
       await delay(2000);
+
       dispatch(removeFromCart(item));
     } else {
       await delay(3000);
-      dispatch(updateItem({ id, quantity }));
+      dispatch(updateItem({ _id, quantity }));
+
+      if (quantity < 1) {
+        setIsDeleting(true);
+      }
     }
   };
 
@@ -162,17 +168,19 @@ export default function Cart() {
       {isMounted && cartItems.length > 0 ? (
         <div className="w-full h-full overflow-x-hidden overflow-y-auto flex-grow pb-36 custom-scrollbar">
           {cartItems.map((item) => {
-            const { id } = item;
-            const isLoading = isLoadingStatus[id]?.isLoading;
-            const isComplete = isLoadingStatus[id]?.isComplete;
+            const { _id } = item;
+            const isLoading = isLoadingStatus[_id]?.isLoading;
+            const isComplete = isLoadingStatus[_id]?.isComplete;
 
             return (
               <div
                 className="pt-4 pb-14"
-                key={id}
+                key={_id}
                 id="cart-item"
                 style={{
                   transition: "transform .15s ease-out, opacity .25s ease-out",
+                  transform: isDeleting ? "translateX(100%)" : "translateX(0)",
+                  opacity: isDeleting ? "0" : "1",
                 }}
               >
                 <div className="flow-root pb-6 border-b border-listBorder w-full">
@@ -261,7 +269,11 @@ export default function Cart() {
                             type="button"
                             aria-label="Increase item quantity"
                             onClick={() =>
-                              handleUpdateCart(item.id, item.quantity - 1, item)
+                              handleUpdateCart(
+                                item._id,
+                                item.quantity - 1,
+                                item
+                              )
                             }
                             className="w-max ring-o active:ring-1 ring-lightBrown transition-all"
                           >
@@ -285,7 +297,7 @@ export default function Cart() {
                             type="button"
                             aria-label="Decrease item quantity"
                             onClick={() =>
-                              handleUpdateCart(item.id, item.quantity + 1)
+                              handleUpdateCart(item._id, item.quantity + 1)
                             }
                             className="w-max ring-o active:ring-1 ring-lightBrown transition-all"
                           >

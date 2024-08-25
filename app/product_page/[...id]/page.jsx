@@ -62,6 +62,20 @@ export default function Product_Page({ params }) {
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   async function fetchProduct() {
+  //     try {
+  //       const res = await fetch(`/api/itemCategory?id=${productId}`);
+  //       const product = await res.json();
+  //       dispatch(addItemToCart(product.item));
+  //     } catch (error) {
+  //       console.log("Failed to fetch product:", error);
+  //     }
+  //   }
+
+  //   fetchProduct();
+  // }, [dispatch, productId]);
+
   const product = products.find((item) => item._id === productId);
 
   let slides = [];
@@ -92,14 +106,14 @@ export default function Product_Page({ params }) {
     );
   };
 
-  const addItemToCart = async (product) => {
+  const addItemToCart = async (newProduct) => {
     if (!agree) {
       console.log("please agree to terms");
       setIsChecked(true);
     } else {
       setIsAddingToCart(true);
       await delay(2000);
-      dispatch(addToCart(product.id, product));
+      dispatch(addToCart(newProduct));
       dispatch(toggleCart());
       dispatch(toggleAgree());
       setIsAddingToCart(false);
@@ -482,7 +496,7 @@ export default function Product_Page({ params }) {
                       <path d="M24 22h-24l12-20z" />
                     </svg>
                   </div>
-                  <div className="absolute w-auto z-[1000]">
+                  <div className="absolute w-auto z-[10]">
                     <div className="bg-black text-snow text-sm p-2">
                       check this box
                     </div>
