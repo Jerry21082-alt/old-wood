@@ -31,7 +31,6 @@ export async function GET(request) {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get("page")) || 1;
     const limit = parseInt(url.searchParams.get("limit")) || 10;
-    const pairLimit = parseInt(url.searchParams.get("pairLimit")) || 8;
     const id = url.searchParams.get("id");
 
     const skip = (page - 1) * limit;

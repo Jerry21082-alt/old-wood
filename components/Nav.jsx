@@ -510,7 +510,11 @@ export default function Nav() {
                 </li>
 
                 <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px]">
-                  <Link href="/" id="collection" className="nav-link">
+                  <Link
+                    href="/blogs/collections"
+                    id="collection"
+                    className="nav-link"
+                  >
                     Collections
                   </Link>
 
