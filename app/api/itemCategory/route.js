@@ -10,9 +10,18 @@ export async function GET(request) {
 
     const url = new URL(request.url);
     const id = url.searchParams.get("id");
+    const name = url.searchParams.get("name");
     const pairLimit = parseInt(url.searchParams.get("pairLimit")) || 8;
 
-    const item = await collection.findOne({ _id: new ObjectId(id) });
+    let item;
+
+    if (id) {
+      item = await collection.findOne({ _id: new ObjectId(id) });
+    } else if (name) {
+      item = await collection.findOne({
+        name: { $regex: new RegExp(name, "i") },
+      });
+    }
 
     if (!item) {
       return NextResponse.json(
@@ -26,7 +35,11 @@ export async function GET(request) {
       .limit(pairLimit)
       .toArray();
 
-    return NextResponse.json({ success: true, itemCategory, item });
+    return NextResponse.json({
+      success: true,
+      itemCategory,
+      item,
+    });
   } catch (error) {
     console.error("Error fetching item category:", error);
     return NextResponse.json(

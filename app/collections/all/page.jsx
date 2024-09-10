@@ -12,7 +12,6 @@ import { gsap } from "gsap";
 
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
-import { delay } from "@/helpers";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -122,32 +121,19 @@ export default function page() {
     }
   }, [isLoading]);
 
-  const handleNextPage = (e) => {
+  const handlePagination = (e, direction) => {
     e.preventDefault();
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
 
-    if (currentPage < totalPage) {
+    if (direction === "next" && currentPage < totalPage) {
       setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  const handlePreviousPage = (e) => {
-    e.preventDefault();
-    router.refresh();
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-
-    if (currentPage > 1) {
+    } else if (direction === "previous" && currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
   };
-
   const preventDefaultLink = (e) => e.preventDefault();
 
   const styles = {
@@ -223,14 +209,14 @@ export default function page() {
                   }}
                 >
                   <ul className="flex min-w-0 flex-nowrap whitespace-nowrap md:whitespace-normal md:flex-wrap pointer-events-auto md:px-0 space-x-0 md:space-x-5">
-                    {navLinks.map((li) => {
+                    {navLinks.map((li, index) => {
                       let isActive;
                       if (pathname.includes(li.href)) {
                         isActive = true;
                       }
 
                       return (
-                        <li key={li.link} className="capitalize px-5 md:px-0">
+                        <li key={index} className="capitalize px-5 md:px-0">
                           <a
                             style={{ color: isActive ? "#221f20" : "#959697" }}
                             href={`/${li.href}`}
@@ -445,7 +431,7 @@ export default function page() {
           <nav className="table border-separate table-fixed">
             <a
               href={`/collections/furniture?page=${currentPage + 1}`}
-              onClick={handlePreviousPage}
+              onClick={(e) => handlePagination(e, "previous")}
               className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm page"
               style={{
                 boxShadow:
@@ -472,6 +458,7 @@ export default function page() {
             {Array.from({ length: totalPage }).map((_, index) =>
               currentPage === index + 1 ? (
                 <span
+                  key={index}
                   className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
                   style={{
                     boxShadow:
@@ -484,7 +471,7 @@ export default function page() {
               ) : (
                 <a
                   href={`/collections/all?page=${index + 1}`}
-                  onClick={handleNextPage}
+                  onClick={(e) => handlePagination(e, "next")}
                   className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
                   style={{
                     boxShadow:
@@ -499,7 +486,7 @@ export default function page() {
 
             <a
               href={`/collections/furniture?page=${currentPage + 1}`}
-              onClick={handleNextPage}
+              onClick={(e) => handlePagination(e, "next")}
               className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm page"
               style={{
                 boxShadow:

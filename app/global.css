@@ -302,7 +302,6 @@ select {
   height: 1px;
   transition: transform 0.3s ease-in-out;
 }
-
 .grid-item {
   display: inline-grid;
   grid-auto-flow: column;
@@ -389,7 +388,7 @@ select {
   transition: transform 0.4s ease-in-out;
 }
 
-.collections img:hover {
+.collections:hover img {
   transform: scale(1.05);
 }
 

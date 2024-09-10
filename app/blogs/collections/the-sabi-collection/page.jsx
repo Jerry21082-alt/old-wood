@@ -106,8 +106,8 @@ export default function TheAnniversaryCollection() {
           "--container-gutter": "24px",
           "--article-list-row-gap": "calc(2* 24px)",
           "--article-list-column-gap": articleListColumnGap,
-          display: "flex",
-          flexWrap: "wrap",
+          //   display: "flex",
+          //   flexWrap: "wrap",
           gap: `var(--article-list-row-gap) var(--article-list-column-gap)`,
         },
     multi_column_inner: !isMobile
@@ -130,19 +130,29 @@ export default function TheAnniversaryCollection() {
           style={customStyles.article_img_wrapper}
         >
           <img
-            src="//roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1500"
-            srcSet="//roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=200 200w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=300 300w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=400 400w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=500 500w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=600 600w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=700 700w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=800 800w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=900 900w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1000 1000w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1100 1100w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1200 1200w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1300 1300w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1400 1400w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1500 1500w"
-            alt="The Anniversary Collection"
+            src="//roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1500"
+            srcSet="//roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=200 200w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=300 300w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=400 400w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=500 500w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=600 600w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=700 700w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=800 800w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=900 900w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1000 1000w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1100 1100w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1200 1200w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1300 1300w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1400 1400w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1500 1500w"
+            alt="The Disc Collection"
             style={{
               transform: isMounted ? "scale(1)" : "scale(1.2)",
               transition: "transform .4s ease-in-out",
             }}
           />
         </div>
-        <div className="mx-6 md:mr-auto p-0">
-          <h1 className="h4 text-2xl md:text-[34px] mt-[48px] mb-[24px]">
-            The Anniversary Collection
+        <div className="mx-6 md:mr-auto p-0 md:pr-[80px]">
+          {/* <a
+            href="/"
+            className="mt-[12px] text-lightBrown text-sm uppercase block"
+          >
+            Casual Living
+          </a> */}
+          <h1 className="h4 text-2xl md:text-4xl mt-[48px] mb-[24px]">
+            Sabi Collection
           </h1>
+
+          <div className="text-lightBrown text-[15px] h3">
+            Designed with a woman in mind. Strong but graceful.
+          </div>
         </div>
       </div>
 
@@ -161,9 +171,9 @@ export default function TheAnniversaryCollection() {
                   >
                     <a href="/" className="max-w-full md:max-w-[70%] block">
                       <img
-                        src="//roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1500"
-                        srcSet="//roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=500 500w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=600 600w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=700 700w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=800 800w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1000 1000w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1200 1200w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1400 1400w"
-                        alt="The Bromley Sofa - Cocoa"
+                        src="//roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1500"
+                        srcSet="//roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=500 500w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=600 600w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=700 700w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=800 800w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1000 1000w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1200 1200w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1400 1400w"
+                        alt="Sabi Sectional"
                         className="max-w-full max-h-full"
                       />
                     </a>
@@ -175,67 +185,57 @@ export default function TheAnniversaryCollection() {
                         href="/"
                         className="text-[18px] mb-5 mt-[10px] block relative w-max"
                       >
-                        The Bromley Sofa
-                      </a>
-                      <a
-                        href="/"
-                        className="text-lightBrown relative shop-button text-sm uppercase"
-                      >
-                        Shop now
+                        Sabi Sectional
                       </a>
                     </div>
                   </div>
                 </div>
                 <div className="w-full md:w-[70%] flex-grow-0 md:flex-grow max-w-full">
                   <div>
-                    <h5 className="block mt-10 mb-4 text-sm">THE CONCEPTION</h5>
-                    <p className="text-sm" style={{ lineHeight: "1.5" }}>
-                      A refined tribute to timeless elegance, ROWEAM’s “Elements
-                      of Life and Love” collection seamlessly blends vintage
-                      allure with modern sophistication.
-                    </p>
-                    <p className="mt-6">
-                      <strong>
-                        “Crafted with the spirit of heritage in mind. Rich yet
-                        understated.”
-                      </strong>
-                    </p>
-                    <p className="mt-6">
-                      Our vision for this anniversary collection celebrates the
-                      harmonious interplay of past and present. With
-                      meticulously curated materials and expert craftsmanship,
-                      each piece exudes a timeless grace. Drawing inspiration
-                      from the transformative journey of vintage elements, this
-                      collection embodies a perfect balance of storied elegance
-                      and contemporary refinement, offering a symphony of
-                      classic charm and modern beauty.
-                    </p>
                     <h5 className="block mt-10 mb-4 text-sm">
-                      THE INSPIRATION
+                      <b>THE CONCEPTION</b>
+                    </h5>
+                    <p className="text-sm" style={{ lineHeight: "1.5" }}>
+                      <span>
+                        A monolithic approach to classic comfort, our Sabi
+                        sectional blends everyday living with refined style.
+                      </span>
+                      &nbsp;transforms a solid block into a delicate, undulating
+                      leg.
+                    </p>
+
+                    <h4 className="mt-6">
+                      <i>
+                        <span className="h3">
+                          “Designed with a woman in mind. Strong but graceful."
+                        </span>
+                      </i>
+                      <p className="text-sm mt-6">
+                        <span>
+                          A clean line of tailored upholstery, simply and
+                          elegant. Drawing inspiration from the seamless fusion
+                          of strength and femininity, the Sabi embodies a
+                          symphony of grace and allure.
+                        </span>
+                      </p>
+                    </h4>
+                    <h5 className="block mt-10 mb-4 text-sm">
+                      <b>THE INSPIRATION</b>
                     </h5>
                     <p className="mt-6">
-                      Every detail of the “Elements of Life and Love” collection
-                      is meticulously designed to capture the timeless grace of
-                      vintage craftsmanship, inviting admiration and reverence
-                      with every gaze.
+                      Each contour is thoughtfully crafted to reflect the fluid
+                      elegance of a woman's shoulder and neckline, inviting
+                      admiration and allure with every glance.
                     </p>
                     <p className="mt-6">
-                      The carefully selected materials are expertly transformed
-                      to enhance the allure of each piece, while intricate
-                      detailing elevates the art of living. The collection
-                      features luxurious textures and refined finishes that
-                      invite you to experience their beauty firsthand. Each item
-                      is a testament to enduring elegance, with a design that
-                      gracefully combines historical charm with modern
-                      sophistication.
-                    </p>
-                    <p className="mt-6">
-                      A foundation of understated opulence, the collection's
-                      elements are poised to become treasured parts of your
-                      home, making space for both cherished memories and
-                      everyday moments. Embrace the beauty of the past and the
-                      promise of the present with pieces that offer both comfort
-                      and a touch of grandeur.
+                      The arm height, is expertly tailored to elevate the luxury
+                      of lounging. Layered with the finest soft down, the back
+                      beckons you to sink into its embrace, promising repose and
+                      relaxation. Below, a padded plinth base glides along the
+                      floor, commanding attention with understated grandeur. An
+                      invitation of embrace, a call to linger. A modest frame
+                      with a stately presence, the Sabi was made for cherishing
+                      memories and making space for life’s simple moments.
                     </p>
                   </div>
                 </div>
@@ -257,7 +257,7 @@ export default function TheAnniversaryCollection() {
                       <div>
                         <span>1</span>
                         <a href="/" className="m-[7px] inline-block">
-                          Harvard Devinity Desk
+                          Harvard Divinity Desk
                         </a>
                       </div>
                     </div>
@@ -265,7 +265,7 @@ export default function TheAnniversaryCollection() {
                       <div>
                         <span>2</span>
                         <a href="/" className="m-[7px] inline-block">
-                          TeVe Chairs
+                          NBL Coffee Table
                         </a>
                       </div>
                     </div>
@@ -276,15 +276,15 @@ export default function TheAnniversaryCollection() {
                       className="max-w-full w-[1874px] block overflow-hidden mb-5"
                     >
                       <img
-                        src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=1874"
-                        srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=200 200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=300 300w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=400 400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=900 900w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=1100 1100w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=1200 1200w"
-                        alt="Havard Divinity Desk"
+                        src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=1874"
+                        srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=200 200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=300 300w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=400 400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=900 900w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=1100 1100w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0755_1c98765a-d1f0-4bcc-a1ee-b977929c43c9.jpg?v=1717160421&width=1200 1200w"
+                        alt="NBL Coffee Table"
                         loading="lazy"
                         className="object-cover object-center w-full h-full"
                       />
                     </a>
                     <div className="flex items-center">
-                      <p className="ml-1">The Harvard Divinity Desk</p>
+                      <p className="ml-1">NBL Coffee Table</p>
                     </div>
                   </div>
                   <div>
@@ -293,15 +293,110 @@ export default function TheAnniversaryCollection() {
                       className="max-w-full w-[1874px] block overflow-hidden mb-5 article-item_img"
                     >
                       <img
-                        src="//roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265"
-                        srcSet="//roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=200 200w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=300 300w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=400 400w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=500 500w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=600 600w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=700 700w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=800 800w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=900 900w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=1000 1000w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=1100 1100w, //roweam.com/cdn/shop/files/101515_Alf_Svenson_Teve_Chairs_2777.jpg?v=1708096265&width=1200 1200w"
-                        alt="TeVe Chair"
+                        src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=1874"
+                        srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=200 200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=300 300w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=400 400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=900 900w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=1100 1100w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0710_500fad24-7e66-4b1c-a488-089b40e85f46.jpg?v=1717160421&width=1200 1200w"
+                        alt="The Harvard Divinity Desk"
                         loading="lazy"
                         className="object-cover object-center w-full h-full"
                       />
                     </a>
                     <div className="flex items-center">
-                      <p className="ml-1">Teve Chairs</p>
+                      <p className="ml-1">The Harvard Divinity Desk</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="my-20">
+            <div>
+              <div className="max-w-[1600px] px-6 md:px-10">
+                <div className="relative flex items-start justify-center flex-wrap md:flex-nowrap">
+                  <div
+                    className="grid items-center md:block mb-[60px]"
+                    style={customStyles.article_img_wrapper}
+                  >
+                    <a href="/" className="max-w-full w-full md:w-[30%] block">
+                      <img
+                        src="//roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1500"
+                        srcSet="//roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=500 500w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=600 600w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=700 700w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=800 800w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1000 1000w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1200 1200w, //roweam.com/cdn/shop/files/101743_Sabi_Sectional_0031.jpg?v=1716312829&width=1400 1400w"
+                        alt="Sabi Sectional"
+                        className="max-w-full max-h-full"
+                      />
+                    </a>
+                    <div>
+                      <div className="mt-5 md:mt-[10px] text-lightBrown text-xs md:text-sm uppercase w-max">
+                        featured
+                      </div>
+                      <a
+                        href="/"
+                        className="text-[18px] mb-5 mt-[10px] block relative w-max"
+                      >
+                        Sabi Sectional
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex-grow w-full md:w-[70%] max-w-full">
+                    <div>
+                      {/* <h3 className="mt-12 mb-6 text-2xl md:text-4xl h3">
+                        <i>
+                          <span>
+                            “I learned how to use the lathe when I was a toddler
+                            while my father worked on custom millwork for an old
+                            library in Greenwich, Connecticut. From there I was
+                            hooked.”
+                          </span>
+                          <span>
+                            <span>&nbsp;</span>- Blair Moore, Founder of Oldwood
+                          </span>
+                        </i>
+                      </h3> */}
+
+                      <h5 className="mt-6">
+                        <span className="text-[15px]">
+                          <b>The Process</b>
+                        </span>
+                      </h5>
+                      <p className="mt-6">
+                        <span>
+                          Constructed from premium cotton and down, the Sabi
+                          showcases a seamless tight back with added comfort in
+                          the arms and a removable bench seat cushion for double
+                          the durability. This sturdy sectional offers a perfect
+                          balance of support and plushness for maximum comfort.
+                          Featuring an 8-way hand-tied suspension with down and
+                          feather fill, the Sabi has undergone 54 iterations to
+                          perfect the ultimate seating experience. Handmade at
+                          every stage by skilled artisans who proudly sign each
+                          element of their work, this sectional is a testament
+                          to exceptional craftsmanship.
+                        </span>
+                      </p>
+                      <h5 className="mt-6">
+                        <span className="text-[15px]">
+                          <b>Why You</b>
+                        </span>
+                      </h5>
+                      <p className="mt-6">
+                        <span>
+                          Designed with families in mind, the Sabi Sectional is
+                          built to withstand the demands of everyday living.
+                        </span>
+                      </p>
+                    </div>
+                    <div className="w-full border-t border-listBorder flex justify-between items-start pt-[30px] mt-[75px]">
+                      <div className="text-lightBrown text-sm">
+                        <i>Blair Moore</i>
+                      </div>
+                      <a
+                        href="/blogs/collections"
+                        className="relative shop-button text-lightBrown text-sm uppercase"
+                      >
+                        Back to collection
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -433,13 +528,13 @@ export default function TheAnniversaryCollection() {
                     <div className="w-full max-w-[1600px] px-6 md:px-10">
                       <div className="max-w-[500px]">
                         <div className="h2 text-xl md:text-[34px]">
-                          In Situ Living
+                          The Bromley In Situ
                         </div>
                         <div className="mt-[15px]">
                           <p>
-                            Our Belgian Midcentury project was designed by our
-                            design team at Moore House Design. A selection of
-                            pieces specifically picked for Living.
+                            Our connerstone collection, designed with families
+                            in mind. A curated selection of pieces of specially
+                            styled for a life well lived.
                           </p>
                           <div className="mt-5">
                             <Link
@@ -461,29 +556,28 @@ export default function TheAnniversaryCollection() {
                       className="w-full object-cover object-center hidden md:inline-block"
                     />
                     <img
-                      src="//roweam.com/cdn/shop/files/roweam-mobile04.jpg?v=1687295563&width=1200"
-                      srcSet="//roweam.com/cdn/shop/files/roweam-mobile04.jpg?v=1687295563&width=500 500w, //roweam.com/cdn/shop/files/roweam-mobile04.jpg?v=1687295563&width=600 600w, //roweam.com/cdn/shop/files/roweam-mobile04.jpg?v=1687295563&width=700 700w, //roweam.com/cdn/shop/files/roweam-mobile04.jpg?v=1687295563&width=800 800w, //roweam.com/cdn/shop/files/roweam-mobile04.jpg?v=1687295563&width=1000 1000w, //roweam.com/cdn/shop/files/roweam-mobile04.jpg?v=1687295563&width=1200 1200w"
+                      src="//roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=1874"
+                      srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=1400 1400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0278_14be34f8-0d72-4c98-ae58-1d8742f021cd.jpg?v=1695061934&width=1600 1600w"
                       alt="product image"
                       className="object-cover object-center inline-block md:hidden"
                     />
                   </div>
-                  <div className="absolute top-[30%] md:top-[35%] left-[15%] md:left-[87%] ml-[-12px] mt-[-12px]">
+                  <div className="absolute top-[21%] md:top-[28%] left-[27%] md:left-[47%] ml-[-12px] mt-[-12px]">
                     <button
                       type="button"
-                      className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+                      className="w-4 h-4 float-left rounded-full border border-milk tap-area bg-milk"
                     >
                       <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
-                        The Bromley Sofa
+                        Art
                       </span>
                     </button>
                     <div
-                      className="py-[10px] pl-[10px] pr-[20px] md:grid hidden w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
-                      id="reveal-more"
+                      className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
                       style={{
-                        opacity: "0",
-                        visibility: "hidden",
-                        transform: "scale(0) translateY(0%)",
-                        right: "calc(100% + 7px)",
+                        opacity: "1",
+                        visibility: "visible",
+                        transform: "scale(1) translateY(-50%)",
+                        left: "calc(100% + 7px)",
                         gridTemplateColumns: "100px 100px",
                       }}
                     >
@@ -491,20 +585,21 @@ export default function TheAnniversaryCollection() {
                         <img
                           src="//roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=1125"
                           srcSet="//roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=144 144w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=216 216w, //roweam.com/cdn/shop/files/101019_Bromley_7_1953.jpg?v=1699744654&width=288 288w"
+                          alt="product image"
                           className="h-full w-full object-cover object-center bg-[#a5a097]"
                         />
                       </div>
                       <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
                         <Link
                           href="/"
-                          className="pointer-events-none block mb-[2px] text-xs md:text-sm"
+                          className="pointer-events-none block mb-[2px] text-xs"
                         >
-                          Bromley Sofa
+                          The Bromley Sofa
                         </Link>
                         <div className="w-full">
                           <Link
                             href="/"
-                            className="pointer-events-none block mb-[2px] uppercase text-sm md:text-lg shop-room-button relative w-max"
+                            className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
                           >
                             see more
                           </Link>
@@ -512,12 +607,57 @@ export default function TheAnniversaryCollection() {
                       </div>
                     </div>
                   </div>
-                  <div className="absolute top-[42%] md:top-[42%] left-[66%] md:left-[36%] ml-[-12px] mt-[-12px]">
+                  <div className="absolute top-[60%] md:top-[54%] left-[62%] md:left-[65%] ml-[-12px] mt-[-12px]">
                     <button
                       type="button"
                       className="w-4 h-4 float-left rounded-full border border-milk tap-area"
                     >
-                      <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm">
+                      <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
+                        Tables
+                      </span>
+                    </button>
+                    <div
+                      className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                      style={{
+                        opacity: "1",
+                        visibility: "hidden",
+                        transform: "scale(1) translateY(-50%)",
+                        left: "calc(100% + 7px)",
+                        gridTemplateColumns: "100px 100px",
+                      }}
+                    >
+                      <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                        <img
+                          src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                          srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                          alt="product image"
+                          className="h-full w-full object-cover object-center bg-[#a5a097]"
+                        />
+                      </div>
+                      <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                        <Link
+                          href="/"
+                          className="pointer-events-none block mb-[2px] text-xs"
+                        >
+                          Table Lamps
+                        </Link>
+                        <div className="w-full">
+                          <Link
+                            href="/"
+                            className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                          >
+                            see more
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute top-[57%] md:top-[38%] left-[24%] md:left-[42%] ml-[-12px] mt-[-12px]">
+                    <button
+                      type="button"
+                      className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+                    >
+                      <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
                         Vases & Vessels
                       </span>
                     </button>
@@ -557,24 +697,69 @@ export default function TheAnniversaryCollection() {
                       </div>
                     </div>
                   </div>
-                  <div className="absolute top-[57%] md:top-[53%] left-[54%] md:left-[34%] ml-[-12px] mt-[-12px]">
+                  <div className="absolute top-[67%] md:top-[55%] left-[77%] md:left-[42%] ml-[-12px] mt-[-12px]">
                     <button
                       type="button"
                       className="w-4 h-4 float-left rounded-full border border-milk tap-area"
                     >
                       <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
-                        Decorative Objects
+                        Dinning Chairs
                       </span>
                     </button>
                     <div
                       className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
                       style={{
-                        opacity: "1",
+                        opacity: "0",
                         visibility: "hidden",
-                        transform: "scale(1) translateY(-50%)",
+                        transform: "scale(1) translateY(0%)",
+                        right: "calc(100% + 5px)",
+                        gridTemplateColumns: "100px 100px",
+                      }}
+                    >
+                      <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                        <img
+                          src="//roweam.com/cdn/shop/files/Large_Round_Art_Pottery_Vase_1576.jpg?v=1717117447&width=1500"
+                          srcSet="//roweam.com/cdn/shop/files/Large_Round_Art_Pottery_Vase_1576.jpg?v=1717117447&width=144 144w, //roweam.com/cdn/shop/files/Large_Round_Art_Pottery_Vase_1576.jpg?v=1717117447&width=216 216w, //roweam.com/cdn/shop/files/Large_Round_Art_Pottery_Vase_1576.jpg?v=1717117447&width=288 288w"
+                          className="h-full w-full object-cover object-center bg-[#a5a097]"
+                        />
+                      </div>
+                      <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                        <Link
+                          href="/"
+                          className="pointer-events-none block mb-[2px] text-xs"
+                        >
+                          Vases & Vessels
+                        </Link>
+                        <div className="w-full">
+                          <Link
+                            href="/"
+                            className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                          >
+                            see more
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute top-[67%] md:top-[55%] left-[77%] md:left-[42%] ml-[-12px] mt-[-12px]">
+                    <button
+                      type="button"
+                      className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+                    >
+                      <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
+                        Dinning Chairs
+                      </span>
+                    </button>
+                    <div
+                      className="py-[10px] pl-[10px] pr-[20px] md:grid hidden w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                      style={{
+                        opacity: "0",
+                        visibility: "hidden",
+                        transform: "scale(0) translateY(0%)",
                         left: "calc(100% + 7px)",
                         gridTemplateColumns: "100px 100px",
                       }}
+                      id="reveal-more"
                     >
                       <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
                         <img
@@ -587,14 +772,14 @@ export default function TheAnniversaryCollection() {
                       <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
                         <Link
                           href="/"
-                          className="pointer-events-none block mb-[2px] text-xs"
+                          className="pointer-events-none block mb-[2px] text-xs md:text-sm"
                         >
                           Table Lamps
                         </Link>
                         <div className="w-full">
                           <Link
                             href="/"
-                            className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                            className="pointer-events-none block mb-[2px] uppercase text-sm md:text-lg shop-room-button relative w-max"
                           >
                             see more
                           </Link>
@@ -631,47 +816,14 @@ export default function TheAnniversaryCollection() {
                 id="collection"
               >
                 <a
-                  href="/blogs/collections/the-sabi-collection"
+                  href="/blogs/collections/the-disc-collection"
                   className="h-[300px] md:h-auto relative block mb-5 md:mb-6 overflow-hidden article-item_img"
                   style={{ aspectRatio: isMobile ? "1 / 1.3" : "1 / 1.3" }}
                 >
                   <img
-                    src="//roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=2500"
-                    srcSet="//roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=352 352w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=832 832w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1200 1200w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=1920 1920w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2.jpg?v=1724259876&width=2500 2500w"
-                    alt="Sabi Collection"
-                    loading="lazy"
-                    className="object-center object-cover w-full h-full"
-                  />
-                </a>
-                <div>
-                  <a
-                    href="/"
-                    className="my-[12px] text-lightBrown spacing-[1px] uppercase text-xs"
-                  >
-                    Casual Living
-                  </a>
-
-                  <h3 className="mt-[12px] mb-4 text-[18px] md:text-xl block w-full pb-[5px] h2">
-                    <a href="/blogs/collections/the-sabi-collection">
-                      Sabi Collection
-                    </a>
-                  </h3>
-
-                  <div className="text-lightBrown h3 text-[15px]">
-                    Designed with a woman in mind. Strong but graceful.
-                  </div>
-                </div>
-              </div>
-              <div style={customStyles.article_y} id="collection">
-                <a
-                  href="/blogs/collections/the-disc-collection"
-                  className="h-[300px] md:h-auto relative block mb-5 md:mb-6 overflow-hidden article-item_img"
-                  style={{ aspectRatio: !isMobile ? "1 / 1.3" : "" }}
-                >
-                  <img
                     src="//roweam.com/cdn/shop/articles/Roweam_Environmental_101732_Disc_Side_Table_2558.jpg?v=1694801708&width=2500"
                     srcSet="//roweam.com/cdn/shop/articles/Roweam_Environmental_101732_Disc_Side_Table_2558.jpg?v=1694801708&width=352 352w, //roweam.com/cdn/shop/articles/Roweam_Environmental_101732_Disc_Side_Table_2558.jpg?v=1694801708&width=832 832w, //roweam.com/cdn/shop/articles/Roweam_Environmental_101732_Disc_Side_Table_2558.jpg?v=1694801708&width=1200 1200w, //roweam.com/cdn/shop/articles/Roweam_Environmental_101732_Disc_Side_Table_2558.jpg?v=1694801708&width=1920 1920w, //roweam.com/cdn/shop/articles/Roweam_Environmental_101732_Disc_Side_Table_2558.jpg?v=1694801708&width=2500 2500w"
-                    alt="Disc Collection"
+                    alt="The Disc Collection"
                     loading="lazy"
                     className="object-center object-cover w-full h-full"
                   />
@@ -682,10 +834,33 @@ export default function TheAnniversaryCollection() {
                       The Disc Collection
                     </a>
                   </h3>
-
                   <div className="text-lightBrown h3 text-[15px]">
                     A collection of elegant, handcrafted case goods that walk
                     the line between minimal and maximal design.{" "}
+                  </div>
+                </div>
+              </div>
+              <div style={customStyles.article_y} id="collection">
+                <a
+                  href="/blogs/collection/pavillion-collection"
+                  className="h-[300px] md:h-auto relative block mb-5 md:mb-6 overflow-hidden article-item_img"
+                  style={{ aspectRatio: !isMobile ? "1 / 1.3" : "" }}
+                >
+                  <img
+                    src="//roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=2500"
+                    srcSet="//roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=352 352w, //roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=832 832w, //roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=1200 1200w, //roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=1920 1920w, //roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=2500 2500w"
+                    alt="The Pavillion Collection"
+                    loading="lazy"
+                    className="object-center object-cover w-full h-full"
+                  />
+                </a>
+                <div>
+                  <h3 className="mt-[12px] mb-4 text-[18px] md:text-xl block w-full pb-[5px] h2">
+                    <a href="/">The Pavillion Collection</a>
+                  </h3>
+
+                  <div className="text-lightBrown h3 text-[15px]">
+                    Sweet lines and stately presence.{" "}
                   </div>
                 </div>
               </div>
@@ -695,13 +870,13 @@ export default function TheAnniversaryCollection() {
                 id="collection"
               >
                 <a
-                  href="/blogs/collections/the-pavillion-collection"
+                  href="/blogs/collections/the-bromley-collection"
                   className="h-[300px] md:h-auto w-full relative block mb-5 md:mb-6 overflow-hidden article-item_img"
                   style={{ aspectRatio: !isMobile ? "1.575" : "" }}
                 >
                   <img
-                    src="//roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=2500"
-                    srcSet="//roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=352 352w, //roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=832 832w, //roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=1200 1200w, //roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=1920 1920w, //roweam.com/cdn/shop/articles/Environmental_3646.jpg?v=1694965631&width=2500 2500w"
+                    src="//roweam.com/cdn/shop/articles/Roweam_Environmental_101019_Bromley_7ft_2203.jpg?v=1695071382&width=2500"
+                    srcSet="//roweam.com/cdn/shop/articles/Roweam_Environmental_101019_Bromley_7ft_2203.jpg?v=1695071382&width=352 352w, //roweam.com/cdn/shop/articles/Roweam_Environmental_101019_Bromley_7ft_2203.jpg?v=1695071382&width=832 832w, //roweam.com/cdn/shop/articles/Roweam_Environmental_101019_Bromley_7ft_2203.jpg?v=1695071382&width=1200 1200w, //roweam.com/cdn/shop/articles/Roweam_Environmental_101019_Bromley_7ft_2203.jpg?v=1695071382&width=1920 1920w, //roweam.com/cdn/shop/articles/Roweam_Environmental_101019_Bromley_7ft_2203.jpg?v=1695071382&width=2500 2500w"
                     loading="lazy"
                     alt="The Pavillion Collection"
                     className="w-full h-full object-cover object-center"
@@ -709,13 +884,12 @@ export default function TheAnniversaryCollection() {
                 </a>
                 <div>
                   <h3 className="mt-[12px] text-[18px] md:text-xl block pb-[5px] w-full h2">
-                    <a href="/blogs/collections/the-pavillion-collection">
-                      The Pavillion Collection
-                    </a>
+                    The Bromley Collection
                   </h3>
 
                   <div className="text-lightBrown text-[15px] h3 mb-4">
-                    Sweet lines and stately presence.
+                    A sofa made for Sunday morning reading and naps by the
+                    fireplace.{" "}
                   </div>
                 </div>
               </div>

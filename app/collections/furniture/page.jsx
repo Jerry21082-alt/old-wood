@@ -2,7 +2,6 @@
 
 import AspectRatioContainer from "@/components/AspectRatioContainer";
 import { formatPrice } from "@/helpers/formatPrice";
-import { getProducts } from "@/utils/fetchData";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -49,27 +48,32 @@ export default function page() {
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [furnitureProducts, setFurnitureProducts] = useState([]);
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
+  async function fetchData(page = 1, category = "furniture") {
+    try {
+      const res = await fetch(
+        `/api/products?category=${category}&page=${page}`
+      );
+      const data = await res.json();
+      if (data) {
+        console.log(data);
+        setData(data.products);
+        setCurrentPage(data.currentPage);
+        setTotalPage(data.totalPages);
+      }
+    } catch (error) {
+      console.log("An error occured!", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
-    async function getFurnitureProducts() {
-      try {
-        const data = await getProducts("/api/products");
-        if (data) {
-          const furnitures = data.filter(
-            (item) => item.category === "furniture"
-          );
-          setFurnitureProducts(furnitures);
-        }
-      } catch (error) {
-        console.log("An error occured!", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    getFurnitureProducts();
-  }, []);
+    fetchData(currentPage);
+  }, [currentPage]);
 
   useEffect(() => setIsMounted(true), []);
 
@@ -118,6 +122,20 @@ export default function page() {
       });
     }
   }, [isLoading]);
+
+  const handlePagination = (e, direction) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    if (direction === "next" && currentPage < totalPage) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else if (direction === "previous" && currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   const styles = {
     productShow: isMobile
@@ -325,7 +343,7 @@ export default function page() {
                     ? Array.from({ length: 6 }).map((_, index) => (
                         <LoadingSkeleton key={index}></LoadingSkeleton>
                       ))
-                    : furnitureProducts.map((item, idx) => (
+                    : data.map((item, idx) => (
                         <div
                           className="flex flex-col relative"
                           key={idx}
@@ -408,35 +426,71 @@ export default function page() {
         </div>
         <div className="mt-10 mb-[150px] flex justify-center">
           <nav className="table border-separate table-fixed">
-            <span
-              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
-              style={{
-                boxShadow:
-                  "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
-              }}
-              aria-current="page"
-            >
-              1
-            </span>
             <a
-              href="/collections/furniture?page=1"
-              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
-              style={{
-                boxShadow:
-                  "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
-              }}
-              //   aria-current="page"
-            >
-              2
-            </a>
-            <a
-              href="/collections/furniture?page=1"
+              href={`/collections/furniture?page=${currentPage + 1}`}
+              onClick={(e) => handlePagination(e, "previous")}
               className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm page"
               style={{
                 boxShadow:
                   "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                visibility: currentPage === 1 ? "hidden" : "visible",
               }}
-              //   aria-current="page"
+              // aria-current="page"
+            >
+              <svg
+                focusable="false"
+                width="15"
+                height="15"
+                viewBox="0 0 17 14"
+                className="my-0 mx-auto"
+              >
+                <path
+                  d="M17 7H2M8 1L2 7l6 6"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  fill="none"
+                ></path>
+              </svg>
+            </a>
+            {Array.from({ length: totalPage }).map((_, index) =>
+              currentPage === index + 1 ? (
+                <span
+                  key={index}
+                  className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
+                  style={{
+                    boxShadow:
+                      "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                  }}
+                  aria-current="page"
+                >
+                  {currentPage}
+                </span>
+              ) : (
+                <a
+                  // href={`/collections/furniture?page=${index + 1}`}
+                  onClick={() => setCurrentPage(currentPage + index)}
+                  className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
+                  style={{
+                    boxShadow:
+                      "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                  }}
+                  //   aria-current="page"
+                >
+                  {1 + index}
+                </a>
+              )
+            )}
+
+            <a
+              href={`/collections/furniture?page=${currentPage + 1}`}
+              onClick={(e) => handlePagination(e, "next")}
+              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm page"
+              style={{
+                boxShadow:
+                  "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                visibility: totalPage > 10 ? "visible" : "hidden",
+              }}
+              // aria-current="page"
             >
               <svg
                 focusable="false"

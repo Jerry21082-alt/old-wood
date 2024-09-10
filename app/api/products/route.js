@@ -31,22 +31,32 @@ export async function GET(request) {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get("page")) || 1;
     const limit = parseInt(url.searchParams.get("limit")) || 10;
-    const id = url.searchParams.get("id");
+    const category = url.searchParams.get("category");
 
     const skip = (page - 1) * limit;
 
-    const products = await collection
-      .find({})
-      .skip(skip)
-      .limit(limit)
+    const results = await collection
+      .aggregate([
+        {
+          $match: category ? { category } : {},
+        },
+        {
+          $facet: {
+            paginatedProducts: [{ $skip: skip }, { $limit: limit }],
+            totalItems: [{ $count: "count" }],
+          },
+        },
+      ])
       .toArray();
 
-    const totalItems = await collection.countDocuments();
+    const paginatedProducts = results[0].paginatedProducts;
+    const totalItems = results[0].totalItems[0]
+      ? results[0].totalItems[0].count
+      : 0;
 
     return NextResponse.json({
-      products,
+      products: paginatedProducts,
       totalItems,
-      id,
       totalPages: Math.ceil(totalItems / limit),
       currentPage: page,
     });

@@ -49,104 +49,223 @@ export default function Nav() {
   }, []);
 
   useEffect(() => {
-    const shop = document.getElementById("shop");
-    const shopList = document.querySelectorAll("#shop-nav_reveal a");
-    const shopReveal = document.getElementById("shop-nav_reveal");
-    const container = shopReveal.querySelectorAll("#menu-container");
-
-    const handleMouseEnter = () => {
-      shopReveal.style.visibility = "visible";
-      shopReveal.style.opacity = "1";
+    const domElements = {
+      shopList: document.querySelectorAll("#navigation a"),
+      collectionList: document.querySelectorAll("#collection_reveal a"),
+      shop: document.getElementById("shop"),
+      shopContainer: document.getElementById("shop-nav_reveal"),
+      container: document.querySelectorAll("#menu-container"),
+      collectionContainer: document.querySelector("#collection_reveal"),
+      collectionButton: document.querySelector("#collection-button"),
+      collectionBoxImg: document.querySelectorAll("#collection-box_img"),
     };
 
-    const handleMouseLeave = () => {
-      shopReveal.style.visibility = "hidden";
-      shopReveal.style.opacity = "0";
+    const revealElement = (element) => {
+      element.style.opacity = 1;
+      element.style.visibility = "visible";
     };
 
-    shopList.forEach((list) => {
-      list.addEventListener("click", handleMouseLeave);
-    });
+    const hideElement = (element) => {
+      element.style.opacity = 0;
+      element.style.visibility = "hidden";
+    };
 
-    shop.addEventListener("mouseenter", function () {
-      handleMouseEnter();
-      const items = gsap.utils.toArray(container);
+    const animateNavItems = (elements, from, to) => {
+      gsap.fromTo(elements, { ...from }, { ...to });
+    };
 
-      gsap.fromTo(
-        items,
-        { opacity: 0, y: 100 },
-        { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
-      );
-    });
-    shop.addEventListener("mouseleave", handleMouseLeave);
-    shopReveal.addEventListener("mouseenter", handleMouseEnter);
-    shopReveal.addEventListener("mouseleave", handleMouseLeave);
+    const manageInteractions = (
+      element,
+      interaction,
+      func,
+      remove = false,
+      ...args
+    ) => {
+      const handler = () => func(...args);
+      remove
+        ? element.removeEventListener(interaction, handler)
+        : element.addEventListener(interaction, handler);
+    };
 
-    return () => {
-      shopList.forEach((list) => {
-        list.removeEventListener("click", handleMouseLeave);
+    const setupInteraction = (element, interaction, func, ...args) => {
+      manageInteractions(element, interaction, func, false, ...args);
+    };
+
+    const removeInteraction = (element, interaction, func, ...args) => {
+      manageInteractions(element, interaction, func, true, ...args);
+    };
+
+    // Common interactions
+    const setupCommonInteractions = () => {
+      domElements.shopList.forEach((list) => {
+        setupInteraction(list, "click", hideElement, domElements.shopContainer);
       });
 
-      shop.removeEventListener("mouseenter", function () {
-        handleMouseEnter();
-        const items = gsap.utils.toArray(container);
-
-        gsap.fromTo(
-          items,
-          { opacity: 0, y: 100 },
-          { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+      domElements.collectionList.forEach((list) => {
+        setupInteraction(
+          list,
+          "click",
+          hideElement,
+          domElements.collectionContainer
         );
       });
-      shop.removeEventListener("mouseleave", handleMouseLeave);
-      shopReveal.removeEventListener("mouseenter", handleMouseEnter);
-      shopReveal.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
 
-  useEffect(() => {
-    const collection = document.getElementById("collection");
-    const collectionReveal = document.getElementById("collection_reveal");
-    const container = collectionReveal.querySelectorAll("#menu-container");
-
-    const handleMouseEnter = () => {
-      collectionReveal.style.visibility = "visible";
-      collectionReveal.style.opacity = "1";
-    };
-
-    const handleMouseLeave = () => {
-      collectionReveal.style.visibility = "hidden";
-      collectionReveal.style.opacity = "0";
-    };
-
-    collection.addEventListener("mouseenter", function () {
-      handleMouseEnter();
-      const items = gsap.utils.toArray(container);
-
-      gsap.fromTo(
-        items,
-        { opacity: 0, y: 100 },
-        { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+      setupInteraction(
+        domElements.shop,
+        "mouseenter",
+        (items) => {
+          revealElement(domElements.shopContainer);
+          animateNavItems(
+            items,
+            { opacity: 0, y: 100 },
+            { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+          );
+        },
+        gsap.utils.toArray(domElements.container)
       );
-    });
-    collection.addEventListener("mouseleave", handleMouseLeave);
-    collectionReveal.addEventListener("mouseenter", handleMouseEnter);
-    collectionReveal.addEventListener("mouseleave", handleMouseLeave);
 
-    return () => {
-      collection.removeEventListener("mouseenter", function () {
-        handleMouseEnter();
-        const items = gsap.utils.toArray(container);
+      setupInteraction(
+        domElements.collectionButton,
+        "mouseenter",
+        (items) => {
+          revealElement(domElements.collectionContainer);
+          animateNavItems(
+            items,
+            { opacity: 0, y: 100 },
+            { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+          );
+        },
+        gsap.utils.toArray(domElements.collectionBoxImg)
+      );
 
-        gsap.fromTo(
-          items,
-          { opacity: 0, y: 100 },
-          { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+      setupInteraction(
+        domElements.collectionButton,
+        "mouseleave",
+        hideElement,
+        domElements.collectionContainer
+      );
+      setupInteraction(
+        domElements.collectionContainer,
+        "mouseenter",
+        revealElement,
+        domElements.collectionContainer
+      );
+      setupInteraction(
+        domElements.collectionContainer,
+        "mouseleave",
+        hideElement,
+        domElements.collectionContainer
+      );
+      setupInteraction(
+        domElements.shop,
+        "mouseleave",
+        hideElement,
+        domElements.shopContainer
+      );
+      setupInteraction(
+        domElements.shopContainer,
+        "mouseenter",
+        revealElement,
+        domElements.shopContainer
+      );
+      setupInteraction(
+        domElements.shopContainer,
+        "mouseleave",
+        hideElement,
+        domElements.shopContainer
+      );
+    };
+
+    const removeCommonInteractions = () => {
+      domElements.shopList.forEach((list) => {
+        removeInteraction(
+          list,
+          "click",
+          hideElement,
+          domElements.shopContainer
         );
       });
-      collection.removeEventListener("mouseleave", handleMouseLeave);
-      collectionReveal.removeEventListener("mouseenter", handleMouseEnter);
-      collectionReveal.removeEventListener("mouseleave", handleMouseLeave);
+
+      domElements.collectionList.forEach((list) => {
+        removeInteraction(
+          list,
+          "click",
+          hideElement,
+          domElements.collectionContainer
+        );
+      });
+
+      removeInteraction(
+        domElements.shop,
+        "mouseenter",
+        (items) => {
+          revealElement(domElements.shopContainer);
+          animateNavItems(
+            items,
+            { opacity: 0, y: 100 },
+            { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+          );
+        },
+        gsap.utils.toArray(domElements.container)
+      );
+
+      removeInteraction(
+        domElements.collectionButton,
+        "mouseenter",
+        (items) => {
+          revealElement(domElements.collectionContainer);
+          animateNavItems(
+            items,
+            { opacity: 0, y: 100 },
+            { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }
+          );
+        },
+        gsap.utils.toArray(domElements.collectionBoxImg)
+      );
+
+      removeInteraction(
+        domElements.collectionButton,
+        "mouseleave",
+        hideElement,
+        domElements.collectionContainer
+      );
+      removeInteraction(
+        domElements.collectionContainer,
+        "mouseenter",
+        revealElement,
+        domElements.collectionContainer
+      );
+      removeInteraction(
+        domElements.collectionContainer,
+        "mouseleave",
+        hideElement,
+        domElements.collectionContainer
+      );
+      removeInteraction(
+        domElements.shop,
+        "mouseleave",
+        hideElement,
+        domElements.shopContainer
+      );
+      removeInteraction(
+        domElements.shopContainer,
+        "mouseenter",
+        revealElement,
+        domElements.shopContainer
+      );
+      removeInteraction(
+        domElements.shopContainer,
+        "mouseleave",
+        hideElement,
+        domElements.shopContainer
+      );
     };
+
+    // Initial setup
+    setupCommonInteractions();
+
+    // Cleanup on unmount
+    return () => removeCommonInteractions();
   }, []);
 
   useEffect(() => {
@@ -512,7 +631,7 @@ export default function Nav() {
                 <li className="uppercase text-sm flex items-center flex-shrink-0 mr-[45px]">
                   <Link
                     href="/blogs/collections"
-                    id="collection"
+                    id="collection-button"
                     className="nav-link"
                   >
                     Collections
@@ -531,108 +650,101 @@ export default function Nav() {
                     <div className="relative z-[2] w-full px-10">
                       <div className="flex pt-[45px] pb-[60px] overflow-visible relative z-[1]">
                         <div className="flex justify-between flex-wrap w-full">
-                          <div className="mr-16" id="menu-container">
+                          <div className="mr-16" id="collection-box_img">
                             <Link
-                              href="/"
-                              className="text-darkGray mb-4 text-[14px] block nav-link"
+                              href="/blogs/collections"
+                              className="text-darkGray mb-4 text-[18px] block nav-link"
                             >
                               Collection
                             </Link>
                             <ul className="h2 capitalize text-darkBrown">
-                              <li>
+                              <li className="pt-[5px]">
                                 <Link
-                                  href=""
-                                  className="text-sm py-[5px] break-words relative w-max nav-link"
+                                  href="/blogs/collections/the-sabi-collection"
+                                  className="text-[18px] break-words relative w-max nav-link"
                                 >
                                   Sabi Collection
                                 </Link>
                               </li>
-                              <li>
+                              <li className="pt-[5px]">
                                 <Link
-                                  href=""
-                                  className="text-sm py-[5px] break-words relative w-max nav-link"
+                                  href="/blogs/collections/the-pavillion-collection"
+                                  className="text-[18px] py-[5px] break-words relative w-max nav-link"
                                 >
                                   Pavillion Collection
                                 </Link>
                               </li>
-                              <li>
+                              <li className="pt-[5px]">
                                 <Link
-                                  href=""
-                                  className="text-sm py-[5px] break-words relative w-max nav-link"
+                                  href="/blogs/collections/the-disc-collection"
+                                  className="text-[18px] py-[5px] break-words relative w-max nav-link"
                                 >
                                   Disc Collection
                                 </Link>
                               </li>
-                              <li>
+                              <li className="pt-[5px]">
                                 <Link
                                   href=""
-                                  className="text-sm py-[5px] break-words relative w-max nav-link"
+                                  className="text-[18px] py-[5px] break-words relative w-max nav-link"
                                 >
                                   View All
                                 </Link>
                               </li>
                             </ul>
                           </div>
-                        </div>
-
-                        <div className="grid grid-flow-col items-start gap-5">
-                          <Link
-                            href="/"
-                            id="menu-container"
-                            className="collections"
-                          >
-                            <div className="w-[220px] mb-[18px] overflow-hidden">
-                              <AspectRatioContainer aspectRatio={1 / 1}>
+                          <div className="grid grid-flow-col items-start gap-5">
+                            <Link
+                              href="/blogs/collections/the-sabi-collection"
+                              id="collection-box_img"
+                              className="collections w-auto"
+                            >
+                              <div className="h-[220px] w-auto mb-[18px] overflow-hidden">
                                 <img
                                   src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=2082"
                                   srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=352 352w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=832 832w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=1920 1920w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101_8020b2fd-b6a5-4792-9b77-820b7b037654.jpg?v=1717179520&width=2082 2082w"
                                   alt="sabi collection"
                                   className="object-cover object-center w-full h-full"
                                 />
-                              </AspectRatioContainer>
-                            </div>
-                            <span className="relative w-max block text-sm normal-case collection-title">
-                              Sabi Collection
-                            </span>
-                          </Link>
-                          <Link
-                            href="/"
-                            id="menu-container"
-                            className="collections"
-                          >
-                            <div className="w-[220px] mb-[18px] overflow-hidden">
-                              <AspectRatioContainer>
+                              </div>
+                              <span className="relative w-max block text-sm normal-case collection-title">
+                                Sabi Collection
+                              </span>
+                            </Link>
+                            <Link
+                              href="/blogs/collections/the-pavillion-collection"
+                              id="collection-box_img"
+                              className="collections"
+                            >
+                              <div className="h-[220px] mb-[18px] overflow-hidden">
                                 <img
                                   src="//roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=2500"
                                   srcSet="//roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=352 352w, //roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=832 832w, //roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=1920 1920w, //roweam.com/cdn/shop/files/Roweam_Environmental_101725_Pavilion_Chair_0833_1.jpg?v=1721917047&width=2500 2500w"
                                   alt="sabi collection"
                                   className="object-cover object-center h-full w-full"
                                 />
-                              </AspectRatioContainer>
-                            </div>
-                            <span className="relative w-max block text-sm normal-case collection-title">
-                              Pavillion Collection
-                            </span>
-                          </Link>
-                          <Link
-                            href="/"
-                            id="menu-container"
-                            className="collections"
-                          >
-                            <div className="w-[220px] mb-[18px] overflow-hidden">
-                              <AspectRatioContainer>
+                              </div>
+                              <span className="relative w-max block text-sm normal-case collection-title">
+                                Pavillion Collection
+                              </span>
+                            </Link>
+                            <Link
+                              href="/blogs/collections/the-disc-collection"
+                              id="collection-box_img"
+                              className="collections"
+                            >
+                              <div className="h-[220px] w-auto mb-[18px] overflow-hidden">
                                 <img
                                   src="//roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=2500"
                                   srcSet="//roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=352 352w, //roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=832 832w, //roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=1920 1920w, //roweam.com/cdn/shop/files/Roweam_Environmental_101732_Disc_Side_Table_2557_RESIZED_FOR_MEGA_MENU.jpg?v=1694965257&width=2500 2500w"
                                   alt="product image"
                                   className="object-over object-center w-full h-full"
                                 />
-                              </AspectRatioContainer>
-                            </div>
-                            <span className="relative w-max block text-sm normal-case collection-title">
-                              Disc Collection
-                            </span>
-                          </Link>
+                              </div>
+                              <span className="relative w-max block text-sm normal-case collection-title">
+                                Disc Collection
+                              </span>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

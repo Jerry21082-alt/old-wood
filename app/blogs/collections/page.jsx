@@ -115,7 +115,7 @@ export default function page() {
             </div>
             <div style={{ width: "calc(50% - 12px)" }} id="collection">
               <a
-                href="/"
+                href="/blogs/collections/the-sabi-collection"
                 className="h-[300px] md:h-auto relative block mb-5 md:mb-6 overflow-hidden article-item_img"
                 style={{ aspectRatio: !isMobile ? "1.575 / 1" : "" }}
               >
@@ -130,7 +130,7 @@ export default function page() {
               <div>
                 <a
                   href="/"
-                  className="my-[12px] text-lightBrown spacing-[1px] uppercase text-xs md:text-xl"
+                  className="my-[12px] text-lightBrown spacing-[1px] uppercase text-xs md:text-sm"
                 >
                   Casual Living
                 </a>
@@ -146,7 +146,7 @@ export default function page() {
             </div>
             <div style={customStyles.article_y} id="collection">
               <a
-                href="/"
+                href="/blogs/collections/the-disc-collection"
                 className="h-[300px] md:h-auto relative block mb-5 md:mb-6 overflow-hidden article-item_img"
                 style={{ aspectRatio: !isMobile ? "1 / 1.3" : "" }}
               >
@@ -160,7 +160,9 @@ export default function page() {
               </a>
               <div>
                 <h3 className="mt-[12px] mb-4 text-[18px] md:text-xl block w-full pb-[5px] h2">
-                  <a href="/">The Disc Collection</a>
+                  <a href="/blogs/collections/the-disc-collection">
+                    The Disc Collection
+                  </a>
                 </h3>
 
                 <div className="text-lightBrown h3 text-[15px]">

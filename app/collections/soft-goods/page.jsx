@@ -48,28 +48,46 @@ export default function page() {
 
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [furnitureProducts, setFurnitureProducts] = useState([]);
+  const [productData, setProductData] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
+
+  async function getProducts(page = 1, category = "soft_goods") {
+    try {
+      const res = await fetch(
+        `/api/products?category=${category}&page=${page}`
+      );
+      const data = await res.json();
+      if (data) {
+        setProductData(data.products);
+        setTotalPage(data.totalPages);
+        setCurrentPage(data.currentPage);
+      }
+    } catch (error) {
+      console.log("An error occured!", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
-    async function getFurnitureProducts() {
-      try {
-        const data = await getProducts("/api/products");
-        if (data) {
-          const furnitures = data.filter(
-            (item) => item.category === "soft_goods"
-          );
-          setFurnitureProducts(furnitures);
-        }
-      } catch (error) {
-        console.log("An error occured!", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
+    getProducts(currentPage);
+  }, [currentPage]);
 
-    getFurnitureProducts();
-  }, []);
+  const handlePagination = (e, direction) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    if (direction === "next" && currentPage < totalPage) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else if (direction === "previous" && currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   useEffect(() => setIsMounted(true), []);
 
@@ -325,7 +343,7 @@ export default function page() {
                     ? Array.from({ length: 6 }).map((_, index) => (
                         <LoadingSkeleton key={index}></LoadingSkeleton>
                       ))
-                    : furnitureProducts.map((item, idx) => (
+                    : productData.map((item, idx) => (
                         <div
                           className="flex flex-col relative"
                           key={idx}
@@ -408,35 +426,71 @@ export default function page() {
         </div>
         <div className="mt-10 mb-[150px] flex justify-center">
           <nav className="table border-separate table-fixed">
-            <span
-              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
-              style={{
-                boxShadow:
-                  "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
-              }}
-              aria-current="page"
-            >
-              1
-            </span>
             <a
-              href="/collections/furniture?page=1"
-              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
-              style={{
-                boxShadow:
-                  "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
-              }}
-              //   aria-current="page"
-            >
-              2
-            </a>
-            <a
-              href="/collections/furniture?page=1"
+              href={`/collections/furniture?page=${currentPage + 1}`}
+              onClick={(e) => handlePagination(e, "previous")}
               className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm page"
               style={{
                 boxShadow:
                   "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                visibility: currentPage === 1 ? "hidden" : "visible",
               }}
-              //   aria-current="page"
+              // aria-current="page"
+            >
+              <svg
+                focusable="false"
+                width="15"
+                height="15"
+                viewBox="0 0 17 14"
+                className="my-0 mx-auto"
+              >
+                <path
+                  d="M17 7H2M8 1L2 7l6 6"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  fill="none"
+                ></path>
+              </svg>
+            </a>
+            {Array.from({ length: totalPage }).map((_, index) =>
+              currentPage === index + 1 ? (
+                <span
+                  key={index}
+                  className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
+                  style={{
+                    boxShadow:
+                      "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                  }}
+                  aria-current="page"
+                >
+                  {currentPage}
+                </span>
+              ) : (
+                <a
+                  href={`/collections/all?page=${index + 1}`}
+                  onClick={(e) => handlePagination(e, "next")}
+                  className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm text-lightBrown page"
+                  style={{
+                    boxShadow:
+                      "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                  }}
+                  //   aria-current="page"
+                >
+                  {index + 1}
+                </a>
+              )
+            )}
+
+            <a
+              href={`/collections/furniture?page=${currentPage + 1}`}
+              onClick={(e) => handlePagination(e, "next")}
+              className="h-[56px] w-[56px] relative table-cell text-center align-middle text-sm page"
+              style={{
+                boxShadow:
+                  "1px 0 rgb(212, 210, 204), 0 1px rgb(212, 210, 204), 1px 1px rgb(212, 210, 204), 1px 0 rgb(212, 210, 204) inset, 0 1px rgb(212, 210, 204) inset",
+                visibility: totalPage > 10 ? "visible" : "hidden",
+              }}
+              // aria-current="page"
             >
               <svg
                 focusable="false"

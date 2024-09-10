@@ -48,31 +48,34 @@ export default function page() {
 
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
 
   useEffect(() => setIsMounted(true), []);
 
-  useEffect(() => {
-    async function fetchDecor() {
-      try {
-        const data = await getProducts("/api/products");
-
-        if (data) {
-          const filteredProduct = data.filter(
-            (item) => item.category === "art"
-          );
-          setProducts(filteredProduct);
-        }
-      } catch (error) {
-        console.log("An error occured", error);
-      } finally {
-        setIsLoading(false);
+  async function fetchData(page = 1, category = "art") {
+    try {
+      const res = await fetch(
+        `/api/products?category=${category}&page=${page}`
+      );
+      const data = await res.json();
+      if (data) {
+        setData(data.products);
+        setCurrentPage(data.currentPage);
+        setTotalPage(data.totalPages);
       }
+    } catch (error) {
+      console.log("An error occured", error);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    fetchDecor();
-  }, []);
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -324,7 +327,7 @@ export default function page() {
                     ? Array.from({ length: 6 }).map((_, index) => (
                         <LoadingSkeleton key={index}></LoadingSkeleton>
                       ))
-                    : products.map((item, idx) => (
+                    : data.map((item, idx) => (
                         <div
                           className="flex flex-col relative"
                           key={idx}

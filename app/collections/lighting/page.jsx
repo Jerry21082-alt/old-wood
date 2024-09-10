@@ -49,27 +49,31 @@ export default function page() {
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [lightingProducts, setLightingProducts] = useState([]);
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
+  async function getData(page = 1, category = "lighting") {
+    try {
+      const res = await fetch(
+        `/api/products?category=${category}&page=${page}`
+      );
+      const data = await res.json();
+      if (data) {
+        setData(data.products);
+        setCurrentPage(data.currentPage);
+        setTotalPage(data.totalPages);
+      }
+    } catch (error) {
+      console.log("An error occured!", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
-    async function getFurnitureProducts() {
-      try {
-        const data = await getProducts("/api/products");
-        if (data) {
-          const furnitures = data.filter(
-            (item) => item.category === "lighting"
-          );
-          setLightingProducts(furnitures);
-        }
-      } catch (error) {
-        console.log("An error occured!", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    getFurnitureProducts();
-  }, []);
+    getData(currentPage);
+  }, [currentPage]);
 
   useEffect(() => setIsMounted(true), []);
 
@@ -325,7 +329,7 @@ export default function page() {
                     ? Array.from({ length: 6 }).map((_, index) => (
                         <LoadingSkeleton key={index}></LoadingSkeleton>
                       ))
-                    : lightingProducts.map((item, idx) => (
+                    : data.map((item, idx) => (
                         <div
                           className="flex flex-col relative"
                           key={idx}

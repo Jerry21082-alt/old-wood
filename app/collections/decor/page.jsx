@@ -59,7 +59,7 @@ export default function page() {
         const data = await getProducts("/api/products");
 
         if (data) {
-          const filteredProduct = data.filter(
+          const filteredProduct = data?.products.filter(
             (item) => item.category === "decor"
           );
           setProducts(filteredProduct);

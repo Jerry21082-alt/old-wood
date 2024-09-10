@@ -49,17 +49,15 @@ export default function DinningAndEntertainment() {
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [furnitureProducts, setFurnitureProducts] = useState([]);
+  const [dinningAndEntertaining, setDinnningAndEntertaining] = useState([]);
 
   useEffect(() => {
-    async function getFurnitureProducts() {
+    async function fetchData(category = "") {
       try {
-        const data = await getProducts("/api/products");
+        const res = await fetch(`/api/products?category=${category}`);
+        const data = await res.json();
         if (data) {
-          const furnitures = data.filter(
-            (item) => item.category === "dinning&entertainment"
-          );
-          setFurnitureProducts(furnitures);
+          setDinnningAndEntertaining(data.products);
         }
       } catch (error) {
         console.log("An error occured!", error);
@@ -68,7 +66,7 @@ export default function DinningAndEntertainment() {
       }
     }
 
-    getFurnitureProducts();
+    fetchData();
   }, []);
 
   useEffect(() => setIsMounted(true), []);
@@ -332,7 +330,7 @@ export default function DinningAndEntertainment() {
                     ? Array.from({ length: 6 }).map((_, index) => (
                         <LoadingSkeleton key={index}></LoadingSkeleton>
                       ))
-                    : furnitureProducts.map((item, idx) => (
+                    : dinningAndEntertaining.map((item, idx) => (
                         <div
                           className="flex flex-col relative"
                           key={idx}
