@@ -27,7 +27,12 @@ export default function Home() {
       try {
         const res = await fetch(`/api/products?page=${page}&limit=${limit}`);
         const data = await res.json();
-        setProducts(data.products);
+
+        if (res.status === 200) {
+          setProducts(data.products);
+        } else {
+          setError(true);
+        }
       } catch (error) {
         console.log("error fetching data", error);
         setError(true);
@@ -41,56 +46,50 @@ export default function Home() {
   }, []);
 
   const getReelItems = (length) => {
+    if (products.length <= 0) return [];
     const reelItems = [];
 
-    for (let i = 1; i <= length; i++) {
+    for (let i = 1; i < Math.min(length, products.length); i++) {
       reelItems.push(products[i]);
     }
 
     return reelItems;
   };
 
-  useEffect(() => {
-    gsap.fromTo(
-      "#shop-the-look",
-      { clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)", opacity: 0 },
-      {
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-        opacity: 1,
-        duration: 1,
-        scrollTrigger: {
-          trigger: "#shop-the-look",
-          start: "top 130%",
-          once: true,
-          toggleActions: "play none none none",
-        },
-      }
-    );
+  // useEffect(() => {
+  //   gsap.fromTo(
+  //     "#shop-the-look",
+  //     { clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)", opacity: 0 },
+  //     {
+  //       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+  //       opacity: 1,
+  //       duration: 1,
+  //       scrollTrigger: {
+  //         trigger: "#shop-the-look",
+  //         start: "top 90%",
+  //         once: true,
+  //         toggleActions: "play none none none",
+  //       },
+  //     }
+  //   );
+  // }, []);
 
-    gsap.utils.toArray("#slide-up").forEach((element) => {
-      gsap.fromTo(
-        element,
-        { y: 100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.25,
-          stagger: 1,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 100%",
-            once: true,
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-  }, []);
+  // if (error) {
+  //   return <div>An error occured</div>;
+  // }
+
+  if (isLoading) {
+    return <LoadingSkeleton />;
+  }
+
+  if (error) {
+    return <div>Hmmmm! Seems like you are'nt connected to the internet</div>;
+  }
 
   return (
     <>
       {!isLoading && <NewsLetter />}
-      <section className="block mt-0 mb-0 relative">
+      {/* <section className="block mt-0 mb-0 relative">
         <div
           className="fixed left-0 bottom-0 w-full h-14 z-50"
           style={{
@@ -102,7 +101,7 @@ export default function Home() {
         </div>
 
         <div
-          className="min-h-[80vh] relative flex image-overlay gradient"
+          className="min-h-[100vh] relative flex image-overlay"
           style={{
             opacity: reveal ? "1" : "0",
             transition: "opacity .4s ease",
@@ -128,6 +127,26 @@ export default function Home() {
             <div className="relative flex h-full w-full items-center justify-center p-9">
               <div className="z-10 mx-6 relative"></div>
             </div>
+          </div>
+        </div>
+      </section> */}
+
+      <section className="my-20">
+        <div className="relative flex min-h-[80vh] md:min-h-screen image-overlay z-[2]">
+          <div
+            style={{ paddingBottom: "66.68%" }}
+            className="absolute top-0 w-full h-full overflow-hidden"
+          >
+            <img
+              className="hidden md:inline-block"
+              src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2500"
+              srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2400 2400w"
+            />
+            <img
+              className="inline-block md:hidden object-center object-cover absolute top-0 left-0 overflow-hidden h-full w-full"
+              src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2500"
+              srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2400 2400w"
+            />
           </div>
         </div>
       </section>
@@ -170,7 +189,7 @@ export default function Home() {
 
                 <div className="mt-8 flex justify-center">
                   <Link
-                    href="/"
+                    href=""
                     className="shop-button relative text-lightBrown"
                   >
                     SHOP NOW
@@ -239,7 +258,7 @@ export default function Home() {
                 </div>
               </div>
             </header>
-            {products.length < 0 || isLoading ? (
+            {isLoading ? (
               <LoadingSkeleton></LoadingSkeleton>
             ) : (
               <ProductReel products={getReelItems(7)} />
@@ -269,7 +288,7 @@ export default function Home() {
                     </p>
                     <div className="mt-5">
                       <Link
-                        href="/"
+                        href=""
                         className="inline-block uppercase relative shop-room-button text-sm md:text-md lg:text-lg"
                       >
                         shop this room
@@ -322,14 +341,14 @@ export default function Home() {
                 </div>
                 <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
                   <Link
-                    href="/"
+                    href=""
                     className="pointer-events-none block mb-[2px] text-xs"
                   >
                     Table Lamps
                   </Link>
                   <div className="w-full">
                     <Link
-                      href="/"
+                      href=""
                       className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
                     >
                       see more

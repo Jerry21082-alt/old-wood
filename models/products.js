@@ -31,5 +31,7 @@ const productSchema = new mongoose.Schema({
   dimensions: { type: dimensionsSchema },
 });
 
+productSchema.index({ name: "text", description: "text" })
+
 export default mongoose.models.Products ||
   mongoose.model("Products", productSchema);

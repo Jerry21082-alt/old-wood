@@ -9,42 +9,52 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ProductReel({ products, isLoading }) {
   useEffect(() => {
-    const items = gsap.utils.toArray("#product_item");
-
+  const items = gsap.utils.toArray(".product_item");
+  if (items.length > 0) {
     gsap.fromTo(
       items,
       { opacity: 0, y: 30 },
       {
         opacity: 1,
         y: 0,
-        stagger: 1.2,
+        stagger: 0.6,
         scrollTrigger: {
           trigger: items[0].parentNode,
           start: "top 80%",
           end: "top 50%",
-          scrub: true,
           once: true,
           toggleActions: "play none none none",
         },
       }
     );
+  }
 
-    items.forEach((item) => {
-      const primaryImage = item.querySelector("#primary-img");
-      const secondaryImage = item.querySelector("#secondary-img");
+  items.forEach((item) => {
+    const primaryImage = item.querySelector("#primary-img");
+    const secondaryImage = item.querySelector("#secondary-img");
 
-      gsap.set(secondaryImage, { autoAlpha: 0 });
-      item.addEventListener("mouseenter", () => {
-        gsap.to(primaryImage, { autoAlpha: 0, duration: 0.4 });
-        gsap.to(secondaryImage, { autoAlpha: 1, duration: 0.4 });
-      });
+    gsap.set(secondaryImage, { autoAlpha: 0 });
 
-      item.addEventListener("mouseleave", () => {
-        gsap.to(primaryImage, { autoAlpha: 1, duration: 0.4 });
-        gsap.to(secondaryImage, { autoAlpha: 0, duration: 0.4 });
-      });
-    });
-  }, []);
+    const handleMouseEnter = () => {
+      gsap.to(primaryImage, { autoAlpha: 0, duration: 0.4 });
+      gsap.to(secondaryImage, { autoAlpha: 1, duration: 0.4 });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(primaryImage, { autoAlpha: 1, duration: 0.4 });
+      gsap.to(secondaryImage, { autoAlpha: 0, duration: 0.4 });
+    };
+
+    item.addEventListener("mouseenter", handleMouseEnter);
+    item.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      item.removeEventListener("mouseenter", handleMouseEnter);
+      item.removeEventListener("mouseleave", handleMouseLeave); // Fixed from "mouseenter"
+    };
+  });
+}, []);
+
 
   useEffect(() => {
     const container = document.getElementById("product-reel_container");
@@ -178,26 +188,6 @@ export default function ProductReel({ products, isLoading }) {
         >
           <title>scroll left</title>
           <path d="M20.5 2.293c-10.045 0-18.207 8.163-18.207 18.207 0 10.044 8.163 18.207 18.207 18.207 10.044 0 18.207-8.163 18.207-18.207s-8.163-18.207-18.207-18.207zM20.5 2.999c9.645 0 17.501 7.856 17.501 17.501s-7.856 17.501-17.501 17.501c-9.645 0-17.501-7.856-17.501-17.501s7.856-17.501 17.501-17.501zM17.622 14.862c-0.088 0-0.176 0.032-0.249 0.105l-5.281 5.281c-0.147 0.147-0.147 0.35 0 0.496l5.274 5.287c0.076 0.076 0.155 0.105 0.252 0.105s0.18-0.031 0.254-0.105c0.147-0.147 0.147-0.35 0-0.496l-4.679-4.679h15.471c0.206 0 0.357-0.151 0.357-0.357s-0.151-0.357-0.357-0.357h-15.471l4.679-4.679c0.147-0.147 0.147-0.35 0-0.496-0.073-0.073-0.161-0.105-0.249-0.105z" />
-          <text
-            x="0"
-            y="56"
-            fill="#000000"
-            font-size="5px"
-            font-weight="bold"
-            font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
-          >
-            Created by vectlab
-          </text>
-          <text
-            x="0"
-            y="61"
-            fill="#000000"
-            font-size="5px"
-            font-weight="bold"
-            font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
-          >
-            from the Noun Project
-          </text>
         </svg>
       </div>
       <div
@@ -213,14 +203,13 @@ export default function ProductReel({ products, isLoading }) {
           }}
         >
           {products.map((item) => (
-            <div className="flex flex-col relative" key={item.id}>
+            <div className="flex flex-col relative product_item" key={item.id}>
               <div
                 className="relative mb-4"
                 style={{
                   opacity: "1",
                   transition: "opacity .4s ease, transform .4s ease",
                 }}
-                id="product_item"
               >
                 <div className="absolute right-2 top-2 z-10 flex flex-col items-end">
                   {item.toOrder && (

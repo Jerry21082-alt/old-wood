@@ -1,16 +1,33 @@
 "use client";
 
 import { toggleSearch } from "@/features/navigation/navigationSlice";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function SearchBar() {
   const openSearch = useSelector((state) => state.navigation.isSearchOpen);
+  const [query, setQuery] = useState("Napoleon");
 
   const searchBarRef = useRef(null);
   const dispatch = useDispatch();
 
   const onClose = () => dispatch(toggleSearch());
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch(
+        `/api/products?search=${encodeURIComponent(query)}`
+      );
+      const data = await res.json();
+      console.log('fetch data', data)
+    } catch (error) {
+      console.log("Failed to search product", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     const handleSearchEscape = (event) => {
@@ -73,6 +90,8 @@ export default function SearchBar() {
           <form className="relative flex items-center mb-[60px]">
             <input
               type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               autoComplete="off"
               placeholder="Search"
               aria-label="search"

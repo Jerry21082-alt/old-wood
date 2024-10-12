@@ -166,7 +166,7 @@ export default function Cart() {
       }`}
     >
       {isMounted && cartItems.length > 0 ? (
-        <div className="w-full h-full overflow-x-hidden overflow-y-auto flex-grow pb-36 custom-scrollbar">
+        <div className="w-full h-full overflow-x-hidden overflow-y-scroll flex-grow pb-36 custom-scrollbar">
           {cartItems.map((item) => {
             const { _id } = item;
             const isLoading = isLoadingStatus[_id]?.isLoading;

@@ -99,9 +99,8 @@ export default function page() {
                 style={{ aspectRatio: !isMobile ? "1 / 1.3" : "" }}
               >
                 <img
-                  src="//roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=2500"
-                  srcSet="//roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=352 352w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=832 832w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1200 1200w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=1920 1920w, //roweam.com/cdn/shop/articles/20230809-In_Situ-Sabi_02_0731-MAIN1_2_43995db3-6ef2-40ae-b43f-fff1eecb48f3.jpg?v=1724260061&width=2500 2500w"
-                  alt="The Anniversary Collection"
+                  src="//roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=1500"
+                  srcSet="//roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=200 200w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=300 300w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=400 400w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=500 500w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=600 600w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=700 700w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=800 800w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=900 900w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=1000 1000w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=1100 1100w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=1200 1200w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=1300 1300w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=1400 1400w, //roweam.com/cdn/shop/articles/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842729&width=1500 1500w"
                   loading="lazy"
                   className="w-full h-full object-cover object-center"
                 />
@@ -129,7 +128,7 @@ export default function page() {
               </a>
               <div>
                 <a
-                  href="/"
+                  href="/blogs/collections/the-sabi-collection"
                   className="my-[12px] text-lightBrown spacing-[1px] uppercase text-xs md:text-sm"
                 >
                   Casual Living
@@ -177,7 +176,7 @@ export default function page() {
               id="collection"
             >
               <a
-                href="/"
+                href="/blogs/collections/the-pavillion-collection"
                 className="h-[300px] md:h-auto w-full relative block mb-5 md:mb-6 overflow-hidden article-item_img"
                 style={{ aspectRatio: !isMobile ? "1.575" : "" }}
               >
@@ -190,9 +189,11 @@ export default function page() {
                 />
               </a>
               <div>
-                <h3 className="mt-[12px] text-[18px] md:text-xl block pb-[5px] w-full h2">
-                  The Pavillion Collection
-                </h3>
+                <a href="/blogs/collections/the-pavillion-collection">
+                  <h3 className="mt-[12px] text-[18px] md:text-xl block pb-[5px] w-full h2">
+                    The Pavillion Collection
+                  </h3>
+                </a>
 
                 <div className="text-lightBrown text-[15px] h3 mb-4">
                   Sweet lines and stately presence.
@@ -205,7 +206,7 @@ export default function page() {
               id="collection"
             >
               <a
-                href="/"
+                href="/blogs/collections/the-bromley-collection"
                 className="h-[300px] md:h-auto relative block mb-5 md:mb-6 overflow-hidden article-item_img"
                 style={{ aspectRatio: !isMobile ? "1.575 / 1" : "" }}
               >
@@ -218,9 +219,11 @@ export default function page() {
                 />
               </a>
               <div>
-                <h3 className="mt-[12px] text-[18px] md:text-xl block pb-[5px] w-full h2">
-                  The Bromley Collection
-                </h3>
+                <a href="/blogs/collections/the-bromley-collection">
+                  <h3 className="mt-[12px] text-[18px] md:text-xl block pb-[5px] w-full h2">
+                    The Bromley Collection
+                  </h3>
+                </a>
 
                 <div className="text-lightBrown text-xs md:text-sm h3">
                   A sofa made for Sunday morning reading and naps by the

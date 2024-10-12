@@ -30,15 +30,25 @@ export async function GET(request) {
 
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get("page")) || 1;
-    const limit = parseInt(url.searchParams.get("limit")) || 10;
+    const limit = parseInt(url.searchParams.get("limit")) || 12;
     const category = url.searchParams.get("category");
+    const search = url.searchParams.get("search");
+
+    console.log("new", search)
 
     const skip = (page - 1) * limit;
+
+    const matchQuery = {};
+
+    if (category) matchQuery.category = category;
+    if (search) {
+      matchQuery.$text = { $search: search };
+    }
 
     const results = await collection
       .aggregate([
         {
-          $match: category ? { category } : {},
+          $match: matchQuery,
         },
         {
           $facet: {

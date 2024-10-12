@@ -29,7 +29,7 @@ export default function Product_Page({ params }) {
   const [terms, setTerms] = useState(false);
   const [reveal, setReveal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState([]);
+  const [item, setItem] = useState(null);
   const [pairs, setPairs] = useState([]);
 
   const agree = useSelector((state) => state.checkout.agree);
@@ -37,21 +37,15 @@ export default function Product_Page({ params }) {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    async function fetchData(page = 1, limit = 12, pairLimit = 8) {
+    async function fetchData(pairLimit = 8) {
       try {
-        const itemCategoryRes = await fetch(
+        const res = await fetch(
           `/api/itemCategory?id=${productId}&pairLimit=${pairLimit}`
         );
 
-        const itemCategoryData = await itemCategoryRes.json();
-        setPairs(itemCategoryData.itemCategory);
-
-        const productsRes = await fetch(
-          `/api/products?page=${page}&limit=${limit}`
-        );
-
-        const productsData = await productsRes.json();
-        setProducts(productsData.products);
+        const data = await res.json();
+        setPairs(data.itemCategory);
+        setItem(data.item);
       } catch (error) {
         console.log("An error occurred, please try again!", error);
       } finally {
@@ -62,48 +56,19 @@ export default function Product_Page({ params }) {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   async function fetchProduct() {
-  //     try {
-  //       const res = await fetch(`/api/itemCategory?id=${productId}`);
-  //       const product = await res.json();
-  //       dispatch(addItemToCart(product.item));
-  //     } catch (error) {
-  //       console.log("Failed to fetch product:", error);
-  //     }
-  //   }
-
-  //   fetchProduct();
-  // }, [dispatch, productId]);
-
-  const product = products.find((item) => item._id === productId);
-
-  let slides = [];
-
-  if (product) {
-    slides = product.allImages;
-  }
-
   useEffect(() => {
     setReveal(true);
   }, []);
 
-  const handleIncrement = (product) => {
-    setProducts((prevProduct) =>
-      prevProduct.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+  const handleIncrement = () => {
+    setItem((prevItem) => ({ ...item, quantity: prevItem.quantity + 1 }));
   };
 
-  const handleDecrement = (product) => {
-    setProducts((prevProduct) =>
-      prevProduct.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity - 1 < 1 ? 1 : item.quantity - 1 }
-          : item
-      )
-    );
+  const handleDecrement = () => {
+    setItem((prevItem) => {
+      if (prevItem.quantity - 1 < 1) return { ...prevItem, quantity: 1 };
+      return { ...prevItem, quantity: prevItem.quantity - 1 };
+    });
   };
 
   const addItemToCart = async (newProduct) => {
@@ -154,7 +119,7 @@ export default function Product_Page({ params }) {
   };
 
   const showSlide = (idx) => {
-    const totalSlides = slides.length;
+    const totalSlides = item.allImages.length;
     if (idx >= totalSlides) {
       return;
     } else if (idx < 0) {
@@ -223,8 +188,7 @@ export default function Product_Page({ params }) {
                 {isLoading ? (
                   <LoadingSkeleton></LoadingSkeleton>
                 ) : (
-                  slides &&
-                  slides.map((img, idx) => (
+                  item?.allImages.map((img, idx) => (
                     <div
                       className="min-w-full box-border flex items-center h-full"
                       key={idx}
@@ -280,8 +244,11 @@ export default function Product_Page({ params }) {
                 onClick={handleNext}
                 style={{
                   visibility:
-                    currentIndex === slides.length - 1 ? "hidden" : "visible",
-                  opacity: currentIndex === slides.length - 1 ? "0" : "1",
+                    currentIndex === item.allImages.length - 1
+                      ? "hidden"
+                      : "visible",
+                  opacity:
+                    currentIndex === item.allImages.length - 1 ? "0" : "1",
                   transition:
                     "visibility .25s ease-in-out, opacity .25s ease-in-out",
                 }}
@@ -309,7 +276,7 @@ export default function Product_Page({ params }) {
               </div>
             </AspectRatioContainer>
             <div className="w-full flex md:hidden items-center justify-center mt-4">
-              {slides.map((_, idx) => (
+              {item.allImages.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -331,7 +298,7 @@ export default function Product_Page({ params }) {
                 Sabi Sectional
               </h1>
               <div className="text-lightBrown text-sm md:text-lg lg:text-xl h3">
-                {product.type}
+                {item.type}
               </div>
             </div>
 
@@ -348,18 +315,7 @@ export default function Product_Page({ params }) {
                   >
                     <div>
                       <p className="text-sm md:text-md lg:text-lg">
-                        The sabi sectional was designed to fill the room. She
-                        features a pared-down, rounded silhouette reminiscent of
-                        a woman’s exposed shoulder. With a seat depth of 25.75",
-                        the nine-foot sectional comfortably seats six to seven
-                        people. She’s the perfect piece for a large-scale
-                        entertaining space.
-                      </p>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        Shown upholstered in our olive fabric.
-                      </p>
-                      <p className="mt-4 text-sm md:text-md lg:text-lg">
-                        <span>Shown upholstered in our olive fabric.</span>
+                        {item?.description ? item.description : ""}
                       </p>
                     </div>
                   </div>
@@ -385,46 +341,44 @@ export default function Product_Page({ params }) {
                       <ul className="flex flex-col space-y-1 text-sm md:text-md lg:text-lg">
                         <li className="px-1 text-darkGray">
                           {`width: ${
-                            product?.dimensions?.width
-                              ? product.dimensions.width
+                            item?.dimensions?.width
+                              ? item.dimensions.width
                               : null
                           } in`}
                         </li>
                         <li className="px-1 text-darkGray">
                           {`Length: ${
-                            product?.dimensions?.length
-                              ? product.dimensions.length
+                            item?.dimensions?.length
+                              ? item.dimensions.length
                               : null
                           } in`}
                         </li>
                         <li className="px-1 text-darkGray">
                           {`Depth: ${
-                            product.dimensions.depth
-                              ? product.dimensions.depth
-                              : null
+                            item.dimensions.depth ? item.dimensions.depth : null
                           } in`}
                         </li>
                         <li className="px-1 text-darkGray">
-                          {`Height: ${product.dimensions.height} in`}
+                          {`Height: ${item.dimensions.height} in`}
                         </li>
                         <li className="px-1 text-darkGray">
                           {`Seat Height: ${
-                            product.dimensions.seatHeight
-                              ? product.dimensions.seatHeight
+                            item.dimensions.seatHeight
+                              ? item.dimensions.seatHeight
                               : null
                           } in`}
                         </li>
                         <li className="px-1 text-darkGray">
                           {`Seat Depth: ${
-                            product.dimensions.seatDepth
-                              ? product.dimensions.seatDepth
+                            item.dimensions.seatDepth
+                              ? item.dimensions.seatDepth
                               : null
                           } in`}
                         </li>
                         <li className="px-1 text-darkGray">
                           {`Arm Height: ${
-                            product.dimensions.armHeight
-                              ? product.dimensions.armHeight
+                            item.dimensions.armHeight
+                              ? item.dimensions.armHeight
                               : null
                           } in`}
                         </li>
@@ -464,7 +418,7 @@ export default function Product_Page({ params }) {
 
               <div className="mt-6">
                 <span className="text-lightBrown text-[14px] md:text-lg lg:text-xl">
-                  ${formatPrice(product.price)}
+                  ${formatPrice(item.price)}
                 </span>
               </div>
 
@@ -504,10 +458,7 @@ export default function Product_Page({ params }) {
                 </div>
                 <div className="w-28 md:w-[30%] h-12 p-3 md:p-5 flex items-center border border-listBorder">
                   <div className="flex justify-between items-center w-full">
-                    <button
-                      type="button"
-                      onClick={() => handleDecrement(product)}
-                    >
+                    <button type="button" onClick={handleDecrement}>
                       <svg
                         focusable="false"
                         width="10"
@@ -520,13 +471,10 @@ export default function Product_Page({ params }) {
                     </button>
 
                     <span className="text-lightBrown text-sm md:text-lg lg:text-xl">
-                      {product.quantity}
+                      {item.quantity}
                     </span>
 
-                    <button
-                      type="button"
-                      onClick={() => handleIncrement(product)}
-                    >
+                    <button type="button" onClick={handleIncrement}>
                       <svg
                         version="1.1"
                         xmlns="http://www.w3.org/2000/svg"
@@ -546,7 +494,7 @@ export default function Product_Page({ params }) {
                   <button
                     className="w-full uppercase py-3 px-3 bg-lightBrown text-milk relative"
                     type="button"
-                    onClick={() => addItemToCart(product)}
+                    onClick={() => addItemToCart(item)}
                   >
                     <span
                       className="text-sm md:text-[14px] lg:text-[16px]"

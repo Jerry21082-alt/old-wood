@@ -261,10 +261,8 @@ export default function Nav() {
       );
     };
 
-    // Initial setup
     setupCommonInteractions();
 
-    // Cleanup on unmount
     return () => removeCommonInteractions();
   }, []);
 
@@ -336,9 +334,7 @@ export default function Nav() {
             onClick={handleCartToggle}
           >
             <span className="inline-block text-sm capitalize">Cart</span>
-            <span className="inline-block text-sm">
-              {isMounted && cartLength}
-            </span>
+            <span className="inline-block text-sm">{0}</span>
           </button>
           <div className={`w-4 h-4 ml-7 relative flex items-center`}>
             <div
@@ -684,7 +680,7 @@ export default function Nav() {
                               </li>
                               <li className="pt-[5px]">
                                 <Link
-                                  href=""
+                                  href="/blogs/collections"
                                   className="text-[18px] py-[5px] break-words relative w-max nav-link"
                                 >
                                   View All
@@ -839,7 +835,7 @@ export default function Nav() {
                     cart
                   </a>
                   <div>
-                    <span className="ml-3">{isMounted && cartLength}</span>
+                    <span className="ml-3">{cartLength}</span>
                   </div>
                 </li>
               </ul>
