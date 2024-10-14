@@ -9,6 +9,7 @@ module.exports = {
     colors: {
       lightBrown: "#5e3519",
       darkBrown: "#221f20",
+      shadow: "rgb(34, 31, 32)",
       snow: "rgb(243, 241, 234)",
       milk: "#f3f1ea",
       transparent: "rgba(34, 31, 32, 0)",

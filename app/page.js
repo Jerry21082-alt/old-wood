@@ -56,28 +56,6 @@ export default function Home() {
     return reelItems;
   };
 
-  // useEffect(() => {
-  //   gsap.fromTo(
-  //     "#shop-the-look",
-  //     { clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)", opacity: 0 },
-  //     {
-  //       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-  //       opacity: 1,
-  //       duration: 1,
-  //       scrollTrigger: {
-  //         trigger: "#shop-the-look",
-  //         start: "top 90%",
-  //         once: true,
-  //         toggleActions: "play none none none",
-  //       },
-  //     }
-  //   );
-  // }, []);
-
-  // if (error) {
-  //   return <div>An error occured</div>;
-  // }
-
   if (isLoading) {
     return <LoadingSkeleton />;
   }
@@ -89,64 +67,20 @@ export default function Home() {
   return (
     <>
       {!isLoading && <NewsLetter />}
-      {/* <section className="block mt-0 mb-0 relative">
-        <div
-          className="fixed left-0 bottom-0 w-full h-14 z-50"
-          style={{
-            opacity: toggleMobileMenu ? "1" : "0",
-            transition: "opacity .4s ease-in-out",
-          }}
-        >
-          <div className="footer-gradient" />
-        </div>
-
-        <div
-          className="min-h-[100vh] relative flex image-overlay"
-          style={{
-            opacity: reveal ? "1" : "0",
-            transition: "opacity .4s ease",
-          }}
-        >
+      <section>
+        <div>
           <div
-            className="absolute left-0 top-0 w-full h-full overflow-hidden"
-            style={{ paddingBottom: "66.64%" }}
+            className="min-h-[80vh] md:min-h-auto w-full relative flex bg-milk text-milk"
+            style={{ aspectRatio: "1.49667" }}
           >
-            <img
-              src="https://roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=2500"
-              srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1400 1400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1600 1600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=1800 1800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=2000 2000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=2200 2200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_02_0731-MAIN101.jpg?v=1717160421&width=2400 2400w"
-              className="object-cover object-center absolute top-0 left-0 overflow-hidden w-full h-full"
-              alt="hero image"
-              style={{
-                transform: reveal ? "scale(1)" : "scale(1.1)",
-                transition: "transform .4s ease",
-              }}
-            />
-          </div>
-
-          <div className="w-full max-w-screen-2xl p-6">
-            <div className="relative flex h-full w-full items-center justify-center p-9">
-              <div className="z-10 mx-6 relative"></div>
+            <div className="absolute left-0 top-0 w-full h-full overflow-hidden block">
+              <img
+                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2500"
+                srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2400 2400w"
+                style={{ opacity: 1 }}
+                className="object-center object-cover max-w-full absolute top-0 left-0 w-full h-full overlay__img"
+              />
             </div>
-          </div>
-        </div>
-      </section> */}
-
-      <section className="my-20">
-        <div className="relative flex min-h-[80vh] md:min-h-screen image-overlay z-[2]">
-          <div
-            style={{ paddingBottom: "66.68%" }}
-            className="absolute top-0 w-full h-full overflow-hidden"
-          >
-            <img
-              className="hidden md:inline-block"
-              src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2500"
-              srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2400 2400w"
-            />
-            <img
-              className="inline-block md:hidden object-center object-cover absolute top-0 left-0 overflow-hidden h-full w-full"
-              src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2500"
-              srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2400 2400w"
-            />
           </div>
         </div>
       </section>
@@ -201,9 +135,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block mt-5 w-full">
+      <section className="block w-full">
         <div
-          className="py-7"
           style={{ display: "flow-root", bakground: "transparent" }}
         >
           <div className="w-full max-w-[1600px] p-0 md:p-10">
@@ -253,7 +186,7 @@ export default function Home() {
                           </h6>
                         </div>
                       </div>
-                    )
+                    ),
                   )}
                 </div>
               </div>
@@ -451,7 +384,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block my-20">
+      <section className="block">
         <div className="w-full max-w-[1600px] px-0 md:px-10">
           <div className="image-with-text">
             <div className="w-full px-6 md:p-16">
@@ -497,7 +430,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-wrap h-full w-full">
-              <div className="pb-6 overflow-hidden pl-[30%] order-2 h-full w-full">
+              <div className="overflow-hidden order-2 h-full w-full">
                 <img
                   src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
                   srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000 2000w"

@@ -8,10 +8,12 @@ import { load, save } from "redux-localstorage-simple";
 const PERSISTED_KEYS = ["cart", "products"];
 
 let preloadedState;
+
 try {
   preloadedState = load({ states: PERSISTED_KEYS });
+  console.log("Preloaded State:", preloadedState);
 } catch (error) {
-  console.warn("Invalid state in localStorage, resetting state.");
+  console.warn("Invalid state in localStorage, resetting state:", error);
   preloadedState = {};
 }
 

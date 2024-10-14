@@ -2,6 +2,8 @@
 
 import "./global.css";
 import "../styles/typography.css";
+import "../styles/nav.css";
+
 import Layout from "@/components/Layout";
 import { store } from "@/store/store";
 import { Provider, useDispatch, useSelector } from "react-redux";
