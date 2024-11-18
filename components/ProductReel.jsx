@@ -8,137 +8,52 @@ import { useEffect, useState } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProductReel({ products, isLoading }) {
-  useEffect(() => {
-  const items = gsap.utils.toArray(".product_item");
-  if (items.length > 0) {
-    gsap.fromTo(
-      items,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.6,
-        scrollTrigger: {
-          trigger: items[0].parentNode,
-          start: "top 80%",
-          end: "top 50%",
-          once: true,
-          toggleActions: "play none none none",
-        },
-      }
-    );
-  }
+  // useEffect(() => {
+  //   const items = gsap.utils.toArray(".product_item");
+  //   if (items.length > 0) {
+  //     gsap.fromTo(
+  //       items,
+  //       { opacity: 0, y: 30 },
+  //       {
+  //         opacity: 1,
+  //         y: 0,
+  //         stagger: 0.6,
+  //         scrollTrigger: {
+  //           trigger: items[0].parentNode,
+  //           start: "top 80%",
+  //           end: "top 50%",
+  //           once: true,
+  //           toggleActions: "play none none none",
+  //         },
+  //       }
+  //     );
+  //   }
 
-  items.forEach((item) => {
-    const primaryImage = item.querySelector("#primary-img");
-    const secondaryImage = item.querySelector("#secondary-img");
+  //   items.forEach((item) => {
+  //     const primaryImage = item.querySelector("#primary-img");
+  //     const secondaryImage = item.querySelector("#secondary-img");
 
-    gsap.set(secondaryImage, { autoAlpha: 0 });
+  //     gsap.set(secondaryImage, { autoAlpha: 0 });
 
-    const handleMouseEnter = () => {
-      gsap.to(primaryImage, { autoAlpha: 0, duration: 0.4 });
-      gsap.to(secondaryImage, { autoAlpha: 1, duration: 0.4 });
-    };
+  //     const handleMouseEnter = () => {
+  //       gsap.to(primaryImage, { autoAlpha: 0, duration: 0.4 });
+  //       gsap.to(secondaryImage, { autoAlpha: 1, duration: 0.4 });
+  //     };
 
-    const handleMouseLeave = () => {
-      gsap.to(primaryImage, { autoAlpha: 1, duration: 0.4 });
-      gsap.to(secondaryImage, { autoAlpha: 0, duration: 0.4 });
-    };
+  //     const handleMouseLeave = () => {
+  //       gsap.to(primaryImage, { autoAlpha: 1, duration: 0.4 });
+  //       gsap.to(secondaryImage, { autoAlpha: 0, duration: 0.4 });
+  //     };
 
-    item.addEventListener("mouseenter", handleMouseEnter);
-    item.addEventListener("mouseleave", handleMouseLeave);
+  //     item.addEventListener("mouseenter", handleMouseEnter);
+  //     item.addEventListener("mouseleave", handleMouseLeave);
 
-    return () => {
-      item.removeEventListener("mouseenter", handleMouseEnter);
-      item.removeEventListener("mouseleave", handleMouseLeave); // Fixed from "mouseenter"
-    };
-  });
-}, []);
-
-
-  useEffect(() => {
-    const container = document.getElementById("product-reel_container");
-    const arrowRight = document.getElementById("arrow-right");
-    const arrowLeft = document.getElementById("arrow-left");
-    const scroller = document.getElementById("scroller");
-
-    if (!container || !arrowLeft || !arrowRight || !scroller) return;
-
-    const tl = gsap.timeline();
-
-    const animateArrow = () => {
-      tl.fromTo(arrowRight, { opacity: 0, x: -50 }, { opacity: 1, x: 0 });
-
-      tl.play();
-    };
-
-    arrowRight.addEventListener("mouseenter", animateArrow);
-
-    const revealArrow = (arrow) => {
-      arrow.style.opacity = "1";
-      arrow.style.visibility = "visible";
-    };
-
-    const hideArrow = (arrow) => {
-      arrow.style.opacity = "0";
-      arrow.style.visibility = "hidden";
-    };
-
-    const checkArrow = () => {
-      if (scroller.scrollLeft === 0) {
-        hideArrow(arrowLeft);
-      } else {
-        revealArrow(arrowLeft);
-      }
-
-      if (scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth) {
-        hideArrow(arrowRight);
-      } else {
-        revealArrow(arrowRight);
-      }
-    };
-
-    const scrollRight = () => {
-      scroller.scrollBy({
-        left: 5000,
-        behavior: "smooth",
-      });
-
-      setTimeout(() => checkArrow(), 100);
-    };
-
-    const scrollLeft = () => {
-      scroller.scrollBy({
-        left: -5000,
-        behavior: "smooth",
-      });
-
-      setTimeout(() => checkArrow(), 100);
-    };
-
-    arrowRight.addEventListener("click", scrollRight);
-    arrowLeft.addEventListener("click", scrollLeft);
-
-    container.addEventListener("mouseenter", checkArrow);
-    container.addEventListener("mouseleave", () => {
-      hideArrow(arrowLeft);
-      hideArrow(arrowRight);
-    });
-
-    checkArrow();
-
-    return () => {
-      tl.kill();
-      arrowRight.removeEventListener("mouseenter", animateArrow);
-      arrowRight.removeEventListener("click", scrollRight);
-      arrowLeft.removeEventListener("click", scrollLeft);
-      container.removeEventListener("mouseenter", checkArrow);
-      container.removeEventListener("mouseleave", () => {
-        hideArrow(arrowLeft);
-        hideArrow(arrowRight);
-      });
-    };
-  }, []);
+  //     return () => {
+  //       item.removeEventListener("mouseenter", handleMouseEnter);
+  //       item.removeEventListener("mouseleave", handleMouseLeave); // Fixed from "mouseenter"
+  //     };
+  //   });
+  // }, []);
 
   return (
     <section className="relative w-full" id="product-reel_container">

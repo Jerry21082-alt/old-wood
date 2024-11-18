@@ -116,13 +116,13 @@ select {
 }
 
 .overlay__img::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(243, 241, 234, 0.05);
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(243, 241, 234, 0.05);
+  pointer-events: none;
 }
 
 .hamburger-menu {
@@ -708,6 +708,16 @@ select {
   pointer-events: none;
   z-index: 1;
   box-shadow: 0 0 0 2px currentColor;
+}
+
+.image-with_text-wrapper {
+  display: grid;
+  grid-template-columns: calc(50% - var(--container-gutter)) 50%;
+  gap: 40px;
+  position: relative;
+  padding: 0;
+  align-items: center;
+  overflow: hidden;
 }
 
 @keyframes direction {

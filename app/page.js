@@ -75,8 +75,8 @@ export default function Home() {
           >
             <div className="absolute left-0 top-0 w-full h-full overflow-hidden block">
               <img
-                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2500"
-                srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386.jpg?v=1726842285&width=2400 2400w"
+                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=2500"
+                srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=2400 2400w"
                 style={{ opacity: 1 }}
                 className="object-center object-cover max-w-full absolute top-0 left-0 w-full h-full overlay__img"
               />
@@ -90,44 +90,49 @@ export default function Home() {
           THIS IS THE NEW NOSTALGIA
         </div>
 
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full relative mb-8 overflow-hidden block">
+        <div className="image-with_text-wrapper">
+          <div
+            className="order-2 relative overflow-hidden w-full z-0"
+            style={{
+              marginRight:
+                "calc((100vw - max(calc((100vw - calc(1600px - (40px) * 2)) / 2), 40px) * 2 - 24px * (20 - 1)) / 20)",
+            }}
+          >
             <img
-              src="/Roweam_Environmental_101019_Bromley_7ft_2035_RESIZED.jpg"
-              alt="product image"
-              className="z-[1] w-full h-auto max-h-full"
+              src="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1500"
+              srcSet="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1200 1200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1400 1400w"
+              alt="The Bromley Chair"
+              loading="lazy"
+              className="z-[1] relative block w-full"
             />
           </div>
-          <div className="mb-9 w-full">
-            <div className="aspect-square w-full flex justify-center items-center flex-col">
-              <div className="my-4 mx-0 text-[#5e3519]">
-                <span className="block text-center text-sm md:text-md lg:text-lg">
-                  OLDWOOD NEW VINTAGE
-                </span>
-              </div>
-              <div className="mt-10 mb-8 text-4xl text-center mx-0 h2">
-                <span className="block text-4xl md:text-5xl lg:text-6xl">
-                  The Bromley
-                </span>
-                <span className="block text-center text-4xl md:text-5xl lg:text-6xl">
-                  Collection
-                </span>
-              </div>
+          <div className="order-1 z-[1] block relative mr-0">
+            <div className="flex flex-nowrap">
+              <div className="block flex-shrink-0 w-full order-0 text-center">
+                <div className="my-4 text-[#5e3519] font-medium text-sm">
+                  <span className="block">ROWEAM NEW VINTAGE</span>
+                </div>
+                <div className="mt-12 mb-6 h2">
+                  <span className="block text-4xl md:text-[56px] text-[#5e3519]">
+                    The Bromley Chair
+                  </span>
+                </div>
+                <div className="text-center">
+                  <p className="font-normal">
+                    A take on our iconic Bromley Sofa, the Bromley Chair is an
+                    amalgamation of eras and styles. Perfect for cozying up with
+                    your favorite book, it's angular arms are designed for
+                    lounging.
+                  </p>
 
-              <div className="mb-0 w-full">
-                <p className="mt-0 text-center w-full block text-sm md:text-md lg:text-lg">
-                  Our cornerstone collection, designed with families and comfort
-                  in mind. Exquisite designs that foster a life well lived for
-                  generations to come.
-                </p>
-
-                <div className="mt-8 flex justify-center">
-                  <Link
-                    href=""
-                    className="shop-button relative text-lightBrown"
-                  >
-                    SHOP NOW
-                  </Link>
+                  <div className="mt-8 text-center">
+                    <Link
+                      href=""
+                      className="w-max relative text-center text-[#5e3519] uppercase text-[13px] shop-button"
+                    >
+                      shop the collection
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -136,9 +141,7 @@ export default function Home() {
       </section>
 
       <section className="block w-full">
-        <div
-          style={{ display: "flow-root", bakground: "transparent" }}
-        >
+        <div style={{ display: "flow-root", bakground: "transparent" }}>
           <div className="w-full max-w-[1600px] p-0 md:p-10">
             <header className="max-w-full my-7 md:my-7 md:m-0 block px-6 md:px-0">
               <div>
@@ -186,7 +189,7 @@ export default function Home() {
                           </h6>
                         </div>
                       </div>
-                    ),
+                    )
                   )}
                 </div>
               </div>

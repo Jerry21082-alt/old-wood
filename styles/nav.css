@@ -4,7 +4,15 @@
 }
 
 .header.transparent {
-    color: #fff;
+  color: #fff;
+}
+
+.header--transparent {
+  box-shadow: 0 1px transparent;
+}
+
+.header--bordered {
+  box-shadow: 0 1px rgb(212, 210, 204);
 }
 
 .header.scrolled {
@@ -30,26 +38,68 @@
 }
 
 .header.header__hidden::before {
-    opacity: 0;
+  opacity: 0;
+}
+
+.nav_container {
+  transition: background-color 0.25s ease-in-out;
+}
+
+.nav_container:hover {
+  background-color: #f3f1ea;
+}
+
+.nav_container:hover .header::before {
+  opacity: 0;
+}
+
+.nav_container:hover .nav--link {
+  color: #000;
 }
 
 .nav_container.reveal {
-    background: #f3f1ea;
+  background: #f3f1ea;
+}
+
+.nav_container.reveal .nav--link {
+  color: #000;
+  transition: color 0.25s ease-in-out;
 }
 
 .link--animated::after {
-    content: "";
-    position: absolute;
-    bottom: 2px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: var(--transform-origin-end);
-    transition: transform 0.3s;
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: var(--transform-origin-end);
+  transition: transform 0.3s;
 }
 
 .link--animated:hover::after {
-    transform: scale(1);
+  transform: scale(1);
+}
+
+.shop_menu.hidden {
+  opacity: 0;
+  visibility: hidden;
+  /* display: none; */
+}
+
+.collection_menu.hidden {
+  opacity: 0;
+  visibility: 0;
+  /* display: none; */
+}
+
+.card-img {
+  transform: scale(1);
+  transition: transform 0.25s ease-in-out;
+}
+
+.card-img:hover {
+  transform: scale(1.05);
 }

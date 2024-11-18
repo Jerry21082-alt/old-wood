@@ -3,7 +3,7 @@ import clientPromise from "@/lib/mongoose";
 
 export async function POST(request) {
   try {
-    const productData = await request.json(); // Parse the JSON body
+    const productData = await request.json();
     console.log("Product Data Received:", productData);
 
     const client = await clientPromise;
@@ -33,8 +33,6 @@ export async function GET(request) {
     const limit = parseInt(url.searchParams.get("limit")) || 12;
     const category = url.searchParams.get("category");
     const search = url.searchParams.get("search");
-
-    console.log("new", search)
 
     const skip = (page - 1) * limit;
 
