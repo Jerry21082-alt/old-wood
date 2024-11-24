@@ -4,12 +4,13 @@ import ProductReel from "../components/ProductReel";
 import NewsLetter from "@/components/NewsLetter";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { getProducts } from "@/utils/fetchData";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
+import { animateElementOnView } from "@/helpers/animateElementOnView";
+import { addClass } from "@/helpers/addClass";
 
 export default function Home() {
   gsap.registerPlugin(ScrollTrigger);
@@ -19,8 +20,73 @@ export default function Home() {
   const [vintageSelect, setVintageSelect] = useState(0);
   const [activeRList, setActiveRList] = useState(false);
   const toggleMobileMenu = useSelector((state) => state.navigation.isMenuOpen);
-  const [reveal, setReveal] = useState(false);
   const [products, setProducts] = useState([]);
+  const element = useRef(null);
+  const shopTheLookContainer = useRef(null);
+  const fadeContainer = useRef(null);
+  const textwithRList = useRef(null);
+
+  useEffect(() => {
+    if (
+      isLoading ||
+      !element.current ||
+      !shopTheLookContainer.current ||
+      !fadeContainer.current
+    )
+      return;
+
+    const animateElements = () => {
+      const bromley_chair_img = document.querySelector(".img--animated");
+      const shop_the_look_img = document.querySelector("#shop-the_look");
+      const room_card = document.querySelector(".room--card");
+      const fade_img = document.querySelector(".img--fade");
+      const rListImg = document.querySelector(".r-list_img");
+      const splitText = document.querySelectorAll(".split-text");
+
+      const animations = [
+        {
+          target: element.current,
+          child: bromley_chair_img,
+          className: "reveal",
+        },
+        {
+          target: shopTheLookContainer.current,
+          child: shop_the_look_img,
+          className: "reveal",
+        },
+        {
+          target: shopTheLookContainer.current,
+          child: room_card,
+          className: "visible",
+        },
+        {
+          target: fadeContainer.current,
+          child: fade_img,
+          className: "visible",
+        },
+        {
+          target: textwithRList.current,
+          child: rListImg,
+          className: "reveal",
+        },
+      ];
+
+      animations.forEach(({ target, child, className }) => {
+        animateElementOnView(target, addClass, 0.1, child, className);
+      });
+      splitText.forEach((text) => {
+        animateElementOnView(
+          fadeContainer.current,
+          addClass,
+          0.1,
+          text,
+          "reveal"
+        );
+      });
+    };
+
+    animateElements();
+  }, [isLoading]);
 
   useEffect(() => {
     async function fetchData(page = 1, limit = 12) {
@@ -38,7 +104,6 @@ export default function Home() {
         setError(true);
       } finally {
         setIsLoading(false);
-        setReveal(true);
       }
     }
 
@@ -71,12 +136,12 @@ export default function Home() {
         <div>
           <div
             className="min-h-[80vh] md:min-h-auto w-full relative flex bg-milk text-milk"
-            style={{ aspectRatio: "1.49667" }}
+            style={{ aspectRatio: "1.5" }}
           >
             <div className="absolute left-0 top-0 w-full h-full overflow-hidden block">
               <img
-                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=2500"
-                srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Bromley_Mohair_03_0386_1_ed643bc5-9fa3-4bdb-8d51-570a9b6130c3.jpg?v=1729014910&width=2400 2400w"
+                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2500"
+                srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2400 2400w"
                 style={{ opacity: 1 }}
                 className="object-center object-cover max-w-full absolute top-0 left-0 w-full h-full overlay__img"
               />
@@ -93,6 +158,8 @@ export default function Home() {
         <div className="image-with_text-wrapper">
           <div
             className="order-2 relative overflow-hidden w-full z-0"
+            ref={element}
+            id="bromley_chair"
             style={{
               marginRight:
                 "calc((100vw - max(calc((100vw - calc(1600px - (40px) * 2)) / 2), 40px) * 2 - 24px * (20 - 1)) / 20)",
@@ -103,7 +170,7 @@ export default function Home() {
               srcSet="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1200 1200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1400 1400w"
               alt="The Bromley Chair"
               loading="lazy"
-              className="z-[1] relative block w-full"
+              className="z-[1] relative block w-full img--animated"
             />
           </div>
           <div className="order-1 z-[1] block relative mr-0">
@@ -113,7 +180,7 @@ export default function Home() {
                   <span className="block">ROWEAM NEW VINTAGE</span>
                 </div>
                 <div className="mt-12 mb-6 h2">
-                  <span className="block text-4xl md:text-[56px] text-[#5e3519]">
+                  <span className="block text-4xl md:text-5xl text-[#5e3519]">
                     The Bromley Chair
                   </span>
                 </div>
@@ -146,14 +213,12 @@ export default function Home() {
             <header className="max-w-full my-7 md:my-7 md:m-0 block px-6 md:px-0">
               <div>
                 <div className="flex items-center space-x-6">
-                  <h4 className="h2 text-darkBrown text-2xl md:text-3xl lg:text-4xl">
-                    Made To Age
-                  </h4>
+                  <h4 className="h2 text-lightBrown text-3xl">Made To Age</h4>
                   <div className="mt-0 block">
                     <a
                       href="/"
                       style={{ backgroundPosition: "99% -97%, 99% 99%" }}
-                      className="text-lightBrown relative text-sm md:text-md lg:text-lg shop-button"
+                      className="text-lightBrown relative text-sm shop-button"
                     >
                       SHOP ALL
                     </a>
@@ -184,7 +249,7 @@ export default function Home() {
                         </div>
 
                         <div>
-                          <h6 className="text-darkBrown capitalize text-sm md:text-md lg:text-lg">
+                          <h6 className="text-darkGray capitalize text-sm">
                             {li}
                           </h6>
                         </div>
@@ -197,26 +262,23 @@ export default function Home() {
             {isLoading ? (
               <LoadingSkeleton></LoadingSkeleton>
             ) : (
-              <ProductReel products={getReelItems(7)} />
+              <ProductReel products={getReelItems(7)} isLoading={isLoading} />
             )}
           </div>
         </div>
       </section>
 
-      <section
-        id="shop-the-look"
-        style={{ transition: "clip-path .25s ease-out, opacity .25s ease-out" }}
-      >
-        <div className="w-full relative mt-10">
+      <section ref={shopTheLookContainer}>
+        <div className="w-full relative mt-10" id="shop-the_look">
           <div className="relative overflow-hidden text-milk">
             <div className="absolute bottom-6 md:bottom-10 left-0 w-full">
               <div className="w-full max-w-[1600px] px-6 md:px-10">
                 <div className="max-w-[500px]">
-                  <div className="h2 text-2xl text-[34px] md:text-4xl lg:text-5xl">
+                  <div className="h2 text-2xl text-[34px] md:text-4xl">
                     Sabi In Situ
                   </div>
                   <div className="mt-[15px]">
-                    <p className="text-sm md:text-md lg:text-lg">
+                    <p>
                       A clean line of tailored upholstery, simple and elegant.
                       Drawing inspiration from the seamless fusion of strength
                       and femininity, the Sabi embodies a symphony of grace and
@@ -225,7 +287,7 @@ export default function Home() {
                     <div className="mt-5">
                       <Link
                         href=""
-                        className="inline-block uppercase relative shop-room-button text-sm md:text-md lg:text-lg"
+                        className="inline-block uppercase relative shop-room-button text-sm"
                       >
                         shop this room
                       </Link>
@@ -236,21 +298,22 @@ export default function Home() {
             </div>
             <div>
               <img
-                src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2500"
-                srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1400 1400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1600 1600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=1800 1800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2000 2000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2200 2200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_ec8e90bf-c2b2-4474-ab46-37b190fa478f.jpg?v=1717414381&width=2400 2400w"
+                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2500"
+                srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=500 500w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2400 2400w"
                 alt="product image"
                 className="w-full object-cover object-center hidden md:inline-block"
               />
               <img
-                src="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=1178"
-                srcset="//roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=500 500w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Sabi_01_0682-MAIN1_2aeeb711-0c31-40cf-af10-f813e2011586.jpg?v=1717414234&width=1000 1000w"
+                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=1874"
+                srcset="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=500 500w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_Handheld_0519.jpg?v=1731943467&width=1600 1600w"
                 alt="product image"
                 className="object-cover object-center inline-block md:hidden"
               />
             </div>
-            <div className="absolute top-[26%] md:top-[22%] left-[36%] md:left-[45%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[26%] md:top-[53%] left-[36%] md:left-[50%] ml-[-12px] mt-[-12px]">
               <button
                 type="button"
+                aria-expanded="true"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
               >
                 <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
@@ -258,10 +321,49 @@ export default function Home() {
                 </span>
               </button>
               <div
+                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-1/2 shadow-md z-[1] bg-[#221f20] room--card"
+                style={{ left: "calc(100% + 7px)" }}
+              >
+                <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                    srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                    alt="product image"
+                    className="h-full w-full object-cover object-center bg-[#a5a097]"
+                  />
+                </div>
+                <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                  <Link
+                    href="/"
+                    className="pointer-events-none block mb-[2px] text-sm text-lightBrown bg-milk"
+                  >
+                    Lorenzo Sofa
+                  </Link>
+                  <div className="w-full">
+                    <Link
+                      href=""
+                      className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                    >
+                      see more
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute top-[55%] md:top-[70%] left-[78%] md:left-[52%] ml-[-12px] mt-[-12px]">
+              <button
+                type="button"
+                className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+              >
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
+                  Coffee Table
+                </span>
+              </button>
+              <div
                 className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
                 style={{
                   opacity: "1",
-                  visibility: "visible",
+                  visibility: "hidden",
                   transform: "scale(1) translateY(-50%)",
                   left: "calc(100% + 7px)",
                   gridTemplateColumns: "100px 100px",
@@ -277,14 +379,14 @@ export default function Home() {
                 </div>
                 <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
                   <Link
-                    href=""
+                    href="/"
                     className="pointer-events-none block mb-[2px] text-xs"
                   >
-                    Table Lamps
+                    Lorenzo Sofa
                   </Link>
                   <div className="w-full">
                     <Link
-                      href=""
+                      href="/"
                       className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
                     >
                       see more
@@ -293,13 +395,149 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[55%] md:top-[54%] left-[78%] md:left-[70%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[55%] md:top-[50%] left-[78%] md:left-[85%] ml-[-12px] mt-[-12px]">
               <button
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
               >
                 <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
-                  Seating
+                  Vasses & Vessels
+                </span>
+              </button>
+              <div
+                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                style={{
+                  opacity: "1",
+                  visibility: "hidden",
+                  transform: "scale(1) translateY(-50%)",
+                  left: "calc(100% + 7px)",
+                  gridTemplateColumns: "100px 100px",
+                }}
+              >
+                <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                    srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                    alt="product image"
+                    className="h-full w-full object-cover object-center bg-[#a5a097]"
+                  />
+                </div>
+                <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                  <Link
+                    href="/"
+                    className="pointer-events-none block mb-[2px] text-xs"
+                  >
+                    Lorenzo Sofa
+                  </Link>
+                  <div className="w-full">
+                    <Link
+                      href="/"
+                      className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                    >
+                      see more
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute top-[55%] md:top-[82%] left-[78%] md:left-[70%] ml-[-12px] mt-[-12px]">
+              <button
+                type="button"
+                className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+              >
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
+                  Arnt Lande Chair by Møller & Stokke Arnt Lande Chair by Møller
+                  & Stokke
+                </span>
+              </button>
+              <div
+                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                style={{
+                  opacity: "1",
+                  visibility: "hidden",
+                  transform: "scale(1) translateY(-50%)",
+                  left: "calc(100% + 7px)",
+                  gridTemplateColumns: "100px 100px",
+                }}
+              >
+                <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                    srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                    alt="product image"
+                    className="h-full w-full object-cover object-center bg-[#a5a097]"
+                  />
+                </div>
+                <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                  <Link
+                    href="/"
+                    className="pointer-events-none block mb-[2px] text-xs"
+                  >
+                    Lorenzo Sofa
+                  </Link>
+                  <div className="w-full">
+                    <Link
+                      href="/"
+                      className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                    >
+                      see more
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute top-[55%] md:top-[59%] left-[78%] md:left-[5%] ml-[-12px] mt-[-12px]">
+              <button
+                type="button"
+                className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+              >
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
+                  Lawrence Peabody Chaise
+                </span>
+              </button>
+              <div
+                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                style={{
+                  opacity: "1",
+                  visibility: "hidden",
+                  transform: "scale(1) translateY(-50%)",
+                  left: "calc(100% + 7px)",
+                  gridTemplateColumns: "100px 100px",
+                }}
+              >
+                <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                    srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                    alt="product image"
+                    className="h-full w-full object-cover object-center bg-[#a5a097]"
+                  />
+                </div>
+                <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                  <Link
+                    href="/"
+                    className="pointer-events-none block mb-[2px] text-xs"
+                  >
+                    Lorenzo Sofa
+                  </Link>
+                  <div className="w-full">
+                    <Link
+                      href="/"
+                      className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                    >
+                      see more
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute top-[55%] md:top-[30%] left-[78%] md:left-[73%] ml-[-12px] mt-[-12px]">
+              <button
+                type="button"
+                className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+              >
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
+                  Amber Bucolic Tapestry
                 </span>
               </button>
               <div
@@ -338,13 +576,13 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[57%] md:top-[38%] left-[24%] md:left-[42%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[57%] md:top-[45%] left-[24%] md:left-[27%] ml-[-12px] mt-[-12px]">
               <button
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
               >
                 <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
-                  Harvard Divinity Desk
+                  Table Lamps
                 </span>
               </button>
               <div
@@ -393,22 +631,16 @@ export default function Home() {
             <div className="w-full px-6 md:p-16">
               <div>
                 <h5 className="text-lightBrown text-sm" id="slide-up">
-                  <span className="uppercase text-sm md:text-md lg:text-lg">
+                  <span className="uppercase text-sm">
                     Part new vintage, part true vintage
                   </span>
                 </h5>
 
                 <div className="mt-4">
-                  <span
-                    className="text-darkBrown text-5xl md:text-6xl lg:text-7xl h2 block"
-                    id="slide-up"
-                  >
-                    The Oldwood
+                  <span className="block text-4xl md:text-5xl text-[#5e3519] h2 split-text">
+                    The Roweam
                   </span>
-                  <span
-                    className="text-darkBrown text-5xl md:text-6xl lg:text-7xl h2 block"
-                    id="slide-up"
-                  >
+                  <span className="block text-4xl md:text-5xl text-[#5e3519] h2 split-text">
                     Method
                   </span>
                 </div>
@@ -424,7 +656,7 @@ export default function Home() {
                 <div className="mt-8">
                   <Link
                     href="/"
-                    className="shop-button relative uppercase text-lightBrown"
+                    className="shop-button relative uppercase text-lightBrown text-[13px]"
                   >
                     Learn More
                   </Link>
@@ -432,13 +664,13 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex flex-wrap h-full w-full">
-              <div className="overflow-hidden order-2 h-full w-full">
+            <div className="flex flex-wrap h-full w-full" ref={fadeContainer}>
+              <div className="overflow-hidden order-2 h-full w-full fade--container">
                 <img
                   src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
                   srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000 2000w"
                   alt="product image"
-                  className="h-full w-full object-cover object-center"
+                  className="h-full w-full object-cover object-center img--fade"
                 />
               </div>
             </div>
@@ -447,7 +679,7 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="image-with-text-r-list">
+        <div className="image-with-text-r-list" ref={textwithRList}>
           <div className="px-6 md:px-10 w-full">
             <div className="overflow-hidden flex flex-wrap">
               <div className="relative w-full overflow-hidden mb-8">
@@ -455,7 +687,7 @@ export default function Home() {
                   src="//roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=2000"
                   srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1400 1400w"
                   alt="product image"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center r-list_img"
                 />
               </div>
             </div>

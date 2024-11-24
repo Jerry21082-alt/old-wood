@@ -3,6 +3,7 @@
 import "./global.css";
 import "../styles/typography.css";
 import "../styles/nav.css";
+import "../styles/productReel.css";
 
 import Layout from "@/components/Layout";
 import { store } from "@/store/store";

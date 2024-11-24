@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleCart } from "@/features/navigation/navigationSlice";
+import { usePathname, useRouter } from "next/navigation";
 
 const useScreen = (screen) => {
   const [screenSize, setScreenSize] = useState(false);
@@ -85,170 +88,13 @@ const animateItems = (items) => {
   );
 };
 
-const setupMenuInteraction = () => {
-  // Query DOM elements
-  const queryDomElements = () => ({
-    linkItems: document.querySelectorAll(".link__items > a"),
-    megaMenu: document.querySelector(".mega__menu"),
-    navContainer: document.querySelector(".nav_container"),
-    navHeader: document.querySelector(".header"),
-    shopMenu: document.querySelector("#shop_menu"),
-    collectionMenu: document.querySelector("#collection_menu"),
-    shopItems: document.querySelectorAll("#shop_items"),
-    collectionCards: document.querySelectorAll("#collection_card"),
-    defaultLinks: document.querySelectorAll("#default-link"),
-  });
-
-  const dom = queryDomElements();
-  const {
-    linkItems,
-    megaMenu,
-    navContainer,
-    navHeader,
-    shopMenu,
-    collectionMenu,
-    shopItems,
-    collectionCards,
-    defaultLinks,
-  } = dom;
-
-  const domArray = [
-    linkItems,
-    megaMenu,
-    navContainer,
-    navHeader,
-    shopMenu,
-    collectionMenu,
-    shopItems,
-    collectionCards,
-    defaultLinks,
-  ];
-
-  for (const element of domArray) {
-    if (!element) {
-      console.warn("Required DOM element not found!");
-      return;
-    }
-  }
-
-  // hide megaMenu when any of the default link is clicked
-  const handleMegaMenuCloseOnClick = (elements) => {
-    elements.forEach((element) => {
-      element.addEventListener("click", () => hideElement(megaMenu));
-    });
-  };
-
-  // handleMegaMenuCloseOnClick(defaultLinks);
-
-  // Find buttons by text content
-  const findButtonByText = (buttons, text) =>
-    Array.from(buttons).find((btn) => btn.innerText.trim() === text);
-
-  const shopBtn = findButtonByText(linkItems, "SHOP");
-
-  const collectionBtn = findButtonByText(linkItems, "COLLECTIONS");
-
-  // Event Handlers
-  const handleShowMegaMenu = () => showElement(megaMenu);
-  const handleHideMegaMenu = (e) => {
-    if (!megaMenu.contains(e.relatedTarget)) hideElement(megaMenu);
-  };
-
-  const handleShowShopMenu = () => {
-    showElement(megaMenu);
-    removeClass(shopMenu, "hidden");
-    addClass(collectionMenu, "hidden");
-    animateItems(shopItems);
-  };
-
-  const handleShowCollectionMenu = () => {
-    showElement(megaMenu);
-    addClass(shopMenu, "hidden");
-    removeClass(collectionMenu, "hidden");
-    animateItems(collectionCards);
-  };
-
-  const toggleNavBorder = (add) =>
-    add
-      ? addClass(navHeader, "header--bordered")
-      : removeClass(navHeader, "header--bordered");
-
-  // Attach Event Listeners
-  collectionBtn?.addEventListener("mouseenter", handleShowCollectionMenu);
-  collectionBtn?.addEventListener("mouseleave", handleHideMegaMenu);
-  collectionBtn?.addEventListener("click", () => hideElement(megaMenu));
-  shopBtn?.addEventListener("mouseenter", handleShowShopMenu);
-  shopBtn?.addEventListener("mouseleave", handleHideMegaMenu);
-  shopBtn?.addEventListener("click", () => hideElement(megaMenu));
-  navContainer.addEventListener("mouseenter", () => toggleNavBorder(true));
-  navContainer.addEventListener("mouseleave", () => toggleNavBorder(false));
-  megaMenu.addEventListener("mouseenter", handleShowMegaMenu);
-  megaMenu.addEventListener("mouseleave", () => hideElement(megaMenu));
-};
-
-const removeMenuInteraction = () => {
-  // Query DOM elements
-  const queryDomElements = () => ({
-    linkItems: document.querySelectorAll(".link__items > a"),
-    megaMenu: document.querySelector(".mega__menu"),
-    navContainer: document.querySelector(".nav_container"),
-    navHeader: document.querySelector(".header"),
-    shopMenu: document.querySelector(".shop_menu"),
-    shopItems: document.querySelectorAll("#shop_items"),
-  });
-
-  const dom = queryDomElements();
-
-  const { linkItems, megaMenu, navContainer, navHeader, shopMenu, shopItems } =
-    dom;
-
-  if (!linkItems || !megaMenu || !navContainer || !navHeader || !shopMenu) {
-    console.warn("Required DOM elements not found.");
-    return;
-  }
-
-  // Find buttons by text content
-  const findButtonByText = (buttons, text) =>
-    Array.from(buttons).find((btn) => btn.textContent.trim() === text);
-
-  const shopBtn = findButtonByText(linkItems, "SHOP");
-  const collectionBtn = findButtonByText(linkItems, "COLLECTIONS");
-
-  // Event Handlers
-  const handleShowMegaMenu = () => showElement(megaMenu);
-  const handleHideMegaMenu = (e) => {
-    if (!megaMenu.contains(e.relatedTarget)) hideElement(megaMenu);
-  };
-
-  const handleShowShopMenu = () => {
-    showElement(megaMenu);
-    removeClass(shopMenu, "hidden");
-    animateItems(shopItems);
-  };
-
-  const handleShowCollectionMenu = () => {
-    showElement(megaMenu);
-    addClass(shopMenu, "hidden");
-  };
-
-  const toggleNavBorder = (add) =>
-    add
-      ? addClass(navHeader, "header--bordered")
-      : removeClass(navHeader, "header--bordered");
-
-  // Attach Event Listeners
-  collectionBtn?.removeEventListener("mouseenter", handleShowCollectionMenu);
-  shopBtn?.removeEventListener("mouseenter", handleShowShopMenu);
-  shopBtn?.removeEventListener("mouseleave", handleHideMegaMenu);
-  navContainer.removeEventListener("mouseenter", () => toggleNavBorder(true));
-  navContainer.removeEventListener("mouseleave", () => toggleNavBorder(false));
-  megaMenu.removeEventListener("mouseenter", handleShowMegaMenu);
-  megaMenu.removeEventListener("mouseleave", () => hideElement(megaMenu));
-};
-
 export default function Nav() {
   const isDesktop = useScreen(768);
   const scrolled = isScrolled();
+
+  const dispatch = useDispatch();
+  const pathname = usePathname();
+  const cartOpen = useSelector((state) => state.navigation.isCartOpen);
 
   const headerPrimaryLinks = [
     {
@@ -265,7 +111,6 @@ export default function Nav() {
     },
     { link_text: "Insitu", href: "/insitu" },
   ];
-  const headerSecondaryLinks = ["Search", "Login", "Cart"];
   const shopItemsLinks = [
     {
       heading: "Furniture",
@@ -332,21 +177,165 @@ export default function Nav() {
     ],
   };
 
+  const setupMenuInteraction = () => {
+    // Query DOM elements
+    const queryDomElements = () => ({
+      linkItems: document.querySelectorAll(".link__items > a"),
+      megaMenu: document.querySelector(".mega__menu"),
+      navContainer: document.querySelector(".nav_container"),
+      navHeader: document.querySelector(".header"),
+      shopMenu: document.querySelector("#shop_menu"),
+      collectionMenu: document.querySelector("#collection_menu"),
+      shopItems: document.querySelectorAll("#shop_items"),
+      collectionCards: document.querySelectorAll("#collection_card"),
+      defaultLinks: document.querySelectorAll(".prevent-default"),
+    });
+
+    const dom = queryDomElements();
+    const {
+      linkItems,
+      megaMenu,
+      navContainer,
+      navHeader,
+      shopMenu,
+      collectionMenu,
+      shopItems,
+      collectionCards,
+      defaultLinks,
+    } = dom;
+
+    Object.values(dom).forEach((element) => {
+      if (!element) {
+        console.warn("Required DOM element not found!");
+        return;
+      }
+    });
+
+    // Find buttons by text content
+    const findButtonByText = (buttons, text) =>
+      Array.from(buttons).find((btn) => btn.innerText.trim() === text);
+
+    const shopBtn = findButtonByText(linkItems, "SHOP");
+
+    const collectionBtn = findButtonByText(linkItems, "COLLECTIONS");
+
+    // Event Handlers
+    const handleShowMegaMenu = () => showElement(megaMenu);
+    const handleHideMegaMenu = (e) => {
+      if (!megaMenu.contains(e.relatedTarget)) hideElement(megaMenu);
+    };
+
+    const handleShowShopMenu = () => {
+      showElement(megaMenu);
+      removeClass(shopMenu, "hidden");
+      addClass(collectionMenu, "hidden");
+      animateItems(shopItems);
+    };
+
+    const handleShowCollectionMenu = () => {
+      showElement(megaMenu);
+      addClass(shopMenu, "hidden");
+      removeClass(collectionMenu, "hidden");
+      animateItems(collectionCards);
+    };
+
+    // Attach Event Listeners
+    collectionBtn?.addEventListener("mouseenter", handleShowCollectionMenu);
+    collectionBtn?.addEventListener("mouseleave", handleHideMegaMenu);
+    collectionBtn?.addEventListener("click", () => hideElement(megaMenu));
+    shopBtn?.addEventListener("mouseenter", handleShowShopMenu);
+    shopBtn?.addEventListener("mouseleave", handleHideMegaMenu);
+    shopBtn?.addEventListener("click", () => hideElement(megaMenu));
+    megaMenu.addEventListener("mouseenter", handleShowMegaMenu);
+    megaMenu.addEventListener("mouseleave", () => hideElement(megaMenu));
+  };
+
+  const removeMenuInteraction = () => {
+    // Query DOM elements
+    const queryDomElements = () => ({
+      linkItems: document.querySelectorAll(".link__items > a"),
+      megaMenu: document.querySelector(".mega__menu"),
+      navContainer: document.querySelector(".nav_container"),
+      navHeader: document.querySelector(".header"),
+      shopMenu: document.querySelector(".shop_menu"),
+      shopItems: document.querySelectorAll("#shop_items"),
+    });
+
+    const dom = queryDomElements();
+
+    const {
+      linkItems,
+      megaMenu,
+      navContainer,
+      navHeader,
+      shopMenu,
+      shopItems,
+    } = dom;
+
+    if (!linkItems || !megaMenu || !navContainer || !navHeader || !shopMenu) {
+      console.warn("Required DOM elements not found.");
+      return;
+    }
+
+    // Find buttons by text content
+    const findButtonByText = (buttons, text) =>
+      Array.from(buttons).find((btn) => btn.textContent.trim() === text);
+
+    const shopBtn = findButtonByText(linkItems, "SHOP");
+    const collectionBtn = findButtonByText(linkItems, "COLLECTIONS");
+
+    // Event Handlers
+    const handleShowMegaMenu = () => showElement(megaMenu);
+    const handleHideMegaMenu = (e) => {
+      if (!megaMenu.contains(e.relatedTarget)) hideElement(megaMenu);
+    };
+
+    const handleShowShopMenu = () => {
+      showElement(megaMenu);
+      removeClass(shopMenu, "hidden");
+      animateItems(shopItems);
+    };
+
+    const handleShowCollectionMenu = () => {
+      showElement(megaMenu);
+      addClass(shopMenu, "hidden");
+    };
+
+    const toggleNavBorder = (add) =>
+      add
+        ? addClass(navHeader, "header--bordered")
+        : removeClass(navHeader, "header--bordered");
+
+    // Attach Event Listeners
+    collectionBtn?.removeEventListener("mouseenter", handleShowCollectionMenu);
+    shopBtn?.removeEventListener("mouseenter", handleShowShopMenu);
+    shopBtn?.removeEventListener("mouseleave", handleHideMegaMenu);
+    // navContainer.removeEventListener("mouseenter", () => toggleNavBorder(true));
+    // navContainer.removeEventListener("mouseleave", () => toggleNavBorder(true));
+    megaMenu.removeEventListener("mouseenter", handleShowMegaMenu);
+    megaMenu.removeEventListener("mouseleave", () => hideElement(megaMenu));
+  };
+
   useEffect(() => {
     setupMenuInteraction();
     return () => removeMenuInteraction();
   }, []);
 
+  const openCart = (e) => {
+    e.preventDefault();
+    dispatch(toggleCart());
+  };
+
   return (
     <div
       style={{ marginBottom: "calc(-1*65.5%, 0px) + 0px" }}
       className={`fixed top-0 z-[4] right-0 w-full nav_container ${
-        scrolled ? "reveal" : ""
-      }`}
+        scrolled || cartOpen ? "reveal" : ""
+      }  ${pathname !== "/" ? "not-homepage" : ""}`}
     >
       <div
         className={`block relative header ${
-          scrolled ? "header__hidden header--bordered" : ""
+          scrolled || cartOpen ? "header__hidden header--bordered" : ""
         }`}
       >
         <div className="relative z-[2] max-w-[1600px] w-full mx-auto px-6 md:px-10 block">
@@ -355,7 +344,7 @@ export default function Nav() {
             className="flex items-center"
           >
             <nav
-              className="justify-end md:flex items-center hidden"
+              className="justify-end md:flex items-center"
               style={{ flex: "1 1 0" }}
             >
               <div>
@@ -521,7 +510,7 @@ export default function Nav() {
                 <img
                   src="//roweam.com/cdn/shop/files/roweam-logo_320x.png?v=1686631893"
                   alt="logo"
-                  className="max-w-[160px] block w-max"
+                  className="max-w-[160px] block w-max logo--img"
                 />
               </Link>
             </h1>
@@ -544,8 +533,8 @@ export default function Nav() {
                     <path d="M63.3 59.9c3.8-4.6 6.2-10.5 6.2-17 0-14.6-11.9-26.5-26.5-26.5S16.5 28.3 16.5 42.9 28.4 69.4 43 69.4c6.4 0 12.4-2.3 17-6.2l20.6 20.6c.5.5 1.1.7 1.7.7.6 0 1.2-.2 1.7-.7.9-.9.9-2.5 0-3.4L63.3 59.9zm-20.4 4.7c-12 0-21.7-9.7-21.7-21.7s9.7-21.7 21.7-21.7 21.7 9.7 21.7 21.7-9.7 21.7-21.7 21.7z"></path>
                   </svg>
                   <Link
-                    href="/"
-                    className="w-max block uppercase text-[13px] text-milk nav--link link--animated relative"
+                    href="/search"
+                    className="w-max block uppercase text-[13px] text-milk nav--link link--animated prevent-default relative"
                     aria-expanded="false"
                   >
                     Search
@@ -607,9 +596,10 @@ export default function Nav() {
                   </svg>
 
                   <Link
-                    href="/accounts/login"
-                    className="w-max block uppercase text-[13px] text-milk nav--link link--animated relative"
+                    href="/cart"
+                    className="w-max block uppercase text-[13px] text-milk nav--link link--animated relative prevent-default"
                     aria-expanded="false"
+                    onClick={openCart}
                   >
                     Cart
                   </Link>

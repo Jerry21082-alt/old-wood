@@ -1,6 +1,6 @@
-import { delay } from "@/helpers";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
+import { delay } from "@/helpers/delay";
 
 export default function NewsLetter() {
   const [showNewsLetter, setShowNewsLetter] = useState(false);

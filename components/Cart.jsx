@@ -11,8 +11,8 @@ import {
   toggleCart,
 } from "@/features/navigation/navigationSlice";
 import { useRouter } from "next/navigation";
-import { delay } from "@/helpers";
 import { gsap } from "gsap";
+import { delay } from "@/helpers/delay";
 
 export default function Cart() {
   const cartState = useSelector((state) => state.navigation.isCartOpen);
@@ -161,10 +161,16 @@ export default function Cart() {
   return (
     <section
       ref={cartRef}
-      className={`w-screen md:w-[45%] fixed top-[62.5px] md:top-[66.5px] border-t border-listBorder bottom-0 right-0 bg-milk z-[1000] px-6 md:px-10 ${
+      className={`w-screen max-w-[500px] md:w-[89vw] fixed top-[62.5px] md:top-[66.5px] bottom-0 right-0 bg-milk z-[1000] px-6 md:px-10 ${
         !cartState ? "close-cart" : "open-cart"
       }`}
     >
+      <span
+        className={`fixed top-0 right-full w-screen h-screen cart__overlay ${
+          cartState ? "open" : ""
+        }`}
+        onClick={onClose}
+      ></span>
       {isMounted && cartItems.length > 0 ? (
         <div className="w-full h-full overflow-x-hidden overflow-y-scroll flex-grow pb-36 custom-scrollbar">
           {cartItems.map((item) => {
@@ -343,7 +349,7 @@ export default function Cart() {
                 className="w-full px-4 md:px-8 py-3 text-sm md:text-[16px] lg:text-lg bg-lightBrown text-milk relative"
               >
                 <div
-                  className="w-full h-full flex items-center justify-center"
+                  className="w-full h-full flex items-center justify-center text-sm"
                   style={{
                     opacity: isAddingToCart ? "0" : "1",
                     transition: "opacity .2s ease-in-out",
@@ -383,12 +389,10 @@ export default function Cart() {
         <div className="flex items-center justify-center bg-milk h-full w-full">
           <div className="w-full">
             <div className="pb-14">
-              <h3 className="h2 block mb-2 text-2xl md:text-3xl lg:text-4xl">
+              <h3 className="h2 block mb-2 text-2xl md:text-3xl text-lightBrown">
                 Your cart is empty
               </h3>
-              <p className="text-sm md:text-[16px] lg:text-lg">
-                Discover our products.
-              </p>
+              <p className="text-sm">Discover our products.</p>
             </div>
             <div className="w-full">
               <button type="button" className="w-full bg-lightBrown px-8 py-3">
@@ -399,7 +403,7 @@ export default function Cart() {
                       id: 1,
                     },
                   }}
-                  className="w-full h-full text-milk text-sm md:text-[16px] lg:text-lg"
+                  className="w-full h-full text-milk text-sm"
                 >
                   continue shopping
                 </Link>

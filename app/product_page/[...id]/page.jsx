@@ -12,9 +12,11 @@ import { toggleAgree } from "@/features/checkout/checkoutSlice";
 import { formatPrice } from "@/helpers/formatPrice";
 import { addToCart } from "@/features/cart/cartSlice";
 import { toggleOverlay } from "@/features/navigation/navigationSlice";
-import { delay } from "@/helpers";
 import { toggleCart } from "@/features/navigation/navigationSlice";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
+import { delay } from "@/helpers/delay";
+import { animateElementOnView } from "@/helpers/animateElementOnView";
+import { addClass } from "@/helpers/addClass";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -34,7 +36,6 @@ export default function Product_Page({ params }) {
 
   const agree = useSelector((state) => state.checkout.agree);
   const dispatch = useDispatch();
-  const scrollRef = useRef(null);
 
   useEffect(() => {
     async function fetchData(pairLimit = 8) {
@@ -59,6 +60,57 @@ export default function Product_Page({ params }) {
   useEffect(() => {
     setReveal(true);
   }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const dom = {
+        collapseBtn: document?.querySelectorAll(".collapse--btn"),
+        collapseDiv: document?.querySelectorAll(".collapseable"),
+        collapseVisibleText: document?.querySelector(".collapse-visible_text"),
+      };
+
+      const { collapseBtn, collapseDiv, collapseVisibleText } = dom;
+
+      const toggleHeight = (element) => {
+        if (!element) return;
+        if (element.style.height === "0px" || !element.style.height) {
+          element.style.height = `${element.scrollHeight}px`;
+        } else {
+          element.style.height = "0px";
+        }
+      };
+
+      const handleClick = (idx) => {
+        collapseDiv[idx].classList.toggle("not-collapse");
+        collapseVisibleText.classList.toggle("hide");
+        toggleHeight(collapseDiv[idx]);
+      };
+
+      collapseBtn.forEach((btn, idx) => {
+        btn.addEventListener("click", () => handleClick(idx));
+      });
+
+      return () => {
+        collapseBtn.forEach((btn, index) =>
+          btn.removeEventListener("click", () => handleClick(index))
+        );
+      };
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const methodGrid = document.querySelector(".method-grid");
+      const methodImg = document.querySelector(".method--img");
+
+      if (!methodGrid || !methodImg) {
+        console.warn("Required DOM element not found!");
+        return;
+      }
+
+      animateElementOnView(methodGrid, addClass, 0.1, methodImg, "reveal");
+    }
+  }, [isLoading]);
 
   const handleIncrement = () => {
     setItem((prevItem) => ({ ...item, quantity: prevItem.quantity + 1 }));
@@ -158,6 +210,8 @@ export default function Product_Page({ params }) {
     setCurrentIndex(index);
   };
 
+  const container = "w-full max-w-[1600px] ml-auto px-10";
+
   if (isLoading) {
     return (
       <div>
@@ -167,685 +221,268 @@ export default function Product_Page({ params }) {
   }
 
   return (
-    <section className="mt-24">
-      <div className="max-w-[1600px] w-full px-6 md:px-10">
-        <div className="mt-6 mb-9 pt-6 block justify-between items-center md:grid product-thombnail">
-          <div className="w-full">
-            <AspectRatioContainer
-              className="w-full overflow-hidden relative"
-              aspectRatio={3 / 4}
-            >
-              <div
-                className="flex w-full h-full relative"
-                style={{
-                  transform: `translateX(${-currentIndex * 100}%)`,
-                  transition: "transform .5s ease-in-out",
-                }}
-                onTouchEnd={handleTouchEnd}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-              >
-                {isLoading ? (
-                  <LoadingSkeleton></LoadingSkeleton>
-                ) : (
-                  item?.allImages.map((img, idx) => (
+    <section style={{ marginTop: "65.5px" }}>
+      <div className={container}>
+        <div
+          className="grid gap-10 pt-10 mx-0 justify-between items-start"
+          style={{ gridTemplateColumns: "50% 50%" }}
+        >
+          <div className="relative w-full block">
+            <div className="relative mx-auto">
+              <div className="block min-w-full text-center">
+                {item.allImages.map((img, idx) => (
+                  <div
+                    key={idx}
+                    className="pointer-events-none mb-10 min-w-full text-center block"
+                  >
                     <div
-                      className="min-w-full box-border flex items-center h-full"
-                      key={idx}
+                      className="overflow-hidden bg-milk z-0 pb-0 relative block mx-auto"
+                      style={{ aspectRatio: 0.75 }}
                     >
                       <img
                         src={img.src}
                         srcSet={img.srcSet}
-                        className="object-cover object-center w-full"
-                        alt="product-image"
-                        style={{
-                          transform: reveal ? "scale(1)" : "scale(1.2)",
-                          opacity: reveal ? "1" : "0",
-                          transition: "transform .4s ease, opacity .4s ease",
-                        }}
+                        alt={item.name}
+                        loading="lazy"
+                        className="relative top-0 left-0 object-cover object-center max-w-full w-auto h-full "
                       />
                     </div>
-                  ))
-                )}
-              </div>
-              <div
-                className="absolute bottom-[10%] left-10 hidden md:block"
-                onClick={handlePrev}
-                style={{
-                  visibility: currentIndex === 0 ? "hidden" : "visible",
-                  opacity: currentIndex === 0 ? "0" : "1",
-                  transition:
-                    "visibility .25s ease-in-out, opacity .25s ease-in-out",
-                }}
-              >
-                <div
-                  className="rounded-full flex items-center justify-center cursor-pointer active:scale-100 hover:scale-110 hover:fill-lightBrown"
-                  style={{
-                    transition:
-                      "transform .25s ease-in-out, fill .25s ease-in-out",
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    version="1.1"
-                    viewBox="0 0 41 51.25"
-                    x="0px"
-                    y="0px"
-                    width="74"
-                    height="74"
-                  >
-                    <title>left-arrow</title>
-                    <path d="M20.5 2.293c-10.045 0-18.207 8.163-18.207 18.207 0 10.044 8.163 18.207 18.207 18.207 10.044 0 18.207-8.163 18.207-18.207s-8.163-18.207-18.207-18.207zM20.5 2.999c9.645 0 17.501 7.856 17.501 17.501s-7.856 17.501-17.501 17.501c-9.645 0-17.501-7.856-17.501-17.501s7.856-17.501 17.501-17.501zM17.622 14.862c-0.088 0-0.176 0.032-0.249 0.105l-5.281 5.281c-0.147 0.147-0.147 0.35 0 0.496l5.274 5.287c0.076 0.076 0.155 0.105 0.252 0.105s0.18-0.031 0.254-0.105c0.147-0.147 0.147-0.35 0-0.496l-4.679-4.679h15.471c0.206 0 0.357-0.151 0.357-0.357s-0.151-0.357-0.357-0.357h-15.471l4.679-4.679c0.147-0.147 0.147-0.35 0-0.496-0.073-0.073-0.161-0.105-0.249-0.105z" />
-                  </svg>
-                </div>
-              </div>
-              <div
-                className="absolute bottom-[10%] right-10 hidden md:block"
-                onClick={handleNext}
-                style={{
-                  visibility:
-                    currentIndex === item.allImages.length - 1
-                      ? "hidden"
-                      : "visible",
-                  opacity:
-                    currentIndex === item.allImages.length - 1 ? "0" : "1",
-                  transition:
-                    "visibility .25s ease-in-out, opacity .25s ease-in-out",
-                }}
-              >
-                <div
-                  className="rounded-full flex items-center justify-center cursor-pointer active:scale-100 hover:scale-110 hover:fill-lightBrown"
-                  style={{
-                    transition:
-                      "transform .25s ease-in-out, fill .25s ease-in-out",
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    version="1.1"
-                    viewBox="0 0 41 51.25"
-                    x="0px"
-                    y="0px"
-                    width="74"
-                    height="74"
-                  >
-                    <title>right-arrow</title>
-                    <path d="M20.5 2.293c-10.045 0-18.207 8.163-18.207 18.207s8.163 18.207 18.207 18.207c10.044 0 18.207-8.163 18.207-18.207s-8.163-18.207-18.207-18.207zM20.5 2.999c9.645 0 17.501 7.856 17.501 17.501s-7.856 17.501-17.501 17.501c-9.645 0-17.501-7.856-17.501-17.501s7.856-17.501 17.501-17.501zM23.385 14.869c-0.088 0-0.176 0.032-0.249 0.105-0.147 0.147-0.147 0.35 0 0.496l4.679 4.679h-15.478c-0.206 0-0.357 0.151-0.357 0.357s0.146 0.35 0.357 0.35h15.471l-4.679 4.679c-0.147 0.147-0.147 0.35 0 0.496 0.074 0.074 0.157 0.105 0.254 0.105s0.176-0.030 0.252-0.105l5.281-5.281c0.147-0.147 0.147-0.35 0-0.496l-5.281-5.281c-0.073-0.073-0.161-0.105-0.249-0.105z" />
-                  </svg>
-                </div>
-              </div>
-            </AspectRatioContainer>
-            <div className="w-full flex md:hidden items-center justify-center mt-4">
-              {item.allImages.map((_, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  className="rounded-full h-3 w-3 ml-3"
-                  style={{
-                    backgroundColor:
-                      currentIndex === idx ? "#221f20" : "#a5a097",
-                    transition: "background-color .4s ease-in-out",
-                  }}
-                  // onClick={() => handleSlideClick(idx)}
-                ></button>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-7 md:mt-0 p-0 md:p-20 w-full">
-            <div className="my-7">
-              <h1 className="h4 text-2xl md:text-4xl lg:text-5xl my-2">
-                Sabi Sectional
-              </h1>
-              <div className="text-lightBrown text-sm md:text-lg lg:text-xl h3">
-                {item.type}
-              </div>
-            </div>
-
-            <div className="w-full">
-              <div className="border-darkGray border-t w-full">
-                <Drawer
-                  color="#221f20"
-                  borderColor="#A5A097"
-                  title="Description"
-                >
-                  <div
-                    className="pb-6 transition-all"
-                    style={{ transitionDuration: ".25s ease" }}
-                  >
-                    <div>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        {item?.description ? item.description : ""}
-                      </p>
-                    </div>
                   </div>
-                </Drawer>
-              </div>
-
-              <div className="border-darkGray w-full">
-                <Drawer color="#221f20" borderColor="#A5A097" title="Dimension">
-                  <div
-                    className="pb-6 transition-all"
-                    style={{ transitionDuration: ".25s ease" }}
-                  >
-                    <div>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        <Link
-                          href="/"
-                          className="text-xs uppercase text-darkBrown shop-button relative"
-                        >
-                          Tearsheet
-                        </Link>
-                      </p>
-                      <p className="my-6 text-darkGray text-sm">Overall</p>
-                      <ul className="flex flex-col space-y-1 text-sm md:text-md lg:text-lg">
-                        <li className="px-1 text-darkGray">
-                          {`width: ${
-                            item?.dimensions?.width
-                              ? item.dimensions.width
-                              : null
-                          } in`}
-                        </li>
-                        <li className="px-1 text-darkGray">
-                          {`Length: ${
-                            item?.dimensions?.length
-                              ? item.dimensions.length
-                              : null
-                          } in`}
-                        </li>
-                        <li className="px-1 text-darkGray">
-                          {`Depth: ${
-                            item.dimensions.depth ? item.dimensions.depth : null
-                          } in`}
-                        </li>
-                        <li className="px-1 text-darkGray">
-                          {`Height: ${item.dimensions.height} in`}
-                        </li>
-                        <li className="px-1 text-darkGray">
-                          {`Seat Height: ${
-                            item.dimensions.seatHeight
-                              ? item.dimensions.seatHeight
-                              : null
-                          } in`}
-                        </li>
-                        <li className="px-1 text-darkGray">
-                          {`Seat Depth: ${
-                            item.dimensions.seatDepth
-                              ? item.dimensions.seatDepth
-                              : null
-                          } in`}
-                        </li>
-                        <li className="px-1 text-darkGray">
-                          {`Arm Height: ${
-                            item.dimensions.armHeight
-                              ? item.dimensions.armHeight
-                              : null
-                          } in`}
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </Drawer>
-              </div>
-
-              <div>
-                <Drawer color="#221f20" borderColor="#A5A097" title="Customize">
-                  <div className="py-2">
-                    <div>
-                      <div className="w-full flex items-center mb-2">
-                        <span className=" text-darkGray uppercase">fabric</span>
-                        <span className="text-sm text-darkBrown ml-6">
-                          Sand
-                        </span>
-
-                        <div className="ml-4">
-                          <Link
-                            href="/"
-                            className=" text-sm text-darkBrown relative"
-                          >
-                            <span className="detail-link relative">
-                              Details
-                            </span>
-                          </Link>
-                        </div>
-
-                        <div className="fabric-grid"></div>
-                      </div>
-                    </div>
-                  </div>
-                </Drawer>
-              </div>
-
-              <div className="mt-6">
-                <span className="text-lightBrown text-[14px] md:text-lg lg:text-xl">
-                  ${formatPrice(item.price)}
-                </span>
-              </div>
-
-              <label id="termCheck" className="mt-4">
-                <input
-                  id="theTerms"
-                  type="checkbox"
-                  required
-                  onClick={handleToggleAgree}
-                  ischecked={agree ? "true" : "false"}
-                />
-                <span className="text-sm md:text-[16px] lg:text-lg max-w-full md:max-w-[300px]">
-                  I agree to the New Vintage terms and conditions
-                </span>
-              </label>
-
-              <div className="flex items-center w-full mt-2 relative">
-                <div
-                  className="absolute top-0 w-full"
-                  style={{ visibility: !isChecked ? "hidden" : "visible" }}
-                >
-                  <div className="absolute -top-2 left-0">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M24 22h-24l12-20z" />
-                    </svg>
-                  </div>
-                  <div className="absolute w-auto z-[10]">
-                    <div className="bg-black text-snow text-sm p-2">
-                      check this box
-                    </div>
-                  </div>
-                </div>
-                <div className="w-28 md:w-[30%] h-12 p-3 md:p-5 flex items-center border border-listBorder">
-                  <div className="flex justify-between items-center w-full">
-                    <button type="button" onClick={handleDecrement}>
-                      <svg
-                        focusable="false"
-                        width="10"
-                        height="2"
-                        viewBox="0 0 10 2"
-                        fill="#5e3519"
-                      >
-                        <path filter="#5e3519" d="M0 0h10v2H0z"></path>
-                      </svg>
-                    </button>
-
-                    <span className="text-lightBrown text-sm md:text-lg lg:text-xl">
-                      {item.quantity}
-                    </span>
-
-                    <button type="button" onClick={handleIncrement}>
-                      <svg
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 20 20"
-                        fill="#5e3519"
-                      >
-                        <title>plus</title>
-                        <path d="M16 10c0 0.553-0.048 1-0.601 1h-4.399v4.399c0 0.552-0.447 0.601-1 0.601s-1-0.049-1-0.601v-4.399h-4.399c-0.552 0-0.601-0.447-0.601-1s0.049-1 0.601-1h4.399v-4.399c0-0.553 0.447-0.601 1-0.601s1 0.048 1 0.601v4.399h4.399c0.553 0 0.601 0.447 0.601 1z"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex-1 ml-4 h-12">
-                  <button
-                    className="w-full uppercase py-3 px-3 bg-lightBrown text-milk relative"
-                    type="button"
-                    onClick={() => addItemToCart(item)}
-                  >
-                    <span
-                      className="text-sm md:text-[14px] lg:text-[16px]"
-                      style={{ opacity: isAddingToCart ? "0" : "1" }}
-                    >
-                      Add to cart
-                    </span>
-                    <span className="absolute w-full h-full top-0 left-0 flex justify-center items-center">
-                      <div
-                        className={isAddingToCart ? "spinner" : ""}
-                        style={{
-                          opacity: !isAddingToCart ? "0" : "1",
-                        }}
-                      >
-                        <svg
-                          fill="#f3f1ea"
-                          width="20px"
-                          height="20px"
-                          viewBox="0 0 1024 1024"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M512 1024c-69.1 0-136.2-13.5-199.3-40.2C251.7 958 197 921 150 874c-47-47-84-101.7-109.8-162.7C13.5 648.2 0 581.1 0 512c0-19.9 16.1-36 36-36s36 16.1 36 36c0 59.4 11.6 117 34.6 171.3 22.2 52.4 53.9 99.5 94.3 139.9 40.4 40.4 87.5 72.2 139.9 94.3C395 940.4 452.6 952 512 952c59.4 0 117-11.6 171.3-34.6 52.4-22.2 99.5-53.9 139.9-94.3 40.4-40.4 72.2-87.5 94.3-139.9C940.4 629 952 571.4 952 512c0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71 437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.2C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3s-13.5 136.2-40.2 199.3C958 772.3 921 827 874 874c-47 47-101.8 83.9-162.7 109.7-63.1 26.8-130.2 40.3-199.3 40.3z" />
-                        </svg>
-                      </div>
-                    </span>
-                  </button>
-                </div>
-              </div>
-
-              <div className="bg-milk p-5 text-sm mt-4 text-sm md:text-md lg:text-lg">
-                <span>
-                  Kindly allow 10-12 weeks lead time for production and
-                  additional 2 weeks for shipping. Thank you.
-                </span>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="flow-root mt-11 px-6">
-        <header>
-          <h3 className="capitalize h2 text-xl md:text-3xl lg:text-4xl border-t border-listBorder pt-7">
-            More about this item
-          </h3>
-        </header>
-      </div>
-
-      <div className="px-6 w-full">
-        <div
-          className="mt-6 overflow-y-hidden overflow-x-auto select"
-          ref={scrollRef}
-        >
-          <div className="min-w-full w-max">
-            <div className="scroll-grid border-y border-listBorder">
-              <button
-                type="button"
-                className="pr-7"
-                onClick={() => handleSelect(1)}
-              >
-                <span
-                  className="text-[12px] md:text-[14px] lg:text-[18px] uppercase"
-                  style={{ color: swipeIndex === 1 ? "#5e35190" : null }}
-                >
-                  product care
-                </span>
-              </button>
-
-              <button
-                type="button"
-                className="pr-7"
-                onClick={() => handleSelect(0)}
-              >
-                <span
-                  className="text-[12px] md:text-[14px] lg:text-[18px] uppercase"
-                  style={{ color: swipeIndex === 0 ? "#5e35190" : null }}
-                >
-                  story
-                </span>
-              </button>
-
-              <button type="button" onClick={() => handleSelect(2)}>
-                <span
-                  className="text-[12px] md:text-[14px] lg:text-[18px] uppercase"
-                  style={{ color: swipeIndex === 2 ? "#5e35190" : null }}
-                >
-                  shipping & return
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="relative p-0 md:p-10"
-        onTouchStart={handleSwipeStart}
-        onTouchEnd={handleTouchDifference}
-        onTouchMove={handleSwipeMove}
-      >
-        <div className="w-full px-6 md:px-10">
           <div
-            className="pb-[30px] border-b border-listBorder block overflow-y-auto "
-            style={{ scrollSnapType: "x mandatory", scrollbarWidth: "none" }}
+            className="p-20 sticky top-0"
+            style={{ width: "calc(100% - 40px)", left: "calc(50% + 40px)" }}
           >
-            <div
-              className="scroll-item-grid"
-              // className="flex min-w-0 relative"
-              style={{ alignItems: "start", justifyContent: "safe start" }}
-            >
-              <div
-                className="w-full gap-6 md:gap-10 flex flex-wrap md:flex-nowrap items-center md:items-start flex-none overflow-hidden mr-0"
-                style={{ scrollSnapAlign: "start" }}
-              >
-                <div className="flex-none w-full md:w-[50%] self-center">
-                  <div
-                    className="flex flex-wrap py-10 pr-10 pl-[3px]"
-                    style={{ alignContent: "space-between" }}
+            <div className="pb-[30px] m-0 border-b border-[#A5A097]">
+              <h1 className="mb-6 h2 text-4xl text-lightBrown">
+                The Bromley Ottoman
+              </h1>
+              <div className="text-[15px] mb-[6px] block text-lightBrown italic">
+                New Vintage
+              </div>
+            </div>
+            <div className="grid" style={{ rowGap: "16px" }}>
+              <div className="relative border-b border-[#A5A097]">
+                <button className="appearance-none px-0 transition-all flex flex-wrap py-[18px] items-center justify-between text-sm overflow-visible cursor-pointer w-full text-lightBrown collapse--btn">
+                  Description
+                  <span className="plus-icon relative"></span>
+                  <p
+                    className="block max-w-[90%] transition-all w-full text-left normal-case h-auto relative mb-0 mt-4 text-shadow collapse-visible_text"
+                    style={{
+                      letterSpacing: 0,
+                      transitionDuration: "0.4s ease-in-out",
+                    }}
                   >
-                    <div>
-                      <h5 className="uppercase text-sm md:text-md lg:text-lg pb-6">
-                        Caring for this item
-                      </h5>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        You may use a steamer on medium to remove wrinkles. Do
-                        not iron.
-                      </p>
-                      <p className="mt-6 text-sm md:text-md lg:text-lg">
-                        Our fabrics are organic in nature which allows for
-                        movement. If you find your tight back sofa is wrinkling,
-                        a simple swipe of the hand and fabric tuck in the arm
-                        will remove those lines. Our cushion internals will
-                        settle and loosen over time. To keep them fresh, simply
-                        fluff and pat to organize the contents.
-                      </p>
-                      <p className="mt-6 text-sm md:text-md lg:text-lg">
-                        Remove stains immediately. If you must, use a damp cloth
-                        to pat out the stain, do not rub. Never use harsh
-                        chemicals to remove stains. For persistent stains,
-                        contact a professional fabric cleaning company.
-                      </p>
-                      <p className="mt-6 text-sm md:text-md lg:text-lg">
-                        It’s important to remember when purchasing items
-                        upholstered in fabric with higher piles, variations in
-                        texture will be highlighted. These fabrics are luxurious
-                        and pile inconsistencies are not a flaw but should be
-                        embraced. It is not uncommon for these fabrics to crush
-                        and distort over time with use. We use these fabrics
-                        often in our designs and cherish their unique qualities.
-                      </p>
-                      <p className="mt-6 text-sm md:text-md lg:text-lg">
-                        To keep these fabrics looking young, it’s recommended to
-                        use a velvet brush or vacuum with an upholstery
-                        attachment to reorganize the pile as you desire.
-                      </p>
-                      <p className="mt-6 text-sm md:text-md lg:text-lg">
-                        Do not steam or iron shearling.
-                      </p>
-                      <p className="mt-6 text-sm md:text-md lg:text-lg">
-                        For small leather stains, use a leather cleaner and
-                        microfiber cloth.
-                      </p>
+                    {item.description?.length > 100
+                      ? `${item?.description.substring(0, 100)}...`
+                      : item?.description}
+                  </p>
+                </button>
+
+                <div
+                  className="h-0 block collapseable"
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className="px-0 transition-all pb-[26px]">
+                    <div className="my-0">
+                      <span>{item?.description}</span>
                     </div>
                   </div>
-                </div>
-                <div className="min-h-full flex-none w-full md:w-[50%]">
-                  <img
-                    src="//roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=1000"
-                    srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=400 400w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=500 500w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=900 900w, //roweam.com/cdn/shop/files/Roweam_Method_4825_Resize_for_Product_Care.jpg?v=1694798533&width=1000 1000w"
-                    alt="product image"
-                    className="object-cover object-center w-full h-full"
-                  />
                 </div>
               </div>
-              <div
-                className="w-full gap-6 md:gap-10 flex flex-wrap md:flex-nowrap items-center md:items-start flex-none overflow-hidden mr-0"
-                style={{ scrollSnapAlign: "start" }}
-              >
-                <div className="flex-none w-full md:w-[50%] self-center">
-                  <div
-                    className="flex flex-wrap py-10 pr-10 pl-[3px]"
-                    style={{ alignContent: "space-between" }}
-                  >
-                    <div>
-                      <h5 className="uppercase text-sm md:text-md lg:text-lg pb-6">
-                        True vintage
-                      </h5>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        We offer domestic shipping to all 50 states using common
-                        carrier. All orders will be fulfilled within 5-7
-                        business days (excluding holidays). Please note that
-                        shipping rates are calculated based on the weight of the
-                        entire order.
-                      </p>
-                      <h5 className="text-sm md:text-md lg:text-lg uppercase my-6 block">
-                        New Vintage
-                      </h5>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        We offer white-glove delivery within the contiguous 48
-                        states. Shipping totals are based on the weight of the
-                        entire order. Please allow 10 - 25 days upon completion
-                        of production for your order to be scheduled for
-                        delivery. You'll be contacted to schedule a delivery
-                        date once your order is delivered to its final
-                        inspection point. Measure furniture in the space and all
-                        entry points to ensure piece will fit upon arrival.
-                      </p>
-                      <h5 className="text-sm md:text-md lg:text-lg my-6 block">
-                        True Vintage - Oversized
-                      </h5>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        Due to the scale of the piece, please inquire with us at{" "}
-                        <a href="/" target="_blank">
-                          hello@oldwood.com
-                        </a>{" "}
-                        . We'll estimate white-glove delivery based on the
-                        delivery location.
-                      </p>
-                      <h5 className="text-sm md:text-md lg:text-lg uppercase my-6">
-                        Damaged or Missing Shipments
-                      </h5>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        In the event that your item arrives damaged or is lost
-                        in transit please contact us at{" "}
-                        <a href="/" target="_blank">
-                          hello@oldwood.com
-                        </a>{" "}
-                        . Please inspect all shipments within 48hrs of delivery.
-                      </p>
-                      <p className="pt-6 text-sm md:text-md lg:text-lg">
-                        <strong>
-                          All Oldwood™ New & True Vintage items are ineligible
-                          for returns or exchanges.
-                        </strong>
-                      </p>
+
+              <div className="mt-[-13px] relative border-b border-[#A5A097]">
+                <button className="appearance-none px-0 transition-all flex flex-wrap py-[18px] items-center justify-between text-sm overflow-visible cursor-pointer w-full text-lightBrown collapse--btn">
+                  Dimensions
+                  <span className="plus-icon relative"></span>
+                </button>
+                <div
+                  className="h-0 block collapseable"
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className="px-0 transition-all pb-[26px]">
+                    <div className="my-0">
+                      <span>
+                        Brutalist and soft. Our take on a staple ottoman adapted
+                        with a chunky square body. Meant to be partnered, yet
+                        strong enough to stand alone.
+                      </span>
                     </div>
                   </div>
-                </div>
-                <div className="min-h-full flex-none w-full md:w-[50%]">
-                  <img
-                    src="//roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=1000"
-                    srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=400 400w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=500 500w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=900 900w, //roweam.com/cdn/shop/files/Roweam_Method_4647_Shipping_Resize.jpg?v=1694798467&width=1000 1000w"
-                    alt="product image"
-                    className="object-cover object-center w-full h-full"
-                  />
                 </div>
               </div>
+
               <div
-                className="w-full gap-6 md:gap-10 flex flex-wrap md:flex-nowrap items-center md:items-start flex-none overflow-hidden mr-0"
-                style={{ scrollSnapAlign: "start" }}
+                className="grid relative pt-[95px] gap-[15px]"
+                style={{ gridTemplateColumns: "100%" }}
               >
-                <div className="flex-none w-full md:w-[50%] self-center">
-                  <div
-                    className="flex flex-wrap py-10 pr-10 pl-[3px]"
-                    style={{ alignContent: "space-between" }}
-                  >
-                    <div>
-                      <h5 className="uppercase text-sm md:text-md lg:text-lg pb-6">
-                        new vintage
-                      </h5>
-                      <p className="text-sm md:text-md lg:text-lg">
-                        Designs inspired by everyday life, our New Vintage items
-                        are made for the home. Antique elements are paired with
-                        luxurious interior upholstery and organic fabrics. Our
-                        New Vintage pieces are made by hand from master
-                        craftsmen and upholsterers with generations worth of
-                        knowledge.{" "}
-                      </p>
+                <div>
+                  <form>
+                    <div className="absolute top-0 left-0 w-full">
+                      <div className="m-0 p-0">
+                        <div className="flex items-center mt-[10px] text-lightBrown text-[16px]">
+                          <div>
+                            <span className="text-lightBrown text-[16px]">
+                              {`$${formatPrice(item.price, 2)}`}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="absolute w-full bottom-[-160px] text-[13px]">
+                        <div>
+                          <p className="w-full block">
+                            <span className="pr-[4px] text-[13px]">
+                              From <b>$972.54</b>/month
+                            </span>
+                            <div className="inline-flex">
+                              <svg
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 341 81"
+                                fill="none"
+                                className="h-[14px] w-[56px] mt-[1px] overflow-hidden"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M227.297 0C220.448 0 214.896 5.47237 214.896 12.2229V67.8125C214.896 74.563 220.448 80.0354 227.297 80.0354H328.357C335.206 80.0354 340.758 74.563 340.758 67.8125V12.2229C340.758 5.47237 335.206 0 328.357 0H227.297ZM244.999 55.8917V41.8012H253.993C262.21 41.8012 266.579 37.2604 266.579 30.379C266.579 23.4976 262.21 19.3782 253.993 19.3782H239.205V55.8917H244.999ZM244.999 24.8084H252.663C257.982 24.8084 260.595 26.9617 260.595 30.5663C260.595 34.1708 258.077 36.3242 252.9 36.3242H244.999V24.8084ZM276.795 56.6407C281.212 56.6407 284.109 54.7214 285.439 51.4445C285.819 55.0959 288.052 56.9684 292.896 55.7044L292.944 51.819C290.996 52.0063 290.616 51.3041 290.616 49.2912V39.7415C290.616 34.124 286.864 30.8003 279.93 30.8003C273.09 30.8003 269.148 34.1708 269.148 39.8819H274.468C274.468 37.1668 276.415 35.5284 279.835 35.5284C283.444 35.5284 285.107 37.0732 285.059 39.7415V40.9586L278.932 41.614C272.045 42.3629 268.246 44.9376 268.246 49.4316C268.246 53.1298 270.905 56.6407 276.795 56.6407ZM277.982 52.4276C274.99 52.4276 273.803 50.836 273.803 49.2443C273.803 47.091 276.273 46.1079 281.117 45.5462L284.917 45.1249C284.679 49.2443 281.877 52.4276 277.982 52.4276ZM310.537 57.7174C308.115 63.5221 304.22 65.2541 298.141 65.2541H295.528V60.4793H298.331C301.655 60.4793 303.27 59.4494 305.028 56.5002L294.246 31.5493H300.23L307.925 49.7593L314.764 31.5493H320.606L310.537 57.7174Z"
+                                  fill="rgb(90, 49, 244)"
+                                ></path>
+                                <path
+                                  d="M29.5136 35.1798C21.5797 33.4835 18.0451 32.8197 18.0451 29.8064C18.0451 26.9722 20.4371 25.5604 25.221 25.5604C29.4282 25.5604 32.5036 27.3726 34.7674 30.9232C34.9382 31.1972 35.2906 31.292 35.5789 31.1445L44.506 26.6983C44.8263 26.5402 44.9438 26.1399 44.7623 25.8343C41.0569 19.5022 34.2121 16.0358 25.1996 16.0358C13.3574 16.0358 6 21.7885 6 30.9338C6 40.648 14.9591 43.1029 22.9038 44.7992C30.8484 46.4955 34.3936 47.1592 34.3936 50.1725C34.3936 53.1858 31.8095 54.6082 26.6518 54.6082C21.8893 54.6082 18.3548 52.4589 16.2191 48.2866C16.059 47.981 15.6852 47.8546 15.3756 48.0127L6.46985 52.364C6.16017 52.5221 6.03203 52.8908 6.19221 53.2069C9.72673 60.2134 16.9773 64.1538 26.6625 64.1538C38.996 64.1538 46.4494 58.496 46.4494 49.0663C46.4494 39.6365 37.4476 36.8972 29.5136 35.2009V35.1798Z"
+                                  fill="rgb(90, 49, 244)"
+                                ></path>
+                                <path
+                                  d="M77.3525 16.0358C72.291 16.0358 67.8168 17.8059 64.6026 20.9561C64.3997 21.1458 64.0687 21.0088 64.0687 20.7349V0.621625C64.0687 0.273937 63.791 0 63.4387 0H52.2692C51.9168 0 51.6391 0.273937 51.6391 0.621625V63.0476C51.6391 63.3952 51.9168 63.6692 52.2692 63.6692H63.4387C63.791 63.6692 64.0687 63.3952 64.0687 63.0476V35.6644C64.0687 30.3754 68.1798 26.319 73.7219 26.319C79.2639 26.319 83.279 30.2911 83.279 35.6644V63.0476C83.279 63.3952 83.5566 63.6692 83.909 63.6692H95.0785C95.4309 63.6692 95.7085 63.3952 95.7085 63.0476V35.6644C95.7085 24.1591 88.0628 16.0464 77.3525 16.0464V16.0358Z"
+                                  fill="rgb(90, 49, 244)"
+                                ></path>
+                                <path
+                                  d="M118.389 14.2552C112.324 14.2552 106.622 16.0779 102.542 18.7224C102.265 18.9016 102.169 19.2703 102.34 19.5548L107.262 27.8466C107.444 28.1416 107.828 28.247 108.127 28.0679C111.224 26.2241 114.769 25.2653 118.389 25.2864C128.138 25.2864 135.303 32.0716 135.303 41.0377C135.303 48.6763 129.569 54.3342 122.297 54.3342C116.371 54.3342 112.26 50.9311 112.26 46.1266C112.26 43.3767 113.445 41.122 116.531 39.5311C116.851 39.3625 116.969 38.9727 116.777 38.6671L112.132 30.9126C111.982 30.6598 111.662 30.5439 111.373 30.6492C105.148 32.925 100.78 38.4037 100.78 45.7579C100.78 56.8839 109.761 65.1863 122.287 65.1863C136.916 65.1863 147.434 55.1876 147.434 40.8481C147.434 25.476 135.197 14.2446 118.368 14.2446L118.389 14.2552Z"
+                                  fill="rgb(90, 49, 244)"
+                                ></path>
+                                <path
+                                  d="M180.098 15.9515C174.449 15.9515 169.409 18.006 165.725 21.6304C165.522 21.8306 165.191 21.6831 165.191 21.4092V17.0473C165.191 16.6996 164.914 16.4256 164.561 16.4256H153.68C153.328 16.4256 153.05 16.6996 153.05 17.0473V79.3784C153.05 79.7261 153.328 80 153.68 80H164.849C165.202 80 165.48 79.7261 165.48 79.3784V58.9385C165.48 58.6645 165.811 58.5276 166.013 58.7067C169.687 62.0782 174.545 64.0485 180.109 64.0485C193.211 64.0485 203.43 53.5862 203.43 39.9947C203.43 26.4032 193.2 15.941 180.109 15.941L180.098 15.9515ZM177.995 53.4914C170.541 53.4914 164.892 47.6439 164.892 39.9104C164.892 32.177 170.53 26.3295 177.995 26.3295C185.459 26.3295 191.086 32.0822 191.086 39.9104C191.086 47.7387 185.533 53.4914 177.984 53.4914H177.995Z"
+                                  fill="rgb(90, 49, 244)"
+                                ></path>
+                              </svg>
+                            </div>
+
+                            <span
+                              className="inline-flex flex-nowrap w-fit min-w-max items-center pl-[4px]"
+                              style={{ columnGap: "4px" }}
+                            >
+                              <button className="inline-block cursor-pointer underline text-xs normal-case">
+                                Check your purchasing power
+                              </button>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div className="min-h-full flex-none w-full md:w-[50%]">
-                  <img
-                    src="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400"
-                    srcSet="//roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=400 400w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=500 500w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=600 600w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=700 700w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=800 800w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=900 900w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1000 1000w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1100 1100w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1200 1200w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1300 1300w, //roweam.com/cdn/shop/files/Still_Life-Pavilion_Chair_2557_RESIZED_FOR_TRADE_PAGE.jpg?v=1694967270&width=1400 1400w"
-                    alt="product image"
-                    className="object-cover object-center w-full h-full"
-                  />
+
+                    <label
+                      id="termsCheck"
+                      className="absolute top-[50px] left-0 grid items-center cursor-pointer gap-[10px]"
+                      style={{ gridTemplateColumns: "17px auto" }}
+                    >
+                      <input
+                        type="checkbox"
+                        className="appearance-none rounded-full border border-shadow h-4 w-4 mt-[4px] cursor-pointer text-left text-lightBrown"
+                      />
+                      <span>
+                        I agree to the New Vintage terms and conditions
+                      </span>
+                    </label>
+
+                    <div className="grid gap-[10px]">
+                      <button className="px-[35px] text-[13px] whitespace-nowrap h-auto w-full bg-lightBrown text-milk relative inline-block overflow-visible no-underline cursor-pointer touch-manipulation appearance-none leading-[45px]">
+                        <span
+                          className="flex items-center justify-center whitespace-nowrap"
+                          style={{ letterSpacing: "1.3px" }}
+                        >
+                          Add to cart
+                        </span>
+                        <span className="loader-button">
+                          <div className="spinner"></div>
+                        </span>
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="my-7 px-6 w-full">
-          <div className="flow-root">
-            <header className="mb-7 max-w-full">
-              <div>
-                <h3 className="h2 text-xl md:text-3xl lg:text-4xl">
-                  Pairs with
-                </h3>
-              </div>
-            </header>
-          </div>
-        </div>
-        <ProductReel products={pairs} />
       </div>
 
-      <section className="my-7">
-        <div className="px-6 md: md:px-10 w-full">
-          <div className="px-6 md:px-10 bg-milk">
-            <div className="method-grid">
-              <div className="w-full relative overflow-hidden">
-                <img
-                  src="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400"
-                  srcSet="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=600 600w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=700 700w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=800 800w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1000 1000w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1200 1200w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400 1400w"
-                  alt="product image"
-                  className="z-10 block relative w-full h-auto max-w-full"
-                />
-              </div>
+      <div className="my-20 py-10">
+        <div className="max-w-[1600px] px-6 md:px-10 w-full">
+          <header className="max-w-full mb-[30xp] text-left">
+            <div>
+              <h3 className="mt-12 mb-6 text-[34px] text-lightBrown h2">
+                Pairs With
+              </h3>
+            </div>
+          </header>
+          <ProductReel products={pairs} />
+        </div>
+        <div className="my-7">
+          <div className="px-6 md: md:px-10 w-full">
+            <div className="px-6 md:px-10 bg-milk">
+              <div className="method-grid">
+                <div className="w-full relative overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400"
+                    srcSet="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=600 600w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=700 700w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=800 800w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1000 1000w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1200 1200w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400 1400w"
+                    alt="product image"
+                    className="block relative w-full h-auto max-w-full method--img"
+                  />
+                </div>
 
-              <div className="py-6">
-                <div className="flex flex-wrap">
-                  <div className="shrink-0 w-full">
-                    <div className="h2 mb-7">
-                      <div>
-                        <span className="block text-4xl md:text-5xl lg:text-6xl">
-                          The Old Wood
-                        </span>
-                        <span className="block text-4xl md:text-5xl lg:text-6xl">
-                          Method
-                        </span>
+                <div className="py-6">
+                  <div className="flex flex-wrap">
+                    <div className="shrink-0 w-full">
+                      <div className="h2 mb-7">
+                        <div>
+                          <span className="block text-4xl md:text-5xl text-lightBrown">
+                            The Roweam
+                          </span>
+                          <span className="block text-4xl md:text-5xl text-lightBrown">
+                            Method
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <p className="text-sm md:text-md lg:text-lg">
-                    We believe in the storytelling power of one-of-a-kind pieces
-                    that are made to age through generation. Our custom products
-                    do just that. All material options are tried and true
-                    favorites that patina perfectly. So we welcome the sun and
-                    play, sleep and stain--our furniture is meant for fully
-                    lived life.
-                  </p>
+                  <div>
+                    <p>
+                      We believe in the storytelling power of one-of-a-kind
+                      pieces that are made to age through generation. Our custom
+                      products do just that. All material options are tried and
+                      true favorites that patina perfectly. So we welcome the
+                      sun and play, sleep and stain--our furniture is meant for
+                      fully lived life.
+                    </p>
 
-                  <div className="mt-8">
-                    <Link
-                      href="/"
-                      className="relative text-lightBrown detail-link uppercase"
-                    >
-                      learn more
-                    </Link>
+                    <div className="mt-8">
+                      <Link
+                        href="/"
+                        className="relative text-lightBrown detail-link uppercase text-sm"
+                      >
+                        learn more
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      {terms ? <Terms hideTerms={hideTerms} /> : null}
+      </div>
     </section>
   );
 }

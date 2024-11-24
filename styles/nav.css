@@ -61,9 +61,31 @@
   background: #f3f1ea;
 }
 
-.nav_container.reveal .nav--link {
+.nav_container.reveal .nav--link,
+.nav_container.not-homepage .nav--link {
   color: #000;
   transition: color 0.25s ease-in-out;
+}
+
+.nav_container.reveal .logo--img,
+.nav_container.not-homepage .logo--img {
+  filter: invert(0);
+}
+
+.nav_container.not-homepage .header::before {
+  opacity: 0;
+}
+
+.nav_container:hover .header {
+  box-shadow: 0 1px rgb(212, 210, 204);
+}
+
+.nav_container:hover .logo--img {
+  filter: invert(0);
+}
+
+.logo--img {
+  filter: invert(1);
 }
 
 .link--animated::after {
