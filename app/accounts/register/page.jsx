@@ -4,6 +4,13 @@ import { useEffect, useState } from "react";
 
 export default function page() {
   const [isMobile, setIsMobile] = useState(false);
+  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+  });
 
   const styles = {
     general: {
@@ -31,6 +38,42 @@ export default function page() {
 
     return;
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // Try to parse JSON; handle cases where it might fail
+      let data;
+      try {
+        data = await res.json();
+      } catch (err) {
+        data = null; // Response body is empty or invalid JSON
+      }
+
+      if (res.ok) {
+        setMessage("Registration successful!");
+        setFormData({ firstName: "", lastName: "", email: "", password: "" });
+      } else {
+        setMessage(data?.error || "Something went wrong!");
+      }
+    } catch (error) {
+      console.error("Error during fetch:", error);
+      setMessage("An unexpected error occurred. Please try again.");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   return (
     <section
@@ -66,6 +109,14 @@ export default function page() {
                       <input
                         type="text"
                         id="customer[firstname]"
+                        name="first name"
+                        value={formData.firstName}
+                        onChange={(e) =>
+                          setFormData((prevData) => ({
+                            ...prevData,
+                            firstName: e.target.value,
+                          }))
+                        }
                         className="order-2 border-lightBrown border-b w-full h-[52px]"
                         style={{ background: "transparent" }}
                       />
@@ -80,6 +131,14 @@ export default function page() {
                       <input
                         type="text"
                         id="customer[lastname]"
+                        name="last name"
+                        value={formData.lastName}
+                        onChange={(e) =>
+                          setFormData((prevData) => ({
+                            ...prevData,
+                            lastName: e.target.value,
+                          }))
+                        }
                         className="order-2 border-lightBrown border-b w-full h-[52px]"
                         style={{ background: "transparent" }}
                       />
@@ -94,6 +153,9 @@ export default function page() {
                       <input
                         type="email"
                         id="customer[email]"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         className="order-2 border-lightBrown border-b w-full h-[52px]"
                         style={{ background: "transparent" }}
                       />
@@ -108,6 +170,9 @@ export default function page() {
                       <input
                         type="password"
                         id="customer[password]"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
                         className="order-2 border-lightBrown border-b w-full h-[52px]"
                         style={{ background: "transparent" }}
                       />
@@ -121,6 +186,7 @@ export default function page() {
                     <button
                       style={{ fontSize: "calc(1rem - 2px)" }}
                       type="button"
+                      onClick={handleSubmit}
                       className="px-[35px] w-full whitespace-nowrap relative inline-block text-milk bg-lightBrown mt-8 my-[15px] overflow-visible cursor-pointer touch-manipulation h-auto leading-[45px]"
                     >
                       <span className="flex items-center justify-center">

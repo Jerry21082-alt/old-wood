@@ -1,10 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "@/features/authentication/authSlice";
 
 export default function page() {
   const [isMobile, setIsMobile] = useState(false);
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [message, setMessage] = useState("");
+
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const styles = {
     general: {
@@ -33,6 +41,42 @@ export default function page() {
     return;
   }, []);
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        dispatch(login(data.user));
+        setMessage("");
+        setFormData({ email: "", password: "" });
+        router.push("/");
+      } else {
+        setMessage("Something went wrong!" || data.error);
+      }
+    } catch (error) {
+      console.log("Login error", error);
+      setMessage("An unexpected error occured. Please try again!");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   return (
     <section
       className="mt-[62.6px] md:mt-[66.5px]"
@@ -54,10 +98,47 @@ export default function page() {
               <div className="grid gap-y-8">
                 <div>
                   <form name="login">
+                    <div
+                      className="flex items-center mb-8 text-left bg-dim text-lightBrown py-[13px] px-[18px]"
+                      style={{ display: message.length > 0 ? "flex" : "none" }}
+                    >
+                      <span className="mr-[10px] text-lightBrown">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="20"
+                          height="20"
+                          fill="currentColor"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                          />
+                          <line
+                            x1="12"
+                            y1="7"
+                            x2="12"
+                            y2="13"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                          />
+                          <circle cx="12" cy="17" r="1" fill="currentColor" />
+                        </svg>
+                      </span>
+                      <p>{message}</p>
+                    </div>
                     <div className="flex flex-wrap relative">
                       <input
                         type="email"
                         id="customer[email]"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         className="order-2 border-lightBrown border-b w-full h-[52px]"
                         style={{ background: "transparent" }}
                       />
@@ -72,6 +153,9 @@ export default function page() {
                       <input
                         type="password"
                         id="customer[password]"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
                         className="order-2 border-lightBrown border-b w-full h-[52px]"
                         style={{ background: "transparent" }}
                       />
@@ -83,6 +167,7 @@ export default function page() {
                       </label>
                     </div>
                     <button
+                      onClick={handleLogin}
                       style={{ fontSize: "calc(1rem - 2px)" }}
                       type="button"
                       className="px-[35px] w-full whitespace-nowrap relative inline-block text-milk bg-lightBrown mt-8 overflow-visible cursor-pointer touch-manipulation h-auto leading-[45px]"

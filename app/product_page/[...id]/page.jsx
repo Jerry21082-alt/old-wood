@@ -124,17 +124,12 @@ export default function Product_Page({ params }) {
   };
 
   const addItemToCart = async (newProduct) => {
-    if (!agree) {
-      console.log("please agree to terms");
-      setIsChecked(true);
-    } else {
-      setIsAddingToCart(true);
-      await delay(2000);
-      dispatch(addToCart(newProduct));
-      dispatch(toggleCart());
-      dispatch(toggleAgree());
-      setIsAddingToCart(false);
-    }
+    setIsAddingToCart(true);
+    await delay(2000);
+    dispatch(addToCart(newProduct));
+    dispatch(toggleCart());
+    dispatch(toggleAgree());
+    setIsAddingToCart(false);
   };
 
   const hideTerms = () => {
@@ -320,7 +315,7 @@ export default function Product_Page({ params }) {
                 style={{ gridTemplateColumns: "100%" }}
               >
                 <div>
-                  <form>
+                  <form onSubmit={(e) => e.preventDefault()}>
                     <div className="absolute top-0 left-0 w-full">
                       <div className="m-0 p-0">
                         <div className="flex items-center mt-[10px] text-lightBrown text-[16px]">
@@ -399,7 +394,10 @@ export default function Product_Page({ params }) {
                     </label>
 
                     <div className="grid gap-[10px]">
-                      <button className="px-[35px] text-[13px] whitespace-nowrap h-auto w-full bg-lightBrown text-milk relative inline-block overflow-visible no-underline cursor-pointer touch-manipulation appearance-none leading-[45px]">
+                      <button
+                        onClick={() => addItemToCart(item)}
+                        className="px-[35px] text-[13px] whitespace-nowrap h-auto w-full bg-lightBrown text-milk relative inline-block overflow-visible no-underline cursor-pointer touch-manipulation appearance-none leading-[45px]"
+                      >
                         <span
                           className="flex items-center justify-center whitespace-nowrap"
                           style={{ letterSpacing: "1.3px" }}

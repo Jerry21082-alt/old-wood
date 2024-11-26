@@ -881,6 +881,10 @@ select {
   visibility: visible;
 }
 
+.link-bar {
+  box-shadow: 0 1px rgb(var(--border-color)), 0 -1px rgb(var(--border-color));
+}
+
 @keyframes direction {
   from {
     opacity: 0;

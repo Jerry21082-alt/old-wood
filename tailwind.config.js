@@ -21,6 +21,7 @@ module.exports = {
       ligthGrey: "rgb(236,236,236)",
       primaryBtn: "#592ff4",
       inputBorder: "rgba(0,0,0,.045)",
+      dim: "rgb(233, 228, 220)",
     },
   },
   plugins: [],
