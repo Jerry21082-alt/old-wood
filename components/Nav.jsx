@@ -581,17 +581,17 @@ export default function Nav() {
                       y="48"
                       fill="none"
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="16"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="16"
                       rx="8"
                     ></rect>
                     <path
                       fill="none"
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="16"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="16"
                       d="M168,88a40,40,0,0,1-80,0"
                     ></path>
                   </svg>

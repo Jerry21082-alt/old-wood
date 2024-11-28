@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    middleware: {
-      matcher: ["/dashboard/:path*", "/account", "/profile/:path*"], // Match specific routes
-    },
-  },
+  experimental: {}, // No middleware configuration here
   images: {
     remotePatterns: [
       {

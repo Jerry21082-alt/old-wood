@@ -11,7 +11,6 @@ import {
   toggleCart,
 } from "@/features/navigation/navigationSlice";
 import { useRouter } from "next/navigation";
-import { gsap } from "gsap";
 import { delay } from "@/helpers/delay";
 
 export default function Cart() {
@@ -60,33 +59,6 @@ export default function Cart() {
 
     return () => document.removeEventListener("click", handleClickOutside);
   }, [cartState, onClose]);
-
-  useEffect(() => {
-    if (cartState) {
-      gsap.fromTo(
-        "#cart-item",
-        {
-          opacity: 0,
-          x: 200,
-        },
-        {
-          opacity: 1,
-          x: 0,
-        }
-      );
-      gsap.fromTo(
-        "#continue-btn",
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-        }
-      );
-    }
-  }, [cartState]);
 
   const getTotalCartItemsPrice = () => {
     let emptyArray = [];

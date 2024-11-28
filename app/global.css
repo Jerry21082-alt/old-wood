@@ -289,6 +289,41 @@ select {
   transition: transform 0.3s ease-in-out;
 }
 
+#theTerms:checked::after {
+  content: "";
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: block;
+  background: #5e3519;
+  position: absolute;
+  top: 6px;
+  left: 2px;
+}
+
+#termsWrap {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: all;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url(//roweam.com/cdn/shop/t/21/assets/bg-dark-grain.png?v=7508540…);
+  background-repeat: repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+#termsWrap.showMe {
+  visibility: visible;
+  opacity: 1;
+}
+
 .detail-link::after {
   content: "";
   position: absolute;
@@ -703,8 +738,11 @@ select {
   scrollbar-width: none;
 }
 
-.spinner {
+.spinner svg {
   animation: spin 1s linear infinite;
+  margin: auto;
+  display: block;
+  overflow: visible;
 }
 
 .overlay {
