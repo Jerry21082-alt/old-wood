@@ -127,7 +127,7 @@ export default function Product_Page({ params }) {
     });
   };
 
-  const addItemToCart = async (newProduct) => {
+  const addItemToCart = (newProduct) => {
     if (!isChecked) {
       console.log("check the box");
       return;
@@ -475,7 +475,7 @@ export default function Product_Page({ params }) {
                         required
                         className="appearance-none rounded-full border border-shadow h-4 w-4 mt-[4px] cursor-pointer text-left text-lightBrown"
                       />
-                      <span>
+                      <span className="block mt-1">
                         I agree to the New Vintage terms and conditions
                       </span>
                     </label>

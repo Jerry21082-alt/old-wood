@@ -5,6 +5,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "@/features/navigation/navigationSlice";
+import { toggleSearch } from "@/features/navigation/navigationSlice";
 import { usePathname, useRouter } from "next/navigation";
 
 const useScreen = (screen) => {
@@ -95,6 +96,7 @@ export default function Nav() {
   const dispatch = useDispatch();
   const pathname = usePathname();
   const cartOpen = useSelector((state) => state.navigation.isCartOpen);
+  const openSearch = useSelector((state) => state.navigation.isSearchOpen);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const headerPrimaryLinks = [
@@ -327,16 +329,24 @@ export default function Nav() {
     dispatch(toggleCart());
   };
 
+  const openSearchBar = (e) => {
+    e.preventDefault();
+
+    dispatch(toggleSearch());
+  };
+
   return (
     <div
       style={{ marginBottom: "calc(-1*65.5%, 0px) + 0px" }}
       className={`fixed top-0 z-[4] right-0 w-full nav_container ${
-        scrolled || cartOpen ? "reveal" : ""
+        scrolled || cartOpen || openSearch ? "reveal" : ""
       }  ${pathname !== "/" ? "not-homepage" : ""}`}
     >
       <div
         className={`block relative header ${
-          scrolled || cartOpen ? "header__hidden header--bordered" : ""
+          scrolled || cartOpen || openSearch
+            ? "header__hidden header--bordered"
+            : ""
         }`}
       >
         <div className="relative z-[2] max-w-[1600px] w-full mx-auto px-6 md:px-10 block">
@@ -537,6 +547,7 @@ export default function Nav() {
                     href="/search"
                     className="w-max block uppercase text-[13px] text-milk nav--link link--animated prevent-default relative"
                     aria-expanded="false"
+                    onClick={openSearchBar}
                   >
                     Search
                   </Link>

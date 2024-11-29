@@ -1,14 +1,45 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import SplitLines from "@/components/SplitLines";
+import { animateElementOnView } from "@/helpers/animateElementOnView";
+import { addClass } from "@/helpers/addClass";
+import FadeText from "@/components/FadeText";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function page() {
   const [isMobile, setIsMobile] = useState(false);
+  const odeRef = useRef(null);
+  const odeImg = useRef(null);
+  const aboutRef = useRef(null);
+  const aboutImg = useRef(null);
+
+  const anchorLinks = [
+    {
+      href: "/about",
+      linkText: "About",
+    },
+    {
+      href: "/nolstagia",
+      linkText: "The New Nostalgia",
+    },
+    {
+      href: "/progress",
+      linkText: "Progress",
+    },
+    {
+      href: "/contact",
+      linkText: "Contact",
+    },
+    {
+      href: "/interior",
+      linkText: "Interior Design",
+    },
+  ];
 
   const styles = {
     mobileImgFull: isMobile
@@ -17,7 +48,10 @@ export default function page() {
             "calc(calc((100vw - max(calc((100vw - calc( 1600px - ( 40px ) * 2) ) / 2), 40px ) * 2 - 24px * ( 20 - 1)) / 20 )* 14 + 24px* 13",
           transition: "opacity .25s ease-out, clip-path .25s ease-out",
         }
-      : {},
+      : {
+          marginLeft:
+            "calc((100vw - max(calc((100vw - calc(1600px - (40px) * 2)) / 2), 40px) * 2 - 24px * (20 - 1)) / 20)",
+        },
     mobileTextFull: isMobile
       ? {
           marginLeft:
@@ -53,33 +87,43 @@ export default function page() {
   }, []);
 
   useEffect(() => {
-    gsap.fromTo(
-      "#about-intro_img",
-      {
-        opacity: 0,
-        clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
-      },
-      {
-        opacity: 1,
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-      }
-    );
+    const handleScrollToView = () => {
+      const animations = [
+        {
+          element: odeRef.current,
+          child: odeImg.current,
+          className: "reveal",
+        },
+        {
+          element: aboutRef.current,
+          child: aboutImg.current,
+          className: "reveal",
+        },
+      ];
+
+      animations.forEach((ele) => {
+        animateElementOnView(ele.element, addClass, 0.1, ele.child, "reveal");
+      });
+    };
+
+    handleScrollToView();
   }, []);
 
   return (
-    <section className="mt-7 md:my-20">
-      <div className="w-full">
+    <section className="pt-[65.5px]">
+      <div className="w-full mt-7 md:my-20">
         <div className="flex relative flex-wrap items-start md:items-center h-auto md:min-h-[700px]">
           <div
-            className="order-2 overflow-hidden bg-milk relative md:absolute top-0 md:overflow-hidden bg-none md:bg-milk left-auto right-0"
+            className="order-2 overflow-hidden bg-milk relative md:absolute w-full top-0 md:bg-milk left-auto right-0 h-full"
             style={styles.mobileImgFull}
-            id="about-intro_img"
+            ref={odeRef}
           >
             <img
               src="//roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=2500"
               srcSet="//roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=600 600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=700 700w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=800 800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=1000 1000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=1200 1200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=1400 1400w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=1600 1600w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=1800 1800w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=2000 2000w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=2200 2200w, //roweam.com/cdn/shop/files/20230809-In_Situ-Living_01_0197_CROP_45e3e4f1-cf5b-4603-841f-23fa11a03bb2.jpg?v=1694799944&width=2400 2400w"
               alt="product image"
-              className="max-w-full"
+              className="w-full h-full object-cover ode--img"
+              ref={odeImg}
             />
           </div>
 
@@ -87,79 +131,49 @@ export default function page() {
             className="px-6 md:px-10 py-16 relative z-[1] overflow-hidden"
             style={styles.mobileTextFull}
           >
-            <div className="h2 mt-14 mr-6" style={styles.heading}>
+            <div className="h4 mt-14 mr-6" style={styles.heading}>
               <div className="text-[54px] md:text-[74px] block">
-                <span className="block line leading-8">An Ode to</span>
-                <span className="block">the Home</span>
+                <SplitLines
+                  text1="An Ode to"
+                  text2="the Home"
+                  className="leading-[1] text-lightBrown"
+                />
               </div>
             </div>
             <div className="max-w-[80%] md:max-w-[55%] mt-6">
-              <p className="text-sm md:text-lg">
+              <FadeText
+                text="Our intentional approach is designed to offer new and vintage
+                furniture that inspires curiosity within your home."
+              />
+              {/* <p className="text-sm md:text-lg">
                 Our intentional approach is designed to offer new and vintage
                 furniture that inspires curiosity within your home.
-              </p>
+              </p> */}
             </div>
             <div className="order-3 w-full md:px-0">
               <ul
                 className="flex md:block border-b md:border-0 mt-[60px] my-0 md:my-[60px] border-listBorder overflow-visible overflow-x-auto w-auto md:w-[200%]"
                 style={{ scrollbarWidth: "none" }}
               >
-                <li className="pr-[30px] whitespace-nowrap">
-                  <h5>
-                    <a
-                      href="#"
-                      className="text-xs md:text-sm relative pr-[10px] text-darkGray"
-                    >
-                      About
-                    </a>
-                  </h5>
-                </li>
-                <li className="pr-[30px] whitespace-nowrap">
-                  <h5>
-                    <a
-                      href="#"
-                      className="text-xs md:text-sm relative pr-[10px] text-darkGray"
-                    >
-                      the new nostalgia
-                    </a>
-                  </h5>
-                </li>
-                <li className="pr-[30px] whitespace-nowrap">
-                  <h5>
-                    <a
-                      href="#"
-                      className="text-xs md:text-sm relative pr-[10px] text-darkGray"
-                    >
-                      process
-                    </a>
-                  </h5>
-                </li>
-                <li className="pr-[30px] whitespace-nowrap">
-                  <h5>
-                    <a
-                      href="#"
-                      className="text-xs md:text-sm relative pr-[10px] text-darkGray"
-                    >
-                      contact
-                    </a>
-                  </h5>
-                </li>
-                <li className="pr-[30px] whitespace-nowrap">
-                  <h5>
-                    <a
-                      href="#"
-                      className="text-xs md:text-sm relative pr-[10px] text-darkGray"
-                    >
-                      interior design services
-                    </a>
-                  </h5>
-                </li>
+                {anchorLinks.map((link) => (
+                  <li key={link.linkText} className="py-[5px]">
+                    <h5>
+                      <a
+                        href="#"
+                        className="text-sm relative pr-[10px] text-darkGray"
+                      >
+                        {link.linkText}
+                      </a>
+                    </h5>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
       </div>
       <div className="m-7 md:my-20">
+        x
         <div>
           <div className="pb-6 md:px-10 pt-8 md:pt-0 w-full relative">
             <div className="w-full max-w-[1600px]">
@@ -170,11 +184,17 @@ export default function page() {
                     "calc(60% - calc(40px / 2)) calc(40% - calc(40px / 2))",
                 }}
               >
-                <div className="order-2 md:order-none mt-[30px] w-full relative overflow-hidden">
+                <div
+                  className="order-2 md:order-none mt-[30px] w-full relative overflow-hidden"
+                  ref={aboutRef}
+                >
                   <img
                     src="//roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_03_1055-MAIN2_Resized.jpg?v=1694800013&width=1400"
                     srcSet="//roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_03_1055-MAIN2_Resized.jpg?v=1694800013&width=600 600w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_03_1055-MAIN2_Resized.jpg?v=1694800013&width=700 700w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_03_1055-MAIN2_Resized.jpg?v=1694800013&width=800 800w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_03_1055-MAIN2_Resized.jpg?v=1694800013&width=1000 1000w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_03_1055-MAIN2_Resized.jpg?v=1694800013&width=1200 1200w, //roweam.com/cdn/shop/files/20230810-In_Situ-Bromley_03_1055-MAIN2_Resized.jpg?v=1694800013&width=1400 1400w"
                     alt="product image"
+                    loading="lazy"
+                    className="about--img"
+                    ref={aboutImg}
                   />
                 </div>
                 <div className="w-full z-[1]">
@@ -188,8 +208,8 @@ export default function page() {
                         </div>
                       </div>
                       <div>
-                        <p className="text-sm md:text-md lg:text-lg">
-                          Oldwood is a luxury furniture brand whose heirloom
+                        <p>
+                          Roweam is a luxury furniture brand whose heirloom
                           custom furniture pieces evoke a sense of simple
                           nostalgia. Inspired by the minds of designers, crafted
                           by the hands of artisans, and sourced with leading

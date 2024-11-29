@@ -102,13 +102,10 @@ select {
 }
 
 input::placeholder,
+.search-input::placeholder,
 select {
   color: rgba(0, 0, 0, 0.56);
-  font-size: 14px;
-}
-
-.search-input::placeholder {
-  font-size: 24px;
+  font-size: 16px;
 }
 
 #r-form::before {
@@ -118,6 +115,27 @@ select {
   height: 0.5px;
   background-color: #221f20;
   bottom: 0px;
+}
+
+.text-container {
+  overflow: hidden;
+}
+
+.animated--text span {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+}
+
+.animated--text.reveal span {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.animated--text span:nth-child(2) {
+  transition-duration: 0.2s;
 }
 
 .visually-hidden {
@@ -646,7 +664,7 @@ select {
     visibility 0.6s cubic-bezier(0.75, 0, 0.175, 1);
 }
 
-.cart__overlay {
+.drawer__overlay {
   background-image: url(//roweam.com/cdn/shop/t/21/assets/bg-dark-grain.png?v=7508540…);
   background-repeat: repeat;
   background-color: transparent;
@@ -656,7 +674,7 @@ select {
   transition: visibility 0.6s ease-in-out, opacity 0.6s ease-in-out;
 }
 
-.cart__overlay.open {
+.drawer__overlay.open {
   visibility: visible;
   opacity: 1;
 }
@@ -861,7 +879,8 @@ select {
   visibility: visible;
 }
 
-.img--fade {
+.img--fade,
+.ode--img {
   opacity: 0;
   visibility: hidden;
   transform: scale(1.2);
@@ -871,13 +890,15 @@ select {
   transition-delay: 0.2s;
 }
 
-.img--fade.visible {
+.img--fade.visible,
+.ode--img.reveal {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
 }
 
-.r-list_img {
+.r-list_img,
+.about--img {
   clip-path: inset(0 0 0 80%);
   opacity: 0;
   visibility: hidden;
@@ -886,10 +907,26 @@ select {
     visibility 0.4s cubic-bezier(0.75, 0, 0.175, 1);
 }
 
-.r-list_img.reveal {
+.r-list_img.reveal,
+.about--img.reveal {
   clip-path: inset(0 0 0 0);
   opacity: 1;
   visibility: visible;
+}
+
+.fade-text {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.2);
+  transition: opacity 0.4s cubic-bezier(0.75, 0, 0.175, 1),
+    visibility 0.4s cubic-bezier(0.75, 0, 0.175, 1),
+    transform 0.4s cubic-bezier(0.75, 0, 0.175, 1);
+  transition-delay: 0.25s;
+}
+
+.fade-text.in {
+  visibility: visible;
+  opacity: 1;
 }
 
 .collapseable {

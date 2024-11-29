@@ -138,7 +138,7 @@ export default function Cart() {
       }`}
     >
       <span
-        className={`fixed top-0 right-full w-screen h-screen cart__overlay ${
+        className={`fixed top-0 right-full w-screen h-screen drawer__overlay ${
           cartState ? "open" : ""
         }`}
         onClick={onClose}

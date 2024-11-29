@@ -11,7 +11,7 @@ const showReel = (container, items) => {
 
   items.forEach((item, index) => {
     animateElementOnView(container, addClass, 0.15, item, "reveal");
-    item.style.transitionDelay = `${index * 0.1}s`;
+    item.style.transitionDelay = `${index * 0.08}s`;
   });
 };
 

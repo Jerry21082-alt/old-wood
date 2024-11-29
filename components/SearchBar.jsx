@@ -9,6 +9,7 @@ export default function SearchBar() {
   const [query, setQuery] = useState("Napoleon");
 
   const searchBarRef = useRef(null);
+  const searchInputRef = useRef(null);
   const dispatch = useDispatch();
 
   const onClose = () => dispatch(toggleSearch());
@@ -19,16 +20,11 @@ export default function SearchBar() {
         `/api/products?search=${encodeURIComponent(query)}`
       );
       const data = await res.json();
-      console.log('fetch data', data)
+      console.log("fetch data", data);
     } catch (error) {
       console.log("Failed to search product", error);
     }
   };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
     const handleSearchEscape = (event) => {
       if (searchBarRef.current && event.key === "Escape") {
@@ -59,6 +55,12 @@ export default function SearchBar() {
     };
   }, [openSearch, onClose]);
 
+  useEffect(() => {
+    if (openSearch) {
+      searchInputRef.current?.focus();
+    }
+  }, [openSearch]);
+
   const handleClickOutside = (event) => {
     const current = searchBarRef.current;
 
@@ -70,7 +72,7 @@ export default function SearchBar() {
   return (
     <div
       ref={searchBarRef}
-      className="max-w-[89vw] fixed top-[67.5px] right-0 z-50 max-h-screen bg-milk flex flex-col"
+      className="w-[89vw] max-w-[500px] fixed top-[65.5px] right-0 z-[3] max-h-screen bg-milk flex flex-col"
       style={{
         height: "calc(100% - 65.5px)",
         transform: openSearch ? "translateX(0)" : "translateX(100%)",
@@ -78,25 +80,29 @@ export default function SearchBar() {
           "transform .6s cubic-bezier(.75,0,.175,1), visibility .6s cubic-bezier(.75,0,.175,1)",
       }}
     >
+      <span
+        className={`fixed top-0 right-full w-screen h-screen drawer__overlay ${
+          openSearch ? "open" : ""
+        }`}
+        onClick={onClose}
+      ></span>
       <div className="items-center flex flex-wrap pb-[60px] overflow-x-hidden overflow-y-auto flex-grow px-6 md:px-10">
         <div>
-          <h3
-            className="h4 text-3xl md:text-4xl lg:text-5xl block mb-8"
-            style={{ color: "rgb(34, 31, 32)" }}
-          >
+          <h3 className="h4 text-[34px] text-lightBrown block mb-8">
             What can we help you find?
           </h3>
 
           <form className="relative flex items-center mb-[60px]">
             <input
               type="text"
-              value={query}
+              // value={query}
               onChange={(e) => setQuery(e.target.value)}
               autoComplete="off"
               placeholder="Search"
               aria-label="search"
               className="py-[10px] border-lightBrown border-b h-[52px] w-full min-w-[300px] appearance-none search-input"
               style={{ background: "transparent" }}
+              ref={searchInputRef}
             />
             <svg
               focusable="false"
@@ -114,7 +120,7 @@ export default function SearchBar() {
             </svg>
           </form>
 
-          <p className="text-[18px] md:text-xl lg:text-2xl">
+          <p className="text-[1rem]">
             Can't find what you're looking for? Check out our{" "}
             <a
               className="text-lightBrown underline"

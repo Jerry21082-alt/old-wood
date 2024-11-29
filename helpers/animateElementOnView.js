@@ -13,7 +13,9 @@ export const animateElementOnView = (element, func, threshold, ...args) => {
     threshold: threshold,
   });
 
-  observer.observe(element);
+  if (element) {
+    observer.observe(element);
+  }
 
   return () => observer.unobserve(element);
 };
