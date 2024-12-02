@@ -9,7 +9,7 @@ export default function ImgWithTextBlock({
   style = {},
   imgSrc = "",
   srcSet = "",
-  imgAlt,
+  imgAlt = "",
 }) {
   const imgContainerRef = useRef(null);
   const imgRef = useRef(null);

@@ -9,6 +9,7 @@ export default function ImgWithTextWrapper({
   src = "",
   srcSet = "",
   alt = "",
+  style = {},
 }) {
   const containerRef = useRef(null);
   const imgRef = useRef(null);
@@ -31,6 +32,7 @@ export default function ImgWithTextWrapper({
         srcSet={srcSet}
         alt={alt}
         className="relative block z-[1] w-full h-auto max-w-full img-with_text-wrapper"
+        style={style}
       ></img>
     </div>
   );

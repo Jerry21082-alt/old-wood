@@ -11,6 +11,10 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
 import { animateElementOnView } from "@/helpers/animateElementOnView";
 import { addClass } from "@/helpers/addClass";
+import ImgWithTextBlock from "@/components/ImgWithTextBlock";
+import ImgWithTextWrapper from "@/components/ImgWithTextWrapper";
+import SplitLines from "@/components/SplitLines";
+import FadeText from "@/components/FadeText";
 
 export default function Home() {
   gsap.registerPlugin(ScrollTrigger);
@@ -27,28 +31,14 @@ export default function Home() {
   const textwithRList = useRef(null);
 
   useEffect(() => {
-    if (
-      isLoading ||
-      !element.current ||
-      !shopTheLookContainer.current ||
-      !fadeContainer.current
-    )
-      return;
+    if (isLoading || !shopTheLookContainer.current) return;
 
     const animateElements = () => {
-      const bromley_chair_img = document.querySelector(".img--animated");
       const shop_the_look_img = document.querySelector("#shop-the_look");
       const room_card = document.querySelector(".room--card");
-      const fade_img = document.querySelector(".img--fade");
-      const rListImg = document.querySelector(".r-list_img");
       const splitText = document.querySelectorAll(".split-text");
 
       const animations = [
-        {
-          target: element.current,
-          child: bromley_chair_img,
-          className: "reveal",
-        },
         {
           target: shopTheLookContainer.current,
           child: shop_the_look_img,
@@ -58,16 +48,6 @@ export default function Home() {
           target: shopTheLookContainer.current,
           child: room_card,
           className: "visible",
-        },
-        {
-          target: fadeContainer.current,
-          child: fade_img,
-          className: "visible",
-        },
-        {
-          target: textwithRList.current,
-          child: rListImg,
-          className: "reveal",
         },
       ];
 
@@ -138,14 +118,13 @@ export default function Home() {
             className="min-h-[80vh] md:min-h-auto w-full relative flex bg-milk text-milk"
             style={{ aspectRatio: "1.5" }}
           >
-            <div className="absolute left-0 top-0 w-full h-full overflow-hidden block">
-              <img
-                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2500"
-                srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2400 2400w"
-                style={{ opacity: 1 }}
-                className="object-center object-cover max-w-full absolute top-0 left-0 w-full h-full overlay__img"
-              />
-            </div>
+            <ImgWithTextBlock
+              className="absolute left-0 top-0 w-full h-full overflow-hidden block"
+              imgSrc="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2500"
+              srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2400 2400w"
+              imgAlt=""
+              style={{ opacity: 1 }}
+            />
           </div>
         </div>
       </section>
@@ -156,23 +135,12 @@ export default function Home() {
         </div>
 
         <div className="image-with_text-wrapper">
-          <div
+          <ImgWithTextWrapper
             className="order-2 relative overflow-hidden w-full z-0"
-            ref={element}
-            id="bromley_chair"
-            style={{
-              marginRight:
-                "calc((100vw - max(calc((100vw - calc(1600px - (40px) * 2)) / 2), 40px) * 2 - 24px * (20 - 1)) / 20)",
-            }}
-          >
-            <img
-              src="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1500"
-              srcSet="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1200 1200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1400 1400w"
-              alt="The Bromley Chair"
-              loading="lazy"
-              className="z-[1] relative block w-full img--animated"
-            />
-          </div>
+            src="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1500"
+            srcSet="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1200 1200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1400 1400w"
+            alt=""
+          />
           <div className="order-1 z-[1] block relative mr-0">
             <div className="flex flex-nowrap">
               <div className="block flex-shrink-0 w-full order-0 text-center">
@@ -637,20 +605,19 @@ export default function Home() {
                 </h5>
 
                 <div className="mt-4">
-                  <span className="block text-4xl md:text-5xl text-[#5e3519] h2 split-text">
-                    The Roweam
-                  </span>
-                  <span className="block text-4xl md:text-5xl text-[#5e3519] h2 split-text">
-                    Method
-                  </span>
+                  <SplitLines
+                    text1="The Roweam"
+                    text2="Method"
+                    className="text-[56px] leading-[1] text-lightBrown h2"
+                  />
                 </div>
 
                 <div className="max-w-[80%] mt-6" id="slide-up">
-                  <p className="text-sm md:text-md lg:text-lg">
-                    Part new vintage, part true vintage. Our design method takes
+                  <FadeText
+                    text=" Part new vintage, part true vintage. Our design method takes
                     a gathered, authentic approach using well-constructed pieces
-                    complete with endless character, no matter their age.
-                  </p>
+                    complete with endless character, no matter their age."
+                  />
                 </div>
 
                 <div className="mt-8">
@@ -664,32 +631,28 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex flex-wrap h-full w-full" ref={fadeContainer}>
-              <div className="overflow-hidden order-2 h-full w-full fade--container">
-                <img
-                  src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
-                  srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000 2000w"
-                  alt="product image"
-                  className="h-full w-full object-cover object-center img--fade"
-                />
-              </div>
+            <div className="flex flex-wrap h-full w-full">
+              <ImgWithTextWrapper
+                className="overflow-hidden order-2 h-full w-full"
+                src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
+                srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000 2000w"
+                alt=""
+              />
             </div>
           </div>
         </div>
       </section>
 
       <section>
-        <div className="image-with-text-r-list" ref={textwithRList}>
+        <div className="image-with-text-r-list">
           <div className="px-6 md:px-10 w-full">
             <div className="overflow-hidden flex flex-wrap">
-              <div className="relative w-full overflow-hidden mb-8">
-                <img
-                  src="//roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=2000"
-                  srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1400 1400w"
-                  alt="product image"
-                  className="w-full h-full object-cover object-center r-list_img"
-                />
-              </div>
+              <ImgWithTextWrapper
+                className="relative w-full overflow-hidden mb-8"
+                src="//roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=2000"
+                srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4647_1600.jpg?v=1717161542&width=1400 1400w"
+                alt=""
+              />
             </div>
           </div>
 
@@ -700,7 +663,7 @@ export default function Home() {
                   <span className="uppercase">join the r list</span>
                 </div>
 
-                <div className="h2">
+                <div className="h2 text-lightBrown">
                   <span className="text-lg md:text-xl lg:text-2xl">
                     Sign-up to recieve 10%off your first
                   </span>

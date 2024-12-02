@@ -4,7 +4,11 @@
 // import { animateElementOnView } from "@/helpers/animateElementOnView";
 import { useEffect, useRef, useState } from "react";
 
-export default function FadeText({ text, className = "", threshold = 0.1 }) {
+export default function FadeText({
+  text = "",
+  className = "",
+  threshold = 0.1,
+}) {
   const textRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -13,7 +17,7 @@ export default function FadeText({ text, className = "", threshold = 0.1 }) {
       enteries.forEach((entry) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          observer.disconnect(entry.target);
         }
       });
     };

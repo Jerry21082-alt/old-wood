@@ -4,7 +4,7 @@ import { addClass } from "@/helpers/addClass";
 import { animateElementOnView } from "@/helpers/animateElementOnView";
 import { useEffect, useRef } from "react";
 
-export default function SplitLines({ text1, text2, ...args }) {
+export default function SplitLines({ text1 = "", text2 = "", ...args }) {
   const textContainerRef = useRef(null);
   const textRef = useRef(null);
 

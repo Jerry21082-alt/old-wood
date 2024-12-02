@@ -532,8 +532,8 @@ select {
 }
 
 .room--card {
-  opacity: 0;
-  visibility: hidden;
+  /* opacity: 0;
+  visibility: hidden; */
   transform: scale(0) translateY(0%);
   grid-template-columns: 100px 100px;
   transition: opacity 0.4s cubic-bezier(0.75, 0, 0.175, 1),
@@ -890,23 +890,6 @@ select {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
-}
-
-.r-list_img,
-.about--img {
-  clip-path: inset(0 0 0 80%);
-  opacity: 0;
-  visibility: hidden;
-  transition: clip-path 0.4s cubic-bezier(0.75, 0, 0.175, 1),
-    opacity 0.4s cubic-bezier(0.75, 0, 0.175, 1),
-    visibility 0.4s cubic-bezier(0.75, 0, 0.175, 1);
-}
-
-.r-list_img.reveal,
-.about--img.reveal {
-  clip-path: inset(0 0 0 0);
-  opacity: 1;
-  visibility: visible;
 }
 
 .fade-text {
