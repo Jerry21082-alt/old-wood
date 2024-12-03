@@ -129,44 +129,46 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block p-6 md:p-10 w-full">
-        <div className="mb-11 text-[#5e3519] text-center text-sm md:text-md lg:text-lg">
-          THIS IS THE NEW NOSTALGIA
-        </div>
+      <section>
+        <div className="max-w-[1600px] px-6 md:px-10">
+          <div className="mb-11 text-[#5e3519] text-center text-sm md:text-md lg:text-lg">
+            THIS IS THE NEW NOSTALGIA
+          </div>
 
-        <div className="image-with_text-wrapper">
-          <ImgWithTextWrapper
-            className="order-2 relative overflow-hidden w-full z-0"
-            src="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1500"
-            srcSet="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1200 1200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1400 1400w"
-            alt=""
-          />
-          <div className="order-1 z-[1] block relative mr-0">
-            <div className="flex flex-nowrap">
-              <div className="block flex-shrink-0 w-full order-0 text-center">
-                <div className="my-4 text-[#5e3519] font-medium text-sm">
-                  <span className="block">ROWEAM NEW VINTAGE</span>
-                </div>
-                <div className="mt-12 mb-6 h2">
-                  <span className="block text-4xl md:text-5xl text-[#5e3519]">
-                    The Bromley Chair
-                  </span>
-                </div>
-                <div className="text-center">
-                  <p className="font-normal">
-                    A take on our iconic Bromley Sofa, the Bromley Chair is an
-                    amalgamation of eras and styles. Perfect for cozying up with
-                    your favorite book, it's angular arms are designed for
-                    lounging.
-                  </p>
+          <div className="image-with_text-wrapper">
+            <ImgWithTextWrapper
+              className="order-2 relative overflow-hidden w-full z-0"
+              src="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1500"
+              srcSet="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1200 1200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1400 1400w"
+              alt=""
+            />
+            <div className="order-1 z-[1] block relative mr-0">
+              <div className="flex flex-nowrap">
+                <div className="block flex-shrink-0 w-full order-0 text-center">
+                  <div className="my-4 text-[#5e3519] font-medium text-sm">
+                    <span className="block">ROWEAM NEW VINTAGE</span>
+                  </div>
+                  <div className="mt-12 mb-6 h2">
+                    <span className="block text-4xl md:text-5xl text-[#5e3519]">
+                      The Bromley Chair
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-normal">
+                      A take on our iconic Bromley Sofa, the Bromley Chair is an
+                      amalgamation of eras and styles. Perfect for cozying up
+                      with your favorite book, it's angular arms are designed
+                      for lounging.
+                    </p>
 
-                  <div className="mt-8 text-center">
-                    <Link
-                      href=""
-                      className="w-max relative text-center text-[#5e3519] uppercase text-[13px] shop-button"
-                    >
-                      shop the collection
-                    </Link>
+                    <div className="mt-8 text-center">
+                      <Link
+                        href=""
+                        className="w-max relative text-center text-[#5e3519] uppercase text-[13px] shop-button"
+                      >
+                        shop the collection
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

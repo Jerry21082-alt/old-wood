@@ -352,10 +352,10 @@ export default function Nav() {
         <div className="relative z-[2] max-w-[1600px] w-full mx-auto px-6 md:px-10 block">
           <div
             style={{ padding: isDesktop ? "calc(27px - 6px) 0" : "" }}
-            className="flex items-center"
+            className="flex items-center justify-between py-5 md:py-0"
           >
             <nav
-              className="justify-end md:flex items-center"
+              className="justify-end md:flex items-center hidden"
               style={{ flex: "1 1 0" }}
             >
               <div>
@@ -521,15 +521,43 @@ export default function Nav() {
                 <img
                   src="//roweam.com/cdn/shop/files/roweam-logo_320x.png?v=1686631893"
                   alt="logo"
-                  className="max-w-[160px] block w-max logo--img"
+                  className="max-w-[160px] md:max-w-[120px] h-auto block w-max logo--img"
                 />
               </Link>
             </h1>
             <div
-              className="max-w-max flex justify-end items-center"
-              style={{ flex: "1 1 0", marginInlineStart: "48px" }}
+              className="max-w-max justify-end items-center flex"
+              style={{
+                flex: "1 1 0",
+                color: scrolled ? "rgb(34, 31, 32)" : "#f3f1ea",
+              }}
             >
-              <ul className="flex flex-wrap gap-3 list-none">
+              <div className="gap-5 items-center grid grid-flow-col md:hidden">
+                <Link href="/" className="block text-[15px]">
+                  <span className="text-[15px]">Cart</span>
+                  <div className="ml-[5px] inline">1</div>
+                </Link>
+              </div>
+              <div className="ml-[30px] grid grid-flow-col gap-5 items-center md:hidden">
+                <button className="relative block appearance-none touch-manipulation overflow-visible">
+                  <span className="visually-hidden">Navigation</span>
+                  <svg
+                    className="overflow-visible block"
+                    focusable="false"
+                    width="18"
+                    height="14"
+                    viewBox="0 0 18 14"
+                  >
+                    <path
+                      d="M0 1h18M0 13h18H0zm0-6h18H0z"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <ul className="hidden md:flex flex-wrap gap-3 list-none">
                 <li
                   className="mr-11 font-medium uppercase text-[13px] items-center flex-shrink-0 flex"
                   style={{ color: scrolled ? "#000" : "#f3f1ea" }}

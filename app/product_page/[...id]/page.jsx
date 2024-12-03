@@ -17,6 +17,7 @@ import LoadingSkeleton from "@/components/LoadingSkeleton";
 import { delay } from "@/helpers/delay";
 import { animateElementOnView } from "@/helpers/animateElementOnView";
 import { addClass } from "@/helpers/addClass";
+import ImgWithTextWrapper from "@/components/ImgWithTextWrapper";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -549,15 +550,12 @@ export default function Product_Page({ params }) {
           <div className="px-6 md: md:px-10 w-full">
             <div className="px-6 md:px-10 bg-milk">
               <div className="method-grid">
-                <div className="w-full relative overflow-hidden">
-                  <img
-                    src="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400"
-                    srcSet="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=600 600w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=700 700w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=800 800w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1000 1000w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1200 1200w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400 1400w"
-                    alt="product image"
-                    className="block relative w-full h-auto max-w-full method--img"
-                  />
-                </div>
-
+                <ImgWithTextWrapper
+                  className="w-full relative overflow-hidden"
+                  src="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400"
+                  srcSet="//roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=600 600w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=700 700w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=800 800w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1000 1000w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1200 1200w, //roweam.com/cdn/shop/files/101031_Rare_Fritz_Hansen_Sofa_Table_2755_RESIZED_FOR_PDP_ROW_METHOD_8cabc6f8-3eeb-4e47-95ae-7b5932a5e9fd.jpg?v=1694971841&width=1400 1400w"
+                  alt="product image"
+                />
                 <div className="py-6">
                   <div className="flex flex-wrap">
                     <div className="shrink-0 w-full">

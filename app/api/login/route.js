@@ -28,10 +28,7 @@ export async function POST(request) {
     }
     if (!passwordRegex.test(password)) {
       return NextResponse.json(
-        {
-          error:
-            "Password must be at least 6 characters long and include letters and numbers!",
-        },
+        { error: "Invalid password format!" },
         { status: 400 }
       );
     }
@@ -40,36 +37,39 @@ export async function POST(request) {
     const user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json(
-        { error: "Invalid email or password!" },
+        { error: "Invalid credentials." },
         { status: 401 }
       );
     }
 
     // Validate password
-    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return NextResponse.json(
-        { error: "Invalid email or password!" },
+        { error: "Invalid credentials." },
         { status: 401 }
       );
     }
 
     // Generate token
+    const expiresIn = 60 * 60; // 1 hour
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn }
     );
 
     // Set cookie
     const response = NextResponse.json({
       message: "Login successful!",
+      expiresIn,
     });
     response.cookies.set("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
+      maxAge: expiresIn,
     });
 
     return response;
