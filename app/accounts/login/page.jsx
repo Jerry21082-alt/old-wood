@@ -64,11 +64,10 @@ export default function page() {
         setFormData({ email: "", password: "" });
         router.push("/");
       } else {
-        setMessage("Something went wrong!" || data.error);
+        setMessage(data.error);
       }
     } catch (error) {
       console.log("Login error", error);
-      setMessage("An unexpected error occured. Please try again!");
     }
   };
 
