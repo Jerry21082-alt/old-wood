@@ -27,7 +27,7 @@ export default function ProductReel({ products, isLoading }) {
 
   return (
     <section
-      className="relative w-full block my-20"
+      className="relative w-full block mt-20"
       id="product-reel_container"
     >
       <div

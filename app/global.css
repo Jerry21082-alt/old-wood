@@ -850,16 +850,6 @@ select {
   box-shadow: 0 0 0 2px currentColor;
 }
 
-.image-with_text-wrapper {
-  display: grid;
-  grid-template-columns: calc(50% - var(--container-gutter)) 50%;
-  gap: 40px;
-  position: relative;
-  padding: 0;
-  align-items: center;
-  overflow: hidden;
-}
-
 .img-with_text-wrapper,
 #shop-the_look {
   clip-path: inset(0 0 0 100%);

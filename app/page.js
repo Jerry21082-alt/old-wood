@@ -130,44 +130,56 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="max-w-[1600px] px-6 md:px-10">
-          <div className="mb-11 text-[#5e3519] text-center text-sm md:text-md lg:text-lg">
-            THIS IS THE NEW NOSTALGIA
-          </div>
+        <div
+          style={{
+            marginBottom: "calc(-1* 28px)",
+            paddingTop: "calc(3* 28px)",
+          }}
+        >
+          <div className="max-w-[1600px] px-6 md:px-10">
+            <div className="mb-11 text-[#5e3519] text-center text-sm md:text-md lg:text-lg">
+              THIS IS THE NEW NOSTALGIA
+            </div>
 
-          <div className="image-with_text-wrapper">
-            <ImgWithTextWrapper
-              className="order-2 relative overflow-hidden w-full z-0"
-              src="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1500"
-              srcSet="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1200 1200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1400 1400w"
-              alt=""
-            />
-            <div className="order-1 z-[1] block relative mr-0">
-              <div className="flex flex-nowrap">
-                <div className="block flex-shrink-0 w-full order-0 text-center">
-                  <div className="my-4 text-[#5e3519] font-medium text-sm">
-                    <span className="block">ROWEAM NEW VINTAGE</span>
-                  </div>
-                  <div className="mt-12 mb-6 h2">
-                    <span className="block text-4xl md:text-5xl text-[#5e3519]">
-                      The Bromley Chair
-                    </span>
-                  </div>
-                  <div className="text-center">
-                    <p className="font-normal">
-                      A take on our iconic Bromley Sofa, the Bromley Chair is an
-                      amalgamation of eras and styles. Perfect for cozying up
-                      with your favorite book, it's angular arms are designed
-                      for lounging.
-                    </p>
+            <div
+              className="flex flex-wrap md:grid overflow-hidden relative gap-10"
+              style={{ gridTemplateColumns: "50% 50%" }}
+            >
+              <ImgWithTextWrapper
+                className="order-1 md:order-2 relative overflow-hidden w-full z-0 mb-8 md:mb-0"
+                src="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1500"
+                srcSet="//roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=600 600w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=700 700w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=800 800w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1000 1000w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1200 1200w, //roweam.com/cdn/shop/files/101641_Bromley_Chair_0628_1600x1600_82ef79e5-85a7-4be6-8b16-881108f9f6b9.jpg?v=1717161137&width=1400 1400w"
+                alt=""
+              />
+              <div className="order-1 z-[1] block relative mr-0 mb-14 md:mb-0">
+                <div className="flex flex-nowrap">
+                  <div className="block flex-shrink-0 w-full order-0 text-center">
+                    <div className="my-4 text-[#5e3519] font-medium text-sm">
+                      <span className="block">ROWEAM NEW VINTAGE</span>
+                    </div>
+                    <div className="mt-4 md:mt-12 mb-6">
+                      <SplitLines
+                        text1="The Bromley"
+                        text2="Chair"
+                        className="block text-[46px] leading-[1] md:text-5xl text-[#5e3519] h2"
+                      />
+                    </div>
+                    <div className="text-center">
+                      <p className="font-normal">
+                        A take on our iconic Bromley Sofa, the Bromley Chair is
+                        an amalgamation of eras and styles. Perfect for cozying
+                        up with your favorite book, it's angular arms are
+                        designed for lounging.
+                      </p>
 
-                    <div className="mt-8 text-center">
-                      <Link
-                        href=""
-                        className="w-max relative text-center text-[#5e3519] uppercase text-[13px] shop-button"
-                      >
-                        shop the collection
-                      </Link>
+                      <div className="mt-8 text-center">
+                        <Link
+                          href=""
+                          className="w-max relative text-center text-[#5e3519] uppercase text-[13px] shop-button"
+                        >
+                          shop the collection
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -183,7 +195,9 @@ export default function Home() {
             <header className="max-w-full my-7 md:my-7 md:m-0 block px-6 md:px-0">
               <div>
                 <div className="flex items-center space-x-6">
-                  <h4 className="h2 text-lightBrown text-3xl">Made To Age</h4>
+                  <h4 className="h2 text-lightBrown text-[24px]">
+                    Made To Age
+                  </h4>
                   <div className="mt-0 block">
                     <a
                       href="/"
@@ -280,7 +294,7 @@ export default function Home() {
                 className="object-cover object-center inline-block md:hidden"
               />
             </div>
-            <div className="absolute top-[26%] md:top-[53%] left-[36%] md:left-[50%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[26%] md:top-[53%] left-[36%] md:left-[50%] ml-[-12px] mt-[-12px] hidden md:block">
               <button
                 type="button"
                 aria-expanded="true"
@@ -291,7 +305,7 @@ export default function Home() {
                 </span>
               </button>
               <div
-                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-1/2 shadow-md z-[1] bg-[#221f20] room--card"
+                className="py-[10px] pl-[10px] pr-[20px] w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-1/2 shadow-md z-[1] bg-[#221f20] room--card hidden md:grid"
                 style={{ left: "calc(100% + 7px)" }}
               >
                 <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
@@ -320,7 +334,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[55%] md:top-[70%] left-[78%] md:left-[52%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[55%] md:top-[70%] left-[78%] md:left-[52%] ml-[-12px] mt-[-12px] hidden md:block">
               <button
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
@@ -365,7 +379,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[55%] md:top-[50%] left-[78%] md:left-[85%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[55%] md:top-[50%] left-[78%] md:left-[85%] ml-[-12px] mt-[-12px] hidden md:block">
               <button
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
@@ -410,7 +424,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[55%] md:top-[82%] left-[78%] md:left-[70%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[55%] md:top-[82%] left-[78%] md:left-[70%] ml-[-12px] mt-[-12px] hidden md:block">
               <button
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
@@ -456,7 +470,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[55%] md:top-[59%] left-[78%] md:left-[5%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[44%] md:top-[59%] left-[14%] md:left-[5%] ml-[-12px] mt-[-12px]">
               <button
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
@@ -501,7 +515,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[55%] md:top-[30%] left-[78%] md:left-[73%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[9%] md:top-[30%] left-[21%] md:left-[73%] ml-[-12px] mt-[-12px]">
               <button
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
@@ -546,7 +560,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[57%] md:top-[45%] left-[24%] md:left-[27%] ml-[-12px] mt-[-12px]">
+            <div className="absolute top-[57%] md:top-[45%] left-[24%] md:left-[27%] ml-[-12px] mt-[-12px] hidden md:block">
               <button
                 type="button"
                 className="w-4 h-4 float-left rounded-full border border-milk tap-area"
@@ -591,55 +605,92 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            <div className="absolute top-[50%] md:top-[45%] left-[53%] md:left-[27%] ml-[-12px] mt-[-12px] block md:hidden">
+              <button
+                type="button"
+                className="w-4 h-4 float-left rounded-full border border-milk tap-area"
+              >
+                <span className="absolute top-[-4px] left-6 whitespace-nowrap normal-case text-sm md:text-md lg:text-lg">
+                  Occasional Tables
+                </span>
+              </button>
+              <div
+                className="py-[10px] pl-[10px] pr-[20px] grid w-min gap-[15px] absolute top-1/2 max-w-[60vw] md:top-full shadow-md z-[1] bg-[#221f20]"
+                style={{
+                  opacity: "1",
+                  visibility: "hidden",
+                  transform: "scale(1) translateY(-50%)",
+                  left: "calc(100% + 7px)",
+                  gridTemplateColumns: "100px 100px",
+                }}
+              >
+                <div className="w-[100px] h-[100px] bg-[#a5a097] mr-[15px] overflow-hidden">
+                  <img
+                    src="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=1500"
+                    srcSet="//roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=144 144w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=216 216w, //roweam.com/cdn/shop/files/Popsicle_Stick_Lamp_2013.jpg?v=1717109193&width=288 288w"
+                    alt="product image"
+                    className="h-full w-full object-cover object-center bg-[#a5a097]"
+                  />
+                </div>
+                <div className="flex flex-wrap h-[96px] text-[#f3f1ea] content-between">
+                  <Link
+                    href="/"
+                    className="pointer-events-none block mb-[2px] text-xs"
+                  >
+                    Table Lamps
+                  </Link>
+                  <div className="w-full">
+                    <Link
+                      href="/"
+                      className="pointer-events-none block mb-[2px] uppercase text-sm shop-room-button relative w-max"
+                    >
+                      see more
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="block">
         <div className="w-full max-w-[1600px] px-0 md:px-10">
-          <div className="image-with-text">
-            <div className="w-full px-6 md:p-16">
-              <div>
-                <h5 className="text-lightBrown text-sm" id="slide-up">
-                  <span className="uppercase text-sm">
-                    Part new vintage, part true vintage
-                  </span>
-                </h5>
-
-                <div className="mt-4">
-                  <SplitLines
-                    text1="The Roweam"
-                    text2="Method"
-                    className="text-[56px] leading-[1] text-lightBrown h2"
-                  />
-                </div>
-
-                <div className="max-w-[80%] mt-6" id="slide-up">
-                  <FadeText
-                    text=" Part new vintage, part true vintage. Our design method takes
-                    a gathered, authentic approach using well-constructed pieces
-                    complete with endless character, no matter their age."
-                  />
-                </div>
-
+          <div className="flex flex-wrap">
+            <div className="order-2 pb-14 pl-[30%] overflow-hidden">
+              <img
+                src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
+                srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000 2000w"
+                loading="lazy"
+                className="max-h-auto w-full"
+              ></img>
+            </div>
+            <div className="order-1 py-14 px-6 w-auto">
+              <h5 className="block my-4 text-sm text-lightBrown">
+                <FadeText text="Part New Vintage, Part True Vintage" />
+              </h5>
+              <div className="h2 block">
+                <SplitLines
+                  text1="The Roweam"
+                  text2="Method"
+                  className="text-[46px] leading-[1] text-lightBrown"
+                />
+              </div>
+              <div className="max-w-[80%] mt-6">
+                <p>
+                  Part new vintage, part true vintage. Our design method takes a
+                  gathered, authentic approach using well-constructed pieces
+                  complete with endless character, no matter their age.
+                </p>
                 <div className="mt-8">
                   <Link
-                    href="/"
-                    className="shop-button relative uppercase text-lightBrown text-[13px]"
+                    href=""
+                    className="text-[15px] leading-[1] relative h-auto shop-button text-lightBrown"
                   >
-                    Learn More
+                    Learn more
                   </Link>
                 </div>
               </div>
-            </div>
-
-            <div className="flex flex-wrap h-full w-full">
-              <ImgWithTextWrapper
-                className="overflow-hidden order-2 h-full w-full"
-                src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
-                srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000 2000w"
-                alt=""
-              />
             </div>
           </div>
         </div>
