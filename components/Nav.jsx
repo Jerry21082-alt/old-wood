@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCart } from "@/features/navigation/navigationSlice";
+import { toggleCart, toggleMenu } from "@/features/navigation/navigationSlice";
 import { toggleSearch } from "@/features/navigation/navigationSlice";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -97,6 +97,7 @@ export default function Nav() {
   const pathname = usePathname();
   const cartOpen = useSelector((state) => state.navigation.isCartOpen);
   const openSearch = useSelector((state) => state.navigation.isSearchOpen);
+  const isMobileMenuOpen = useSelector((state) => state.navigation.isMenuOpen);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const headerPrimaryLinks = [
@@ -335,16 +336,20 @@ export default function Nav() {
     dispatch(toggleSearch());
   };
 
+  const toggleMobileMenu = () => {
+    dispatch(toggleMenu());
+  };
+
   return (
     <div
       style={{ marginBottom: "calc(-1*65.5%, 0px) + 0px" }}
       className={`fixed top-0 z-[4] right-0 w-full nav_container ${
-        scrolled || cartOpen || openSearch ? "reveal" : ""
+        scrolled || cartOpen || openSearch || !isMobileMenuOpen ? "reveal" : ""
       }  ${pathname !== "/" ? "not-homepage" : ""}`}
     >
       <div
         className={`block relative header ${
-          scrolled || cartOpen || openSearch
+          scrolled || cartOpen || openSearch || !isMobileMenuOpen
             ? "header__hidden header--bordered"
             : ""
         }`}
@@ -521,7 +526,7 @@ export default function Nav() {
                 <img
                   src="//roweam.com/cdn/shop/files/roweam-logo_320x.png?v=1686631893"
                   alt="logo"
-                  className="max-w-[160px] md:max-w-[120px] h-auto block w-max logo--img"
+                  className="max-w-[160px] w-[120px] md:w-full h-auto block logo--img"
                 />
               </Link>
             </h1>
@@ -539,7 +544,10 @@ export default function Nav() {
                 </Link>
               </div>
               <div className="ml-[30px] grid grid-flow-col gap-5 items-center md:hidden">
-                <button className="relative block appearance-none touch-manipulation overflow-visible">
+                <button
+                  className="relative block appearance-none touch-manipulation overflow-visible"
+                  onClick={toggleMobileMenu}
+                >
                   <span className="visually-hidden">Navigation</span>
                   <svg
                     className="overflow-visible block"

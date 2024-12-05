@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/features/authentication/authSlice";
 import { getUserFromToken } from "@/utils/getUserFromToken";
+import MobileNavigation from "./MobileNavigation";
 
 export default function Layout({ children }) {
   const isOpened = useSelector((state) => state.navigation.isCartOpen);
@@ -45,7 +46,7 @@ export default function Layout({ children }) {
       <Nav />
       <Cart />
       <SearchBar />
-      {/* <MobileMenu /> */}
+      <MobileNavigation />
       <main>{children}</main>
       <Footer />
     </section>

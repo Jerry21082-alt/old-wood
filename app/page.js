@@ -656,7 +656,10 @@ export default function Home() {
 
       <section className="block">
         <div className="w-full max-w-[1600px] px-0 md:px-10">
-          <div className="flex flex-wrap">
+          <div
+            className="flex flex-wrap md:grid min-h[700px] items-center"
+            style={{ gridTemplateColumns: "40% 60%" }}
+          >
             <div className="order-2 pb-14 pl-[30%] overflow-hidden">
               <img
                 src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
