@@ -660,7 +660,7 @@ export default function Home() {
             className="flex flex-wrap md:grid min-h[700px] items-center"
             style={{ gridTemplateColumns: "40% 60%" }}
           >
-            <div className="order-2 pb-14 pl-[30%] overflow-hidden">
+            <div className="order-2 pb-14 pl-[30%] md:pl-0 overflow-hidden">
               <img
                 src="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000"
                 srcSet="//roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=600 600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=700 700w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=800 800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1000 1000w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1200 1200w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1400 1400w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1600 1600w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=1800 1800w, //roweam.com/cdn/shop/files/Roweam_Method_4316_2400x1700_808cce19-9b11-42c9-8c6c-8167b4e61cfb.jpg?v=1705956908&width=2000 2000w"

@@ -926,6 +926,20 @@ select {
   left: calc(50% + 40px);
 }
 
+.flickity {
+  transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.img-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.img-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
 @media screen and (max-width: 900px) {
   .product-info {
     width: 100%;

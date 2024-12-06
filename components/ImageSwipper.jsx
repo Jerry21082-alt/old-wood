@@ -36,6 +36,9 @@ export default function ImageSwipper({ productImgs }) {
           srcSet={img.srcSet}
           alt={img.alt}
           loading="lazy"
+          className={`${
+            currentIndex === index ? "img-visible" : "img-hidden"
+          } flickity`}
         />
       ))}
     </div>
