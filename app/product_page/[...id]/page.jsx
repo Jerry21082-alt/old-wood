@@ -198,7 +198,7 @@ export default function Product_Page({ params }) {
     setCurrentIndex(index);
   };
 
-  const container = "w-full max-w-[1600px] ml-auto px-10";
+  const container = "w-full max-w-[1600px] ml-auto px-6 md:px-10";
   const Terms = () => (
     <div className={isChecked ? "showMe" : ""} id="termsWrap" ref={termRef}>
       <div
@@ -258,10 +258,50 @@ export default function Product_Page({ params }) {
     <section style={{ marginTop: "65.5px" }}>
       <div className={container}>
         <div
-          className="grid gap-10 pt-10 mx-0 justify-between items-start"
+          className="block md:grid gap-10 pt-5 md:pt-10 mt-6 mb-9 md:mx-0 justify-between items-start"
           style={{ gridTemplateColumns: "50% 50%" }}
         >
-          <div className="relative w-full block">
+          <div className="block md:hidden w-full" style={{ position: "unset" }}>
+            <div className="max-w-[1500px] relative mx-auto">
+              <div
+                className="text-center min-w-full relative overflow-visible"
+                style={{
+                  marginLeft: "calc(-1* 24px)",
+                  marginRight: "calc(-1* 24px)",
+                  userSelect: "none",
+                }}
+              >
+                <div className="h-[436px] touch-pan-y cursor-grab relative overflow-visible w-full">
+                  <div
+                    className="absolute w-full h-full left-0"
+                    style={{ transform: "translateX(188px)" }}
+                  >
+                    <div
+                      className="absolute left-0 z-[1] px-6 text-center min-w-full cursor-grab w-full block"
+                      style={{
+                        userSelect: "none",
+                        transition: "visibility .2s linear",
+                        transform: "translateX(-187px)",
+                      }}
+                    >
+                      <div
+                        className="overflow-hidden bg-milk relative block mx-auto pointer-events-auto text-center cursor-grab"
+                        style={{ aspectRatio: "0.75", userSelect: "none" }}
+                      >
+                        <img
+                          src="//roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1500"
+                          srcSet="//roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=400 400w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=500 500w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=600 600w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=700 700w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=800 800w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=900 900w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1000 1000w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1100 1100w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1200 1200w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1300 1300w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1400 1400w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1500 1500w"
+                          alt="product image"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative w-full hidden md:block">
             <div className="relative mx-auto">
               <div className="block min-w-full text-center">
                 {item.allImages.map((img, idx) => (
@@ -286,12 +326,9 @@ export default function Product_Page({ params }) {
               </div>
             </div>
           </div>
-          <div
-            className="p-20 sticky top-0"
-            style={{ width: "calc(100% - 40px)", left: "calc(50% + 40px)" }}
-          >
+          <div className="py-6 px-0 md:p-20 relative md:sticky md:left-0 top-0 w-full product-info">
             <div className="pb-[30px] m-0 border-b border-[#A5A097]">
-              <h1 className="mb-6 h2 text-4xl text-lightBrown">
+              <h1 className="mb-6 h2 text-[24px] leading-[1] md:text-4xl text-lightBrown">
                 The Bromley Ottoman
               </h1>
               <div className="text-[15px] mb-[6px] block text-lightBrown italic">
@@ -300,7 +337,10 @@ export default function Product_Page({ params }) {
             </div>
             <div className="grid" style={{ rowGap: "16px" }}>
               <div className="relative border-b border-[#A5A097]">
-                <button className="appearance-none px-0 transition-all flex flex-wrap py-[18px] items-center justify-between text-sm overflow-visible cursor-pointer w-full text-lightBrown collapse--btn">
+                <button
+                  className="appearance-none px-0 transition-all flex flex-wrap py-[18px] items-center justify-between text-sm overflow-visible cursor-pointer w-full collapse--btn"
+                  style={{ color: "" }}
+                >
                   Description
                   <span className="plus-icon relative"></span>
                   <p
@@ -465,7 +505,7 @@ export default function Product_Page({ params }) {
 
                     <label
                       id="termsCheck"
-                      className="absolute top-[50px] left-0 grid items-center cursor-pointer gap-[10px]"
+                      className="absolute top-[50px] left-0 grid content-center cursor-pointer gap-[10px]"
                       style={{ gridTemplateColumns: "17px auto" }}
                     >
                       <input
@@ -474,9 +514,9 @@ export default function Product_Page({ params }) {
                         onChange={handleCheck}
                         id="theTerms"
                         required
-                        className="appearance-none rounded-full border border-shadow h-4 w-4 mt-[4px] cursor-pointer text-left text-lightBrown"
+                        className="appearance-none rounded-full border border-shadow h-4 w-4 mt-[4px] cursor-pointer text-left text-lightBrown text-[16px]"
                       />
-                      <span className="block mt-1">
+                      <span className="block text-sm">
                         I agree to the New Vintage terms and conditions
                       </span>
                     </label>
@@ -535,11 +575,11 @@ export default function Product_Page({ params }) {
         </div>
       </div>
 
-      <div className="my-20 py-10">
-        <div className="max-w-[1600px] px-6 md:px-10 w-full">
-          <header className="max-w-full mb-[30xp] text-left">
+      <div className="my-6 md:my-20 py-6 md:py-10">
+        <div className="max-w-[1600px] md:px-10 w-full">
+          <header className="max-w-full mb-[30px] text-left px-6">
             <div>
-              <h3 className="mt-12 mb-6 text-[34px] text-lightBrown h2">
+              <h3 className="mt-[40px] md:mt-12 mb-4 md:mb-6 text-[24px] md:text-[34px] text-lightBrown h2">
                 Pairs With
               </h3>
             </div>

@@ -33,7 +33,7 @@ export default function MobileNavigation() {
   return (
     <div
       className={`fixed left-auto right-0 bg-milk w-screen text-left flex flex-col text-shadow max-h-screen h-screen z-[10] mobile-menu ${
-        isMobileMenuOpen ? "mobile-menu--open" : ""
+        isMobileMenuOpen ? "" : "mobile-menu--open"
       }`}
       style={{
         top: "calc(62.5px + 1px)",

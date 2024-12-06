@@ -921,6 +921,18 @@ select {
   display: none;
 }
 
+.product-info {
+  width: calc(100% - 40px);
+  left: calc(50% + 40px);
+}
+
+@media screen and (max-width: 900px) {
+  .product-info {
+    width: 100%;
+    left: 0;
+  }
+}
+
 @keyframes direction {
   from {
     opacity: 0;

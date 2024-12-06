@@ -344,12 +344,12 @@ export default function Nav() {
     <div
       style={{ marginBottom: "calc(-1*65.5%, 0px) + 0px" }}
       className={`fixed top-0 z-[4] right-0 w-full nav_container ${
-        scrolled || cartOpen || openSearch || !isMobileMenuOpen ? "reveal" : ""
+        scrolled || cartOpen || openSearch || isMobileMenuOpen ? "reveal" : ""
       }  ${pathname !== "/" ? "not-homepage" : ""}`}
     >
       <div
         className={`block relative header ${
-          scrolled || cartOpen || openSearch || !isMobileMenuOpen
+          scrolled || cartOpen || openSearch || isMobileMenuOpen
             ? "header__hidden header--bordered"
             : ""
         }`}
@@ -531,10 +531,11 @@ export default function Nav() {
               </Link>
             </h1>
             <div
-              className="max-w-max justify-end items-center flex"
+              className="max-w-max justify-end items-center flex header-secondary_link"
               style={{
                 flex: "1 1 0",
-                color: scrolled ? "rgb(34, 31, 32)" : "#f3f1ea",
+                color:
+                  scrolled || isMobileMenuOpen ? "rgb(34, 31, 32)" : "#f3f1ea",
               }}
             >
               <div className="gap-5 items-center grid grid-flow-col md:hidden">
