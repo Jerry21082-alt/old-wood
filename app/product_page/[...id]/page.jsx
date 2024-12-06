@@ -1,33 +1,21 @@
 "use client";
 
-import AspectRatioContainer from "@/components/AspectRatioContainer";
-import Drawer from "@/components/Drawer";
 import ProductReel from "@/components/ProductReel";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-
 import { useSelector, useDispatch } from "react-redux";
-import { toggleAgree } from "@/features/checkout/checkoutSlice";
-
 import { formatPrice } from "@/helpers/formatPrice";
 import { addToCart } from "@/features/cart/cartSlice";
-import { toggleOverlay } from "@/features/navigation/navigationSlice";
-import { toggleCart } from "@/features/navigation/navigationSlice";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
-import { delay } from "@/helpers/delay";
 import { animateElementOnView } from "@/helpers/animateElementOnView";
 import { addClass } from "@/helpers/addClass";
 import ImgWithTextWrapper from "@/components/ImgWithTextWrapper";
+import ImageSwipper from "@/components/ImageSwipper";
 
 export default function Product_Page({ params }) {
   const { id } = params;
   const [productId] = id;
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [swipeIndex, setSwipeIndex] = useState(0);
   const [reveal, setReveal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [item, setItem] = useState(null);
@@ -137,67 +125,6 @@ export default function Product_Page({ params }) {
     dispatch(addToCart(newProduct));
   };
 
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  const handleSwipeStart = (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  };
-
-  const handleSwipeMove = (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-  };
-
-  const handleTouchDifference = () => {
-    if (touchEndX < touchStartX) {
-      setSwipeIndex((prevIndex) => prevIndex - 1);
-    } else {
-      if (touchEndX > touchStartX) {
-        setSwipeIndex((prevIndex) => prevIndex + 1);
-      }
-    }
-  };
-
-  const showSlide = (idx) => {
-    const totalSlides = item.allImages.length;
-    if (idx >= totalSlides) {
-      return;
-    } else if (idx < 0) {
-      return;
-    } else {
-      setCurrentIndex(idx);
-    }
-  };
-
-  const handleNext = () => showSlide(currentIndex + 1);
-  const handlePrev = () => showSlide(currentIndex - 1);
-
-  const handleTouchStart = (event) => {
-    setStartX(event.touches[0].clientX);
-    setIsDragging(true);
-  };
-
-  const handleTouchEnd = () => setIsDragging(false);
-
-  const handleTouchMove = (event) => {
-    if (!isDragging) return;
-
-    const currentX = event.touches[0].clientX;
-    const diffX = startX - currentX;
-
-    if (diffX > 50) {
-      handleNext();
-      setIsDragging(false);
-    } else if (diffX < -50) {
-      handlePrev();
-      setIsDragging(false);
-    }
-  };
-
-  const handleSelect = (index) => {
-    setCurrentIndex(index);
-  };
-
   const container = "w-full max-w-[1600px] ml-auto px-6 md:px-10";
   const Terms = () => (
     <div className={isChecked ? "showMe" : ""} id="termsWrap" ref={termRef}>
@@ -271,7 +198,7 @@ export default function Product_Page({ params }) {
                   userSelect: "none",
                 }}
               >
-                <div className="h-[436px] touch-pan-y cursor-grab relative overflow-visible w-full">
+                <div className="h-[436px] touch-pan-y cursor-grab relative overflow-hidden w-full">
                   <div
                     className="absolute w-full h-full left-0"
                     style={{ transform: "translateX(188px)" }}
@@ -284,17 +211,7 @@ export default function Product_Page({ params }) {
                         transform: "translateX(-187px)",
                       }}
                     >
-                      <div
-                        className="overflow-hidden bg-milk relative block mx-auto pointer-events-auto text-center cursor-grab"
-                        style={{ aspectRatio: "0.75", userSelect: "none" }}
-                      >
-                        <img
-                          src="//roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1500"
-                          srcSet="//roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=400 400w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=500 500w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=600 600w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=700 700w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=800 800w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=900 900w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1000 1000w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1100 1100w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1200 1200w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1300 1300w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1400 1400w, //roweam.com/cdn/shop/files/F101641-7CU_Bromley_Sofa_-_Brown_Mohair_0238.jpg?v=1717099995&width=1500 1500w"
-                          alt="product image"
-                          loading="lazy"
-                        />
-                      </div>
+                      <ImageSwipper productImgs={item.allImages} />
                     </div>
                   </div>
                 </div>
