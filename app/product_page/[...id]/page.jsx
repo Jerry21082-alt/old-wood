@@ -10,7 +10,7 @@ import LoadingSkeleton from "@/components/LoadingSkeleton";
 import { animateElementOnView } from "@/helpers/animateElementOnView";
 import { addClass } from "@/helpers/addClass";
 import ImgWithTextWrapper from "@/components/ImgWithTextWrapper";
-import ImageSwipper from "@/components/ImageSwipper";
+import FlickityCarousel from "@/components/FlickityCarousel";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -188,36 +188,7 @@ export default function Product_Page({ params }) {
           className="block md:grid gap-10 pt-5 md:pt-10 mt-6 mb-9 md:mx-0 justify-between items-start"
           style={{ gridTemplateColumns: "50% 50%" }}
         >
-          <div className="block md:hidden w-full" style={{ position: "unset" }}>
-            <div className="max-w-[1500px] relative mx-auto">
-              <div
-                className="text-center min-w-full relative overflow-visible"
-                style={{
-                  marginLeft: "calc(-1* 24px)",
-                  marginRight: "calc(-1* 24px)",
-                  userSelect: "none",
-                }}
-              >
-                <div className="h-[436px] touch-pan-y cursor-grab relative overflow-hidden w-full">
-                  <div
-                    className="absolute w-full h-full left-0"
-                    style={{ transform: "translateX(188px)" }}
-                  >
-                    <div
-                      className="absolute left-0 z-[1] px-6 text-center min-w-full cursor-grab w-full block"
-                      style={{
-                        userSelect: "none",
-                        transition: "visibility .2s linear",
-                        transform: "translateX(-187px)",
-                      }}
-                    >
-                      <ImageSwipper productImgs={item.allImages} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <FlickityCarousel productImgs={item.allImages} />
           <div className="relative w-full hidden md:block">
             <div className="relative mx-auto">
               <div className="block min-w-full text-center">
