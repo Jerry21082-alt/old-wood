@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function ImageSwipper({ productImgs }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [opacity, setOpacity] = useState(1);
 
   const handleSwipe = (startX, endX) => {
     if (startX - endX > 50 && currentIndex < productImgs.length - 1) {
@@ -14,31 +15,38 @@ export default function ImageSwipper({ productImgs }) {
   };
 
   let touchStartX = 0;
+  let touchMoveX = 0;
 
+  const handleTouchMove = (e) => {
+    touchMoveX = e.touches[0].clientX;
+    const dragDis = Math.abs(touchMoveX - touchStartX);
+    const newOpacity = Math.max(1 - dragDis / 300, 0.1);
+    setOpacity(newOpacity);
+  };
   const handleTouchStart = (e) => {
     touchStartX = e.touches[0].clientX;
   };
   const handleTouchEnd = (e) => {
     const touchEndX = e.changedTouches[0].clientX;
     handleSwipe(touchStartX, touchEndX);
+    setOpacity(1);
   };
   return (
     <div
       className="overflow-hidden bg-milk relative block mx-auto pointer-events-auto text-center cursor-grab"
-      style={{ aspectRatio: "0.75", userSelect: "none" }}
+      style={{ aspectRatio: "0.75", userSelect: "none", opacity }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchMove}
     >
-      {productImgs.map((img, index) => (
+      {productImgs.map((_, index) => (
         <img
           key={index}
-          src={img.src}
-          srcSet={img.srcSet}
-          alt={img.alt}
+          src={productImgs[currentIndex].src}
+          srcSet={productImgs[currentIndex].srcSet}
+          alt={productImgs[currentIndex].alt}
           loading="lazy"
-          className={`${
-            currentIndex === index ? "img-visible" : "img-hidden"
-          } flickity`}
+          className={`flickity`}
         />
       ))}
     </div>
