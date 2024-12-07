@@ -15,14 +15,7 @@ export default function ImageSwipper({ productImgs }) {
   };
 
   let touchStartX = 0;
-  let touchMoveX = 0;
 
-  const handleTouchMove = (e) => {
-    touchMoveX = e.touches[0].clientX;
-    const dragDis = Math.abs(touchMoveX - touchStartX);
-    const newOpacity = Math.max(1 - dragDis / 300, 0.1);
-    setOpacity(newOpacity);
-  };
   const handleTouchStart = (e) => {
     touchStartX = e.touches[0].clientX;
   };
@@ -37,7 +30,6 @@ export default function ImageSwipper({ productImgs }) {
       style={{ aspectRatio: "0.75", userSelect: "none", opacity }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      onTouchMove={handleTouchMove}
     >
       {productImgs.map((_, index) => (
         <img
