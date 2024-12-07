@@ -15,7 +15,14 @@ export default function ImageSwipper({ productImgs }) {
   };
 
   let touchStartX = 0;
+  let touchMoveX = 0;
 
+  const handleTouchMove = (e) => {
+    touchMoveX = e.touches[0].clientX;
+    const dragDis = Math.abs(touchMoveX - touchStartX);
+    const newOpacity = Math.max(1 - dragDis / 300, 0.1);
+    setOpacity(newOpacity);
+  };
   const handleTouchStart = (e) => {
     touchStartX = e.touches[0].clientX;
   };
@@ -39,6 +46,7 @@ export default function ImageSwipper({ productImgs }) {
           alt={productImgs[currentIndex].alt}
           loading="lazy"
           className={`flickity`}
+          onTouchMove={handleTouchMove}
         />
       ))}
     </div>
