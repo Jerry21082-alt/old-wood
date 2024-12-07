@@ -8,8 +8,10 @@ export default function ImageSwipper({ productImgs }) {
 
   const handleSwipe = (startX, endX) => {
     if (startX - endX > 50 && currentIndex < productImgs.length - 1) {
+      // Swipe left
       setCurrentIndex((prevIndex) => prevIndex + 1);
     } else if (endX - startX > 50 && currentIndex > 0) {
+      // Swipe right
       setCurrentIndex((prevIndex) => prevIndex - 1);
     }
   };
@@ -19,36 +21,43 @@ export default function ImageSwipper({ productImgs }) {
 
   const handleTouchMove = (e) => {
     touchMoveX = e.touches[0].clientX;
-    const dragDis = Math.abs(touchMoveX - touchStartX);
-    const newOpacity = Math.max(1 - dragDis / 300, 0.1);
+    const dragDistance = Math.abs(touchMoveX - touchStartX);
+    const newOpacity = Math.max(1 - dragDistance / 300, 0.3); // Adjust sensitivity here
     setOpacity(newOpacity);
   };
+
   const handleTouchStart = (e) => {
-    touchStartX = e.touches[0].clientX;
+    touchStartX = e.touches[0].clientX; // Capture start position
   };
+
   const handleTouchEnd = (e) => {
-    const touchEndX = e.changedTouches[0].clientX;
-    handleSwipe(touchStartX, touchEndX);
-    setOpacity(1);
+    const touchEndX = e.changedTouches[0].clientX; // Capture end position
+    handleSwipe(touchStartX, touchEndX); // Determine swipe direction
+    setOpacity(1); // Reset opacity after swipe
   };
+
   return (
     <div
       className="overflow-hidden bg-milk relative block mx-auto pointer-events-auto text-center cursor-grab"
-      style={{ aspectRatio: "0.75", userSelect: "none", opacity }}
+      style={{ aspectRatio: "0.75", userSelect: "none" }}
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {productImgs.map((_, index) => (
-        <img
-          key={index}
-          src={productImgs[currentIndex].src}
-          srcSet={productImgs[currentIndex].srcSet}
-          alt={productImgs[currentIndex].alt}
-          loading="lazy"
-          className={`flickity`}
-          onTouchMove={handleTouchMove}
-        />
-      ))}
+      <img
+        src={productImgs[currentIndex].src}
+        srcSet={productImgs[currentIndex].srcSet}
+        alt={productImgs[currentIndex].alt}
+        loading="lazy"
+        style={{
+          opacity,
+          transition: "opacity 0.3s ease-in-out", // Smooth opacity transition
+          width: "100%",
+          height: "100%",
+          objectFit: "cover", // Ensure the image fits well
+        }}
+        className="flickity"
+      />
     </div>
   );
 }
