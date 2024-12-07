@@ -1,10 +1,7 @@
 .header {
   background: transparent;
   transition: all 0.25s ease-in-out;
-}
-
-.header.transparent {
-  color: #fff;
+  color: #f3f1ea;
 }
 
 .header--transparent {
@@ -13,11 +10,7 @@
 
 .header--bordered {
   box-shadow: 0 1px rgb(212, 210, 204);
-}
-
-.header.scrolled {
-  background: rgb(243, 241, 234);
-  color: black;
+  color: #000;
 }
 
 .header::before {
@@ -53,7 +46,8 @@
   opacity: 0;
 }
 
-.nav_container:hover .nav--link {
+.nav_container:hover .nav--link,
+.nav_container:hover .header-secondary_link {
   color: #000;
 }
 

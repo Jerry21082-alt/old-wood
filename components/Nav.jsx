@@ -348,7 +348,7 @@ export default function Nav() {
       }  ${pathname !== "/" ? "not-homepage" : ""}`}
     >
       <div
-        className={`block relative header ${
+        className={`block relative header  ${
           scrolled || cartOpen || openSearch || isMobileMenuOpen
             ? "header__hidden header--bordered"
             : ""
@@ -534,8 +534,7 @@ export default function Nav() {
               className="max-w-max justify-end items-center flex header-secondary_link"
               style={{
                 flex: "1 1 0",
-                color:
-                  scrolled || isMobileMenuOpen ? "rgb(34, 31, 32)" : "#f3f1ea",
+                color: pathname !== "/" ? "#000" : "",
               }}
             >
               <div className="gap-5 items-center grid grid-flow-col md:hidden">

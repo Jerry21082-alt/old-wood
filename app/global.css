@@ -177,44 +177,6 @@ select {
   pointer-events: none;
 }
 
-.hamburger-menu {
-  /* position: relative; */
-  width: 100%;
-  height: 1px;
-  border-radius: 5px;
-  background-color: rgb(255, 255, 255);
-}
-
-.hamburger-menu.hide-hamburger-menu,
-.hamburger-menu.hide-hamburger-menu::before,
-.hamburger-menu.hide-hamburger-menu::after {
-  visibility: hidden;
-}
-
-.hamburger-menu::before {
-  content: "";
-  position: absolute;
-  bottom: 6px;
-  opacity: 1;
-  width: 100%;
-  height: 1px;
-  border-radius: 5px;
-  background-color: inherit;
-  visibility: visible;
-}
-
-.hamburger-menu::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  opacity: 1;
-  width: 100%;
-  height: 1px;
-  border-radius: 5px;
-  background-color: inherit;
-  visibility: visible;
-}
-
 .collapsible {
   display: block;
   visibility: hidden;

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import CollapsibleContent from "./Collapsible";
 import { useSelector } from "react-redux";
 
 const shopList = [
@@ -54,7 +53,7 @@ export default function MobileNavigation() {
               Shop
               <span className="plus-icon relative"></span>
             </button>
-            <CollapsibleContent id="mobile-menu-1">
+            <div id="mobile-menu-1">
               <ul className="m-0 p-0" id="mobile-menu-1">
                 <li
                   className="flow-root list-none pt-[21px] px-6 mb-[15px]"
@@ -88,7 +87,7 @@ export default function MobileNavigation() {
                   </ul>
                 </li>
               </ul>
-            </CollapsibleContent>
+            </div>
           </li>
         </ul>
       </div>
