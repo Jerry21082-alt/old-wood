@@ -114,17 +114,17 @@ export default function Home() {
       {!isLoading && <NewsLetter />}
       <section>
         <div>
-          <div
-            className="min-h-[80vh] md:min-h-auto w-full relative flex bg-milk text-milk"
-            style={{ aspectRatio: "1.5" }}
-          >
-            <ImgWithTextBlock
-              className="absolute left-0 top-0 w-full h-full overflow-hidden block"
-              imgSrc="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2500"
-              srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2400 2400w"
-              imgAlt=""
-              style={{ opacity: 1 }}
-            />
+          <div className="bg-milk relative min-h-[80vh] flex">
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden img-overlay__image">
+              <img
+                src="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2500"
+                srcSet="//roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=600 600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=700 700w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=800 800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1000 1000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1200 1200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1400 1400w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1600 1600w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=1800 1800w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2000 2000w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2200 2200w, //roweam.com/cdn/shop/files/20240524-Roweam-In_Situ-Italian_Stallion_03_0652.jpg?v=1731942982&width=2400 2400w"
+                loading="lazy"
+                width="2500"
+                height="1662"
+                className="object-center object-cover max-w-full w-full h-full overflow-hidden absolute top-0 left-0"
+              />
+            </div>
           </div>
         </div>
       </section>
