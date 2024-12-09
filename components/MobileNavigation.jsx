@@ -167,7 +167,7 @@ export default function MobileNavigation() {
   return (
     <div
       className={`fixed left-auto right-0 bg-milk w-screen text-left flex flex-col text-shadow max-h-screen h-full z-[10] mobile-menu ${
-        isMobileMenuOpen ? "" : "mobile-menu--open"
+        isMobileMenuOpen ? "open" : "mobile-menu--open"
       }`}
       style={{
         top: "calc(62.5px - 1px)",
@@ -178,7 +178,7 @@ export default function MobileNavigation() {
       <div className="overflow-y-scroll overflow-x-hidden flex-grow px-0">
         <ul className="p-0 m-0">
           <li
-            className="list-none flow-root"
+            className="list-none flow-root mobile-nav_item"
             style={{ borderBottom: "1px solid rgba(34, 31, 32, .15)" }}
           >
             <button
@@ -235,7 +235,7 @@ export default function MobileNavigation() {
             </div>
           </li>
           <li
-            className="list-none flow-root"
+            className="list-none flow-root mobile-nav_item"
             style={{ borderBottom: "1px solid rgba(34, 31, 32, .15)" }}
           >
             <button
@@ -328,6 +328,50 @@ export default function MobileNavigation() {
                 </div>
               </div>
             </div>
+          </li>
+          <li
+            className="list-none flow-root mobile-nav_item"
+            style={{ borderBottom: "1px solid rgba(34, 31, 32, .15)" }}
+          >
+            <Link
+              href="/pages/about"
+              className="text-[15px] list-none w-max py-[21px] px-6 block text-lightBrown"
+            >
+              About
+            </Link>
+          </li>
+          <li
+            className="list-none flow-root mobile-nav_item"
+            style={{ borderBottom: "1px solid rgba(34, 31, 32, .15)" }}
+          >
+            <Link
+              href="/pages/insitu"
+              className="text-[15px] list-none w-max py-[21px] px-6 block text-lightBrown"
+            >
+              In Situ
+            </Link>
+          </li>
+          <li
+            className="list-none flow-root mobile-nav_item"
+            style={{ borderBottom: "1px solid rgba(34, 31, 32, .15)" }}
+          >
+            <Link
+              href="/pages/search"
+              className="text-[15px] list-none w-max py-[21px] px-6 block text-lightBrown"
+            >
+              Search
+            </Link>
+          </li>
+          <li
+            className="list-none flow-root mobile-nav_item"
+            style={{ borderBottom: "1px solid rgba(34, 31, 32, .15)" }}
+          >
+            <Link
+              href="/pages/account"
+              className="text-[15px] list-none w-max py-[21px] px-6 block text-lightBrown"
+            >
+              Account
+            </Link>
           </li>
         </ul>
       </div>
