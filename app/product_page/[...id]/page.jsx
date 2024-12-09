@@ -129,8 +129,11 @@ export default function Product_Page({ params }) {
   const Terms = () => (
     <div className={isChecked ? "showMe" : ""} id="termsWrap" ref={termRef}>
       <div
-        className="max-w-[600px] m-10 bg-milk py-[60px] px-[5%] text-left"
-        style={{ width: "calc(100% - 40px)" }}
+        className="max-w-[600px] m-6 md:m-10 bg-milk py-[7.5%] md:py-[60px] px-[5%] text-left overflow-y-scroll md:overflow-y-hidden"
+        style={{
+          width: "calc(100% - 40px)",
+          maxHeight: "calc(100vh - calc(4* 24px))",
+        }}
       >
         <h5 className="text-shadow text-sm uppercase block">
           New Vintage Terms and Conditions
@@ -172,6 +175,8 @@ export default function Product_Page({ params }) {
       </div>
     </div>
   );
+
+  console.log(item);
 
   if (isLoading) {
     return (
@@ -217,7 +222,7 @@ export default function Product_Page({ params }) {
           <div className="py-6 px-0 md:p-20 relative md:sticky md:left-0 top-0 w-full product-info">
             <div className="pb-[30px] m-0 border-b border-[#A5A097]">
               <h1 className="mb-6 h2 text-[24px] leading-[1] md:text-4xl text-lightBrown">
-                The Bromley Ottoman
+                {item.name}
               </h1>
               <div className="text-[15px] mb-[6px] block text-lightBrown italic">
                 New Vintage
@@ -256,26 +261,41 @@ export default function Product_Page({ params }) {
                 </div>
               </div>
 
-              <div className="mt-[-13px] relative border-b border-[#A5A097]">
-                <button className="appearance-none px-0 transition-all flex flex-wrap py-[18px] items-center justify-between text-sm overflow-visible cursor-pointer w-full text-lightBrown collapse--btn">
-                  Dimensions
-                  <span className="plus-icon relative"></span>
-                </button>
-                <div
-                  className="h-0 block collapseable"
-                  style={{ overflow: "hidden" }}
-                >
-                  <div className="px-0 transition-all pb-[26px]">
-                    <div className="my-0">
-                      <span>
-                        Brutalist and soft. Our take on a staple ottoman adapted
-                        with a chunky square body. Meant to be partnered, yet
-                        strong enough to stand alone.
-                      </span>
+              {Object.keys(item?.dimensions || {}).length !== 0 ? (
+                <div className="mt-[-13px] relative border-b border-[#A5A097]">
+                  <button className="appearance-none px-0 transition-all flex flex-wrap py-[18px] items-center justify-between text-sm overflow-visible cursor-pointer w-full text-lightBrown collapse--btn">
+                    Dimensions
+                    <span className="plus-icon relative"></span>
+                  </button>
+                  <div
+                    className="h-0 block collapseable"
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div className="px-0 transition-all pb-[26px]">
+                      <div className="text-[#a5a097]">
+                        <p className="mb-4">
+                          <a
+                            href=""
+                            className="uppercase underline text-[12px] text-shadow"
+                            style={{ textDecorationColor: "#5e3519" }}
+                          >
+                            Tearsheet
+                          </a>
+                        </p>
+                        <ul className="m-0 p-0">
+                          {Object.entries(item.dimensions).map(
+                            ([key, val, i]) => (
+                              <li key={i} className="py-[3px] text-sm">
+                                {`${key}: ${val}"`}
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ) : null}
 
               <div
                 className="grid relative pt-[95px] gap-[15px]"

@@ -9,7 +9,7 @@ export default function FlickityCarousel({ productImgs }) {
   const startX = useRef(0);
 
   const handleSwipe = (startX, endX) => {
-    const swipeThreshold = 50;
+    const swipeThreshold = 10;
     if (
       startX - endX > swipeThreshold &&
       currentIndex < productImgs.length - 1
