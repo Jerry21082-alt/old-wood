@@ -576,7 +576,7 @@ function CheckoutContent() {
                 id="select0"
                 required
                 autoComplete="shipping country"
-                className="w-full outline-none mt-1 text-sm text-black text-balance"
+                className="w-full outline-none mt-1 text-black text-balance"
               >
                 {provinces.map((province) => (
                   <option value={province} key={province}>
