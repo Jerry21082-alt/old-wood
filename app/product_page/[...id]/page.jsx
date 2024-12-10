@@ -322,6 +322,7 @@ export default function Product_Page({ params }) {
                       inputMode="numeric"
                       autoComplete="off"
                       value={item.quantity}
+                      onChange={() => console.log("changed")}
                       aria-label="Quantity"
                       className="w-[55px] text-shadow h-[45px] text-center p-0 text-[15px] focus:bg-snow"
                     />

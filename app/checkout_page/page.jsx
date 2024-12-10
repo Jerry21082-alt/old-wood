@@ -129,28 +129,67 @@ function CheckoutContent() {
   };
 
   return (
-    <section className="w-full checkout-page">
-      <nav className="flex items-center justify-center w-full bg-milk border-b border-listBorder relative">
-        <div className="p-4">
+    <section className="w-full">
+      <header className="bg-milk border-[rgb(211,209,202)] border-b flex items-center justify-center">
+        <div className="max-w-full w-full p-6">
           <div>
-            <Link href="/" className="logo text-4xl">
-              oldwood
-            </Link>
-          </div>
-
-          <div className="absolute right-4 top-1/2 -translate-y-1/2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 48 48"
-              id="shopping-bag"
-              width="20px"
-              height="20px"
+            <div
+              className="grid relative gap-[1.7rem]"
+              style={{ gridTemplateColumns: "minmax(0. 1fr)" }}
             >
-              <path d="M41.3 14.58a5 5 0 0 0-5-4.58H34a10 10 0 0 0-20 0h-2.32a5 5 0 0 0-5 4.58l-2.36 28a5 5 0 0 0 5 5.39h29.35a5 5 0 0 0 5-5.4ZM24 2a8 8 0 0 1 8 8H16a8 8 0 0 1 8-8Zm14.67 44H9.33a3 3 0 0 1-3-3.23l2.35-28a3 3 0 0 1 3-2.75H14v6h-1a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2h-1V12h16v6h-1a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2h-1v-6h2.32a3 3 0 0 1 3 2.75l2.35 28a3 3 0 0 1-3 3.25Z"></path>
-            </svg>
+              <div
+                className="grid justify-center items-center relative min-w-full"
+                style={{
+                  rowGap: "3.8rem",
+                  columnGap: "3.8rem",
+                  gridTemplateRows: "minmax(0, 1fr)",
+                  gridTemplateColumns:
+                    "minmax(auto, max-content) minmax(0, 1fr) minmax(auto, max-content)",
+                }}
+              >
+                <div className="flex flex-col items-center  relative">
+                  <div className="max-w-[27rem] relative overflow-hidden">
+                    <span>
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0743/6615/7081/files/roweam-logo_x320.png?v=1686631893"
+                        alt="Roweam Logo"
+                        width="271"
+                        height="39.972500000000004"
+                        className="block max-w-full h-auto object-cover object-center"
+                      />
+                    </span>
+                  </div>
+                </div>
+                <span>
+                  <Link href="/cart" className="text-[rgb(46,46,46)]">
+                    <span
+                      className="max-w-full max-h-full block"
+                      style={{
+                        minWidth: "calc(1.4rem * 1.7142857142857142)",
+                        minHeight: "calc(1.4rem * 1.7142857142857142)",
+                        height: "calc(1.4rem * 1.7142857142857142)",
+                        width: "calc(1.4rem * 1.7142857142857142)",
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 14 14"
+                        focusable="false"
+                        aria-hidden="true"
+                        className="fill-none max-w-full w-full max-h-full h-full block"
+                        style={{ stroke: "currentcolor" }}
+                      >
+                        <path d="M2.675 10.037 3.072 4.2h7.856l.397 5.837A2.4 2.4 0 0 1 8.932 12.6H5.069a2.4 2.4 0 0 1-2.394-2.563"></path>
+                        <path d="M4.9 3.5a2.1 2.1 0 1 1 4.2 0v1.4a2.1 2.1 0 0 1-4.2 0z"></path>
+                      </svg>
+                    </span>
+                  </Link>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
+      </header>
 
       <main className="w-full">
         <section className="w-full">
@@ -297,8 +336,8 @@ function CheckoutContent() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M454.942 0C441.175 0 430.015 11.1602 430.015 24.927V138.295C430.015 152.062 441.175 163.222 454.942 163.222H658.072C671.839 163.222 682.999 152.062 682.999 138.295V24.927C682.999 11.1602 671.839 0 658.072 0H454.942ZM490.023 113.902V85.1661H508.1C524.616 85.1661 533.399 75.9057 533.399 61.872C533.399 47.8383 524.616 39.4371 508.1 39.4371H478.376V113.902H490.023ZM490.023 50.5114H505.427C516.119 50.5114 521.37 54.9029 521.37 62.2539C521.37 69.6049 516.31 73.9964 505.904 73.9964H490.023V50.5114ZM553.933 115.429C562.811 115.429 568.635 111.515 571.308 104.832C572.071 112.279 576.558 116.098 586.296 113.52L586.391 105.596C582.477 105.978 581.714 104.546 581.714 100.441V80.9655C581.714 69.5094 574.172 62.7312 560.233 62.7312C546.486 62.7312 538.562 69.6049 538.562 81.2519H549.255C549.255 75.7148 553.169 72.3734 560.042 72.3734C567.298 72.3734 570.639 75.5239 570.544 80.9655V83.4477L558.229 84.7842C544.386 86.3117 536.748 91.5624 536.748 100.727C536.748 108.269 542.095 115.429 553.933 115.429ZM556.319 106.837C550.305 106.837 547.918 103.591 547.918 100.345C547.918 95.9539 552.882 93.9491 562.62 92.8035L570.257 91.9443C569.78 100.345 564.148 106.837 556.319 106.837ZM621.754 117.625C616.885 129.463 609.057 132.995 596.837 132.995H591.586V123.258H597.219C603.902 123.258 607.148 121.157 610.68 115.143L589.009 64.2587H601.038L616.504 101.396L630.251 64.2587H641.993L621.754 117.625Z"
                     fill="#5433EB"
                   />
@@ -327,7 +366,7 @@ function CheckoutContent() {
                   height="30"
                   viewBox="0 0 437 174"
                 >
-                  <g fill="none" fill-rule="nonzero">
+                  <g fill="none" fillRule="nonzero">
                     <path
                       fill="#5F6368"
                       d="M207.2 84.6v50.8h-16.1V10h42.7c10.3-.2 20.2 3.7 27.7 10.9 7.5 6.7 11.7 16.4 11.5 26.4.2 10.1-4 19.8-11.5 26.6-7.5 7.1-16.7 10.7-27.6 10.7h-26.7zm0-59.2v43.8h27c6 .2 11.8-2.2 15.9-6.5 8.5-8.2 8.6-21.7.4-30.2l-.4-.4c-4.1-4.4-9.9-6.8-15.9-6.6l-27-.1zM310.1 46.8c11.9 0 21.3 3.2 28.2 9.5 6.9 6.4 10.3 15.1 10.3 26.2v52.8h-15.4v-11.9h-.7c-6.7 9.8-15.5 14.7-26.6 14.7-9.4 0-17.4-2.8-23.7-8.4-6.2-5.2-9.7-12.9-9.5-21 0-8.9 3.4-15.9 10.1-21.2 6.7-5.3 15.7-7.9 26.9-7.9 9.6 0 17.4 1.8 23.6 5.2v-3.7c0-5.5-2.4-10.7-6.6-14.2-4.3-3.8-9.8-5.9-15.5-5.9-9 0-16.1 3.8-21.4 11.4l-14.2-8.9c7.7-11.1 19.2-16.7 34.5-16.7zm-20.8 62.3c0 4.2 2 8.1 5.3 10.5 3.6 2.8 8 4.3 12.5 4.2 6.8 0 13.3-2.7 18.1-7.5 5.3-5 8-10.9 8-17.7-5-4-12-6-21-6-6.5 0-12 1.6-16.4 4.7-4.3 3.2-6.5 7.1-6.5 11.8zM437 49.6l-53.8 123.6h-16.6l20-43.2-35.4-80.3h17.5l25.5 61.6h.4l24.9-61.6z"
