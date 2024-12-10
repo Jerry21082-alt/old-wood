@@ -362,10 +362,7 @@ export default function MobileNavigation() {
               Search
             </Link>
           </li>
-          <li
-            className="list-none flow-root mobile-nav_item"
-            style={{ borderBottom: "1px solid rgba(34, 31, 32, .15)" }}
-          >
+          <li className="list-none flow-root mobile-nav_item pb-[100px]">
             <Link
               href="/pages/account"
               className="text-[15px] list-none w-max py-[21px] px-6 block text-lightBrown"

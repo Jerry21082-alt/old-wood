@@ -93,11 +93,14 @@ export default function Nav() {
   const isDesktop = useScreen(768);
   const scrolled = isScrolled();
 
+  const [isMounted, setIsMounted] = useState(false);
+
   const dispatch = useDispatch();
   const pathname = usePathname();
   const cartOpen = useSelector((state) => state.navigation.isCartOpen);
   const openSearch = useSelector((state) => state.navigation.isSearchOpen);
   const isMobileMenuOpen = useSelector((state) => state.navigation.isMenuOpen);
+  const cartLength = useSelector((state) => state.cart.cartLength);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const headerPrimaryLinks = [
@@ -310,7 +313,6 @@ export default function Nav() {
         ? addClass(navHeader, "header--bordered")
         : removeClass(navHeader, "header--bordered");
 
-    // Attach Event Listeners
     collectionBtn?.removeEventListener("mouseenter", handleShowCollectionMenu);
     shopBtn?.removeEventListener("mouseenter", handleShowShopMenu);
     shopBtn?.removeEventListener("mouseleave", handleHideMegaMenu);
@@ -324,6 +326,8 @@ export default function Nav() {
     setupMenuInteraction();
     return () => removeMenuInteraction();
   }, []);
+
+  useEffect(() => setIsMounted(true));
 
   const openCart = (e) => {
     e.preventDefault();
@@ -538,9 +542,15 @@ export default function Nav() {
               }}
             >
               <div className="gap-5 items-center grid grid-flow-col md:hidden">
-                <Link href="/" className="block text-[15px]">
+                <Link
+                  href="/cart"
+                  className="block text-[15px]"
+                  onClick={openCart}
+                >
                   <span className="text-[15px]">Cart</span>
-                  <div className="ml-[5px] inline">1</div>
+                  {isMounted && (
+                    <div className="ml-[5px] inline">{cartLength}</div>
+                  )}
                 </Link>
               </div>
               <div className="ml-[30px] grid grid-flow-col gap-5 items-center md:hidden">

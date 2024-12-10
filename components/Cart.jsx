@@ -1,15 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
 import { useEffect, useRef, useState } from "react";
 import { updateItem, removeFromCart } from "@/features/cart/cartSlice";
-import {
-  closeAll,
-  isCartOpen,
-  toggleCart,
-} from "@/features/navigation/navigationSlice";
+import { closeAll, toggleCart } from "@/features/navigation/navigationSlice";
 import { useRouter } from "next/navigation";
 import { delay } from "@/helpers/delay";
 
@@ -27,6 +22,14 @@ export default function Cart() {
   const router = useRouter();
 
   useEffect(() => setIsMounted(true), []);
+  useEffect(() => {
+    setTimeout(() => {
+      const items = document.querySelectorAll("#cart-item");
+      items.forEach((item, delay) => {
+        item.style.transitionDelay = `${delay * 0.2}s`;
+      });
+    }, 2000);
+  }, []);
 
   const onClose = () => dispatch(toggleCart());
 
@@ -133,7 +136,7 @@ export default function Cart() {
   return (
     <section
       ref={cartRef}
-      className={`w-screen max-w-[500px] md:w-[89vw] fixed top-[62.5px] md:top-[66.5px] bottom-0 right-0 bg-milk z-[1000] px-6 md:px-10 ${
+      className={`w-screen max-w-[500px] md:w-[89vw] fixed top-[62.5px] md:top-[66.5px] bottom-0 right-0 bg-milk z-[1000] px-6 md:px-10 cart ${
         !cartState ? "close-cart" : "open-cart"
       }`}
     >
@@ -151,23 +154,14 @@ export default function Cart() {
             const isComplete = isLoadingStatus[_id]?.isComplete;
 
             return (
-              <div
-                className="pt-4 pb-14"
-                key={_id}
-                id="cart-item"
-                style={{
-                  transition: "transform .15s ease-out, opacity .25s ease-out",
-                  transform: isDeleting ? "translateX(100%)" : "translateX(0)",
-                  opacity: isDeleting ? "0" : "1",
-                }}
-              >
+              <div className="pt-4 pb-14" key={_id} id="cart-item">
                 <div className="flow-root pb-6 border-b border-listBorder w-full">
                   <div className="flex relative mt-5 w-full">
                     <Link
                       href="/"
                       tabIndex="-1"
                       aria-hidden="true"
-                      className="w-32 relative mr-5 block"
+                      className="w-32 relative mr-[24px] block flex-none"
                     >
                       <div
                         id="loading-container"
@@ -221,7 +215,7 @@ export default function Cart() {
                       <img
                         src={item.primaryImage.img}
                         alt="product image"
-                        className="w-full h-full"
+                        className="w-full h-full object-center object-cover"
                       />
                     </Link>
 

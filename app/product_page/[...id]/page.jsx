@@ -11,6 +11,7 @@ import { animateElementOnView } from "@/helpers/animateElementOnView";
 import { addClass } from "@/helpers/addClass";
 import ImgWithTextWrapper from "@/components/ImgWithTextWrapper";
 import FlickityCarousel from "@/components/FlickityCarousel";
+import CustomLoadingSpinner from "@/components/CustomLoadingSpinner";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -176,8 +177,6 @@ export default function Product_Page({ params }) {
     </div>
   );
 
-  console.log(item);
-
   if (isLoading) {
     return (
       <div>
@@ -229,37 +228,39 @@ export default function Product_Page({ params }) {
               </div>
             </div>
             <div className="grid" style={{ rowGap: "16px" }}>
-              <div className="relative border-b border-[#A5A097]">
-                <button
-                  className="appearance-none px-0 transition-all flex flex-wrap py-[18px] items-center justify-between text-sm overflow-visible cursor-pointer w-full collapse--btn"
-                  style={{ color: "" }}
-                >
-                  Description
-                  <span className="plus-icon relative"></span>
-                  <p
-                    className="block max-w-[90%] transition-all w-full text-left normal-case h-auto relative mb-0 mt-4 text-shadow collapse-visible_text"
-                    style={{
-                      letterSpacing: 0,
-                      transitionDuration: "0.4s ease-in-out",
-                    }}
+              {item?.description.length > 0 ? (
+                <div className="relative border-b border-[#A5A097]">
+                  <button
+                    className="appearance-none px-0 transition-all flex flex-wrap py-[18px] items-center justify-between text-sm overflow-visible cursor-pointer w-full collapse--btn"
+                    style={{ color: "" }}
                   >
-                    {item.description?.length > 100
-                      ? `${item?.description.substring(0, 100)}...`
-                      : item?.description}
-                  </p>
-                </button>
+                    Description
+                    <span className="plus-icon relative"></span>
+                    <p
+                      className="block max-w-[90%] transition-all w-full text-left normal-case h-auto relative mb-0 mt-4 text-shadow collapse-visible_text"
+                      style={{
+                        letterSpacing: 0,
+                        transitionDuration: "0.4s ease-in-out",
+                      }}
+                    >
+                      {item?.description.length > 100
+                        ? `${item?.description.substring(0, 100)}...`
+                        : item?.description}
+                    </p>
+                  </button>
 
-                <div
-                  className="h-0 block collapseable"
-                  style={{ overflow: "hidden" }}
-                >
-                  <div className="px-0 transition-all pb-[26px]">
-                    <div className="my-0">
-                      <span>{item?.description}</span>
+                  <div
+                    className="h-0 block collapseable"
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div className="px-0 transition-all pb-[26px]">
+                      <div className="my-0">
+                        <span className="text-sm">{item?.description}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ) : null}
 
               {Object.keys(item?.dimensions || {}).length !== 0 ? (
                 <div className="mt-[-13px] relative border-b border-[#A5A097]">
@@ -283,13 +284,11 @@ export default function Product_Page({ params }) {
                           </a>
                         </p>
                         <ul className="m-0 p-0">
-                          {Object.entries(item.dimensions).map(
-                            ([key, val, i]) => (
-                              <li key={i} className="py-[3px] text-sm">
-                                {`${key}: ${val}"`}
-                              </li>
-                            )
-                          )}
+                          {Object.entries(item.dimensions).map(([key, val]) => (
+                            <li key={key} className="py-[3px] text-sm">
+                              {`${key}: ${val}"`}
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     </div>
@@ -420,6 +419,7 @@ export default function Product_Page({ params }) {
                         type="checkbox"
                         checked={isChecked}
                         onChange={handleCheck}
+                        // value={""}
                         id="theTerms"
                         required
                         className="appearance-none rounded-full border border-shadow h-4 w-4 mt-[4px] cursor-pointer text-left text-lightBrown text-[16px]"
@@ -451,7 +451,8 @@ export default function Product_Page({ params }) {
                             opacity: addingToCart ? 1 : 0,
                           }}
                         >
-                          <div className="spinner">
+                          <CustomLoadingSpinner />
+                          {/* <div className="spinner">
                             <svg
                               focusable="false"
                               width="24"
@@ -467,7 +468,7 @@ export default function Product_Page({ params }) {
                                 strokeWidth="5"
                               ></circle>
                             </svg>
-                          </div>
+                          </div> */}
                         </span>
                       </button>
                     </div>

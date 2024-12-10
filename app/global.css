@@ -644,6 +644,20 @@ select {
     visibility 0.6s cubic-bezier(0.75, 0, 0.175, 1);
 }
 
+#cart-item {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10%);
+  transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out,
+    visibility 0.25s ease-in-out;
+}
+
+.cart.open-cart #cart-item {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
 .drawer__overlay {
   background-image: url(//roweam.com/cdn/shop/t/21/assets/bg-dark-grain.png?v=7508540…);
   background-repeat: repeat;
@@ -935,6 +949,15 @@ select {
   visibility: visible;
 }
 
+.loading-spinner {
+  width: 25px;
+  height: 25px;
+  border: 2px solid transparent;
+  border-top: 3px solid #f3f1ea;
+  border-radius: 50%;
+  animation: spin 1s cubic-bezier(0.25, 0.1, 0.5, 1) infinite;
+}
+
 @media screen and (max-width: 900px) {
   .product-info {
     width: 100%;
@@ -950,6 +973,21 @@ select {
   to {
     opacity: 1;
     transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(240deg); /* Fast initial rotation */
+  }
+  60% {
+    transform: rotate(360deg); /* Slowing down */
+  }
+  100% {
+    transform: rotate(360deg); /* Pause */
   }
 }
 
@@ -1042,12 +1080,7 @@ select {
     padding: 24px 0;
     overflow: hidden;
   }
-  /*
-  .h4 {
-    font-family: Tobias-Thin;
-    font-size: 22px;
-    line-height: 1.2;
-  } */
+
   .search-input::placeholder {
     font-size: 16px;
   }
