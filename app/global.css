@@ -59,6 +59,11 @@ button {
   outline: none;
 }
 
+select {
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}
+
 .checkout-page {
   background-image: url("../public/bg-sand-50\ \(2\).jpg");
   background-position: center;
