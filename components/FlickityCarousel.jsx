@@ -81,6 +81,8 @@ export default function FlickityCarousel({ productImgs }) {
             marginLeft: "calc(-1* 24px)",
             marginRight: "calc(-1* 24px)",
             userSelect: "none",
+            opacity,
+            transition: "opacity .24s ease-in-out",
           }}
         >
           <div className="h-[436px] touch-pan-y cursor-grab relative overflow-hidden w-full">
@@ -98,7 +100,7 @@ export default function FlickityCarousel({ productImgs }) {
               >
                 <div
                   className="overflow-hidden bg-milk relative block mx-auto pointer-events-auto text-center cursor-grab"
-                  style={{ aspectRatio: "0.75", userSelect: "none", opacity }}
+                  style={{ aspectRatio: "0.75", userSelect: "none" }}
                   onMouseDown={handleMouseDown}
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
@@ -110,7 +112,6 @@ export default function FlickityCarousel({ productImgs }) {
                     alt={productImgs[currentIndex].alt}
                     loading="lazy"
                     style={{
-                      transition: "opacity 0.1s ease-in-out",
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",

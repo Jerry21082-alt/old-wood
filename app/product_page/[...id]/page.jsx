@@ -61,6 +61,13 @@ export default function Product_Page({ params }) {
 
       const { collapseBtn, collapseDiv, collapseVisibleText } = dom;
 
+      Object.keys(dom).map((ele) => {
+        if (!ele) {
+          console.warn("Element not found");
+          return;
+        }
+      });
+
       const toggleHeight = (element) => {
         if (!element) return;
         if (element.style.height === "0px" || !element.style.height) {
@@ -71,6 +78,9 @@ export default function Product_Page({ params }) {
       };
 
       const handleClick = (idx) => {
+        const icon = collapseBtn[idx].querySelector("span");
+
+        icon.classList.toggle("animate-plus");
         collapseDiv[idx].classList.toggle("not-collapse");
         collapseVisibleText.classList.toggle("hide");
         toggleHeight(collapseDiv[idx]);
