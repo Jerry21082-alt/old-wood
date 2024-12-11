@@ -350,7 +350,7 @@ export default function Nav() {
         marginBottom: "calc(-1*65.5%, 0px) + 0px",
         display: pathname === "/checkout_page" ? "none" : "block",
       }}
-      className={`fixed top-0 z-[20] right-0 w-full h-[62.5px] nav_container ${
+      className={`fixed top-0 z-[20] right-0 w-full nav_container ${
         scrolled || cartOpen || openSearch || isMobileMenuOpen ? "reveal" : ""
       }  ${pathname !== "/" ? "not-homepage" : ""}`}
     >

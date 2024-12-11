@@ -1,10 +1,29 @@
 #product_item {
   opacity: 0;
   transform: translateY(10%);
-  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 #product_item.reveal {
   opacity: 1;
   transform: translateY(0%);
+}
+
+#product_item:nth-child(2) {
+  transition-delay: 0.15s;
+}
+#product_item:nth-child(3) {
+  transition-delay: 0.2s;
+}
+#product_item:nth-child(4) {
+  transition-delay: 0.25s;
+}
+#product_item:nth-child(5) {
+  transition-delay: 0.3s;
+}
+#product_item:nth-child(6) {
+  transition-delay: 0.35s;
+}
+#product_item:nth-child(7) {
+  transition-delay: 0.4s;
 }

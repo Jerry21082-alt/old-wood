@@ -148,7 +148,10 @@ function CheckoutContent() {
                 }}
               >
                 <div className="flex flex-col items-center  relative">
-                  <div className="max-w-[27rem] relative overflow-hidden">
+                  <Link
+                    href="/"
+                    className="max-w-[27rem] relative overflow-hidden"
+                  >
                     <span>
                       <img
                         src="https://cdn.shopify.com/s/files/1/0743/6615/7081/files/roweam-logo_x320.png?v=1686631893"
@@ -158,7 +161,7 @@ function CheckoutContent() {
                         className="block max-w-full h-auto object-cover object-center"
                       />
                     </span>
-                  </div>
+                  </Link>
                 </div>
                 <span>
                   <Link href="/cart" className="text-[rgb(46,46,46)]">
@@ -191,7 +194,7 @@ function CheckoutContent() {
         </div>
       </header>
 
-      <main className="w-full">
+      <main className="w-full block md:hidden">
         <section className="w-full">
           <div className="w-full border-listBorder border-b flex items-center justify-between p-4">
             <div

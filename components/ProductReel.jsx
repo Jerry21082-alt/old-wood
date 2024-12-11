@@ -9,9 +9,8 @@ import { autoAlpha } from "@/helpers/autoAlpha";
 const showReel = (container, items) => {
   if (!items) return;
 
-  items.forEach((item, index) => {
-    animateElementOnView(container, addClass, 0.15, item, "reveal");
-    item.style.transitionDelay = `${index * 0.08}s`;
+  items.forEach((item) => {
+    animateElementOnView(container, addClass, 0.1, item, "reveal");
   });
 };
 
@@ -44,13 +43,7 @@ export default function ProductReel({ products, isLoading }) {
         >
           {products.map((item, idx) => (
             <div className="flex flex-col relative" key={idx} id="product_item">
-              <div
-                className="relative mb-4"
-                style={{
-                  opacity: "1",
-                  transition: "opacity .4s ease, transform .4s ease",
-                }}
-              >
+              <div className="relative mb-4">
                 <div className="absolute right-2 top-2 z-[2] flex flex-col items-end">
                   {item.toOrder && (
                     <span className="text-darkBrown py-1 px-2 bg-snow text-xs">
