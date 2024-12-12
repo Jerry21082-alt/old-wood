@@ -7,10 +7,10 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   cart: [
     {
-      itemId: { type: String, required: true },
+      _id: { type: String, required: true },
       name: { type: String, required: true },
       description: { type: String },
-      imageUrl: { type: String, required: true },
+      imgSrc: { type: String, required: true },
       price: { type: Number, required: true },
       quantity: { type: Number, required: true },
       type: { type: String },

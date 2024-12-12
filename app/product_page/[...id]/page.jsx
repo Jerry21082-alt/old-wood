@@ -5,13 +5,14 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formatPrice } from "@/helpers/formatPrice";
-import { addToCart } from "@/features/cart/cartSlice";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
 import { animateElementOnView } from "@/helpers/animateElementOnView";
 import { addClass } from "@/helpers/addClass";
 import ImgWithTextWrapper from "@/components/ImgWithTextWrapper";
 import FlickityCarousel from "@/components/FlickityCarousel";
 import CustomLoadingSpinner from "@/components/CustomLoadingSpinner";
+import axios from "axios";
+import { addToCart } from "@/features/cart/cartSlice";
 
 export default function Product_Page({ params }) {
   const { id } = params;
@@ -23,7 +24,8 @@ export default function Product_Page({ params }) {
   const [pairs, setPairs] = useState([]);
   const [addingToCart, setAddingToCart] = useState(false);
 
-  const agree = useSelector((state) => state.checkout.agree);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   const dispatch = useDispatch();
   const termRef = useRef(null);
 
@@ -127,6 +129,7 @@ export default function Product_Page({ params }) {
     });
   };
 
+  const userId = "675995beb3156158f35381f1";
   const addItemToCart = (newProduct) => {
     if (!isChecked) {
       console.log("check the box");
@@ -134,6 +137,30 @@ export default function Product_Page({ params }) {
     }
 
     dispatch(addToCart(newProduct));
+  };
+
+  const handleFormData = async (e) => {
+    e.preventDefault();
+
+    setAddingToCart(true);
+    try {
+      const res = await axios.post("/api/cart/add", {
+        userId,
+        _id: item._id,
+        imgSrc: item.primaryImage.img,
+        name: item.name,
+        description: item.description,
+        price: item.price,
+        quantity: item.quantity,
+        type: item.type,
+      });
+
+      const { cart } = res?.data;
+    } catch (error) {
+      console.log(error, "An error occured while adding item to cart!");
+    } finally {
+      setAddingToCart(false);
+    }
   };
 
   const container = "w-full max-w-[1600px] ml-auto px-6 md:px-10";
@@ -430,7 +457,6 @@ export default function Product_Page({ params }) {
                         type="checkbox"
                         checked={isChecked}
                         onChange={handleCheck}
-                        // value={""}
                         id="theTerms"
                         required
                         className="appearance-none rounded-full border border-shadow h-4 w-4 mt-[4px] cursor-pointer text-left text-lightBrown text-[16px]"
@@ -556,7 +582,7 @@ export default function Product_Page({ params }) {
           </div>
         </div>
       </div>
-      <Terms />
+      {/* <Terms /> */}
     </section>
   );
 }

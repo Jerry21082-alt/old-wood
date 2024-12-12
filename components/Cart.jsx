@@ -148,13 +148,13 @@ export default function Cart() {
       ></span>
       {isMounted && cartItems.length > 0 ? (
         <div className="w-full h-full overflow-x-hidden overflow-y-scroll flex-grow pb-36 custom-scrollbar">
-          {cartItems.map((item) => {
+          {cartItems.map((item, id) => {
             const { _id } = item;
             const isLoading = isLoadingStatus[_id]?.isLoading;
             const isComplete = isLoadingStatus[_id]?.isComplete;
 
             return (
-              <div className="pt-4 pb-14" key={_id} id="cart-item">
+              <div className="pt-4 pb-0 md:pb-14" key={id} id="cart-item">
                 <div className="flow-root pb-6 border-b border-listBorder w-full">
                   <div className="flex relative mt-5 w-full">
                     <Link

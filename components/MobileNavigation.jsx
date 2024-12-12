@@ -1,5 +1,9 @@
+"use client";
+
+import { toggleMenu } from "@/features/navigation/navigationSlice";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const shopCategories = {
   "SHOP BY CATEGOGRY": {
@@ -164,6 +168,20 @@ const toggleDetails = (id) => {
 
 export default function MobileNavigation() {
   const isMobileMenuOpen = useSelector((state) => state.navigation.isMenuOpen);
+  const dispatch = useDispatch();
+
+  const toggleMobileMenu = () => {
+    dispatch(toggleMenu());
+  };
+
+  useEffect(() => {
+    const mobileMenuLinks = document.querySelectorAll("ul li > a");
+
+    mobileMenuLinks.forEach((link) => {
+      link.addEventListener("click", toggleMobileMenu);
+    });
+  }, []);
+
   return (
     <div
       className={`fixed left-auto right-0 bg-milk w-screen text-left flex flex-col text-shadow max-h-screen h-full z-[10] mobile-menu ${
@@ -364,7 +382,7 @@ export default function MobileNavigation() {
           </li>
           <li className="list-none flow-root mobile-nav_item pb-[100px]">
             <Link
-              href="/pages/account"
+              href="/account"
               className="text-[15px] list-none w-max py-[21px] px-6 block text-lightBrown"
             >
               Account

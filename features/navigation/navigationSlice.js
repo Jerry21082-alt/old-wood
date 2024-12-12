@@ -13,7 +13,6 @@ const navigationSlice = createSlice({
   initialState,
   reducers: {
     toggleMenu: (state) => {
-      state.revealOverlay = !state.revealOverlay;
       state.isMenuOpen = !state.isMenuOpen;
       state.isCartOpen = false;
     },

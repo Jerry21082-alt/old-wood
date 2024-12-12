@@ -82,7 +82,6 @@ export default function FlickityCarousel({ productImgs }) {
             marginRight: "calc(-1* 24px)",
             userSelect: "none",
             opacity,
-            transition: "opacity .24s ease-in-out",
           }}
         >
           <div className="h-[436px] touch-pan-y cursor-grab relative overflow-hidden w-full">

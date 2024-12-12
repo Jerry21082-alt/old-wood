@@ -160,14 +160,14 @@ export default function Home() {
               <div className="order-1 z-[1] block relative mr-0 mb-14 md:mb-0">
                 <div className="flex flex-nowrap">
                   <div className="block flex-shrink-0 w-full order-0 text-center">
-                    <div className="my-4 text-[#5e3519] font-medium text-sm">
+                    <div className="my-4 text-[#5e3519] font-medium text-sm md:text-[15px]">
                       <span className="block">ROWEAM NEW VINTAGE</span>
                     </div>
                     <div className="mt-4 md:mt-12 mb-6">
                       <SplitLines
-                        text1="The Bromley"
-                        text2="Chair"
-                        className="block text-[46px] leading-[1] md:text-5xl text-[#5e3519] h2"
+                        text1="The Bromley Chair"
+                        text2=""
+                        className="block text-[46px] leading-[1] md:leading-[1.5] lg:text-[56px] text-[#5e3519] h2"
                       />
                     </div>
                     <div className="text-center">

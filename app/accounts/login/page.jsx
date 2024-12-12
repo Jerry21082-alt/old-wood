@@ -114,7 +114,7 @@ export default function page() {
                             cy="12"
                             r="10"
                             stroke="currentColor"
-                            stroke-width="2"
+                            strokeWidth="2"
                             fill="none"
                           />
                           <line
@@ -123,8 +123,8 @@ export default function page() {
                             x2="12"
                             y2="13"
                             stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
+                            strokeWidth="2"
+                            strokeLinecap="round"
                           />
                           <circle cx="12" cy="17" r="1" fill="currentColor" />
                         </svg>
