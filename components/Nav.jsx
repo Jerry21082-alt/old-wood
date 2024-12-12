@@ -352,7 +352,9 @@ export default function Nav() {
       }}
       className={`fixed top-0 z-[20] right-0 w-full nav_container ${
         scrolled || cartOpen || openSearch || isMobileMenuOpen ? "reveal" : ""
-      }  ${pathname !== "/" ? "not-homepage" : ""}`}
+      }  ${pathname !== "/" ? "not-homepage" : ""} ${
+        pathname === "/accounts/login" ? "reveal" : ""
+      }`}
     >
       <div
         className={`block relative header  ${

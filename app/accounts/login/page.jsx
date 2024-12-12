@@ -188,7 +188,7 @@ export default function page() {
 
                     <button
                       type="button"
-                      className="text-lightBrown relative inline-block appearance-none text-center w-max cursor-pointer touch-manipulation text-sm shop-button"
+                      className="text-lightBrown relative inline-block appearance-none text-center w-max cursor-pointer touch-manipulation text-[12px] md:text-sm shop-button"
                     >
                       Forgot password?
                     </button>

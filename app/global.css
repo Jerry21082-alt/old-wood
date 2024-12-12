@@ -82,10 +82,13 @@ img {
 
 input {
   background: transparent;
-  outline: none;
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  -webkit-border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
 }
 
 select {
